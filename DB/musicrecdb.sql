@@ -265,6 +265,99 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 START TRANSACTION;
 USE `musicrecdb`;
 INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `created_at`, `updated_at`, `email`, `image_url`, `enabled`, `role`) VALUES (1, 'admin', 'mylittlepony', NULL, NULL, NULL, NULL, 'admin@admin.com', NULL, NULL, 'ADMIN');
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `created_at`, `updated_at`, `email`, `image_url`, `enabled`, `role`) VALUES (2, 'ponyman', 'ponyman', 'Brony', 'Jabrony', NULL, NULL, 'ponyman@rainbow.com', NULL, NULL, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `song`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `musicrecdb`;
+INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (1, 'My Little Pony Theme Song', 'Some Brony', NULL, NULL, NULL, NULL, 'Pony Style', 1);
+INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (2, 'Rainbow Chill Beats', 'Rapper Brony', NULL, NULL, NULL, NULL, 'Pony Time', 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `post`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `musicrecdb`;
+INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`) VALUES (1, 'Purple Ponies are the best ponies', 'Fresh Pony Song', NULL, NULL, 1, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `genre`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `musicrecdb`;
+INSERT INTO `genre` (`id`, `genre_name`) VALUES (1, 'Pony Music');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `comment`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `musicrecdb`;
+INSERT INTO `comment` (`id`, `content`, `created_at`, `updated_at`, `user_id`, `post_id`) VALUES (1, 'Ya Definitely A Sick Pony Song', NULL, NULL, 2, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `rating`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `musicrecdb`;
+INSERT INTO `rating` (`rating`, `user_id`, `post_id`) VALUES (1, 2, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `song_genre`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `musicrecdb`;
+INSERT INTO `song_genre` (`song_id`, `genre_id`) VALUES (1, 1);
+INSERT INTO `song_genre` (`song_id`, `genre_id`) VALUES (2, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `playlist`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `musicrecdb`;
+INSERT INTO `playlist` (`id`, `title`, `user_id`, `description`, `image_url`, `published`) VALUES (1, 'Pony Beats', 1, 'The freshest pony music', NULL, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `playlist_song`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `musicrecdb`;
+INSERT INTO `playlist_song` (`playlist_id`, `song_id`) VALUES (1, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `favorite_user`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `musicrecdb`;
+INSERT INTO `favorite_user` (`user_id`, `favorite_id`) VALUES (2, 1);
 
 COMMIT;
 
