@@ -14,7 +14,6 @@ public class Playlist {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
 	private String title;
 	private String description;
 	@Column(name = "image_url")
@@ -23,6 +22,9 @@ public class Playlist {
 	@OneToOne
 	@JoinColumn(name = "user_id")
 	private User user;
+	
+	public Playlist () {}
+	
 	public int getId() {
 		return id;
 	}
