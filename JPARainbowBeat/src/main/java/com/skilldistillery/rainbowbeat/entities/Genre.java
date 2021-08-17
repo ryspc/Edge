@@ -14,6 +14,7 @@ public class Genre {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
+	public Genre() {}
 	public int getId() {
 		return id;
 	}
@@ -30,9 +31,5 @@ public class Genre {
 	public String toString() {
 		return "Genre [id=" + id + ", name=" + name + "]";
 	}
-	
 
-
-
-	
 }

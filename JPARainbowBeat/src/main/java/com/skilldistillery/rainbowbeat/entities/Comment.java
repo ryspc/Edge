@@ -7,17 +7,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-public class Post {
+public class Comment {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String title;
 	private String content;
 	@CreationTimestamp
 	@Column(name="created_at")
@@ -25,8 +26,14 @@ public class Post {
 	@UpdateTimestamp
 	@Column(name="updated_at")
 	private LocalDateTime updatedAt;
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
+	@ManyToOne
+	@JoinColumn(name = "post_id")
+	private Post post;
 	
-	public Post() {}
+	public Comment() {}
 
 	public int getId() {
 		return id;
@@ -34,14 +41,6 @@ public class Post {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
 	}
 
 	public String getContent() {
@@ -68,33 +67,28 @@ public class Post {
 		this.updatedAt = updatedAt;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Post getPost() {
+		return post;
+	}
+
+	public void setPost(Post post) {
+		this.post = post;
+	}
+
 	@Override
 	public String toString() {
-		return "Post [id=" + id + ", title=" + title + ", content=" + content + ", createdAt=" + createdAt
-				+ ", updatedAt=" + updatedAt + "]";
+		return "Comment [id=" + id + ", content=" + content + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
+				+ ", user=" + user + ", post=" + post + "]";
 	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + id;
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Post other = (Post) obj;
-		if (id != other.id)
-			return false;
-		return true;
-	}
+	
 	
 	
 	

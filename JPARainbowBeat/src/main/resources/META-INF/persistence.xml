@@ -6,6 +6,12 @@
     
    <!-- list entities here -->
  <class>com.skilldistillery.rainbowbeat.entities.User</class>
+ <class>com.skilldistillery.rainbowbeat.entities.Comment</class>
+ <class>com.skilldistillery.rainbowbeat.entities.Genre</class>
+ <class>com.skilldistillery.rainbowbeat.entities.Post</class>
+ <class>com.skilldistillery.rainbowbeat.entities.Song</class>
+ <class>com.skilldistillery.rainbowbeat.entities.Rating</class>
+ <class>com.skilldistillery.rainbowbeat.entities.Playlist</class>
  <!-- end list entities -->
     
 		<properties>
