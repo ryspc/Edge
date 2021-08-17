@@ -1,12 +1,16 @@
 package com.skilldistillery.rainbowbeat.entities;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -23,18 +27,25 @@ public class User {
 	private String firstName;
 	@Column(name = "last_name")
 	private String lastName;
-	@Column(name = "date_created")
+	@Column(name = "created_at")
 	@CreationTimestamp
-	private LocalDate dateCreated;
-	@Column(name = "date_updated")
+	private LocalDate createdAt;
+	@Column(name = "updated_at")
 	@UpdateTimestamp
-	private LocalDate dateUpdated;
+	private LocalDate updatedAt;
 	private String email;
 	@Column(name = "image_url")
 	private String imageUrl;
 	@Column(name = "enabled")
 	private Boolean isEnabled;
 	private String role;
+	@ManyToMany
+	@JoinTable(name = "favorite_user",
+	joinColumns = @JoinColumn(name = "user_id"),
+	inverseJoinColumns = @JoinColumn(name = "favorite_id"))
+	private List<User> following;
+	@ManyToMany(mappedBy = "following")
+	private List<User> followers;
 	
 	// No-Arg Constructor
 	public User() {
@@ -81,20 +92,20 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public LocalDate getDateCreated() {
-		return dateCreated;
+	public LocalDate getCreatedAt() {
+		return createdAt;
 	}
 
-	public void setDateCreated(LocalDate dateCreated) {
-		this.dateCreated = dateCreated;
+	public void setCreatedAt(LocalDate createdAt) {
+		this.createdAt = createdAt;
 	}
 
-	public LocalDate getDateUpdated() {
-		return dateUpdated;
+	public LocalDate getUpdatedAt() {
+		return updatedAt;
 	}
 
-	public void setDateUpdated(LocalDate dateUpdated) {
-		this.dateUpdated = dateUpdated;
+	public void setUpdatedAt(LocalDate updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 	public String getEmail() {
@@ -129,11 +140,30 @@ public class User {
 		this.role = role;
 	}
 
+	public List<User> getFollowing() {
+		return following;
+	}
+
+	public void setFollowing(List<User> following) {
+		this.following = following;
+	}
+
+	public List<User> getFollowers() {
+		return followers;
+	}
+
+	public void setFollowers(List<User> followers) {
+		this.followers = followers;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", dateCreated=" + dateCreated + ", dateUpdated=" + dateUpdated
-				+ ", email=" + email + ", imageUrl=" + imageUrl + ", isEnabled=" + isEnabled + ", role=" + role + "]";
+				+ ", lastName=" + lastName + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", email="
+				+ email + ", imageUrl=" + imageUrl + ", isEnabled=" + isEnabled + ", role=" + role + ", following="
+				+ following + ", followers=" + followers + "]";
 	}
+
+
 	
 }
