@@ -1,7 +1,6 @@
 package com.skilldistillery.rainbowbeat.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import javax.persistence.EntityManager;
@@ -15,11 +14,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class UserTest {
+class PostTest {
 	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User user;
+	private Post post;
 	
 
 	@BeforeAll
@@ -35,27 +34,20 @@ class UserTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		user = em.find(User.class, 2);
+		post = em.find(Post.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		user = null;
+		post = null;
 	}
 
 	@Test
-	@DisplayName("Testing user entity")
+	@DisplayName("Testing post entity")
 	void test1() {
-		assertNotNull(user);
-		assertEquals("ponyman", user.getUsername());
-	}
-	
-	@Test
-	@DisplayName("Testing user entity")
-	void test2() {
-		assertNotNull(user);
-		assertFalse(user.getFollowing().isEmpty());
+		assertNotNull(post);
+		assertEquals("Fresh Pony Song", post.getTitle());
 	}
 
 }
