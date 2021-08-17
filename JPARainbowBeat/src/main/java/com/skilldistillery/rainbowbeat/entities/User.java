@@ -1,9 +1,15 @@
 package com.skilldistillery.rainbowbeat.entities;
 
+import java.time.LocalDate;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 public class User {
@@ -11,43 +17,28 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
 	private String username;
-	
 	private String password;
-	
+	@Column(name = "first_name")
+	private String firstName;
+	@Column(name = "last_name")
+	private String lastName;
+	@Column(name = "date_created")
+	@CreationTimestamp
+	private LocalDate dateCreated;
+	@Column(name = "date_updated")
+	@UpdateTimestamp
+	private LocalDate dateUpdated;
 	private String email;
-	
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	private Boolean enabled;
-	
+	@Column(name = "image_url")
+	private String imageUrl;
+	@Column(name = "enabled")
+	private Boolean isEnabled;
 	private String role;
-
-	public Boolean getEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(Boolean enabled) {
-		this.enabled = enabled;
-	}
-
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
+	
+	// No-Arg Constructor
 	public User() {
-		super();
+		
 	}
 
 	public int getId() {
@@ -74,10 +65,75 @@ public class User {
 		this.password = password;
 	}
 
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public LocalDate getDateCreated() {
+		return dateCreated;
+	}
+
+	public void setDateCreated(LocalDate dateCreated) {
+		this.dateCreated = dateCreated;
+	}
+
+	public LocalDate getDateUpdated() {
+		return dateUpdated;
+	}
+
+	public void setDateUpdated(LocalDate dateUpdated) {
+		this.dateUpdated = dateUpdated;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+	public Boolean getIsEnabled() {
+		return isEnabled;
+	}
+
+	public void setIsEnabled(Boolean isEnabled) {
+		this.isEnabled = isEnabled;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + "]";
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", dateCreated=" + dateCreated + ", dateUpdated=" + dateUpdated
+				+ ", email=" + email + ", imageUrl=" + imageUrl + ", isEnabled=" + isEnabled + ", role=" + role + "]";
 	}
-	
 	
 }
