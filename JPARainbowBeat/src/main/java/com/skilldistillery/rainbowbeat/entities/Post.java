@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 @Entity
 public class Post {
 	
@@ -16,8 +19,10 @@ public class Post {
 	private int id;
 	private String title;
 	private String content;
+	@CreationTimestamp
 	@Column(name="created_at")
 	private LocalDateTime createdAt;
+	@UpdateTimestamp
 	@Column(name="updated_at")
 	private LocalDateTime updatedAt;
 	
