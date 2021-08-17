@@ -2,7 +2,7 @@ package com.skilldistillery.rainbowbeat.services;
 
 import com.skilldistillery.rainbowbeat.entities.User;
 
-public interface UserService {
+public interface AuthService {
 	
-	User userByUsername(String username);
+	User register(User user);
 }
