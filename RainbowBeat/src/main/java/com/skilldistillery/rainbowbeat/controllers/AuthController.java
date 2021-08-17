@@ -15,7 +15,7 @@ import com.skilldistillery.rainbowbeat.entities.User;
 import com.skilldistillery.rainbowbeat.services.AuthService;
 
 @RestController
-@CrossOrigin({"*", "http://localhost:4201"})
+@CrossOrigin({"*", "http://localhost:4291"})
 public class AuthController {
 	
 	@Autowired
