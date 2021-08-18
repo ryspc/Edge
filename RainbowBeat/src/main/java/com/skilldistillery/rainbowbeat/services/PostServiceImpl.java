@@ -32,12 +32,17 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public List<Post> postsByKeyword(String keyword) {
-		return postRepo.findByTitleLikeOrContentLikeOrUserLikeOrSong_TitleLikeOrSong_ArtistLikeOrSong_AlbumLikeOrSong_GenresLike(keyword, keyword, keyword, keyword, keyword, keyword, keyword);
+		String containsKey = "%"+keyword+"%";
+		List<Post> postsKeyword = postRepo.findByTitleLikeOrContentLikeOrUser_UsernameLikeOrSong_TitleLikeOrSong_ArtistLikeOrSong_AlbumLikeOrSong_Genres_NameLike(containsKey, containsKey, containsKey, containsKey, containsKey, containsKey, containsKey);
+		System.out.println("********************************************************");
+		System.out.println(postsKeyword);
+		return postsKeyword;
 	}
 
 	@Override
 	public List<Post> postsByGenre(String genre) {
-		return postRepo.findBySong_Genres(genre);
+		String containsGenre = "%"+genre+"%";
+		return postRepo.findBySong_Genres_NameLike(containsGenre);
 	}
 
 	@Override
