@@ -18,7 +18,7 @@ class GenreTest {
 	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Song song;
+	private Genre genre;
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -33,28 +33,28 @@ class GenreTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		song = em.find(Song.class, 1);
+		genre = em.find(Genre.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		song = null;
+		genre = null;
 	}
 
 	@Test
-	@DisplayName("Song Entity Test")
+	@DisplayName("Genre Entity Test")
 	void test1() {
-		assertNotNull(song);
-		assertEquals("My Little Pony Theme Song", song.getTitle());
+		assertNotNull(genre);
+		assertEquals("Pony Music", genre.getName());
 	}
 	
 	@Test
-	@DisplayName("Song to User Mapping Test")
+	@DisplayName("Genre to Song Mapping Test")
 	void test2() {
-		assertNotNull(song);
-		assertNotNull(song.getUser());
-		assertEquals("admin", song.getUser().getUsername());
+		assertNotNull(genre);
+		assertNotNull(genre.getSongs());
+		assertEquals("Rainbow Chill Beats", genre.getSongs().get(1).getTitle());
 	}
 
 }
