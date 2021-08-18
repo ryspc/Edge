@@ -2,7 +2,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { User } from '../models/user/user';
+import { User } from '../models/user';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
