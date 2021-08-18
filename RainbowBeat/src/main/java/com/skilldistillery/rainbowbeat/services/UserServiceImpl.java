@@ -1,5 +1,7 @@
 package com.skilldistillery.rainbowbeat.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,5 +18,20 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User userByUsername(String username) {
 		return userRepo.findByUsername(username);
+	}
+
+	@Override
+	public List<User> allUsers() {
+		return userRepo.findAll();
+	}
+
+	@Override
+	public User updateUser(User user) {
+		return userRepo.saveAndFlush(user);
+	}
+
+	@Override
+	public User createUser(User user) {
+		return userRepo.saveAndFlush(user);
 	}
 }
