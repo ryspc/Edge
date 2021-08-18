@@ -1,0 +1,29 @@
+*{
+  margin:0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.profileHeader{
+  text-align: center;
+
+}
+
+.uploadHeader{
+  text-align: center;
+  margin-top: 20px;
+}
+
+.post-table-section{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.myPostTable{
+  margin: 10px;
+  padding: 5px;
+  text-align: center;
+}
