@@ -1,6 +1,7 @@
 package com.skilldistillery.rainbowbeat.entities;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,7 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Song {
@@ -41,6 +44,17 @@ public class Song {
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
+	
+	@OneToOne(mappedBy="song")
+	private Post post;
+	
+	@ManyToMany(mappedBy="songs")
+	private List<Genre> genres;
+	
+	@ManyToMany(mappedBy="songs")
+	private List<Playlist> playlists;
+	
+	
 
 	public Song() {
 		super();
