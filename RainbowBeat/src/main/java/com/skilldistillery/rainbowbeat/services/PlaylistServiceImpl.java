@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.skilldistillery.rainbowbeat.entities.Playlist;
 import com.skilldistillery.rainbowbeat.repositories.PlaylistRepository;
 
+@Service
 public class PlaylistServiceImpl implements PlaylistService {
 
 	@Autowired

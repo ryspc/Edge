@@ -1,7 +1,10 @@
 package com.skilldistillery.rainbowbeat.services;
 
+import org.springframework.stereotype.Service;
+
 import com.skilldistillery.rainbowbeat.entities.Song;
 
+@Service
 public class SongServiceImpl implements SongService{
 
 	@Override
