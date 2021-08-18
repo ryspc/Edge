@@ -31,16 +31,6 @@ export class UserService {
     );
   }
 
-  public create(user: User) {
-    return this.http.post<User>(this.url, user, this.httpOptions)
-    .pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError('Error sending new User');
-      })
-    );
-  }
-
   public update(user: User) {
     return this.http.put<User>(this.url, user, this.httpOptions)
     .pipe(

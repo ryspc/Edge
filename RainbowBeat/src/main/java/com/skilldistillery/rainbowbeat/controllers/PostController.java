@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.rainbowbeat.entities.Post;
+import com.skilldistillery.rainbowbeat.repositories.PostRepository;
 import com.skilldistillery.rainbowbeat.services.PostService;
 
 @RestController
@@ -27,6 +28,9 @@ public class PostController {
 	
 	@Autowired
 	private PostService postService;
+	
+	@Autowired
+	private PostRepository postRepo;
 	
 	
 	@GetMapping("posts")
@@ -85,16 +89,23 @@ public class PostController {
 		return p;
 	}
 	
-	@PutMapping("posts/{id}")
-	public Post updatePost(HttpServletRequest req, HttpServletResponse res, @PathVariable int id, @RequestBody Post post, Principal principal) {
-		Post p;
+	@PutMapping("posts/{postId}")
+	public Post updatePost(HttpServletRequest req, HttpServletResponse res, @PathVariable int postId, @RequestBody Post post, Principal principal) {
+		Post p = new Post();
+		System.out.println("******************************");
+		System.out.println(post);
+		System.out.println(postId);
 		try {
-			p = postService.update(principal.getName(), id, post);
+			p = postService.update(postId, post);
+			System.out.println("******************************");
+			System.out.println(p);
 			res.setStatus(200);
 			if (p == null) {
 				res.setStatus(404);
 			}
 		} catch (Exception e) {
+			System.out.println("******************************");
+			System.out.println(e);
 			res.setStatus(400);
 			p = null;
 		}
@@ -102,8 +113,15 @@ public class PostController {
 	}
 	
 	@DeleteMapping("posts/{id}")
-	public void deletePost(HttpServletRequest req, HttpServletResponse res, @PathVariable int id, Principal principal) {
-		boolean deleted = postService.destroy(principal.getName(), id);
+	public void deletePost(HttpServletRequest req, HttpServletResponse res, @PathVariable int id) {
+		System.out.println("*****************************");
+		System.out.println(id);
+		Post post = null;
+		if(postRepo.findById(id).isPresent()) {
+			post = postRepo.findById(id).get();
+			System.out.println(post);
+		}		
+		boolean deleted = postService.destroy(id);
 		if(deleted) {
 			res.setStatus(204);
 		}else {
