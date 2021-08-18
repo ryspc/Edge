@@ -12,13 +12,15 @@ import { UserService } from './services/user.service';
 import { SettingsComponent } from './components/settings/settings.component';
 import { AuthService } from './services/auth.service';
 import { ProfileComponent } from './components/profile/profile.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingComponent,
     ProfileComponent,
-    SettingsComponent
+    SettingsComponent,
+    AdminComponent
 
   ],
   imports: [
