@@ -16,6 +16,8 @@ import javax.persistence.OneToOne;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Post {
 	
@@ -34,6 +36,7 @@ public class Post {
 	@JoinColumn(name="song_id")
 	private Song song;
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name="user_id")
 	private User user;
 	@OneToMany(mappedBy="post")

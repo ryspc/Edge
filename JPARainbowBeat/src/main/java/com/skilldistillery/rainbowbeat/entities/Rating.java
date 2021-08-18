@@ -8,6 +8,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="rating")
 public class Rating {
@@ -18,10 +20,12 @@ public class Rating {
 	@Column(name="rating")
 	private boolean rating;
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name="user_id")
 	@MapsId(value="userId")
 	private User user;
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name="post_id")
 	@MapsId(value="postId")
 	private Post post;
