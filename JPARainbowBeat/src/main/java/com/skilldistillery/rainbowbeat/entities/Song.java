@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Song {
 	
@@ -41,16 +43,20 @@ public class Song {
 	@Column(name="album")
 	private String album;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
 	
+	@JsonIgnore
 	@OneToOne(mappedBy="song")
 	private Post post;
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy="songs")
 	private List<Genre> genres;
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy="songs")
 	private List<Playlist> playlists;
 	
