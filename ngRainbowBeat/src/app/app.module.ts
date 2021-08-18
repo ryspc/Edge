@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { UserService } from './services/user.service';
+import { SettingsComponent } from './components/settings/settings.component';
 import { AuthService } from './services/auth.service';
 import { ProfileComponent } from './components/profile/profile.component';
 
@@ -16,7 +17,9 @@ import { ProfileComponent } from './components/profile/profile.component';
   declarations: [
     AppComponent,
     LandingComponent,
-    ProfileComponent
+    ProfileComponent,
+    SettingsComponent
+
   ],
   imports: [
     BrowserModule,
