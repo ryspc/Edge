@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: LandingComponent },
   { path: 'profile', component: ProfileComponent },
+  {path: 'landing', component: LandingComponent}
 ];
 
 @NgModule({
