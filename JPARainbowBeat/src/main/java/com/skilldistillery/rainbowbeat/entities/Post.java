@@ -1,12 +1,17 @@
 package com.skilldistillery.rainbowbeat.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -25,6 +30,16 @@ public class Post {
 	@UpdateTimestamp
 	@Column(name="updated_at")
 	private LocalDateTime updatedAt;
+	@OneToOne
+	@JoinColumn(name="song_id")
+	private Song song;
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user;
+	@OneToMany(mappedBy="post")
+	private List<Rating> ratings;
+	@OneToMany(mappedBy="post")
+	private List<Comment> comments;
 	
 	public Post() {}
 

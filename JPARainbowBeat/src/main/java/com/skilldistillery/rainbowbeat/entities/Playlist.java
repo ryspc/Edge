@@ -1,11 +1,15 @@
 package com.skilldistillery.rainbowbeat.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -22,6 +26,11 @@ public class Playlist {
 	@OneToOne
 	@JoinColumn(name = "user_id")
 	private User user;
+	@ManyToMany
+	@JoinTable(name="playlist_song",
+			joinColumns=@JoinColumn(name="playlist_id"),
+			inverseJoinColumns=@JoinColumn(name="song_id"))
+			private List<Song> songs;
 	
 	public Playlist () {}
 	
