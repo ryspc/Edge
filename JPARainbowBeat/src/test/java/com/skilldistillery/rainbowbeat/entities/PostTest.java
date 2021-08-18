@@ -49,5 +49,34 @@ class PostTest {
 		assertNotNull(post);
 		assertEquals("Fresh Pony Song", post.getTitle());
 	}
+	
+	@Test
+	@DisplayName("Post to Song Mapping Test")
+	void test2() {
+		assertNotNull(post);
+		assertNotNull(post.getSong());
+		assertEquals("My Little Pony Theme Song", post.getSong().getTitle());
+	}
+	
+	@DisplayName("Post to User Mapping Test")
+	void test3() {
+		assertNotNull(post);
+		assertNotNull(post.getUser());
+		assertEquals("admin", post.getUser().getUsername());
+	}
+	
+	@DisplayName("Post to Rating Mapping Test")
+	void test4() {
+		assertNotNull(post);
+		assertNotNull(post.getRatings());
+		assertEquals(1, post.getRatings().size());
+	}
+	
+	@DisplayName("Post to Comment Mapping Test")
+	void test5() {
+		assertNotNull(post);
+		assertNotNull(post.getComments());
+		assertEquals(1, post.getComments().size());
+	}
 
 }

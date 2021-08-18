@@ -2,6 +2,7 @@ package com.skilldistillery.rainbowbeat.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -14,15 +15,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class SongTest {
-	
+class RatingTest {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Song song;
-	
+	private Rating rating;
+	private RatingId rid;
+
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		emf = Persistence.createEntityManagerFactory("JPARainbowBeat");
+
 	}
 
 	@AfterAll
@@ -33,51 +35,38 @@ class SongTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		song = em.find(Song.class, 1);
+		rid = new RatingId();
+		rid.setPostId(1);;
+		rid.setUserId(2);;
+		rating = em.find(Rating.class, rid);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
+		rating = null;
+		rid = null;
 		em.close();
-		song = null;
 	}
 
 	@Test
-	@DisplayName("Song Entity Test")
+	@DisplayName("testing rating true false")
 	void test1() {
-		assertNotNull(song);
-		assertEquals("My Little Pony Theme Song", song.getTitle());
+		assertNotNull(rating);
+		assertTrue(rating.isRating());
 	}
 	
 	@Test
-	@DisplayName("Song to User Mapping Test")
+	@DisplayName("testing rating to user mapping")
 	void test2() {
-		assertNotNull(song);
-		assertNotNull(song.getUser());
-		assertEquals("admin", song.getUser().getUsername());
-	}
-
-	@Test
-	@DisplayName("Song to Post Mapping Test")
-	void test3() {
-		assertNotNull(song);
-		assertNotNull(song.getPost());
-		assertEquals("Fresh Pony Song", song.getPost().getTitle());
-	}
-
-	@Test
-	@DisplayName("Song to Genre Mapping Test")
-	void test4() {
-		assertNotNull(song);
-		assertNotNull(song.getGenres());
-		assertEquals(1, song.getGenres().size());
+		assertNotNull(rating);
+		assertEquals("ponyman", rating.getUser().getUsername());
 	}
 	
 	@Test
-	@DisplayName("Song to Playlist Mapping Test")
-	void test5() {
-		assertNotNull(song);
-		assertNotNull(song.getPlaylists());
-		assertEquals(1, song.getPlaylists().size());
+	@DisplayName("testing rating to user mapping")
+	void test3() {
+		assertNotNull(rating);
+		assertEquals("Fresh Pony Song", rating.getPost().getTitle());
 	}
+
 }

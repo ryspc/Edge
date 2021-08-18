@@ -132,6 +132,31 @@ public class Song {
 		this.user = user;
 	}
 
+	
+	public Post getPost() {
+		return post;
+	}
+
+	public void setPost(Post post) {
+		this.post = post;
+	}
+
+	public List<Genre> getGenres() {
+		return genres;
+	}
+
+	public void setGenres(List<Genre> genres) {
+		this.genres = genres;
+	}
+
+	public List<Playlist> getPlaylists() {
+		return playlists;
+	}
+
+	public void setPlaylists(List<Playlist> playlists) {
+		this.playlists = playlists;
+	}
+
 	@Override
 	public String toString() {
 		return "Song [id=" + id + ", title=" + title + ", artist=" + artist + ", imageURL=" + imageURL + ", songURL="
