@@ -63,13 +63,15 @@ public class SongServiceImpl implements SongService{
 	
 	@Override
 	public List<Song> getSongByKeyword(String keyword){
-		List<Song> songs = songRepo.findByTitleLike(keyword);
+		String newKeyword = '%'+keyword+'%';
+		List<Song> songs = songRepo.findByTitleLike(newKeyword);
 		return songs;
 	}
 	
 	@Override
-	public List<Song> getSongByGenre(Genre genre){
-		List<Song> songs = songRepo.findByGenres(genre);
+	public List<Song> getSongByGenre(String genre){
+		String newGenre = '%'+genre+'%';
+		List<Song> songs = songRepo.findByGenres_NameLike(newGenre);
 		return songs;
 	}
 	

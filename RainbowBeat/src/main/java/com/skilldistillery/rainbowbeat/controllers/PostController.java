@@ -57,7 +57,7 @@ public class PostController {
 		return posts;
 	}
 	
-	@GetMapping("posts/{genre}")
+	@GetMapping("posts/genre/{genre}")
 	public List<Post> getPostsByGenre(HttpServletRequest req, HttpServletResponse res, @PathVariable String genre){
 		List<Post> posts = postService.postsByGenre(genre);
 		if (posts == null) {

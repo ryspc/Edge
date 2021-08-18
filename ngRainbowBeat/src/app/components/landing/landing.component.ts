@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Toaster } from 'ngx-toast-notifications';
 import { expandRightOnEnterAnimation } from 'angular-animations';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-landing',
@@ -14,7 +15,8 @@ export class LandingComponent implements OnInit {
   constructor(private currentRouter: ActivatedRoute,
     private router: Router,
     private modalService: NgbModal,
-    private toaster: Toaster) { }
+    private toaster: Toaster,
+    private userService: UserService) { }
 
     closeResult = '';
     panelOpenState = false;
