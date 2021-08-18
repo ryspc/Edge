@@ -11,7 +11,7 @@ public interface PostService {
 	List<Post> postsByKeyword(String keyword);
 	List<Post> postsByGenre(String genre);
 	Post create(Post post);
-	Post update(String username, int id, Post post);
-	boolean destroy(String username, int id);
+	Post update(int id, Post post);
+	boolean destroy(int id);
 
 }
