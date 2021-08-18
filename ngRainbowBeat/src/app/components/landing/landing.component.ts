@@ -4,6 +4,9 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Toaster } from 'ngx-toast-notifications';
 import { expandRightOnEnterAnimation } from 'angular-animations';
 import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/models/user';
+import { AuthService } from 'src/app/services/auth.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-landing',
@@ -11,12 +14,15 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent implements OnInit {
+  user: User = new User();
 
   constructor(private currentRouter: ActivatedRoute,
     private router: Router,
     private modalService: NgbModal,
     private toaster: Toaster,
-    private userService: UserService) { }
+    private userService: UserService,
+    private auth: AuthService
+    ) { }
 
     closeResult = '';
     panelOpenState = false;
@@ -43,4 +49,43 @@ export class LandingComponent implements OnInit {
     }
   }
   // END MODAL STUFF //
+
+  login(user: User) {
+    this.auth.login(user.username, user.password).subscribe(
+      loggedIn => {
+        this.router.navigateByUrl("/landing") //TODO: Update url navigation
+      },
+      fail => {
+        console.log("Login Failed");
+        console.log(fail);
+      }
+    );
+  }
+
+  logout() {
+    this.auth.logout();
+    this.router.navigateByUrl("/landing"); //TODO: Update url navigation
+  }
+
+  register(form: NgForm) {
+    let newUser = form.value;
+    this.auth.register(newUser).subscribe(
+      user => {
+        this.auth.login(newUser.username, newUser.password).subscribe(
+          loggedIn => {
+            this.router.navigateByUrl("/landing"); //TODO: Update url navigation
+            console.log("User is logged in");
+          },
+          failed => {
+            this.router.navigateByUrl("/landing");
+          }
+        );
+      },
+      fail => {
+        console.log(fail);
+        this.router.navigateByUrl("/landing");
+      }
+    );
+  }
+
 }

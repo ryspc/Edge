@@ -1,5 +1,22 @@
-<button>Login</button>
-<button>Sign Up</button>
-
 <h1>Rainbow Beat</h1>
 <h4>A beat beat for every color of the rainbow!</h4>
+
+<div>
+  <form #registerForm=ngForm>
+    Username: <input type="text" name="username" ngModel><br>
+    Password: <input type="password" name="password" ngModel><br>
+    Email: <input type="text" name="email" ngModel><br>
+    First Name: <input type="text" name="firstName" ngModel><br>
+    Last Name: <input type="text" name="lastName" ngModel><br>
+    <button (click)="register(registerForm)">Register</button>
+  </form>
+</div>
+
+<div>
+  <form>
+    Username: <input type="text" name="username" [(ngModel)]="user.username">
+    Password: <input type="password" name="password" [(ngModel)]="user.password">
+    <button (click)="login(user)">Login</button>
+  </form>
+</div>
+
