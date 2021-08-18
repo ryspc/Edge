@@ -1,4 +1,6 @@
+import { Genre } from "./genre";
 import { Playlist } from "./playlist";
+import { Post } from "./post";
 import { User } from "./user";
 
 export class Song {

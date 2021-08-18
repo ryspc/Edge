@@ -14,7 +14,7 @@ export class Post {
     createdAt: string = '',
     updatedAt: string = '',
     userId: number = 0,
-    songId: number
+    songId: number = 0
   ){
     this.id = id;
     this.content = content;
