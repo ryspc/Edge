@@ -36,7 +36,7 @@ public class Post {
 	@JoinColumn(name="song_id")
 	private Song song;
 	@ManyToOne
-	@JsonIgnore
+//	@JsonIgnore
 	@JoinColumn(name="user_id")
 	private User user;
 	@OneToMany(mappedBy="post")

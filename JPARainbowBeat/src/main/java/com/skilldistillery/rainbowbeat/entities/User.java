@@ -53,6 +53,7 @@ public class User {
 	private List<User> followers;
 	@OneToMany(mappedBy="user")
 	private List<Song> songs;
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List<Post> posts;
 	@OneToMany(mappedBy="user")
