@@ -30,6 +30,8 @@ public class SongController {
 		return songService.index();
 	}
 	
+	
+	
 	@GetMapping("songs/search/{keyword}")
 	public List<Song> getSongByKeyword(@PathVariable String keyword, HttpServletRequest req, HttpServletResponse res, 
 			Principal principal){
@@ -40,7 +42,7 @@ public class SongController {
 	}
 	
 	@GetMapping("songs/{genre}")
-	public List<Song> getSongByGenre(@PathVariable Genre genre, HttpServletRequest req, HttpServletResponse res, 
+	public List<Song> getSongByGenre(@PathVariable String genre, HttpServletRequest req, HttpServletResponse res, 
 			Principal principal){
 		List<Song> songs = songService.getSongByGenre(genre); 
 		return songs;
