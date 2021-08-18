@@ -15,6 +15,8 @@ import javax.persistence.ManyToMany;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class User {
 	
@@ -39,11 +41,13 @@ public class User {
 	@Column(name = "enabled")
 	private Boolean isEnabled;
 	private String role;
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "favorite_user",
 	joinColumns = @JoinColumn(name = "user_id"),
 	inverseJoinColumns = @JoinColumn(name = "favorite_id"))
 	private List<User> following;
+	@JsonIgnore
 	@ManyToMany(mappedBy = "following")
 	private List<User> followers;
 	
