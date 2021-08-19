@@ -41,15 +41,11 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
     SettingsComponent,
     AdminComponent,
     PlaylistComponent,
-<<<<<<< HEAD
-    FollowersComponent
-
-=======
+    FollowersComponent,
     SidebarComponent,
     AudioListComponent,
     SearchBarComponent,
     CardComponent
->>>>>>> d57e2032bb9d0c53a6b89c1abae9d73a33bedf41
   ],
   imports: [
     BrowserModule,
