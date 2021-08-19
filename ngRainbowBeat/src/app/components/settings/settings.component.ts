@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
@@ -10,12 +11,15 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class SettingsComponent implements OnInit {
   loggedInUser: User | null = null;
+  editUser: User | null = null;
+
   public encoded = this.authService.getCredentials();
   public decoded = atob((this.encoded ?? 'null'));
 
   constructor(
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -33,4 +37,20 @@ export class SettingsComponent implements OnInit {
       }
     );
   }
+
+  setEditUser() {
+    this.editUser = Object.assign({}, this.loggedInUser);
+  }
+
+  updateUserDetails(user: User) {
+    this.userService.update(user).subscribe(
+      update => {
+        this.router.navigateByUrl('/home')
+      },
+      err => {
+        console.log('Error updating user settings');
+      }
+    );
+  }
+
 }
