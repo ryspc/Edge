@@ -21,10 +21,10 @@ export class PlaylistService {
   index(): Observable<Playlist[]>{
     return this.http.get<Playlist[]>(this.url).pipe(
       catchError((err: any) => {
-        console.log('PostService.index() err retrieving post list');
+        console.log('PlaylistService.index() err retrieving  playlists');
         return throwError(err);
       })
-    )
+    );
   }
 
 

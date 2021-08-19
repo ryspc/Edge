@@ -29,6 +29,7 @@ public class Playlist {
 	@JsonIgnore
 	@JoinColumn(name = "user_id")
 	private User user;
+	
 	@ManyToMany
 	@JoinTable(name="playlist_song",
 			joinColumns=@JoinColumn(name="playlist_id"),
@@ -73,6 +74,15 @@ public class Playlist {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	public List<Song> getSongs() {
+		return songs;
+	}
+
+	public void setSongs(List<Song> songs) {
+		this.songs = songs;
+	}
+
 	@Override
 	public String toString() {
 		return "Playlist [id=" + id + ", title=" + title + ", description=" + description + ", imageUrl=" + imageUrl
