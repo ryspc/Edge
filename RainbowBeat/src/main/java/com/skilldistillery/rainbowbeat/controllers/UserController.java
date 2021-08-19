@@ -1,5 +1,8 @@
 package com.skilldistillery.rainbowbeat.controllers;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,15 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
+	@GetMapping("users")
+	public List<User> getAllUsers(HttpServletRequest req, HttpServletResponse res){
+		List<User> users = userService.allUsers();
+		if(users == null) {
+			res.setStatus(404);
+		}
+		return users;
+	}
 	
 	@GetMapping("users/{username}")
 	public User getUserByUsername(@PathVariable String username,HttpServletResponse res) {
