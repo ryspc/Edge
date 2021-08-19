@@ -15,18 +15,20 @@ export class PlaylistComponent implements OnInit {
     private playlistService: PlaylistService
   ) { }
 
-  playlists: Playlist[] = []
+  playlists: Playlist[] = [];
+  playlist: Playlist = new Playlist;
 
   ngOnInit(): void {
-    this.loadUSerPlaylists();
+    this.loadUserPlaylists();
   }
 
-  loadUSerPlaylists(){
+  loadUserPlaylists(){
     this.playlistService.index().subscribe(
-      data => {
-        this.playlists = data;
+      playlists => {
+        this.playlists = playlists;
+        console.log(this.playlists)
       },
-      noData => {
+      noPlaylists => {
         console.error('PlaylistComponenet.loadPosts: error displaying Playlists')
       }
     )
