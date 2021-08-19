@@ -51,6 +51,14 @@ public class PostController {
 		return post;
 	}
 	
+	@GetMapping("posts/user/{username}")
+	public List<Post> getPostsByUsername(HttpServletRequest req, HttpServletResponse res, @PathVariable String username){
+		List<Post> posts = postService.postsByUser(username);
+		if(posts == null) {
+			res.setStatus(404);
+		}
+		return posts;
+	}
 	
 	@GetMapping("posts/search/{keyword}")
 	public List<Post> getPostsByKeyword(HttpServletRequest req, HttpServletResponse res, @PathVariable String keyword){

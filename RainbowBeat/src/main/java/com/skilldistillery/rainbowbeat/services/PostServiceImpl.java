@@ -66,6 +66,12 @@ public class PostServiceImpl implements PostService {
 //		System.out.println(p);
 		return postRepo.saveAndFlush(post);
 	}
+	
+	@Override
+	public List<Post> postsByUser(String username){
+		return postRepo.findByUser_Username(username);
+		
+	}
 
 	@Override
 	public boolean destroy(int id) {
