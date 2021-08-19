@@ -18,6 +18,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { AdminComponent } from './components/admin/admin.component';
+import { PlaylistComponent } from './components/playlist/playlist.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,9 @@ import { AdminComponent } from './components/admin/admin.component';
     LandingComponent,
     ProfileComponent,
     SettingsComponent,
-    AdminComponent
+    AdminComponent,
+    PlaylistComponent
+
   ],
   imports: [
     BrowserModule,
