@@ -1,10 +1,19 @@
 <h1>Settings</h1>
 
-<div>
-  Username:
-  Password:
-  First Name:
-  Last Name:
-  Member Since:
-  <button>Edit Details</button>
+<div *ngIf="!editUser && loggedInUser">
+  <p>Username: {{loggedInUser.username}}</p><br>
+  <p>Email: {{loggedInUser.email}}</p><br>
+  <p>First Name: {{loggedInUser.firstName}}</p><br>
+  <p>Last Name: {{loggedInUser.lastName}}</p><br>
+  <p>Member Since: {{loggedInUser.createdAt}}</p><br>
+  <button (click)="setEditUser()">Edit Details</button>
 </div>
+
+<form *ngIf="editUser">
+  Username: <input type="text" name="username" [(ngModel)]="editUser.username"><br>
+  <!-- Password: <input type="password" name="password" ngModel><br> -->
+  First Name: <input type="text" name="firstName" [(ngModel)]="editUser.firstName"><br>
+  Last Name: <input type="text" name="lastName" [(ngModel)]="editUser.lastName"><br>
+  <input type="submit" name="save" value="Save Changes" (click)="updateUserDetails(editUser)">
+  <input type="submit" name="cancel" value="Cancel" (click)="editUser = null">
+</form>
