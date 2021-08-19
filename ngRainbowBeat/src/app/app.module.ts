@@ -12,6 +12,11 @@ import { UserService } from './services/user.service';
 import { SettingsComponent } from './components/settings/settings.component';
 import { AuthService } from './services/auth.service';
 import { ProfileComponent } from './components/profile/profile.component';
+import { TabModule } from '@syncfusion/ej2-angular-navigations';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
 import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
@@ -21,7 +26,6 @@ import { AdminComponent } from './components/admin/admin.component';
     ProfileComponent,
     SettingsComponent,
     AdminComponent
-
   ],
   imports: [
     BrowserModule,
@@ -31,6 +35,11 @@ import { AdminComponent } from './components/admin/admin.component';
     NgbModule,
     BrowserAnimationsModule,
     ToastNotificationsModule,
+    TabModule,
+    MatTabsModule,
+    MatInputModule,
+    MatButtonModule,
+    MatCardModule
   ],
   providers: [
     UserService,
