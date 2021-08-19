@@ -19,6 +19,12 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { AdminComponent } from './components/admin/admin.component';
 import { PlaylistComponent } from './components/playlist/playlist.component';
+import { AudioListComponent } from './audio-list/audio-list.component';
+import { SearchBarComponent } from './audioComponents/search-bar/search-bar.component';
+import { CardComponent } from './audioComponents/card/card.component';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+
 
 @NgModule({
   declarations: [
@@ -27,7 +33,10 @@ import { PlaylistComponent } from './components/playlist/playlist.component';
     ProfileComponent,
     SettingsComponent,
     AdminComponent,
-    PlaylistComponent
+    PlaylistComponent,
+    AudioListComponent,
+    SearchBarComponent,
+    CardComponent
 
   ],
   imports: [
@@ -42,7 +51,9 @@ import { PlaylistComponent } from './components/playlist/playlist.component';
     MatTabsModule,
     MatInputModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatIconModule,
+    MatToolbarModule
   ],
   providers: [
     UserService,
