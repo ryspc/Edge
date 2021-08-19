@@ -6,6 +6,7 @@ import { LandingComponent } from './components/landing/landing.component';
 import { PlaylistComponent } from './components/playlist/playlist.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -13,8 +14,9 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'settings', component: SettingsComponent},
   { path: 'landing', component: LandingComponent},
-  { path: 'admin', component: AdminComponent},
+  { path: 'admin', component: LandingComponent},
   { path: 'playlist', component: PlaylistComponent},
+  { path: 'sidebar', component: SidebarComponent},
   { path: 'audio', component: AudioListComponent}
 ];
 
