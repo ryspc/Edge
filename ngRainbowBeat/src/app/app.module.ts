@@ -19,6 +19,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { AdminComponent } from './components/admin/admin.component';
 import { PlaylistComponent } from './components/playlist/playlist.component';
+import { FollowersComponent } from './components/followers/followers.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { PlaylistComponent } from './components/playlist/playlist.component';
     ProfileComponent,
     SettingsComponent,
     AdminComponent,
-    PlaylistComponent
+    PlaylistComponent,
+    FollowersComponent
 
   ],
   imports: [
