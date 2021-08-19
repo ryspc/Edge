@@ -15,6 +15,9 @@ public class PostServiceImpl implements PostService {
 	@Autowired
 	private PostRepository postRepo;
 	
+//	@Autowired 
+//	private SongService songService;
+	
 	@Override
 	public List<Post> allPosts() {
 		return postRepo.findAll();
@@ -55,17 +58,29 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public Post update(String username, int id, Post post) {
-		Post p = null;
-		post.setId(id);
-		p = postRepo.saveAndFlush(post);
-		return p;
+	public Post update(int postId, Post post) {
+//		Post p = null;
+		post.setId(postId);
+//		p = postRepo.saveAndFlush(post);
+//		System.out.println("**********************************8");
+//		System.out.println(p);
+		return postRepo.saveAndFlush(post);
 	}
 
 	@Override
-	public boolean destroy(String username, int id) {
+	public boolean destroy(int id) {
+		System.out.println("************************************");
+		System.out.println(id);
+		Post post = null;
+		if(postRepo.findById(id).isPresent()) {
+			post = postRepo.findById(id).get();
+			System.out.println(post);
+		}
 		postRepo.deleteById(id);
-		return !postRepo.existsById(id);
+		boolean postDelete = !postRepo.existsById(id);
+		System.out.println("************************************");
+		System.out.println("Post Deleted: " + postDelete);
+		return postDelete;
 	}
 
 }
