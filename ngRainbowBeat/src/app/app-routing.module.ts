@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AudioListComponent } from './audio-list/audio-list.component';
+import { AdminComponent } from './components/admin/admin.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { PlaylistComponent } from './components/playlist/playlist.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -14,7 +16,8 @@ const routes: Routes = [
   { path: 'landing', component: LandingComponent},
   { path: 'admin', component: LandingComponent},
   { path: 'playlist', component: PlaylistComponent},
-  { path: 'sidebar', component: SidebarComponent}
+  { path: 'sidebar', component: SidebarComponent},
+  { path: 'audio', component: AudioListComponent}
 ];
 
 @NgModule({

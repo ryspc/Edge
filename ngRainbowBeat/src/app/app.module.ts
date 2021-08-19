@@ -20,13 +20,17 @@ import {MatCardModule} from '@angular/material/card';
 import { AdminComponent } from './components/admin/admin.component';
 import { PlaylistComponent } from './components/playlist/playlist.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { MatDividerModule } from '@angular/material/divider';
+import { AudioListComponent } from './audio-list/audio-list.component';
+import { SearchBarComponent } from './audioComponents/search-bar/search-bar.component';
+import { CardComponent } from './audioComponents/card/card.component';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
+
 
 @NgModule({
   declarations: [
@@ -36,7 +40,10 @@ import { MatDividerModule } from '@angular/material/divider';
     SettingsComponent,
     AdminComponent,
     PlaylistComponent,
-    SidebarComponent
+    SidebarComponent,
+    AudioListComponent,
+    SearchBarComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +65,7 @@ import { MatDividerModule } from '@angular/material/divider';
     MatSidenavModule,
     MatListModule,
     MatDividerModule
+
   ],
   providers: [
     UserService,
