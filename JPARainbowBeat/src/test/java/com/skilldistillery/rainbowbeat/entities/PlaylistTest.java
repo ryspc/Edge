@@ -54,7 +54,7 @@ class PlaylistTest {
 	void test2() {
 		assertNotNull(playlist);
 		assertNotNull(playlist.getUser());
-		assertEquals("admin", playlist.getUser().getUsername());
+		assertEquals(1, playlist.getSongs().size());
 	}
 
 }
