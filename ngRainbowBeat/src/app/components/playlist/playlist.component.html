@@ -2,16 +2,16 @@
 
 <h2 class="playlistHeader">My Playlists</h2>
 
-<div class=post-table-section>
-  <table class="myPostTable">
+<div class=playlistBody>
+  <table class="playlistTable">
     <thead *ngFor="let playlist of playlists">
       <tr>
         <th>{{playlist.title}}</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor = "let playlist of playlists">
-        <td >{{playlist.songs}}</td>
+      <tr>
+        <td ></td>
       </tr>
     </tbody>
   </table>
