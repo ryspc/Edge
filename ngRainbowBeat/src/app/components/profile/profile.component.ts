@@ -33,6 +33,23 @@ export class ProfileComponent implements OnInit {
     )
   }
 
+getNumberOfPosts(): number{
+  let postLength = this.posts.length;
+    return postLength;
+}
+
+displayPost(p: Post): void {
+  this.selected = p;
+}
+
+displayTable(): void{
+  this.selected = null;
+}
+
+setEditPost(): void{
+  this.editPost = Object.assign({}, this.selected);
+}
+
   addPost(): void{
     this.postService.create(this.newPost).subscribe(
       data => {
