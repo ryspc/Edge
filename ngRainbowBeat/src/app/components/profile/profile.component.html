@@ -1,18 +1,90 @@
 <h1 class="profileHeader">User Profile</h1>
 
-<h2 class="uploadHeader">My Posts</h2>
+<h2 class="uploadHeader" *ngIf="!selected">My {{getNumberOfPosts()}} Post </h2>
 
 <div class=post-table-section>
-  <table class="myPostTable">
+  <table class="myPostTable" *ngIf="!selected">
     <thead>
       <tr>
-        <th>Title:</th><th>Content:</th><th>Posted:</th>
+        <th>Title:</th><th>Content:</th><th>Posted:</th><th></th><th></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let post of posts">
         <td >{{post.title}}</td><td>{{post.content}}</td><td>{{post.createdAt}}</td>
+        <td>
+          <button
+          (click)="displayPost(post)"
+          class="btn btn-dark">Details</button>
+        </td>
+        <td>
+          <button
+            (click)="destroyPost(post.id)"
+            class="btn btn-dark"
+          >
+            Delete
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>
+<!-- ADD POST SECTION -->
+
+<!-- Post Details SECTION -->
+  <div id="postDetails" *ngIf="selected && !editPost">
+    <h3>Title: {{ selected.title }}</h3>
+    <p>Content: {{ selected.content }}</p>
+    <p>Date Created: {{ selected.createdAt }}</p>
+    <p>Updated: {{ selected.updatedAt }}</p>
+
+    <div class="addPostBtnDiv">
+      <button
+        (click)="displayTable()"
+        class="btn btn-dark addConcBtnEdit"
+      >
+        Back
+      </button>
+      <button
+        (click)="setEditPost()"
+        class="btn btn-dark addConcBtnEdit"
+      >
+        Edit
+      </button>
+    </div>
+  </div>
+  <form id="editTodo" *ngIf="editPost">
+    <h3>Edit Post</h3>
+    <div class="addPostBtnDiv">
+      <label class="editLabel" for="title">Title:</label>
+      <input
+        type="text"
+        class="form-control addPostForm"
+        name="title"
+        [(ngModel)]="editPost.title"
+      />
+      <label class="editLabel" for="content">Content:</label>
+      <input
+        type="text"
+        class="form-control addPostForm"
+        name="content"
+        [(ngModel)]="editPost.content"
+      />
+
+
+      <input
+        type="submit"
+        class="btn btn-dark addPostBtnEdit"
+        name="Save"
+        value="Save"
+        (click)="updatePost(editPost)"
+      />
+      <input
+        type="submit"
+        class="btn btn-dark addPostBtnEdit"
+        name="Cancel"
+        value="Cancel"
+        (click)="editPost = null"
+      />
+    </div>
+  </form>
 </div>

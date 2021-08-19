@@ -19,6 +19,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { AdminComponent } from './components/admin/admin.component';
 import { PlaylistComponent } from './components/playlist/playlist.component';
+import { FollowersComponent } from './components/followers/followers.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -40,10 +41,12 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
     SettingsComponent,
     AdminComponent,
     PlaylistComponent,
+    FollowersComponent,
     SidebarComponent,
     AudioListComponent,
     SearchBarComponent,
     CardComponent
+
   ],
   imports: [
     BrowserModule,

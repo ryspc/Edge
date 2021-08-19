@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { FollowersComponent } from './components/followers/followers.component';
 import { AudioListComponent } from './audio-list/audio-list.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { LandingComponent } from './components/landing/landing.component';
@@ -17,6 +18,7 @@ const routes: Routes = [
     { path: 'profile', component: ProfileComponent },
     { path: 'settings', component: SettingsComponent},
     { path: 'playlist', component: PlaylistComponent},
+    { path: 'followers', component: FollowersComponent },
     { path: 'admin', component: AdminComponent}
   ]}
 ];
