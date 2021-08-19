@@ -1,5 +1,7 @@
 package com.skilldistillery.rainbowbeat.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +28,13 @@ public class UserController {
 	@GetMapping("users/{username}")
 	public User getUserByUsername(@PathVariable String username,HttpServletResponse res) {
 		User user = userService.userByUsername(username);
-		System.out.println(user);
 		return user;
+	}
+	
+	@GetMapping("users/{username}/following")
+	public List<User> getFollowers(@PathVariable String username, HttpServletResponse res) {
+		User user = userService.userByUsername(username);
+		return user.getFollowing();
 	}
 	
 	@PostMapping("users")
