@@ -3,14 +3,15 @@ td {
 }
 
 .siteSection {
-    margin-top: 100px;
+    padding-top: 100px;
     display: grid;
     grid-gap: 20px 100px;
     grid-template-columns: repeat(2, 1fr);
     margin-left: auto;
     margin-right: auto;
     max-width: 1000px;
-    padding: 30px 0;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .login,
@@ -32,13 +33,9 @@ td {
 .heroh1 {
     font-size: 140px;
     line-height: 120px;
-    /* color: white; */
     font-family: 'Courier New', Courier, monospace;
-    /* font-weight: 300px; */
-    /* background: linear-gradient(to right, orange, #fed85c, #66e37d, cyan, violet);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent; */
     background: linear-gradient(to right, white, #fed85c);
+    /* its yellow but it works */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     -webkit-margin-bottom-collapse: 30px;
@@ -48,14 +45,21 @@ td {
 .heroh2 {
     color: white;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    /* color: #fed85c; */
     font-size: 25px;
     line-height: 40px;
 }
 
 .sec {
     font-size: 25px;
-    margin-top: -25px;
-    padding-bottom: 5px;
     ;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background-image: url("src/app/media/pexels-brett-sayles-2479315.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
 }
