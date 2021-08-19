@@ -66,7 +66,7 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
-    MatDividerModule
+    MatDividerModule,
 
   ],
   providers: [
