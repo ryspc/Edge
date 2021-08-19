@@ -29,7 +29,7 @@ export class AuthService {
 
     // create request to authenticate credentials
     return this.http
-      .get(this.baseUrl + 'authenticate', httpOptions)
+      .get<User>(this.baseUrl + 'authenticate', httpOptions)
       .pipe(
         tap((res) => {
           localStorage.setItem('credentials' , credentials);
