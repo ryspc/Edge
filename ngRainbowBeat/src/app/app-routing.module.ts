@@ -10,11 +10,10 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'home' },
+  { path: '', pathMatch: 'full', redirectTo: 'landing' },
   { path: 'landing', component: LandingComponent},
   { path: 'audio', component: AudioListComponent},
   {path: '', component: SidebarComponent, children: [
-    { path: 'home', component: LandingComponent },
     { path: 'profile', component: ProfileComponent },
     { path: 'settings', component: SettingsComponent},
     { path: 'playlist', component: PlaylistComponent},
