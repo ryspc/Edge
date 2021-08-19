@@ -13,6 +13,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { AuthService } from './services/auth.service';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { PlaylistComponent } from './components/playlist/playlist.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { AdminComponent } from './components/admin/admin.component';
     LandingComponent,
     ProfileComponent,
     SettingsComponent,
-    AdminComponent
+    AdminComponent,
+    PlaylistComponent
 
   ],
   imports: [
