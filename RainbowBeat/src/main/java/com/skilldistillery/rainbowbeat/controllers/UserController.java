@@ -26,6 +26,7 @@ public class UserController {
 	@GetMapping("users/{username}")
 	public User getUserByUsername(@PathVariable String username,HttpServletResponse res) {
 		User user = userService.userByUsername(username);
+		System.out.println(user);
 		return user;
 	}
 	
