@@ -19,6 +19,14 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { AdminComponent } from './components/admin/admin.component';
 import { PlaylistComponent } from './components/playlist/playlist.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatIconModule } from '@angular/material/icon';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -27,8 +35,8 @@ import { PlaylistComponent } from './components/playlist/playlist.component';
     ProfileComponent,
     SettingsComponent,
     AdminComponent,
-    PlaylistComponent
-
+    PlaylistComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +50,14 @@ import { PlaylistComponent } from './components/playlist/playlist.component';
     MatTabsModule,
     MatInputModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    ReactiveFormsModule,
+    MatIconModule,
+    FlexLayoutModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatDividerModule
   ],
   providers: [
     UserService,
