@@ -1,22 +1,65 @@
-<h1>Rainbow Beat</h1>
-<h4>A beat beat for every color of the rainbow!</h4>
-
-<div>
-  <form #registerForm=ngForm>
-    Username: <input type="text" name="username" ngModel><br>
-    Password: <input type="password" name="password" ngModel><br>
-    Email: <input type="text" name="email" ngModel><br>
-    First Name: <input type="text" name="firstName" ngModel><br>
-    Last Name: <input type="text" name="lastName" ngModel><br>
-    <button (click)="register(registerForm)">Register</button>
-  </form>
-</div>
-
-<div>
-  <form>
-    Username: <input type="text" name="username" [(ngModel)]="user.username">
-    Password: <input type="password" name="password" [(ngModel)]="user.password">
-    <button (click)="login(user)">Login</button>
-  </form>
-</div>
-
+<body>
+    <section class="siteSection" id="siteSection">
+        <div>
+            <h1 class="heroh1">edge</h1>
+            <!-- <h1 class="heroh1">Beats</h1> -->
+            <h2 class="heroh2">Dive into the world of fresh music. Discover, listen, share and discuss for free. </h2>
+        </div>
+        <mat-card class="matcard">
+            <mat-tab-group animationDuration="0ms">
+                <mat-tab label="Sign Up">
+                    <div class="signup">
+                        <form #registerForm=ngForm class="example-form">
+                            <p class="sec">Let's get started.</p>
+                            <table class="example-full-width" cellspacing="0">
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="example-full-width" appearance="fill">
+                                            <mat-label>First name</mat-label>
+                                            <input matInput type="text" name="firstName" ngModel>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field class="example-full-width" appearance="fill">
+                                            <mat-label>Last Name</mat-label>
+                                            <input matInput type="text" name="lastName" ngModel>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                            </table>
+                            <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>Email</mat-label>
+                                <input matInput type="text" name="email" ngModel>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>Username</mat-label>
+                                <input matInput type="text" name="username" ngModel>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>Password</mat-label>
+                                <input matInput input type="password" name="password" ngModel>
+                            </mat-form-field>
+                            <button mat-stroked-button color="primary" (click)="register(registerForm)">Register</button>
+                        </form>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Login">
+                    <div class="login">
+                        <form #registerForm=ngForm class="example-form">
+                            <p class="sec">Welcome back.</p>
+                            <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>Username</mat-label>
+                                <input matInput type="text" name="username" [(ngModel)]="user.username">
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>Password</mat-label>
+                                <input matInput input type="password" name="password" [(ngModel)]="user.password">
+                            </mat-form-field>
+                            <button mat-stroked-button color="primary" (click)="login(user)">Login</button>
+                        </form>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </mat-card>
+    </section>
+</body>

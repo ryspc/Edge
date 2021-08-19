@@ -31,6 +31,16 @@ export class UserService {
     );
   }
 
+  public getCurrentUser(cred: string[]) {
+    return this.http.get<User>(`${this.url}/${cred[0]}`, this.httpOptions)
+    .pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Error getting User list');
+      })
+    );
+  }
+
   public update(user: User) {
     return this.http.put<User>(this.url, user, this.httpOptions)
     .pipe(

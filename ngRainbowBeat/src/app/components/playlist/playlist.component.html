@@ -1,0 +1,25 @@
+
+
+<h2 class="playlistHeader">My Playlists</h2>
+
+<div class=playlistBody *ngFor = "let playlist of playlists">
+  <h3>{{playlist.title}}</h3>
+  <table class="playlistTable" >
+    <thead>
+      <tr>
+        <th>Artist</th>
+        <th>Title</th>
+        <th>Album</th>
+        <th>Length</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let song of playlist.songs">
+        <td>{{song.artist}}</td>
+        <td>{{song.title}}</td>
+        <td>{{song.album}}</td>
+        <td>{{song.songLength}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
