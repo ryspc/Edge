@@ -22,7 +22,7 @@ export class User {
     email: string = '',
     imageUrl: string = '',
     enabled: boolean = true,
-    role: string = ''
+    role: string = '',
   ) {
     this.id = id;
     this.username = username;
