@@ -3,14 +3,15 @@ td {
 }
 
 .siteSection {
-    margin-top: 100px;
+    padding-top: 100px;
     display: grid;
     grid-gap: 20px 100px;
     grid-template-columns: repeat(2, 1fr);
     margin-left: auto;
     margin-right: auto;
     max-width: 1000px;
-    padding: 30px 0;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .login,
@@ -58,4 +59,14 @@ td {
     margin-top: -25px;
     padding-bottom: 5px;
     ;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background-image: url("src/app/media/pexels-brett-sayles-2479315.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
 }
