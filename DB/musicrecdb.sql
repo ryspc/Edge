@@ -275,8 +275,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `musicrecdb`;
-INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (1, 'My Little Pony Theme Song', 'Some Brony', NULL, NULL, NULL, NULL, 'Pony Style', 1);
-INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (2, 'Rainbow Chill Beats', 'Rapper Brony', NULL, NULL, NULL, NULL, 'Pony Time', 1);
+INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (1, 'My Little Pony Theme Song', 'Some Brony', NULL, NULL, 240, '2020-04-20', 'Pony Style', 1);
+INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (2, 'Rainbow Chill Beats', 'Rapper Brony', NULL, NULL, 300, '2020-05-11', 'Pony Time', 1);
+INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (3, 'Pony Death Princess Eternal Savagery', 'Heavy Pony', NULL, NULL, 330, '2020-04-15', 'Iron Pony', 2);
+INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (4, 'Ol Country Pony', 'Big Country Star', NULL, NULL, 240, '2020-03-15', 'Ponies and Tractors', 2);
 
 COMMIT;
 
@@ -286,7 +288,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `musicrecdb`;
-INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`) VALUES (1, 'Purple Ponies are the best ponies', 'Fresh Pony Song', NULL, NULL, 1, 1);
+INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`) VALUES (1, 'Purple Ponies are the best ponies', 'Fresh Pony Song', ' 2021-08-19T14:00:00', NULL, 1, 1);
+INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`) VALUES (2, 'This song is great', 'Sweet Beats', ' 2021-08-18T14:00:00', NULL, 2, 2);
+INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`) VALUES (3, 'Another great country song', 'The illest pony song ever', ' 2021-08-18T14:00:00', NULL, 2, 4);
+INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`) VALUES (4, 'Very Metal Pony Song', 'So Heavy Brony', '2021-08-18T14:00:00', NULL, 2, 3);
 
 COMMIT;
 
@@ -297,6 +302,8 @@ COMMIT;
 START TRANSACTION;
 USE `musicrecdb`;
 INSERT INTO `genre` (`id`, `genre_name`) VALUES (1, 'Pony Music');
+INSERT INTO `genre` (`id`, `genre_name`) VALUES (2, 'Pony Alt Death Metal');
+INSERT INTO `genre` (`id`, `genre_name`) VALUES (3, 'Conservative Pony Country');
 
 COMMIT;
 
@@ -306,7 +313,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `musicrecdb`;
-INSERT INTO `comment` (`id`, `content`, `created_at`, `updated_at`, `user_id`, `post_id`) VALUES (1, 'Ya Definitely A Sick Pony Song', NULL, NULL, 2, 1);
+INSERT INTO `comment` (`id`, `content`, `created_at`, `updated_at`, `user_id`, `post_id`) VALUES (1, 'Ya Definitely A Sick Pony Song', NULL, NULL, 2, 2);
+INSERT INTO `comment` (`id`, `content`, `created_at`, `updated_at`, `user_id`, `post_id`) VALUES (2, 'The Heaviest Pony Breakdown', NULL, NULL, 1, 4);
+INSERT INTO `comment` (`id`, `content`, `created_at`, `updated_at`, `user_id`, `post_id`) VALUES (3, 'No way pink ponies are better', NULL, NULL, 2, 1);
 
 COMMIT;
 
@@ -328,6 +337,8 @@ START TRANSACTION;
 USE `musicrecdb`;
 INSERT INTO `song_genre` (`song_id`, `genre_id`) VALUES (1, 1);
 INSERT INTO `song_genre` (`song_id`, `genre_id`) VALUES (2, 1);
+INSERT INTO `song_genre` (`song_id`, `genre_id`) VALUES (3, 2);
+INSERT INTO `song_genre` (`song_id`, `genre_id`) VALUES (4, 3);
 
 COMMIT;
 
@@ -348,6 +359,8 @@ COMMIT;
 START TRANSACTION;
 USE `musicrecdb`;
 INSERT INTO `playlist_song` (`playlist_id`, `song_id`) VALUES (1, 1);
+INSERT INTO `playlist_song` (`playlist_id`, `song_id`) VALUES (1, 2);
+INSERT INTO `playlist_song` (`playlist_id`, `song_id`) VALUES (1, 3);
 
 COMMIT;
 
