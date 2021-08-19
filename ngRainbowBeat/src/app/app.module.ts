@@ -46,6 +46,7 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
     AudioListComponent,
     SearchBarComponent,
     CardComponent
+
   ],
   imports: [
     BrowserModule,

@@ -11,15 +11,16 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
-  { path: 'home', component: LandingComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'followers', component: FollowersComponent },
-  { path: 'settings', component: SettingsComponent},
   { path: 'landing', component: LandingComponent},
-  { path: 'admin', component: LandingComponent},
-  { path: 'playlist', component: PlaylistComponent},
-  { path: 'sidebar', component: SidebarComponent},
-  { path: 'audio', component: AudioListComponent}
+  { path: 'audio', component: AudioListComponent},
+  {path: '', component: SidebarComponent, children: [
+    { path: 'home', component: LandingComponent },
+    { path: 'profile', component: ProfileComponent },
+    { path: 'settings', component: SettingsComponent},
+    { path: 'playlist', component: PlaylistComponent},
+    { path: 'followers', component: FollowersComponent },
+    { path: 'admin', component: AdminComponent}
+  ]}
 ];
 
 @NgModule({
