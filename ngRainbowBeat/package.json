@@ -26,6 +26,7 @@
     "@syncfusion/ej2-angular-navigations": "^19.2.56",
     "angular-animations": "^0.11.0",
     "bootstrap": "^4.6.0",
+    "javascript-time-ago": "^2.3.8",
     "ngx-toast-notifications": "^1.3.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
