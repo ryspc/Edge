@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Post } from 'src/app/models/post';
+import { User } from 'src/app/models/user';
+import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -13,10 +15,14 @@ export class ProfileComponent implements OnInit {
   posts: Post[] = [];
   newPost  = new Post();
 
+  currentUser = new User();
   editPost : Post | null = null;
   selected: Post | null = null;
 
-  constructor(private userService: UserService, private postService: PostService) { }
+  constructor(private userService: UserService, private postService: PostService, private authService: AuthService) { }
+
+  encoded = this.authService.getCredentials();
+  decoded = atob((this.encoded ?? 'null'));
 
   ngOnInit(): void {
     this.loadPosts();
@@ -32,6 +38,30 @@ export class ProfileComponent implements OnInit {
       }
     )
   }
+
+  loadPostsByUser(){
+
+    this.userService.getCurrentUser(this.decoded.split(':')).subscribe(
+      user => {
+        this.currentUser = user;
+        console.log(user);
+      },
+      err => {
+        console.log('Could not get logged in User');
+      }
+    );
+
+    this.postService.showPostByUser(this.currentUser.username).subscribe(
+      posts => {
+        this.posts = posts;
+      },
+      noPosts => {
+        console.error('PostListComponenet.loadPosts: error retrieving posts list')
+      }
+    )
+  }
+
+
 
 getNumberOfPosts(): number{
   let postLength = this.posts.length;
