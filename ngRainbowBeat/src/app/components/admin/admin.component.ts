@@ -33,12 +33,15 @@ export class AdminComponent implements OnInit {
   comments: PostComment[] = [];
   enabledComments: PostComment[] = [];
   enabledPosts: Post[]=[];
+  allUsersSelected: boolean = false;
 
 
 
   ngOnInit(): void {
     this.getUserInfo();
     this.getAllUsers();
+
+
 
   }
 
