@@ -11,6 +11,7 @@ export class Comment {
   updatedAt: Date;
   user: User;
   post: Post;
+  isEnabled: boolean;
 
   constructor(
   id: number = 0,
@@ -18,7 +19,8 @@ export class Comment {
   createdAt: Date = new Date(),
   updatedAt: Date = new Date(),
   user: User = new User,
-  post: Post = new Post
+  post: Post = new Post,
+  isEnabled: boolean = true
   ){
     this.id = id;
     this.content = content;
@@ -26,6 +28,7 @@ export class Comment {
     this.updatedAt = updatedAt;
     this.user = user;
     this.post = post;
+    this.isEnabled = isEnabled;
   }
 
 }
