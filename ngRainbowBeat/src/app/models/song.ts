@@ -14,7 +14,7 @@ export class Song {
   releaseDate: Date;
   album: string;
   user: User;
-  post: Post;
+
   genres: Genre[];
   playlists: Playlist[];
 
@@ -29,7 +29,7 @@ export class Song {
     releaseDate: Date = new Date(),
     album: string = '',
     user: User = new User(),
-    post: Post = new Post(),
+
     genres: Genre[] = [],
     playlists: Playlist[] = []
   ){
@@ -42,7 +42,7 @@ export class Song {
     this.releaseDate =releaseDate;
     this.album = album;
     this.user = user;
-    this.post = post;
+
     this.genres = genres;
     this.playlists = playlists;
 
