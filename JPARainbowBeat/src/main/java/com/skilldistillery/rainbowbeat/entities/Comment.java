@@ -37,6 +37,17 @@ public class Comment {
 	@JoinColumn(name = "post_id")
 	private Post post;
 	
+	@Column(name = "enabled")
+	private Boolean isEnabled;
+	
+	public Boolean getIsEnabled() {
+		return isEnabled;
+	}
+
+	public void setIsEnabled(Boolean isEnabled) {
+		this.isEnabled = isEnabled;
+	}
+
 	public Comment() {}
 
 	public int getId() {
@@ -90,8 +101,10 @@ public class Comment {
 	@Override
 	public String toString() {
 		return "Comment [id=" + id + ", content=" + content + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
-				+ ", user=" + user + ", post=" + post + "]";
+				+ ", user=" + user + ", post=" + post + ", isEnabled=" + isEnabled + "]";
 	}
+
+
 	
 	
 	

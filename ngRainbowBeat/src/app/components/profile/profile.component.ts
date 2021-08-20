@@ -45,20 +45,21 @@ export class ProfileComponent implements OnInit {
       user => {
         this.currentUser = user;
         console.log(user);
+        this.postService.showPostByUser(user.username).subscribe(
+          posts => {
+            this.posts = posts;
+          },
+          noPosts => {
+            console.error('PostListComponenet.loadPosts: error retrieving posts list')
+          }
+        )
       },
       err => {
         console.log('Could not get logged in User');
       }
     );
 
-    this.postService.showPostByUser(this.currentUser.username).subscribe(
-      posts => {
-        this.posts = posts;
-      },
-      noPosts => {
-        console.error('PostListComponenet.loadPosts: error retrieving posts list')
-      }
-    )
+
   }
 
 
@@ -83,7 +84,7 @@ setEditPost(): void{
   addPost(): void{
     this.postService.create(this.newPost).subscribe(
       data => {
-        this.loadPosts();
+        this.loadPostsByUser();
       },
       err =>{
         console.log("error adding post through service");
@@ -95,7 +96,7 @@ setEditPost(): void{
   updatePost(p: Post){
     this.postService.update(p).subscribe(
       data => {
-        this.loadPosts();
+        this.loadPostsByUser();
       },
       err =>{
         console.log(err);
@@ -110,7 +111,7 @@ setEditPost(): void{
 destroyPost(id: number){
   this.postService.destroy(id).subscribe(
     data => {
-      this.loadPosts();
+      this.loadPostsByUser();
     },
     err =>{
       console.log(err);
