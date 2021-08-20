@@ -27,3 +27,11 @@
   padding: 5px;
   text-align: center;
 }
+
+.comment-section{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
