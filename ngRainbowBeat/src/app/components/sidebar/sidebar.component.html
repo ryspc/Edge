@@ -6,39 +6,48 @@
         <mat-icon *ngIf="sidenav.opened">
             close
         </mat-icon>
-    </button> Only the freshest pony music!
-</mat-toolbar>
+    </button>
+    <button mat-button>
+        <span>&nbsp;Logo</span>
+    </button>
+    <div class="searchbar">
 
+        Add search bar here
+
+    </div>
+</mat-toolbar>
 <mat-sidenav-container>
     <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
-
-        <img class="avatar mat-elevation-z8" src="https://www.vhv.rs/dpng/d/449-4498659_my-little-pony-profile-hd-png-download.png" />
-
-        <h4 class="name">John Smith</h4>
-        <p class="designation">Software Engineer</p>
-
+        <img *ngIf="loggedInUser" class="avatar mat-elevation-z8" src="{{loggedInUser.imageUrl}}" />
+        <h4 *ngIf="loggedInUser" class="name">{{loggedInUser.firstName}}&nbsp;{{loggedInUser.lastName}}</h4>
+        <p *ngIf="loggedInUser" class="designation">{{loggedInUser.username}}</p>
         <mat-divider></mat-divider>
-
         <button mat-button class="menu-button">
-            <mat-icon>home</mat-icon>
-            <span>Home</span>
+            <mat-icon>arrow_back</mat-icon>
+            <span>&nbsp;Return Home</span>
         </button>
-        <button mat-button class="menu-button">
-            <mat-icon>person</mat-icon>
-            <span>Profile</span>
-        </button>
-        <button mat-button class="menu-button">
-            <mat-icon>info</mat-icon>
-            <span>About</span>
-        </button>
-
         <mat-divider></mat-divider>
-
-        <button mat-button class="menu-button">
-            <mat-icon>help</mat-icon>
-            <span>Help</span>
+        <button mat-button class="menu-button" (click)="profile()">
+            <mat-icon>wysiwyg</mat-icon>
+            <span>&nbsp;Posts</span>
         </button>
-
+        <button mat-button class="menu-button" (click)="followers()">
+            <mat-icon>groups</mat-icon>
+            <span>&nbsp;Followers</span>
+        </button>
+        <button mat-button class="menu-button" (click)="playlist()">
+            <mat-icon>queue_music</mat-icon>
+            <span>&nbsp;Playlist</span>
+        </button>
+        <button mat-button class="menu-button" (click)="settings()">
+            <mat-icon>settings</mat-icon>
+            <span>&nbsp;Settings</span>
+        </button>
+        <mat-divider></mat-divider>
+        <button mat-button class="menu-button" (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            <span>&nbsp;Logout</span>
+        </button>
     </mat-sidenav>
     <mat-sidenav-content>
         <div class="content mat-elevation-z8">
