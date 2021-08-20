@@ -18,8 +18,8 @@
 </mat-toolbar>
 <mat-sidenav-container>
     <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
-        <img *ngIf="loggedInUser" class="avatar mat-elevation-z8" src="{{loggedInUser.imageUrl}}" (click)="profile()" />
-        <h4 *ngIf="loggedInUser" (click)="profile()" class="name">Welcome, {{loggedInUser.username}} </h4>
+        <img *ngIf="loggedInUser" class="avatar mat-elevation-z8 prof" src="{{loggedInUser.imageUrl}}" (click)="profile()" />
+        <h4 *ngIf="loggedInUser" (click)="profile()" class="name prof">Welcome, {{loggedInUser.username}} </h4>
         <mat-divider></mat-divider>
         <h2>Featured Genres</h2>
         <button mat-button class="menu-button">
