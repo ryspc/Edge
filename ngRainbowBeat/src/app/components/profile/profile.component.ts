@@ -18,6 +18,7 @@ export class ProfileComponent implements OnInit {
   currentUser = new User();
   editPost : Post | null = null;
   selected: Post | null = null;
+  enabledPosts: Post[] = [];
 
   constructor(private userService: UserService, private postService: PostService, private authService: AuthService) { }
 
@@ -40,7 +41,7 @@ export class ProfileComponent implements OnInit {
   }
 
   loadPostsByUser(){
-
+    this.enabledPosts = [];
     this.userService.getCurrentUser(this.decoded.split(':')).subscribe(
       user => {
         this.currentUser = user;
@@ -48,6 +49,15 @@ export class ProfileComponent implements OnInit {
         this.postService.showPostByUser(user.username).subscribe(
           posts => {
             this.posts = posts;
+
+            this.posts.forEach(post => {
+              console.log('Enabled? : ' + post.isEnabled);
+              if(post.isEnabled === true){
+                this.enabledPosts.push(post);
+              }
+
+            });
+            console.log(this.enabledPosts);
           },
           noPosts => {
             console.error('PostListComponenet.loadPosts: error retrieving posts list')
@@ -119,6 +129,19 @@ destroyPost(id: number){
     }
   )
   // this.todos= this.todoService.index();
+
+}
+
+hidePost(id: number){
+  for(let i =0; i<this.posts.length; i++){
+    if(this.posts[i].id  === id){
+      console.log(this.posts[i].isEnabled);
+      this.posts[i].isEnabled = false;
+
+    }
+    this.loadPostsByUser();
+  }
+
 
 }
 
