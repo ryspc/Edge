@@ -21,6 +21,10 @@
         <img *ngIf="loggedInUser" class="avatar mat-elevation-z8 prof" src="{{loggedInUser.imageUrl}}" (click)="profile()" />
         <h4 *ngIf="loggedInUser" (click)="profile()" class="name prof">Welcome, {{loggedInUser.username}} </h4>
         <mat-divider></mat-divider>
+        <button mat-button class="menu-button">
+            <span>&nbsp;Create Post</span>
+        </button>
+        <mat-divider></mat-divider>
         <h2>Featured Genres</h2>
         <button mat-button class="menu-button">
             <span>&nbsp;Rock</span>
@@ -70,35 +74,6 @@
         <button mat-button class="menu-button">
             <span>&nbsp;Alternative</span>
         </button>
-        <button mat-button class="menu-button">
-            <span>&nbsp;My Little Pony</span>
-        </button>
-        <!-- <button mat-button class="menu-button" (click)="profile()">
-            <mat-icon>account_circle</mat-icon>
-            <span>&nbsp;Profile</span>
-        </button> 
-        <mat-divider></mat-divider> -->
-        <!-- <button mat-button class="menu-button" (click)="profile()">
-            <mat-icon>wysiwyg</mat-icon>
-            <span>&nbsp;Posts</span>
-        </button>
-        <button mat-button class="menu-button" (click)="followers()">
-            <mat-icon>groups</mat-icon>
-            <span>&nbsp;Followers</span>
-        </button>
-        <button mat-button class="menu-button" (click)="playlist()">
-            <mat-icon>queue_music</mat-icon>
-            <span>&nbsp;Playlist</span>
-        </button>
-        <button mat-button class="menu-button" (click)="settings()">
-            <mat-icon>settings</mat-icon>
-            <span>&nbsp;Settings</span>
-        </button>
-        <mat-divider></mat-divider>
-        <button mat-button class="menu-button" (click)="logout()">
-            <mat-icon>logout</mat-icon>
-            <span>&nbsp;Logout</span>
-        </button> -->
     </mat-sidenav>
     <mat-sidenav-content>
         <div class="content mat-elevation-z8">
