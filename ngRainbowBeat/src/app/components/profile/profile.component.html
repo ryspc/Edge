@@ -30,7 +30,7 @@
     </tbody>
   </table> -->
 
-  <div class="card" style="width: 18rem;" *ngFor="let post of posts">
+  <div class="card" style="width: 18rem;" *ngFor="let post of enabledPosts">
     <div class="card-body">
       <h5 class="card-title">{{post.title}}</h5>
       <h6 class="card-subtitle mb-2 text-muted">{{post.createdAt}}</h6>
@@ -39,7 +39,7 @@
           (click)="displayPost(post)"
           class="btn btn-dark">Details</button>
           <button
-          (click)="destroyPost(post.id)"
+          (click)="hidePost(post.id)"
           class="btn btn-dark"
         >Delete</button>
       <!-- <a href="#" class="card-link">Card link</a>
@@ -104,4 +104,74 @@
       />
     </div>
   </form>
+<!-- Comment Section -->
+  <div class="comment-section" *ngIf="!selectedComment">
+    <h2 class="commentHeader" *ngIf="!selectedComment">I have {{getNumberOfComments()}} Comments </h2>
+  <div class="card" style="width: 18rem;" *ngFor="let com of enabledComments">
+    <div class="card-body">
+      <h5 class="card-title">{{com.post.title}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{com.createdAt}}</h6>
+      <p class="card-text">{{com.content}}</p>
+      <button
+          (click)="displayComment(com)"
+          class="btn btn-dark">Details</button>
+          <button
+          (click)="hideComment(com.id)"
+          class="btn btn-dark"
+        >Delete</button>
+      <!-- <a href="#" class="card-link">Card link</a>
+      <a href="#" class="card-link">Another link</a> -->
+    </div>
+  </div>
+</div>
 
+<!-- Comment Details SECTION -->
+<div id="commentDetails" *ngIf="selectedComment && !editComment">
+  <h3>Post: {{ selectedComment.post.title }}</h3>
+  <p>Content: {{ selectedComment.content }}</p>
+  <p>Date Created: {{ selectedComment.createdAt }}</p>
+  <p>Updated: {{ selectedComment.updatedAt }}</p>
+
+  <div class="addCommentBtnDiv">
+    <button
+      (click)="displayCommentTable()"
+      class="btn btn-dark addConcBtnEdit"
+    >
+      Back
+    </button>
+    <button
+      (click)="setEditComment()"
+      class="btn btn-dark addConcBtnEdit"
+    >
+      Edit
+    </button>
+  </div>
+</div>
+<form id="editComment" *ngIf="editComment">
+  <h3>Edit Comment</h3>
+  <div class="addPostBtnDiv">
+    <label class="editLabel" for="title">Content:</label>
+    <input
+      type="text"
+      class="form-control addCommentForm"
+      name="title"
+      [(ngModel)]="editComment.content"
+    />
+
+
+    <input
+      type="submit"
+      class="btn btn-dark addPostBtnEdit"
+      name="Save"
+      value="Save"
+      (click)="updateComment(editComment)"
+    />
+    <input
+      type="submit"
+      class="btn btn-dark addPostBtnEdit"
+      name="Cancel"
+      value="Cancel"
+      (click)="editComment = null"
+    />
+  </div>
+</form>

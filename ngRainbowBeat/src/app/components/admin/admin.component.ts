@@ -31,12 +31,17 @@ export class AdminComponent implements OnInit {
 
   posts: Post [] = [];
   comments: PostComment[] = [];
+  enabledComments: PostComment[] = [];
+  enabledPosts: Post[]=[];
+  allUsersSelected: boolean = false;
 
 
 
   ngOnInit(): void {
     this.getUserInfo();
     this.getAllUsers();
+
+
 
   }
 
@@ -65,10 +70,22 @@ export class AdminComponent implements OnInit {
   }
 
   displayUserPosts(username: string){
+    this.enabledPosts = [];
   this.postService.postsByUsername(username).subscribe(
-    posts => {
-      this.posts = posts;
-      console.log(posts);
+    data => {
+      this.posts = data;
+      console.log(this.posts);
+
+      this.posts.forEach(post => {
+        console.log(post.isEnabled)
+        if(post.isEnabled == true){
+          console.log(post);
+
+          this.enabledPosts.push(post);
+        }
+      });
+
+
     },
     noPosts => {
       console.log('admin.component.displayUserPosts() could not obtain posts');
@@ -77,10 +94,22 @@ export class AdminComponent implements OnInit {
   }
 
   displayUserComments(username: string){
+    this.enabledComments = [];
     this.commentService.commentsByUsername(username).subscribe(
       data => {
         this.comments = data;
-        console.log(this.comments[0]);
+        console.log(this.comments);
+
+        this.comments.forEach(comment => {
+          console.log(comment.isEnabled)
+          if(comment.isEnabled == true){
+            console.log(comment);
+
+            this.enabledComments.push(comment);
+          }
+
+        });
+        console.log(this.enabledComments);
       },
       noComments => {
         console.log('admin.component.displayUserPosts() could not obtain posts');
@@ -118,15 +147,34 @@ export class AdminComponent implements OnInit {
       );
     }
 
-    deleteComment(id: number){
-        this.commentService.destroy(id).subscribe(
-        data => {
-          console.log(data);
-          this.getUserInfo();
-          this.getAllUsers();
-        }
-        );
+    deleteComment(comment: PostComment, username: string){
+     comment.isEnabled = false;
+     this.commentService.update(comment).subscribe(
+       data => {
+         comment = data;
+         this.displayUserComments(username);
+       },
+       noData => {
+         console.log('comment was not disabled');
+         console.log(noData);
+       }
+     );
     }
+
+    deletePost(post: Post, username: string){
+      post.isEnabled = false;
+      console.log(post.isEnabled)
+      this.postService.disablePost(post).subscribe(
+        data => {
+          post = data;
+          this.displayUserPosts(username);
+        },
+        noData => {
+          console.log('comment was not disabled');
+          console.log(noData);
+        }
+      );
+     }
 
 }
 

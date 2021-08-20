@@ -42,7 +42,7 @@ public class User {
 	@Column(name = "enabled")
 	private Boolean isEnabled;
 	private String role;
-	@JsonIgnore
+//	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "favorite_user",
 	joinColumns = @JoinColumn(name = "user_id"),
@@ -51,6 +51,7 @@ public class User {
 	@JsonIgnore
 	@ManyToMany(mappedBy = "following")
 	private List<User> followers;
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List<Song> songs;
 	@JsonIgnore
@@ -243,9 +244,7 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", email="
-				+ email + ", imageUrl=" + imageUrl + ", isEnabled=" + isEnabled + ", role=" + role + ", following="
-				+ following + ", followers=" + followers + ", songs=" + songs + ", posts=" + posts + ", playlist="
-				+ playlist + ", comment=" + comment + "]";
+				+ email + ", imageUrl=" + imageUrl + ", isEnabled=" + isEnabled + ", role=" + role;
 	}
 
 
