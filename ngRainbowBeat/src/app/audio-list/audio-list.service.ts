@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 
 import { publishReplay, refCount } from 'rxjs/operators';
-import { AudioList, Song } from '../models/audio-list';
+import { AudioList} from '../models/audio-list';
 
 @Injectable({
   providedIn: 'root'

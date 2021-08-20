@@ -2,6 +2,8 @@ package com.skilldistillery.rainbowbeat.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,6 +29,15 @@ public class CommentController {
 	@GetMapping("comments")
 	public List<Comment> getAllComments() {
 		return commentSvc.showAll();
+	}
+	
+	@GetMapping("comments/user/{username}")
+	public List<Comment> getCommentsByUsername(@PathVariable String username,HttpServletResponse res){
+		List<Comment> comments = commentSvc.getCommentsByUsername(username);
+		if(comments == null) {
+			res.setStatus(404);
+		}
+		return comments;
 	}
 	
 	@PostMapping("comments")

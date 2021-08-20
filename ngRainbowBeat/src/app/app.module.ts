@@ -32,8 +32,6 @@ import { SearchBarComponent } from './audioComponents/search-bar/search-bar.comp
 import { CardComponent } from './audioComponents/card/card.component';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,9 +44,7 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
     SidebarComponent,
     AudioListComponent,
     SearchBarComponent,
-    CardComponent,
-
-
+    CardComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +65,7 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
-    MatDividerModule
+    MatDividerModule,
 
   ],
   providers: [
