@@ -32,7 +32,7 @@ public class Comment {
 //	@JsonIgnore
 	@JoinColumn(name = "user_id")
 	private User user;
-	@JsonIgnore
+//	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "post_id")
 	private Post post;

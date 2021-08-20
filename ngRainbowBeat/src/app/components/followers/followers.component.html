@@ -1,10 +1,20 @@
 <div class="container-fluid">
-  <h1>Followers</h1>
+  <div *ngIf="loggedInUser">
+    <div *ngIf="loggedInUser.following.length > 0">
+      <h1>Following</h1><hr>
+      <mat-card *ngFor="let friend of loggedInUser.following">
+        <img mat-card-image src={{friend.imageUrl}} alt="Profile Image">
+        <mat-card-content>
+          <h2>{{friend.username}}</h2>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button class="btn btn-warning btn-sm" (click)="unfollow(friend)">Unfollow</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
 
-  <mat-card *ngFor="let friend of following">
-    <img mat-card-image src={{friend.imageUrl}} alt="Profile Image">
-    <mat-card-actions>
-      <button mat-button>Unfollow</button>
-    </mat-card-actions>
-  </mat-card>
+    <div *ngIf="loggedInUser.following.length === 0">
+      <h1>Not currently following any users!</h1>
+    </div>
+  </div>
 </div>

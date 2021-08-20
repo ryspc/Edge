@@ -97,6 +97,15 @@ export class PostService {
     )
   }
 
+  public disablePost(post: Post){
+    return this.http.put<Post>(this.url + '/' + post.id, post,  this.httpOptions).pipe(
+      catchError((err: any) => {
+        console.error(err);
+        return throwError(
+          'error updating post' + err
+        )
+      }))
+  }
 
 
 }

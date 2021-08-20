@@ -12,6 +12,7 @@ export class User {
   imageUrl: string;
   isEnabled: boolean;
   role: string;
+  following: User[];
   comments: PostComment [];
 
   constructor(
@@ -26,7 +27,8 @@ export class User {
     imageUrl: string = '',
     isEnabled: boolean = true,
     role: string = '',
-    comments: PostComment [] = [],
+    following: User[] = [],
+    comments: PostComment [] = []
   ) {
     this.id = id;
     this.username = username;
@@ -39,6 +41,7 @@ export class User {
     this.imageUrl = imageUrl;
     this.isEnabled = isEnabled;
     this.role = role;
+    this.following = following;
     this.comments = comments;
   }
 }
