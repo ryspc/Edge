@@ -115,7 +115,7 @@
 
 	</mat-card-actions>
 
-  <div class="posts by user" *ngFor = "let post of posts">
+  <div class="posts by user" *ngFor = "let post of enabledPosts">
     <mat-card class="example-card" *ngIf = "post.user.username == user.username">
       <mat-card-header>
         <mat-card-title>{{post.title}}</mat-card-title>
@@ -125,14 +125,15 @@
       </mat-card-header>
 
       <mat-card-content>
-        <p>
+        <p (click)="deletePost(post, user.username)">
+          Click to Delete
         </p>
       </mat-card-content>
       </mat-card>
 
   </div>
 
-  <div class="comments by user" *ngFor = "let c of comments">
+  <div class="comments by user" *ngFor = "let c of enabledComments">
     <mat-card class="example-card" *ngIf = "c.user.username == user.username">
       <mat-card-header>
         <mat-card-title>Comment</mat-card-title>
@@ -142,7 +143,7 @@
       </mat-card-header>
 
       <mat-card-content>
-        <p (click)="deleteComment(c.id)">
+        <p (click)="deleteComment(c, user.username)">
             Click to Delete
         </p>
       </mat-card-content>

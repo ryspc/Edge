@@ -37,11 +37,17 @@ export class CommentService {
         console.error(err);
         return throwError(
           'error deleting comment' + err
-        )
-      }
+        )}
+    ))
+  }
 
-
-    )
-    )
+  public update(comment: PostComment) {
+    return this.http.put<PostComment>(this.url, comment, this.httpOptions)
+    .pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Error updating comment');
+      })
+    );
   }
 }
