@@ -80,7 +80,7 @@ export class AdminComponent implements OnInit {
     this.commentService.commentsByUsername(username).subscribe(
       data => {
         this.comments = data;
-        console.log(this.comments);
+        console.log(this.comments[0]);
       },
       noComments => {
         console.log('admin.component.displayUserPosts() could not obtain posts');
@@ -116,6 +116,16 @@ export class AdminComponent implements OnInit {
           console.log('user enabled not updated')
         }
       );
+    }
+
+    deleteComment(id: number){
+        this.commentService.destroy(id).subscribe(
+        data => {
+          console.log(data);
+          this.getUserInfo();
+          this.getAllUsers();
+        }
+        );
     }
 
 }

@@ -29,7 +29,7 @@ public class Comment {
 	@Column(name="updated_at")
 	private LocalDateTime updatedAt;
 	@ManyToOne
-	@JsonIgnore
+//	@JsonIgnore
 	@JoinColumn(name = "user_id")
 	private User user;
 	@JsonIgnore
