@@ -28,6 +28,11 @@ public class CommentServiceImpl implements CommentService{
 		}
 		return null;
 	}
+	
+	@Override
+	public List<Comment> getCommentsByUsername(String username){
+		return commentRepo.findByUser_Username(username);
+	}
 
 	@Override
 	public Comment create(Comment comment) {
