@@ -29,4 +29,19 @@ export class CommentService {
       })
     )
   }
+
+  public destroy(id: number){
+
+    return this.http.delete<PostComment>(this.url + '/' + id, this.httpOptions).pipe(
+      catchError((err: any) => {
+        console.error(err);
+        return throwError(
+          'error deleting comment' + err
+        )
+      }
+
+
+    )
+    )
+  }
 }
