@@ -8,7 +8,7 @@ export class User {
   updatedAt: string;
   email: string;
   imageUrl: string;
-  enabled: boolean;
+  isEnabled: boolean;
   role: string;
 
   constructor(
@@ -21,7 +21,7 @@ export class User {
     updatedAt: string = '',
     email: string = '',
     imageUrl: string = '',
-    enabled: boolean = true,
+    isEnabled: boolean = true,
     role: string = '',
   ) {
     this.id = id;
@@ -33,7 +33,7 @@ export class User {
     this.updatedAt = updatedAt;
     this.email = email;
     this.imageUrl = imageUrl;
-    this.enabled = enabled;
+    this.isEnabled = isEnabled;
     this.role = role;
   }
 }
