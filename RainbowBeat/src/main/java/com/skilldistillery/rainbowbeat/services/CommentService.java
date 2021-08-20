@@ -10,6 +10,8 @@ public interface CommentService {
 	
 	Comment show(int id);
 	
+	List<Comment> getCommentsByUsername(String username);
+	
 	Comment create(Comment comment);
 	
 	Comment update(Comment comment);
