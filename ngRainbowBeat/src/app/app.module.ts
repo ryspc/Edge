@@ -33,6 +33,7 @@ import { CardComponent } from './audioComponents/card/card.component';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +46,8 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
     SidebarComponent,
     AudioListComponent,
     SearchBarComponent,
-    CardComponent
+    CardComponent,
+
 
   ],
   imports: [
