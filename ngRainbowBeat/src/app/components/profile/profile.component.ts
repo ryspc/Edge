@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit {
   decoded = atob((this.encoded ?? 'null'));
 
   ngOnInit(): void {
-    this.loadPosts();
+    this.loadPostsByUser();
   }
 
   loadPosts(){

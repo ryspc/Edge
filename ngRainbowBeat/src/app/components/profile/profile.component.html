@@ -2,7 +2,8 @@
 
 <h2 class="uploadHeader" *ngIf="!selected">My {{getNumberOfPosts()}} Post </h2>
 
-<div class=post-table-section>
+ <div class=post-table-section>
+   <!--
   <table class="myPostTable" *ngIf="!selected">
     <thead>
       <tr>
@@ -27,7 +28,24 @@
         </td>
       </tr>
     </tbody>
-  </table>
+  </table> -->
+
+  <div class="card" style="width: 18rem;" *ngFor="let post of posts">
+    <div class="card-body">
+      <h5 class="card-title">{{post.title}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{post.createdAt}}</h6>
+      <p class="card-text">{{post.content}}</p>
+      <button
+          (click)="displayPost(post)"
+          class="btn btn-dark">Details</button>
+          <button
+          (click)="destroyPost(post.id)"
+          class="btn btn-dark"
+        ></button>
+      <!-- <a href="#" class="card-link">Card link</a>
+      <a href="#" class="card-link">Another link</a> -->
+    </div>
+  </div>
 
 <!-- Post Details SECTION -->
   <div id="postDetails" *ngIf="selected && !editPost">
