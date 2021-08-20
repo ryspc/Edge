@@ -45,12 +45,14 @@ export class SettingsComponent implements OnInit {
   updateUserDetails(user: User) {
     this.userService.update(user).subscribe(
       update => {
-        this.router.navigateByUrl('/home')
+        this.getLoggedInUser();
+        console.log('edit successful');
       },
       err => {
         console.log('Error updating user settings');
       }
     );
+    this.editUser = null;
   }
 
 }
