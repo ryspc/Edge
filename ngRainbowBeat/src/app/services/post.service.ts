@@ -29,6 +29,15 @@ export class PostService {
     )
   }
 
+  public showPostByUser(username: String ): Observable<Post[]>{
+    return this.http.get<Post[]>(this.url+'/user/'+username).pipe(
+      catchError((err: any) => {
+        console.log('PostService.index() err retrieving post list');
+        return throwError(err);
+      })
+    )
+  }
+
   public create(p: Post){
 
     // this.todos.push(todo);

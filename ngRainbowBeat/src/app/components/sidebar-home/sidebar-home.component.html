@@ -1,0 +1,108 @@
+<mat-toolbar class="mat-elevation-z8">
+    <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+        <mat-icon *ngIf="!sidenav.opened">
+            menu
+        </mat-icon>
+        <mat-icon *ngIf="sidenav.opened">
+            close
+        </mat-icon>
+    </button>
+    <button mat-button>
+        <span>&nbsp;Logo</span>
+    </button>
+    <div class="searchbar">
+
+        Add search bar here
+
+    </div>
+</mat-toolbar>
+<mat-sidenav-container>
+    <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+        <img *ngIf="loggedInUser" class="avatar mat-elevation-z8" src="{{loggedInUser.imageUrl}}" (click)="profile()" />
+        <h4 *ngIf="loggedInUser" (click)="profile()" class="name">Welcome, {{loggedInUser.username}} </h4>
+        <mat-divider></mat-divider>
+        <h2>Featured Genres</h2>
+        <button mat-button class="menu-button">
+            <span>&nbsp;Rock</span>
+        </button>
+        <button mat-button class="menu-button">
+            <span>&nbsp;Hip-Hop/ Rap</span>
+        </button>
+        <button mat-button class="menu-button">
+            <span>&nbsp;Pop</span>
+        </button>
+        <button mat-button class="menu-button">
+            <span>&nbsp;Country</span>
+        </button>
+        <button mat-button class="menu-button">
+            <span>&nbsp;Jazz</span>
+        </button>
+        <button mat-button class="menu-button">
+            <span>&nbsp;Dance</span>
+        </button>
+        <button mat-button class="menu-button">
+            <span>&nbsp;House</span>
+        </button>
+        <button mat-button class="menu-button">
+            <span>&nbsp;Downtempo</span>
+        </button>
+        <button mat-button class="menu-button">
+            <span>&nbsp;Punk</span>
+        </button>
+        <button mat-button class="menu-button">
+            <span>&nbsp;Blues</span>
+        </button>
+        <button mat-button class="menu-button">
+            <span>&nbsp;Classical</span>
+        </button>
+        <button mat-button class="menu-button">
+            <span>&nbsp;R&B</span>
+        </button>
+        <button mat-button class="menu-button">
+            <span>&nbsp;Reggae</span>
+        </button>
+        <button mat-button class="menu-button">
+            <span>&nbsp;Latin</span>
+        </button>
+        <button mat-button class="menu-button">
+            <span>&nbsp;Indie Pop</span>
+        </button>
+        <button mat-button class="menu-button">
+            <span>&nbsp;Alternative</span>
+        </button>
+        <button mat-button class="menu-button">
+            <span>&nbsp;My Little Pony</span>
+        </button>
+        <!-- <button mat-button class="menu-button" (click)="profile()">
+            <mat-icon>account_circle</mat-icon>
+            <span>&nbsp;Profile</span>
+        </button> 
+        <mat-divider></mat-divider> -->
+        <!-- <button mat-button class="menu-button" (click)="profile()">
+            <mat-icon>wysiwyg</mat-icon>
+            <span>&nbsp;Posts</span>
+        </button>
+        <button mat-button class="menu-button" (click)="followers()">
+            <mat-icon>groups</mat-icon>
+            <span>&nbsp;Followers</span>
+        </button>
+        <button mat-button class="menu-button" (click)="playlist()">
+            <mat-icon>queue_music</mat-icon>
+            <span>&nbsp;Playlist</span>
+        </button>
+        <button mat-button class="menu-button" (click)="settings()">
+            <mat-icon>settings</mat-icon>
+            <span>&nbsp;Settings</span>
+        </button>
+        <mat-divider></mat-divider>
+        <button mat-button class="menu-button" (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            <span>&nbsp;Logout</span>
+        </button> -->
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div class="content mat-elevation-z8">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
