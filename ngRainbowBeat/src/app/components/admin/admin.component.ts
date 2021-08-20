@@ -4,7 +4,9 @@ import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
 import { Post } from 'src/app/models/post';
+import { Comment } from 'src/app/models/comment';
 import { CommentService } from 'src/app/services/comment.service';
+import { PostComment } from 'src/app/models/post-comment';
 
 
 @Component({
@@ -28,11 +30,14 @@ export class AdminComponent implements OnInit {
   public decoded = atob((this.encoded ?? 'null'));
 
   posts: Post [] = [];
-  comments: Comment[] = [];
+  comments: PostComment[] = [];
+
+
 
   ngOnInit(): void {
     this.getUserInfo();
     this.getAllUsers();
+
   }
 
   getUserInfo(){
@@ -73,14 +78,44 @@ export class AdminComponent implements OnInit {
 
   displayUserComments(username: string){
     this.commentService.commentsByUsername(username).subscribe(
-      comments => {
-        this.comments = comments;
-        console.log(comments);
+      data => {
+        this.comments = data;
+        console.log(this.comments);
       },
       noComments => {
         console.log('admin.component.displayUserPosts() could not obtain posts');
       }
     );
+    }
+
+    enableUser(user: User){
+      user.isEnabled = true;
+      this.userService.update(user).subscribe(
+        user => {
+          this.user =user;
+          console.log(user);
+          this.getUserInfo();
+          this.getAllUsers();
+        },
+        noUser => {
+          console.log('user enabled not updated')
+        }
+      );
+    }
+
+    disableUser(user: User){
+      user.isEnabled = false;
+      this.userService.update(user).subscribe(
+        user => {
+          this.user =user;
+          console.log(user);
+          this.getUserInfo();
+          this.getAllUsers();
+        },
+        noUser => {
+          console.log('user enabled not updated')
+        }
+      );
     }
 
 }
