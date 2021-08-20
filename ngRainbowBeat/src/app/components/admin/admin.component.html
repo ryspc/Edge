@@ -70,6 +70,7 @@
 
 </mat-card> -->
 
+<div>
 
 <mat-card class="example-card" *ngFor = "let user of users">
 	<mat-card-header>
@@ -82,24 +83,24 @@
 	<mat-card-content>
 		<p>
 		{{user.email}} <br>
-    {{user.enabled}}
+    <!-- {{user.isEnabled}} -->
 		</p>
 	</mat-card-content>
 
 	<mat-card-actions>
-    <div *ngIf = "user.enabled">
-		<button mat-button style=
+    <!-- <div (click)="disableUser(user)" *ngIf = "user.isEnabled"> -->
+		<button (click)="disableUser(user)" *ngIf = "user.isEnabled" mat-button style=
 			"background-color:red; color:white">
 			Disable
 		</button>
-  </div>
+  <!-- </div> -->
 
-    <div *ngIf = "!user.enabled">
-		<button mat-button style=
+    <!-- <div *ngIf = "!user.isEnabled"> -->
+		<button *ngIf = "!user.isEnabled" (click)="enableUser(user)" mat-button style=
 			"background-color:green; color:white">
 			Enable
 		</button>
-    </div>
+    <!-- </div> -->
 
     <button (click)="displayUserPosts(user.username)" mat-button style=
     "background-color:blue; color:white">
@@ -107,7 +108,7 @@
   </button>
 
 
-  <button mat-button style=
+  <button (click)="displayUserComments(user.username)" mat-button style=
     "background-color:orange; color:white">
     View Comments
   </button>
@@ -115,7 +116,7 @@
 	</mat-card-actions>
 </mat-card>
 
-<div class="posts by user" *ngIf = "posts">
+<div class="posts by user">
   <mat-card class="example-card" *ngFor = "let post of posts">
     <mat-card-header>
       <mat-card-title>{{post.title}}</mat-card-title>
@@ -132,12 +133,12 @@
 
 </div>
 
-<div class="comments by user" *ngIf = "comments">
-  <mat-card class="example-card" *ngFor = "let comment of comments">
+<div class="comments by user">
+  <mat-card class="example-card" *ngFor = "let c of comments">
     <mat-card-header>
-      <mat-card-title></mat-card-title>
+      <mat-card-title>Comment</mat-card-title>
       <mat-card-subtitle>
-
+        {{c.content}}
       </mat-card-subtitle>
     </mat-card-header>
 
@@ -146,7 +147,7 @@
       </p>
     </mat-card-content>
     </mat-card>
-
+  </div>
 </div>
 
   </div>

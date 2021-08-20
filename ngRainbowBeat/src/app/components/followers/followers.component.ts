@@ -53,8 +53,4 @@ export class FollowersComponent implements OnInit {
     );
   }
 
-  logoutUser() {
-    this.authService.logout();
-  }
-
 }

@@ -264,8 +264,8 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `musicrecdb`;
-INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `created_at`, `updated_at`, `email`, `image_url`, `enabled`, `role`) VALUES (1, 'admin', 'mylittlepony', NULL, NULL, NULL, NULL, 'admin@admin.com', NULL, NULL, 'ADMIN');
-INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `created_at`, `updated_at`, `email`, `image_url`, `enabled`, `role`) VALUES (2, 'ponyman', 'ponyman', 'Brony', 'Jabrony', NULL, NULL, 'ponyman@rainbow.com', NULL, NULL, NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `created_at`, `updated_at`, `email`, `image_url`, `enabled`, `role`) VALUES (1, 'admin', '$2a$10$XIVl/dqHvi08wZ8.B6qXsOrIy/gilyNbRdC6YYDLXGzATnPEYoVCO', NULL, NULL, NULL, NULL, 'admin@admin.com', NULL, 1, 'ADMIN');
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `created_at`, `updated_at`, `email`, `image_url`, `enabled`, `role`) VALUES (2, 'ponyman', '$2a$10$XIVl/dqHvi08wZ8.B6qXsOrIy/gilyNbRdC6YYDLXGzATnPEYoVCO', 'Brony', 'Jabrony', NULL, NULL, 'ponyman@rainbow.com', NULL, 1, NULL);
 
 COMMIT;
 
@@ -291,7 +291,7 @@ USE `musicrecdb`;
 INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`) VALUES (1, 'Purple Ponies are the best ponies', 'Fresh Pony Song', ' 2021-08-19T14:00:00', NULL, 1, 1);
 INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`) VALUES (2, 'This song is great', 'Sweet Beats', ' 2021-08-18T14:00:00', NULL, 2, 2);
 INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`) VALUES (3, 'Another great country song', 'The illest pony song ever', ' 2021-08-18T14:00:00', NULL, 2, 4);
-INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`) VALUES (4, 'Very Metal Pony Song', 'So Heavy Brony', '2021-08-18T14:00:00', NULL, 2, 3);
+INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`) VALUES (4, 'Very Metal Pony Song', 'So Heavy Brony', '2021-08-18T14:00:00', NULL, 1, 3);
 
 COMMIT;
 
