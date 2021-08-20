@@ -11,12 +11,13 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
   posts: Post[] = [];
   newPost  = new Post();
-  currentUser = new User();
-  editPost : Post | null = null;
-  created: string | null = null;
+  followedUser : User | null = null;
+  likedPost: Post | null = null;
+  loggedInUser = new User;
+  public encoded = this.authService.getCredentials();
+  public decoded = atob((this.encoded ?? 'null'));
 
   constructor(private userService: UserService, private postService: PostService, private authService: AuthService) { }
 
@@ -34,13 +35,36 @@ export class HomeComponent implements OnInit {
       }
     )
   }
-sinceWhen(created: string) {
-let then = this.created;
-console.log(then);
-console.log(Date.now().toString);
 
- return "5 Mins ago";
+  like(post: Post) {
 
- }
+  }
+
+  getLoggedInUser() {
+    this.userService.getCurrentUser(this.decoded.split(':')).subscribe(
+      user => {
+        this.loggedInUser = user;
+        console.log(user);
+      },
+      err => {
+        console.log('Could not get logged in User');
+      }
+    );
+  }
+
+  follow(followedUser: User) {
+    this.getLoggedInUser();
+    console.log("follow method");
+    
+    this.loggedInUser.following.push(followedUser)
+    this.userService.update(this.loggedInUser).subscribe(
+      update => {
+        console.log('Follow successful');
+      },
+      err => {
+        console.log('Error following user');
+      }
+    );
+  }
 }
 

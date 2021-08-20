@@ -5,9 +5,9 @@
                 <mat-card-header>
                     <div mat-card-avatar class="avatar mat-elevation-z8" style="background-image: url({{post.user.imageUrl}})"></div>
                     <mat-card-title class="name">
-                        <span>{{post.user.username}}</span><span class="bullet">&nbsp;&#8226;&nbsp;</span><span class="follow" onclick="followUser()">Follow</span>
+                        <span>{{post.user.username}}</span><span class="bullet">&nbsp;&#8226;&nbsp;</span><span class="follow" (click)="follow(post.user)">Follow</span>
                     </mat-card-title>
-                    <mat-card-subtitle>{{sinceWhen(post.createdAt)}}</mat-card-subtitle>
+                    <mat-card-subtitle>{{post.createdAt | dateAgo}}</mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content>
                     <p>
@@ -17,7 +17,7 @@
                 <img mat-card-image src="{{post.song.imageURL}}">
                 <mat-divider></mat-divider>
                 <mat-card-actions style="text-align: center;">
-                    <button mat-button><mat-icon>thumb_up</mat-icon></button>
+                    <button mat-button onclick="like(post)"><mat-icon>thumb_up</mat-icon></button>
                     <button mat-button><mat-icon>chat</mat-icon></button>
                     <button mat-button><mat-icon>share</mat-icon></button>
                 </mat-card-actions>
