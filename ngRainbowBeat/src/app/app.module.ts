@@ -31,6 +31,8 @@ import { AudioListComponent } from './audio-list/audio-list.component';
 import { SearchBarComponent } from './audioComponents/search-bar/search-bar.component';
 import { CardComponent } from './audioComponents/card/card.component';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { SidebarHomeComponent } from './components/sidebar-home/sidebar-home.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -42,9 +44,11 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
     PlaylistComponent,
     FollowersComponent,
     SidebarComponent,
+    SidebarHomeComponent,
     AudioListComponent,
     SearchBarComponent,
-    CardComponent
+    CardComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

@@ -8,11 +8,11 @@ import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css']
+  selector: 'app-sidebar-home',
+  templateUrl: './sidebar-home.component.html',
+  styleUrls: ['./sidebar-home.component.css']
 })
-export class SidebarComponent {
+export class SidebarHomeComponent {
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
   loggedInUser: User | null = null;
@@ -55,9 +55,7 @@ export class SidebarComponent {
       }
     );
   }
-  home() {
-    this.router.navigateByUrl("/home");
-  }
+
   profile() {
     this.router.navigateByUrl("/profile");
   }
