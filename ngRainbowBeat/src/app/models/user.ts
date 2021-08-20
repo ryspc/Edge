@@ -1,3 +1,5 @@
+import { PostComment } from "./post-comment";
+
 export class User {
   id: number;
   username: string;
@@ -10,6 +12,7 @@ export class User {
   imageUrl: string;
   isEnabled: boolean;
   role: string;
+  comments: PostComment [];
 
   constructor(
     id: number =0,
@@ -23,6 +26,7 @@ export class User {
     imageUrl: string = '',
     isEnabled: boolean = true,
     role: string = '',
+    comments: PostComment [] = [],
   ) {
     this.id = id;
     this.username = username;
@@ -35,5 +39,6 @@ export class User {
     this.imageUrl = imageUrl;
     this.isEnabled = isEnabled;
     this.role = role;
+    this.comments = comments;
   }
 }
