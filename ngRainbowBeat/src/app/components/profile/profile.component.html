@@ -1,8 +1,8 @@
 <h1 class="profileHeader">User Profile</h1>
 
-<h2 class="uploadHeader" *ngIf="!selected">My {{getNumberOfPosts()}} Post </h2>
+<h2 class="uploadHeader" *ngIf="!selected">I have {{getNumberOfPosts()}} Post </h2>
 
- <div class=post-table-section>
+ <div class=post-table-section *ngIf="!selected">
    <!--
   <table class="myPostTable" *ngIf="!selected">
     <thead>
@@ -41,12 +41,12 @@
           <button
           (click)="destroyPost(post.id)"
           class="btn btn-dark"
-        ></button>
+        >Delete</button>
       <!-- <a href="#" class="card-link">Card link</a>
       <a href="#" class="card-link">Another link</a> -->
     </div>
   </div>
-
+</div>
 <!-- Post Details SECTION -->
   <div id="postDetails" *ngIf="selected && !editPost">
     <h3>Title: {{ selected.title }}</h3>
@@ -104,4 +104,4 @@
       />
     </div>
   </form>
-</div>
+

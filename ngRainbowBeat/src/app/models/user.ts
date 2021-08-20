@@ -1,3 +1,5 @@
+import { PostComment } from "./post-comment";
+
 export class User {
   id: number;
   username: string;
@@ -11,6 +13,7 @@ export class User {
   isEnabled: boolean;
   role: string;
   following: User[];
+  comments: PostComment [];
 
   constructor(
     id: number =0,
@@ -24,7 +27,8 @@ export class User {
     imageUrl: string = '',
     isEnabled: boolean = true,
     role: string = '',
-    following: User[] = []
+    following: User[] = [],
+    comments: PostComment [] = []
   ) {
     this.id = id;
     this.username = username;
@@ -38,5 +42,6 @@ export class User {
     this.isEnabled = isEnabled;
     this.role = role;
     this.following = following;
+    this.comments = comments;
   }
 }

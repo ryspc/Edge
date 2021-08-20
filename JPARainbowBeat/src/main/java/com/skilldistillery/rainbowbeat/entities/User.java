@@ -58,6 +58,7 @@ public class User {
 	private List<Post> posts;
 	@OneToMany(mappedBy="user")
 	private List<Playlist> playlist;
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List<Comment> comment;
 	
