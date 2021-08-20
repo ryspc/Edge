@@ -73,6 +73,15 @@ export class PostService {
     )
   }
 
+  public postsByUsername(username: string){
+    return this.http.get<Post[]>(this.url + '/user/' + username, this.httpOptions).pipe(
+      catchError((err: any) => {
+        console.log('PostService.postByUsername() err retrieving post list');
+        return throwError(err);
+      })
+    )
+  }
+
   public destroy(id: number){
 
     return this.http.delete<Post>(this.url + '/' + id, this.httpOptions).pipe(
