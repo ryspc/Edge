@@ -74,6 +74,7 @@ CREATE TABLE IF NOT EXISTS `post` (
   `updated_at` DATETIME NULL,
   `user_id` INT NOT NULL,
   `song_id` INT NOT NULL,
+  `enabled` TINYINT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_post_user1_idx` (`user_id` ASC),
   INDEX `fk_post_song1_idx` (`song_id` ASC),
@@ -114,6 +115,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `updated_at` DATETIME NULL,
   `user_id` INT NOT NULL,
   `post_id` INT NOT NULL,
+  `enabled` TINYINT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_comment_user1_idx` (`user_id` ASC),
   INDEX `fk_comment_post1_idx` (`post_id` ASC),
@@ -288,10 +290,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `musicrecdb`;
-INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`) VALUES (1, 'Purple Ponies are the best ponies', 'Fresh Pony Song', ' 2021-08-19T14:00:00', NULL, 1, 1);
-INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`) VALUES (2, 'This song is great', 'Sweet Beats', ' 2021-08-18T14:00:00', NULL, 2, 2);
-INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`) VALUES (3, 'Another great country song', 'The illest pony song ever', ' 2021-08-18T14:00:00', NULL, 2, 4);
-INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`) VALUES (4, 'Very Metal Pony Song', 'So Heavy Brony', '2021-08-18T14:00:00', NULL, 1, 3);
+INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`, `enabled`) VALUES (1, 'Purple Ponies are the best ponies', 'Fresh Pony Song', ' 2021-08-19T14:00:00', NULL, 1, 1, 1);
+INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`, `enabled`) VALUES (2, 'This song is great', 'Sweet Beats', ' 2021-08-18T14:00:00', NULL, 2, 2, 1);
+INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`, `enabled`) VALUES (3, 'Another great country song', 'The illest pony song ever', ' 2021-08-18T14:00:00', NULL, 2, 4, 1);
+INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`, `enabled`) VALUES (4, 'Very Metal Pony Song', 'So Heavy Brony', '2021-08-18T14:00:00', NULL, 1, 3, 1);
 
 COMMIT;
 
@@ -313,9 +315,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `musicrecdb`;
-INSERT INTO `comment` (`id`, `content`, `created_at`, `updated_at`, `user_id`, `post_id`) VALUES (1, 'Ya Definitely A Sick Pony Song', NULL, NULL, 2, 2);
-INSERT INTO `comment` (`id`, `content`, `created_at`, `updated_at`, `user_id`, `post_id`) VALUES (2, 'The Heaviest Pony Breakdown', NULL, NULL, 1, 4);
-INSERT INTO `comment` (`id`, `content`, `created_at`, `updated_at`, `user_id`, `post_id`) VALUES (3, 'No way pink ponies are better', NULL, NULL, 2, 1);
+INSERT INTO `comment` (`id`, `content`, `created_at`, `updated_at`, `user_id`, `post_id`, `enabled`) VALUES (1, 'Ya Definitely A Sick Pony Song', NULL, NULL, 2, 2, 1);
+INSERT INTO `comment` (`id`, `content`, `created_at`, `updated_at`, `user_id`, `post_id`, `enabled`) VALUES (2, 'The Heaviest Pony Breakdown', NULL, NULL, 1, 4, 1);
+INSERT INTO `comment` (`id`, `content`, `created_at`, `updated_at`, `user_id`, `post_id`, `enabled`) VALUES (3, 'No way pink ponies are better', NULL, NULL, 2, 1, 1);
 
 COMMIT;
 

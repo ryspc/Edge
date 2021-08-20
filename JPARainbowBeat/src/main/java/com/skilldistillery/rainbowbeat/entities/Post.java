@@ -44,6 +44,17 @@ public class Post {
 	@OneToMany(mappedBy="post")
 	private List<Comment> comments;
 	
+	@Column(name = "enabled")
+	private Boolean isEnabled;
+	
+	public Boolean getIsEnabled() {
+		return isEnabled;
+	}
+
+	public void setIsEnabled(Boolean isEnabled) {
+		this.isEnabled = isEnabled;
+	}
+
 	public Post() {}
 
 	public int getId() {
@@ -118,10 +129,13 @@ public class Post {
 		this.comments = comments;
 	}
 
+	
+
 	@Override
 	public String toString() {
 		return "Post [id=" + id + ", title=" + title + ", content=" + content + ", createdAt=" + createdAt
-				+ ", updatedAt=" + updatedAt + "]";
+				+ ", updatedAt=" + updatedAt + ", song=" + song + ", user=" + user + ", ratings=" + ratings
+				+ ", comments=" + comments + ", isEnabled=" + isEnabled + "]";
 	}
 
 	@Override
