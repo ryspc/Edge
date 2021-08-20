@@ -8,6 +8,7 @@ export class PostComment {
   updatedAt: Date;
   user: User;
   post: Post;
+  isEnabled: boolean;
 
   constructor(
   id: number = 0,
@@ -15,8 +16,10 @@ export class PostComment {
   createdAt: Date = new Date(),
   updatedAt: Date = new Date(),
   user: User = new User,
-  post: Post = new Post
+  post: Post = new Post,
+  isEnabled: boolean = true,
   ){
+    this.isEnabled = isEnabled;
     this.id = id;
     this.content = content;
     this.createdAt = createdAt;
