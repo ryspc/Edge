@@ -1,0 +1,29 @@
+.content {
+    padding: 16px;
+}
+
+.content>mat-card {
+    width: 200px;
+}
+
+mat-icon {
+    color: #b25512;
+}
+
+mat-button {
+    size: 50%;
+}
+
+.follow {
+    font-size: 16px;
+    color: #b25512;
+}
+
+.follow:hover {
+    cursor: pointer;
+}
+
+.bullet {
+    font-size: 14px;
+    ;
+}
