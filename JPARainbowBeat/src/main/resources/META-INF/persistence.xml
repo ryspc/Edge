@@ -11,6 +11,7 @@
  <class>com.skilldistillery.rainbowbeat.entities.Post</class>
  <class>com.skilldistillery.rainbowbeat.entities.Song</class>
  <class>com.skilldistillery.rainbowbeat.entities.Rating</class>
+ <class>com.skilldistillery.rainbowbeat.entities.RatingId</class>
  <class>com.skilldistillery.rainbowbeat.entities.Playlist</class>
  <!-- end list entities -->
     

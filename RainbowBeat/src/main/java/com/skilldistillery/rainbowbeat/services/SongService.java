@@ -11,7 +11,7 @@ public interface SongService{
 	
 	public Song show(String username, int songId);
 	
-	public Song create(String username, Song song);
+	public Song create(Song song);
 	
 	public Song update(String username, int songId, Song song);
 	

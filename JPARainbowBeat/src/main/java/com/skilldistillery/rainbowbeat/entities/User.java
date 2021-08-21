@@ -42,7 +42,7 @@ public class User {
 	@Column(name = "enabled")
 	private Boolean isEnabled;
 	private String role;
-//	@JsonIgnore
+	//@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "favorite_user",
 	joinColumns = @JoinColumn(name = "user_id"),
@@ -58,6 +58,7 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List<Post> posts;
 	@OneToMany(mappedBy="user")
+	@JsonIgnore
 	private List<Playlist> playlist;
 	@JsonIgnore
 	@OneToMany(mappedBy="user")

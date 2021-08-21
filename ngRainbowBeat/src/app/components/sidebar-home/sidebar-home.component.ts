@@ -9,6 +9,10 @@ import { UserService } from 'src/app/services/user.service';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PostService } from 'src/app/services/post.service';
 import { Post } from 'src/app/models/post';
+import { Song } from 'src/app/models/song';
+import { SongService } from 'src/app/services/song.service';
+import { GenreService } from 'src/app/services/genre.service';
+import { Genre } from 'src/app/models/genre';
 
 @Component({
   selector: 'app-sidebar-home',
@@ -24,13 +28,23 @@ export class SidebarHomeComponent {
   closeResult = '';
   panelOpenState = false;
   newPost: Post = new Post();
+  newSong: Song = new Song();
+  genreName: string = '';
+  newSongGenre: Genre = new Genre();
+  genres: Genre [] = [];
+
+  // selectChangeHandler(event: any){
+  //   this.genreName = event.target.value;
+  // }
 
   constructor(private observer: BreakpointObserver,
     private userService: UserService,
     private authService: AuthService,
     private postService: PostService,
+    private songService: SongService,
+    private genreService: GenreService,
     private router: Router,
-    private modalService: NgbModal
+    private modalService: NgbModal,
     ) {}
 
   ngAfterViewInit() {
@@ -47,6 +61,7 @@ export class SidebarHomeComponent {
         }
       });
       this.getLoggedInUser();
+      this.getGenres();
   }
 
   // MODAL STUFF //
@@ -87,6 +102,18 @@ export class SidebarHomeComponent {
     );
   }
 
+  getGenres(){
+    this.genreService.allGenres().subscribe(
+      data => {
+        this.genres = data;
+        console.log(this.genres);
+      },
+      err => {
+        console.log('Could not get all genres');
+      }
+    );
+  }
+
   profile() {
     this.router.navigateByUrl("/profile");
   }
@@ -101,6 +128,15 @@ export class SidebarHomeComponent {
   }
 
   addPost() {
+    this.songService.create(this.newSong).subscribe(
+      data => {
+        this.newSong = data
+      },
+      err => {
+        console.log('error creating new Song');
+      }
+    );
+    this.newPost.song = this.newSong;
     this.postService.create(this.newPost).subscribe(
       data => {
         this.newPost = data;
@@ -111,4 +147,35 @@ export class SidebarHomeComponent {
     );
   }
 
+  createPost(genreName: string, song: Song, post: Post){
+    if(this.loggedInUser !== null){
+    song.user = this.loggedInUser;
+    post.user = this.loggedInUser;
+    }
+    this.genreService.genreById(genreName).subscribe(
+      data => {
+        this.newSongGenre = data;
+        song.genres.push(this.newSongGenre);
+
+        this.songService.create(song).subscribe(
+          data => {
+            this.newSong = data;
+            post.song = this.newSong;
+
+            this.postService.create(post).subscribe(
+              data => {
+                this.newPost = data;
+              },
+              err => {
+                console.log("error creating post");
+              } );
+          },
+          err => {
+            console.log("error creating song");
+          });
+    },
+    err => {
+      console.log("error getting genre object");
+  });
+}
 }

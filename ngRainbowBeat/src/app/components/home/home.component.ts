@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   post: Post | null = null;
   followedUser : User | null = null;
   likedPost: Post | null = null;
-  loggedInUser = new User;
+  loggedInUser: User | null = null;
   public encoded = this.authService.getCredentials();
   public decoded = atob((this.encoded ?? 'null'));
   closeResult = '';
@@ -31,7 +31,19 @@ export class HomeComponent implements OnInit {
    ) { }
 
   ngOnInit(): void {
+    this.getLoggedInUser();
     this.loadPosts();
+  }
+  getLoggedInUser() {
+    this.userService.getCurrentUser(this.decoded.split(':')).subscribe(
+      user => {
+        this.loggedInUser = user;
+        console.log(this.loggedInUser);
+      },
+      err => {
+        console.log('Could not get logged in User');
+      }
+    );
   }
 
   // MODAL STUFF //
@@ -70,11 +82,24 @@ export class HomeComponent implements OnInit {
 
   }
 
-  getLoggedInUser() {
+  setPost(post: Post) {
+    this.post = post;
+  }
+
+  follow(followedUser: User) {
     this.userService.getCurrentUser(this.decoded.split(':')).subscribe(
       user => {
         this.loggedInUser = user;
-        console.log(user);
+        this.loggedInUser.following.push(followedUser);
+        this.userService.update(this.loggedInUser).subscribe(
+          update => {
+            console.log('Follow successful');
+            this.getLoggedInUser();
+          },
+          err => {
+            console.log('Error following user');
+          }
+        );
       },
       err => {
         console.log('Could not get logged in User');
@@ -82,22 +107,36 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  setPost(post: Post) {
-    this.post = post;
+  following(user: User) {
+    if(this.loggedInUser){
+      for(let i = 0; i < this.loggedInUser.following.length; i++) {
+        if(this.loggedInUser.following[i].username === user.username){
+          return true;
+        }
+      }
+    } return false;
   }
 
-  follow(followedUser: User) {
-    this.getLoggedInUser();
-    this.loggedInUser.following.push(followedUser)
-    this.userService.update(this.loggedInUser).subscribe(
-      update => {
-        console.log('Follow successful');
-      },
-      err => {
-        console.log('Error following user');
+  unfollow(user: User) {
+    if(this.loggedInUser){
+      for(let i = 0; i < this.loggedInUser.following.length; i++) {
+        if(this.loggedInUser.following[i].username === user.username){
+          this.loggedInUser.following.splice(i, 1);
+        }
       }
-    );
+      this.userService.update(this.loggedInUser).subscribe(
+        update => {
+          this.getLoggedInUser();
+          console.log('unfollow successful')
+        },
+        err => {
+          console.log(err);
+        }
+      );
+    }
   }
+
+
 
 }
 
