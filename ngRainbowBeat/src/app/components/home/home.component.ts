@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Comment } from 'src/app/models/comment';
 import { Post } from 'src/app/models/post';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
+import { CommentService } from 'src/app/services/comment.service';
 import { PostService } from 'src/app/services/post.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -18,6 +20,8 @@ export class HomeComponent implements OnInit {
   followedUser : User | null = null;
   likedPost: Post | null = null;
   loggedInUser = new User;
+  comments: Comment[] = [];
+  postComments: Comment[] = [];
   public encoded = this.authService.getCredentials();
   public decoded = atob((this.encoded ?? 'null'));
   closeResult = '';
@@ -27,11 +31,13 @@ export class HomeComponent implements OnInit {
   constructor(private userService: UserService,
    private postService: PostService,
    private authService: AuthService,
-   private modalService: NgbModal
+   private modalService: NgbModal,
+   private commentService: CommentService
    ) { }
 
   ngOnInit(): void {
     this.loadPosts();
+    this.getAllComments();
   }
 
   // MODAL STUFF //
@@ -97,6 +103,28 @@ export class HomeComponent implements OnInit {
         console.log('Error following user');
       }
     );
+  }
+
+  getAllComments() {
+    this.commentService.allComments().subscribe(
+      data => {
+        this.comments = data;
+        console.log(this.comments);
+
+      },
+      err => {
+        console.log("Error in commentService with getting all comments");
+      }
+    );
+  }
+
+  getCommentsForPost(post: Post) {
+    for(let i = 0; i < this.comments.length; i++) {
+      if(this.comments[i].post.id === post.id){
+        this.postComments.push(this.comments[i]);
+      }
+    }
+    console.log(this.postComments);
   }
 
 }

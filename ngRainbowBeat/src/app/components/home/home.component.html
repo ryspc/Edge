@@ -18,7 +18,7 @@
                 <mat-divider></mat-divider>
                 <mat-card-actions style="text-align: center;">
                     <button mat-button onclick="like(post)"><mat-icon>thumb_up</mat-icon></button>
-                    <button mat-button><mat-icon>chat</mat-icon></button>
+                    <button mat-button (click)="getCommentsForPost(post);open(comment);"><mat-icon>chat</mat-icon></button>
                     <button mat-button><mat-icon>share</mat-icon></button>
                 </mat-card-actions>
             </mat-card>
@@ -61,24 +61,34 @@
       <h3>&nbsp;&nbsp;{{post.user.username}}</h3>
     </div>
   </div>
-  <!-- <form>
-      <div class="modal-body modal-content">
-          <div class="info d-flex">
-              <label for="title" class="form-label"> Title </label> <input class="form-control me-2" type="text" name="title" [(ngModel)]="newPost.title" />
-          </div>
-          <div class="info d-flex">
-            <label for="content" class="form-label"> Content </label>
-            <textarea class="form-control me-2" rows="2" name="content" [(ngModel)]="newPost.content"></textarea>
-        </div>
-          <div class="info d-flex">
-            <label for="song" class="form-label"> Song URL </label>
-            <textarea class="form-control me-2" rows="2" name="song" [(ngModel)]="newPost.song"></textarea>
-        </div>
+</ng-template>
+
+
+<ng-template #comment let-modal>
+  <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">
+          Add Comment
+      </h4>
+
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+
+          <span aria-hidden="true">
+              ×
+          </span>
+      </button>
+  </div>
+  <div *ngFor="let comment of postComments" class="modal-body modal-content">
+    <div class="info d-flex">
+      <h1>{{comment.user.username}}</h1>
     </div>
+    <div class="info d-flex">
+      <h6>{{comment.content}}</h6>
+    </div>
+    <div class="info d-flex">
+      <hr>
+    </div>
+  </div>
     <div class="modal-footer">
-        <button class="btn btn-outline-light pull-right" (click)="modal.close()" id="btn3" type="submit">
-            Close&nbsp;&nbsp;<i class="fa fa-download"></i>
-        </button>
+      <!-- Add Form -->
     </div>
-</form> -->
 </ng-template>
