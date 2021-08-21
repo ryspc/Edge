@@ -6,6 +6,9 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { PostService } from 'src/app/services/post.service';
+import { Post } from 'src/app/models/post';
 
 @Component({
   selector: 'app-sidebar-home',
@@ -18,11 +21,17 @@ export class SidebarHomeComponent {
   loggedInUser: User | null = null;
   public encoded = this.authService.getCredentials();
   public decoded = atob((this.encoded ?? 'null'));
+  closeResult = '';
+  panelOpenState = false;
+  newPost: Post = new Post();
 
   constructor(private observer: BreakpointObserver,
     private userService: UserService,
     private authService: AuthService,
-    private router: Router) {}
+    private postService: PostService,
+    private router: Router,
+    private modalService: NgbModal
+    ) {}
 
   ngAfterViewInit() {
     this.observer
@@ -39,6 +48,28 @@ export class SidebarHomeComponent {
       });
       this.getLoggedInUser();
   }
+
+  // MODAL STUFF //
+  open(content: any) {
+    this.modalService.open(content,
+      { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+        this.closeResult = `Closed with: ${result}`;
+      }, (reason) => {
+        this.closeResult =
+          `Dismissed ${this.getDismissReason(reason)}`;
+      });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
   logout() {
     this.authService.logout();
     this.router.navigateByUrl("/landing"); //TODO: Update url navigation
@@ -68,5 +99,16 @@ export class SidebarHomeComponent {
   settings() {
     this.router.navigateByUrl("/settings");
   }
-  
+
+  addPost() {
+    this.postService.create(this.newPost).subscribe(
+      data => {
+        this.newPost = data;
+      },
+      err => {
+        console.log("Error creating new Post");
+      }
+    );
+  }
+
 }

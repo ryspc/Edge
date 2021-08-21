@@ -2,3 +2,11 @@
  body {
      height: 100%;
  }
+
+ form.normal-form {
+   margin: 10px;
+ }
+
+ .button-row button {
+   margin: 5px;
+ }

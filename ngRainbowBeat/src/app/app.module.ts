@@ -35,6 +35,7 @@ import { SidebarHomeComponent } from './components/sidebar-home/sidebar-home.com
 import { HomeComponent } from './components/home/home.component';
 import { DateAgoPipe } from './pipes/date-ago.pipe';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { PostComponent } from './components/post/post.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     SearchBarComponent,
     CardComponent,
     HomeComponent,
-    DateAgoPipe
+    DateAgoPipe,
+    PostComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +75,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatSidenavModule,
     MatListModule,
     MatDividerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
 
   ],
   providers: [
