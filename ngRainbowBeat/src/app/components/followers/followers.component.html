@@ -1,9 +1,9 @@
 <div class="container-fluid">
   <div *ngIf="loggedInUser">
     <div *ngIf="loggedInUser.following.length > 0">
-      <h1>Following</h1><hr>
+      <h1>Following: <span>{{getFollowingCount()}}</span></h1><hr>
       <mat-card *ngFor="let friend of loggedInUser.following">
-        <img mat-card-image src={{friend.imageUrl}} alt="Profile Image">
+        <img mat-card-image class="avatar" src={{friend.imageUrl}} alt="Profile Image">
         <mat-card-content>
           <h2>{{friend.username}}</h2>
         </mat-card-content>
@@ -12,6 +12,14 @@
         </mat-card-actions>
       </mat-card>
     </div>
+    <!-- <div >
+      <mat-card *ngFor="let follower of followers">
+        <img mat-card-image class="avatar" src={{follower.imageUrl}} alt="Profile Image">
+        <mat-card-content>
+          <h2>{{follower.username}}</h2>
+        </mat-card-content>
+      </mat-card>
+    </div> -->
 
     <div *ngIf="loggedInUser.following.length === 0">
       <h1>Not currently following any users!</h1>

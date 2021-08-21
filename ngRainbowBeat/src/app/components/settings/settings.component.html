@@ -1,20 +1,26 @@
 <div class="container-fluid">
-  <h1>Settings</h1><hr>
-
-  <div *ngIf="!editUser && loggedInUser">
-    <h3>Username: {{loggedInUser.username}}</h3><br>
-    <h3>Email: {{loggedInUser.email}}</h3><br>
-    <h3>First Name: {{loggedInUser.firstName}}</h3><br>
-    <h3>Last Name: {{loggedInUser.lastName}}</h3><br>
-    <h3>Member Since: {{loggedInUser.createdAt}}</h3><br>
-    <button class="btn btn-info" (click)="setEditUser()">Edit Details</button>
+  <div class="row" *ngIf="!editUser && loggedInUser">
+    <div class="col-5">
+      <h1>Settings</h1>
+      <img class="avatar" src={{loggedInUser.imageUrl}} alt="Profile Image">
+    </div>
+    <div class="col-5">
+      <h3>Username: {{loggedInUser.username}}</h3><br>
+      <h3>Email: {{loggedInUser.email}}</h3><br>
+      <h3>First Name: {{loggedInUser.firstName}}</h3><br>
+      <h3>Last Name: {{loggedInUser.lastName}}</h3><br>
+      <h3>Member Since: {{loggedInUser.createdAt}}</h3><br>
+      <button class="btn btn-info" (click)="setEditUser()">Edit Details</button>
+    </div>
   </div>
 
   <form *ngIf="editUser">
+    <h1>Edit Info</h1><hr>
     <h3>First Name: <input type="text" name="firstName" [(ngModel)]="editUser.firstName"></h3><br>
     <h3>Last Name: <input type="text" name="lastName" [(ngModel)]="editUser.lastName"></h3><br>
     <h3>Username: <input type="text" name="username" [(ngModel)]="editUser.username"></h3><br>
     <h3>Email: <input type="text" name="email" [(ngModel)]="editUser.email"></h3><br>
+    <h3>Profile Image URL: <input type="text" name="image-upload" [(ngModel)]="editUser.imageUrl"></h3>
     <input class="btn btn-success" type="submit" name="save" value="Save Changes" (click)="updateUserDetails(editUser)">
     <input class="btn btn-danger" type="submit" name="cancel" value="Cancel" (click)="editUser = null">
   </form>

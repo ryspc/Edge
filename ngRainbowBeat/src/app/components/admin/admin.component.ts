@@ -7,6 +7,7 @@ import { Post } from 'src/app/models/post';
 import { Comment } from 'src/app/models/comment';
 import { CommentService } from 'src/app/services/comment.service';
 import { PostComment } from 'src/app/models/post-comment';
+import { SidebarComponent } from '../sidebar/sidebar.component';
 
 
 @Component({
@@ -20,7 +21,8 @@ export class AdminComponent implements OnInit {
     private userService: UserService,
     private authService: AuthService,
     private postService: PostService,
-    private commentService: CommentService
+    private commentService: CommentService,
+    private sidebarComponent: SidebarComponent
     ) { }
 
     users: User [] = [];
@@ -33,12 +35,16 @@ export class AdminComponent implements OnInit {
   comments: PostComment[] = [];
   enabledComments: PostComment[] = [];
   enabledPosts: Post[]=[];
+  allUsersSelected: boolean = false;
+
 
 
 
   ngOnInit(): void {
     this.getUserInfo();
     this.getAllUsers();
+
+
 
   }
 

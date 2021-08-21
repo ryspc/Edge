@@ -1,77 +1,22 @@
 
 
-  <div *ngIf = "user && user.role === 'ADMIN'">
-  <H1 *ngIf = "user && user.username === 'admin'">Admin Page user.</H1>
+<div *ngIf = "user && user.role !== 'ADMIN'">
+  <H1>Admin Page -- You shall not pass</H1>
   </div>
 
-  <div *ngIf = "!user || user.role === 'NULL'">
-<!-- <h1>You do not have permission to access this page</h1>
 
+    <div *ngIf = "user && user.role === 'ADMIN'">
 
-<mat-card class="matcard">
-  <mat-tab-group animationDuration="0ms">
-      <mat-tab label="Enable/Disable Users">
-          <div class="disable">
-              <form #registerForm=ngForm class="example-form">
-                  <p class="sec">Click the checkbox to enable or disable an account</p>
-                  <table class="example-full-width" cellspacing="0">
-                      <tr>
-                          <td>
-                              <mat-form-field class="example-full-width" appearance="fill">
-                                  <mat-label>First name</mat-label>
-                                  <input matInput type="text" name="firstName" ngModel>
-                              </mat-form-field>
-                          </td>
-                          <td>
-                              <mat-form-field class="example-full-width" appearance="fill">
-                                  <mat-label>Last Name</mat-label>
-                                  <input matInput type="text" name="lastName" ngModel>
-                              </mat-form-field>
-                          </td>
-                      </tr>
-                  </table>
-                  <mat-form-field class="example-full-width" appearance="fill">
-                      <mat-label>Email</mat-label>
-                      <input matInput type="text" name="email" ngModel>
-                  </mat-form-field>
-                  <mat-form-field class="example-full-width" appearance="fill">
-                      <mat-label>Username</mat-label>
-                      <input matInput type="text" name="username" ngModel>
-                  </mat-form-field>
-                  <mat-form-field class="example-full-width" appearance="fill">
-                      <mat-label>Password</mat-label>
-                      <input matInput input type="password" name="password" ngModel>
-                  </mat-form-field>
-                  <button mat-stroked-button color="primary">Register</button>
-              </form>
-          </div>
-      </mat-tab>
-      <mat-tab label="Login">
-          <div class="login">
-              <form #registerForm=ngForm class="example-form">
-                  <p class="sec">Welcome back.</p>
-                  <mat-form-field class="example-full-width" appearance="fill">
-                      <mat-label>Username</mat-label>
-                      <input matInput type="text" name="username">
-                  </mat-form-field>
-                  <mat-form-field class="example-full-width" appearance="fill">
-                      <mat-label>Password</mat-label>
-                      <input matInput input type="password" name="password">
-                  </mat-form-field>
-                  <button mat-stroked-button color="primary">Login</button>
-              </form>
-          </div>
-      </mat-tab>
-  </mat-tab-group>
-</mat-card>
+<button *ngIf = "allUsersSelected == false" (click)="allUsersSelected = true" mat-button style=
+			"background-color:darkmagenta; color:white">
+			Display All Users
+		</button>
 
-<mat-card *ngFor = "let user of users">
-<h4>{{user.username}}</h4>
-
-</mat-card> -->
-
-<div>
-
+<div *ngIf = "allUsersSelected == true">
+  <button (click)="allUsersSelected = false" mat-button style=
+  "background-color:darkmagenta; color:white">
+  Hide All Users
+</button>
 <mat-card class="example-card" *ngFor = "let user of users">
 	<mat-card-header>
 		<mat-card-title>{{user.username}}</mat-card-title>
@@ -83,30 +28,24 @@
 	<mat-card-content>
 		<p>
 		{{user.email}} <br>
-    <!-- {{user.isEnabled}} -->
 		</p>
 	</mat-card-content>
 
 	<mat-card-actions>
-    <!-- <div (click)="disableUser(user)" *ngIf = "user.isEnabled"> -->
 		<button (click)="disableUser(user)" *ngIf = "user.isEnabled" mat-button style=
 			"background-color:red; color:white">
 			Disable
 		</button>
-  <!-- </div> -->
 
-    <!-- <div *ngIf = "!user.isEnabled"> -->
 		<button *ngIf = "!user.isEnabled" (click)="enableUser(user)" mat-button style=
 			"background-color:green; color:white">
 			Enable
 		</button>
-    <!-- </div> -->
 
     <button (click)="displayUserPosts(user.username)" mat-button style=
     "background-color:blue; color:white">
     View Posts
   </button>
-
 
   <button (click)="displayUserComments(user.username)" mat-button style=
     "background-color:orange; color:white">

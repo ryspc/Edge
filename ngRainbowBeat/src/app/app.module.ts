@@ -33,6 +33,8 @@ import { CardComponent } from './audioComponents/card/card.component';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { SidebarHomeComponent } from './components/sidebar-home/sidebar-home.component';
 import { HomeComponent } from './components/home/home.component';
+import { DateAgoPipe } from './pipes/date-ago.pipe';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,8 @@ import { HomeComponent } from './components/home/home.component';
     AudioListComponent,
     SearchBarComponent,
     CardComponent,
-    HomeComponent
+    HomeComponent,
+    DateAgoPipe,
   ],
   imports: [
     BrowserModule,
@@ -70,6 +73,7 @@ import { HomeComponent } from './components/home/home.component';
     MatSidenavModule,
     MatListModule,
     MatDividerModule,
+    MatSnackBarModule,
 
   ],
   providers: [
