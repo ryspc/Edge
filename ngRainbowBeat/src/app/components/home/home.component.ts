@@ -45,8 +45,7 @@ export class HomeComponent implements OnInit {
       }
     );
   }
-
-  // MODAL STUFF //
+  
   open(content: any) {
     this.modalService.open(content,
       { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {

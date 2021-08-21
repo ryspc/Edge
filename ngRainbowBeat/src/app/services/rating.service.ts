@@ -29,5 +29,18 @@ export class RatingService {
       })
     )
   }
+  public update(postId: number,rating: Rating){
+    return this.http.put<Rating>(this.url + '/post/' + postId, rating,  this.httpOptions).pipe(
+      catchError((err: any) => {
+        console.error(err);
+        return throwError(
+          'error updating rating' + err
+        )
+      }
+
+
+    )
+    )
+  }
 
 }
