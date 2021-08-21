@@ -34,6 +34,7 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { SidebarHomeComponent } from './components/sidebar-home/sidebar-home.component';
 import { HomeComponent } from './components/home/home.component';
 import { DateAgoPipe } from './pipes/date-ago.pipe';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { DateAgoPipe } from './pipes/date-ago.pipe';
     MatSidenavModule,
     MatListModule,
     MatDividerModule,
+    MatSnackBarModule
 
   ],
   providers: [
