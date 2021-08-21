@@ -6,6 +6,9 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
+import { Post } from 'src/app/models/post';
+import { PostService } from 'src/app/services/post.service';
+import { SettingsComponent } from '../settings/settings.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -18,11 +21,17 @@ export class SidebarComponent {
   loggedInUser: User | null = null;
   public encoded = this.authService.getCredentials();
   public decoded = atob((this.encoded ?? 'null'));
+  public searchInput: string = '';
+  allPosts: Post[] = [];
+  searchResult: Post[] = [];
 
   constructor(private observer: BreakpointObserver,
     private userService: UserService,
     private authService: AuthService,
-    private router: Router) {}
+    private router: Router,
+    private postService: PostService,
+    )
+    {}
 
   ngAfterViewInit() {
     this.observer
@@ -38,6 +47,8 @@ export class SidebarComponent {
         }
       });
       this.getLoggedInUser();
+      this.getAllPosts();
+
   }
   logout() {
     this.authService.logout();
@@ -70,5 +81,40 @@ export class SidebarComponent {
   settings() {
     this.router.navigateByUrl("/settings");
   }
-  
+
+  getAllPosts(){
+    this.postService.index().subscribe(
+      data => {
+        this.allPosts = data;
+        console.log(this.allPosts);
+      },
+      err => {
+        console.log('Could not retrieve all posts');
+
+      });
+  }
+
+  postsByKeyword(){
+    this.searchResult = [];
+    this.postService.postsByKeyword(this.searchInput).subscribe(
+      data => {
+        this.searchResult = data;
+        console.log(this.searchResult);
+      },
+      err => {
+        console.log('Could not retrieve all posts');
+
+      });
+  }
+
+  // fetchPost(event: any){
+  //   if (event.target.value === '') {
+  //     return this.searchResult = [];
+  //   }
+  //   this.searchResult = this.allPosts.filter((post) => {
+  //     return post.title.toLowerCase().startsWith(event.target.value.toLowerCase());
+  //   })
+  // }
+
+
 }

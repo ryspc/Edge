@@ -107,5 +107,13 @@ export class PostService {
       }))
   }
 
+  public postsByKeyword(keyword: string){
+    return this.http.get<Post[]>(this.url + '/search/' + keyword, this.httpOptions).pipe(
+      catchError((err: any) => {
+        console.log('PostService.postByUsername() err retrieving post list');
+        return throwError(err);
+      })
+    )
+  }
 
 }

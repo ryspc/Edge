@@ -12,8 +12,16 @@
     </button>
     <div class="searchbar">
 
-        Add search bar here
-
+      <input type="text" [(ngModel)]="searchInput" placeholder="Search for a Post" />
+      <button (click)="postsByKeyword()">Search</button>
+      <!-- #searchbar (keyup)="fetchPost($event)" -->
+    </div>
+    <div>
+      <!-- <ul>
+        <li *ngFor="let post of searchResult">
+           <p> {{ post.title }}</p>
+        </li>
+      </ul> -->
     </div>
 </mat-toolbar>
 <mat-sidenav-container>
