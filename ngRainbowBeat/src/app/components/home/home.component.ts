@@ -54,8 +54,6 @@ export class HomeComponent implements OnInit {
 
   follow(followedUser: User) {
     this.getLoggedInUser();
-    console.log("follow method");
-    
     this.loggedInUser.following.push(followedUser)
     this.userService.update(this.loggedInUser).subscribe(
       update => {
