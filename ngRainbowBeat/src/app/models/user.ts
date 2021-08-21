@@ -13,6 +13,7 @@ export class User {
   isEnabled: boolean;
   role: string;
   following: User[];
+  followers: User[];
   comments: PostComment [];
 
   constructor(
@@ -28,6 +29,7 @@ export class User {
     isEnabled: boolean = true,
     role: string = '',
     following: User[] = [],
+    followers: User[] = [],
     comments: PostComment [] = []
   ) {
     this.id = id;
@@ -43,5 +45,6 @@ export class User {
     this.role = role;
     this.following = following;
     this.comments = comments;
+    this.followers = followers;
   }
 }
