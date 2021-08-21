@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Post } from 'src/app/models/post';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
@@ -13,13 +14,21 @@ import { UserService } from 'src/app/services/user.service';
 export class HomeComponent implements OnInit {
   posts: Post[] = [];
   newPost  = new Post();
+  post: Post | null = null;
   followedUser : User | null = null;
   likedPost: Post | null = null;
   loggedInUser: User | null = null;
   public encoded = this.authService.getCredentials();
   public decoded = atob((this.encoded ?? 'null'));
+  closeResult = '';
+  panelOpenState = false;
 
-  constructor(private userService: UserService, private postService: PostService, private authService: AuthService) { }
+
+  constructor(private userService: UserService,
+   private postService: PostService,
+   private authService: AuthService,
+   private modalService: NgbModal
+   ) { }
 
   ngOnInit(): void {
     this.getLoggedInUser();
@@ -37,6 +46,27 @@ export class HomeComponent implements OnInit {
     );
   }
 
+  // MODAL STUFF //
+  open(content: any) {
+    this.modalService.open(content,
+      { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+        this.closeResult = `Closed with: ${result}`;
+      }, (reason) => {
+        this.closeResult =
+          `Dismissed ${this.getDismissReason(reason)}`;
+      });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
   loadPosts(){
     this.postService.index().subscribe(
       posts => {
@@ -50,6 +80,10 @@ export class HomeComponent implements OnInit {
 
   like(post: Post) {
 
+  }
+
+  setPost(post: Post) {
+    this.post = post;
   }
 
   follow(followedUser: User) {
@@ -101,5 +135,8 @@ export class HomeComponent implements OnInit {
       );
     }
   }
+
+
+
 }
 
