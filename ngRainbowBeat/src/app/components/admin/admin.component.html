@@ -6,6 +6,8 @@
 
 
     <div *ngIf = "user && user.role === 'ADMIN'">
+      <!-- <app-sidebar></app-sidebar> -->
+      {{searchKeyword}}
 
 <button *ngIf = "allUsersSelected == false" (click)="allUsersSelected = true" mat-button style=
 			"background-color:darkmagenta; color:white">
