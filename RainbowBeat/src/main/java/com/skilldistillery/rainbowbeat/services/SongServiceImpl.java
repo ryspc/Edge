@@ -49,14 +49,14 @@ public class SongServiceImpl implements SongService{
 //	}
 
 	@Override
-	public Song update(String username, int songId, Song song) {
+	public Song update(int songId, Song song) {
 		song.setId(songId);
 		
 		return songRepo.saveAndFlush(song);
 	}
 
 	@Override
-	public boolean destroy(String username, int songId) {
+	public boolean destroy(int songId) {
 		songRepo.deleteById(songId);
 		return !songRepo.findById(songId).isPresent();
 	}
