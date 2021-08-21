@@ -22,13 +22,9 @@ export class HomeComponent implements OnInit {
   post: Post | null = null;
   followedUser : User | null = null;
   likedPost: Post | null = null;
-<<<<<<< HEAD
   loggedInUser = new User;
   comments: Comment[] = [];
   postComments: Comment[] = [];
-=======
-  loggedInUser: User | null = null;
->>>>>>> e13e3aa3adba7dd2747e4fa2ad1b63f75ec81f0a
   public encoded = this.authService.getCredentials();
   public decoded = atob((this.encoded ?? 'null'));
   closeResult = '';
@@ -43,11 +39,8 @@ export class HomeComponent implements OnInit {
    private postService: PostService,
    private authService: AuthService,
    private modalService: NgbModal,
-<<<<<<< HEAD
-   private commentService: CommentService
-=======
+   private commentService: CommentService,
    private ratingService: RatingService
->>>>>>> e13e3aa3adba7dd2747e4fa2ad1b63f75ec81f0a
    ) { }
 
   ngOnInit(): void {
@@ -66,7 +59,7 @@ export class HomeComponent implements OnInit {
       }
     );
   }
-  
+
   open(content: any) {
     this.modalService.open(content,
       { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
@@ -126,7 +119,7 @@ export class HomeComponent implements OnInit {
       console.log(this.rating.rating);
       console.log(this.rating.user);
       console.log(this.rating.post);
-      
+
       this.ratingService.create(this.rating).subscribe(
         update => {
           console.log('rating created')
@@ -213,7 +206,6 @@ export class HomeComponent implements OnInit {
     }
   }
 
-<<<<<<< HEAD
   getAllComments() {
     this.commentService.allComments().subscribe(
       data => {
@@ -235,9 +227,6 @@ export class HomeComponent implements OnInit {
     }
     console.log(this.postComments);
   }
-=======
-
->>>>>>> e13e3aa3adba7dd2747e4fa2ad1b63f75ec81f0a
 
 }
 
