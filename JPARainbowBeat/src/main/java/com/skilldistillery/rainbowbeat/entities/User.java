@@ -42,7 +42,7 @@ public class User {
 	@Column(name = "enabled")
 	private Boolean isEnabled;
 	private String role;
-//	@JsonIgnore
+	//@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "favorite_user",
 	joinColumns = @JoinColumn(name = "user_id"),
