@@ -98,19 +98,55 @@
   <form>
       <div class="modal-body modal-content">
           <div class="info d-flex">
-              <label for="title" class="form-label"> Title </label> <input class="form-control me-2" type="text" name="title" [(ngModel)]="newPost.title" />
+              <label for="title" class="form-label"> Post Title </label> <input class="form-control me-2" type="text" name="title" [(ngModel)]="newPost.title" />
           </div>
           <div class="info d-flex">
-            <label for="content" class="form-label"> Content </label>
+            <label for="content" class="form-label"> Post Content </label>
             <textarea class="form-control me-2" rows="2" name="content" [(ngModel)]="newPost.content"></textarea>
         </div>
           <div class="info d-flex">
+            <label for="song" class="form-label"> Song Title </label>
+            <textarea class="form-control me-2" rows="2" name="songTitle" [(ngModel)]="newSong.title"></textarea>
+        </div>
+          <div class="info d-flex">
+            <label for="song" class="form-label"> Song Artist </label>
+            <textarea class="form-control me-2" rows="2" name="songArtist" [(ngModel)]="newSong.artist"></textarea>
+        </div>
+          <div class="info d-flex">
+            <label for="song" class="form-label"> Song Album </label>
+            <textarea class="form-control me-2" rows="2" name="songAlbum" [(ngModel)]="newSong.album"></textarea>
+        </div>
+          <div class="info d-flex">
+            <label for="song" class="form-label"> Song Genre </label>
+            <select name = "dropdown" [(ngModel)]="genreName">
+              <option *ngFor="let genre of genres" [value]="genre.id">{{genre.name}}</option>
+              <!-- <option value = "1" name="songGenre1" [ngValue]="genreName">Pony Music</option> -->
+              <!-- <option value = "2" name="songGenre2" [ngValue]="genreName">Pony Alt Death Metal </option> -->
+              <!-- <option value = "3" name="songGenre3" [ngValue]="genreName">Conservative Pony Country</option> -->
+              </select>
+            <!-- <textarea class="form-control me-2" rows="2" name="song" [(ngModel)]="genreName"></textarea> -->
+        </div>
+          <div class="info d-flex">
+            <label for="song" class="form-label"> Song Length </label>
+            <input type="number" name="songLength" [(ngModel)]="newSong.songLength" />
+            <!-- <textarea class="form-control me-2" rows="2" name="song" [(ngModel)]="newSong.songLength"></textarea> -->
+        </div>
+          <div class="info d-flex">
+            <label for="song" class="form-label"> Song Release Date </label>
+            <input type="date" name="releaseDate" [(ngModel)]="newSong.releaseDate" />
+            <!-- <textarea class="form-control me-2" rows="2" name="song" [(ngModel)]="newSong.releaseDate"></textarea> -->
+        </div>
+          <div class="info d-flex">
+            <label for="song" class="form-label"> Image URL </label>
+            <textarea class="form-control me-2" rows="2" name="songImg" [(ngModel)]="newSong.imageURL"></textarea>
+        </div>
+          <div class="info d-flex">
             <label for="song" class="form-label"> Song URL </label>
-            <textarea class="form-control me-2" rows="2" name="song" [(ngModel)]="newPost.song"></textarea>
+            <textarea class="form-control me-2" rows="2" name="songUrl" [(ngModel)]="newSong.songURL"></textarea>
         </div>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-outline-light pull-right" (click)="modal.close(addPost())" id="btn3" type="submit">
+        <button class="btn btn-outline-light pull-right" (click)="modal.close(createPost(genreName, newSong, newPost))" id="btn3" type="submit">
             Save&nbsp;&nbsp;<i class="fa fa-download"></i>
         </button>
     </div>

@@ -41,12 +41,12 @@ public class SongServiceImpl implements SongService{
 	}
 	}
 
-	@Override
-	public Song create(String username, Song song) {
-		song.setUser(userRepo.findByUsername(username));
-		return songRepo.saveAndFlush(song);
-		
-	}
+//	@Override
+//	public Song create(String username, Song song) {
+//		song.setUser(userRepo.findByUsername(username));
+//		return songRepo.saveAndFlush(song);
+//		
+//	}
 
 	@Override
 	public Song update(String username, int songId, Song song) {
@@ -73,6 +73,11 @@ public class SongServiceImpl implements SongService{
 		String newGenre = '%'+genre+'%';
 		List<Song> songs = songRepo.findByGenres_NameLike(newGenre);
 		return songs;
+	}
+	
+	@Override
+	public Song create(Song song) {
+		return songRepo.saveAndFlush(song);
 	}
 	
 }
