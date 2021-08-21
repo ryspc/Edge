@@ -27,3 +27,10 @@ mat-button {
     font-size: 14px;
     ;
 }
+
+.footerPic {
+  margin-top: 16px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
