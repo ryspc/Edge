@@ -13,4 +13,6 @@ public interface RatingService {
 	List<Rating> showAll();
 
 	Rating update(int id, Rating rating);
+
+	Rating create(Rating rating);
 }

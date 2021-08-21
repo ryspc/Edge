@@ -38,7 +38,18 @@ public class RatingServiceImpl implements RatingService {
 	
 	@Override
 	public Rating update(int id, Rating rating) {
+		getRatingByPostId(id);
 		return ratingRepo.saveAndFlush(rating);
 	}
+	
+	@Override
+	public Rating create(Rating rating) {
+		
+		try {
+			ratingRepo.saveAndFlush(rating);
+		} catch (Exception e) {System.out.println(e);}
+		return rating;
+	}
+
 
 }
