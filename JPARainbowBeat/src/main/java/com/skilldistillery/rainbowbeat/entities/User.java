@@ -58,6 +58,7 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List<Post> posts;
 	@OneToMany(mappedBy="user")
+	@JsonIgnore
 	private List<Playlist> playlist;
 	@JsonIgnore
 	@OneToMany(mappedBy="user")

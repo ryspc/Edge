@@ -9,10 +9,14 @@ import { UserService } from 'src/app/services/user.service';
 import { Post } from 'src/app/models/post';
 import { PostService } from 'src/app/services/post.service';
 import { SettingsComponent } from '../settings/settings.component';
+import { AdminComponent } from '../admin/admin.component';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
+  template: `
+    <app-admin [searchKeyword]="searchInput"></app-admin>
+  `,
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent {
@@ -24,6 +28,8 @@ export class SidebarComponent {
   public searchInput: string = '';
   allPosts: Post[] = [];
   searchResult: Post[] = [];
+  childMessage: Post[] = this.searchResult;
+  childKeyword: string = '';
 
   constructor(private observer: BreakpointObserver,
     private userService: UserService,

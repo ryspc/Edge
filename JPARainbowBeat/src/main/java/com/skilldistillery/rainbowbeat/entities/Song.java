@@ -43,7 +43,7 @@ public class Song {
 	@Column(name="album")
 	private String album;
 	
-	@JsonIgnore
+	
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
@@ -52,7 +52,7 @@ public class Song {
 	@OneToOne(mappedBy="song")
 	private Post post;
 	
-	@JsonIgnore
+	
 	@ManyToMany(mappedBy="songs")
 	private List<Genre> genres;
 	
