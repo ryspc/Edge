@@ -43,4 +43,16 @@ export class RatingService {
     )
   }
 
+  public create(rating: Rating){
+    return this.http.post<Rating>(this.url, rating,  this.httpOptions).pipe(
+      catchError((err: any) => {
+        console.error(err);
+        return throwError(
+          'error creating rating' + err
+        )
+      }
+    )
+    )
+  }
+
 }

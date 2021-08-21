@@ -5,6 +5,8 @@ import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
 import { UserService } from 'src/app/services/user.service';
+import { RatingService } from 'src/app/services/rating.service';
+import { Rating } from 'src/app/models/rating';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +15,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class HomeComponent implements OnInit {
   posts: Post[] = [];
+  ratings: Rating[] = [];
   newPost  = new Post();
   post: Post | null = null;
   followedUser : User | null = null;
@@ -22,12 +25,17 @@ export class HomeComponent implements OnInit {
   public decoded = atob((this.encoded ?? 'null'));
   closeResult = '';
   panelOpenState = false;
+  ratingTotal: number = 0;
+  ratingPositive: number = 0;
+  rating: Rating = new Rating();
+
 
 
   constructor(private userService: UserService,
    private postService: PostService,
    private authService: AuthService,
-   private modalService: NgbModal
+   private modalService: NgbModal,
+   private ratingService: RatingService
    ) { }
 
   ngOnInit(): void {
@@ -70,6 +78,26 @@ export class HomeComponent implements OnInit {
     this.postService.index().subscribe(
       posts => {
         this.posts = posts;
+        this.posts.forEach(post => {
+          this.ratingService.ratingByPostId(post.id).subscribe(
+            data => {
+              this.ratings = data;
+              this.ratingTotal = this.ratings.length;
+              console.log('rating updated');
+              this.ratings.forEach(rating => {
+                if (rating.rating === true) {
+                this.ratingPositive++; }
+                post.rating = this.ratingPositive/this.ratingTotal;
+                console.log(post.rating);
+                console.log(this.ratingTotal);
+                console.log(this.ratingPositive);
+              });
+            },
+            err => {
+              console.log(err);
+            }
+          );
+        });
       },
       noPosts => {
         console.error('PostListComponenet.loadPosts: error retrieving posts list')
@@ -78,8 +106,45 @@ export class HomeComponent implements OnInit {
   }
 
   like(post: Post) {
-
+    if(this.loggedInUser && this.rating){
+      this.rating.rating = true;
+      this.rating.user = this.loggedInUser;
+      this.rating.post = post;
+      console.log(this.rating.rating);
+      console.log(this.rating.user);
+      console.log(this.rating.post);
+      
+      this.ratingService.create(this.rating).subscribe(
+        update => {
+          console.log('rating created')
+        },
+        err => {
+          console.log(err);
+        }
+      );
+    }
   }
+
+
+  // getRating(post: Post) {
+  //   if(this.loggedInUser && this.ratings){
+  //     this.ratingService.ratingByPostId(post.id).subscribe(
+  //       data => {
+  //         this.ratings = data;
+  //         console.log('rating updated');
+  //         this.ratings.forEach(rating => {
+  //           if (rating.rating === true) {
+  //           this.ratingPositive++; }
+  //         });
+  //       },
+  //       err => {
+  //         console.log(err);
+  //       }
+  //     );
+  //   }
+  // }
+
+
 
   setPost(post: Post) {
     this.post = post;

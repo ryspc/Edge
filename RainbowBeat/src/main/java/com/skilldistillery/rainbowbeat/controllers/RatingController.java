@@ -10,12 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skilldistillery.rainbowbeat.entities.Comment;
 import com.skilldistillery.rainbowbeat.entities.Post;
 import com.skilldistillery.rainbowbeat.entities.Rating;
 import com.skilldistillery.rainbowbeat.services.RatingService;
@@ -42,7 +42,7 @@ public class RatingController {
 		return ratings;
 	}
 	@PutMapping("rating/post/{id}")
-	public Rating updatePost(HttpServletRequest req, HttpServletResponse res, @PathVariable int id, @RequestBody Rating rating, Principal principal) {
+	public Rating updateRating(HttpServletRequest req, HttpServletResponse res, @PathVariable int id, @RequestBody Rating rating, Principal principal) {
 		Rating r = new Rating();
 		try {
 			r = ratingSvc.update(id, rating);
@@ -53,6 +53,22 @@ public class RatingController {
 		} catch (Exception e) {
 			res.setStatus(400);
 			r = null;
+		}
+		return r;
+	}
+	
+	@PostMapping("rating")
+	public Rating createRating(HttpServletRequest req, HttpServletResponse res, @RequestBody Rating rating) {
+		Rating r = ratingSvc.create(rating);
+		try {
+			if(r == null) {
+				res.setStatus(404);
+			}else {
+				res.setStatus(201);
+			}
+		} catch (Exception e) {
+			res.setStatus(400);
+			r=null;
 		}
 		return r;
 	}
