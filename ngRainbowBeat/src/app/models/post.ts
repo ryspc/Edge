@@ -13,6 +13,7 @@ export class Post {
   user: User;
   song: Song;
   isEnabled: boolean;
+  rating: number;
 
   constructor(
     id: number = 0,
@@ -24,7 +25,8 @@ export class Post {
     songId: number = 0,
     user: User = new User,
     song: Song = new Song,
-    isEnabled: boolean = true
+    isEnabled: boolean = true,
+    rating: number = 0
   ){
     this.id = id;
     this.content = content;
@@ -36,5 +38,6 @@ export class Post {
     this.user = user;
     this.isEnabled = isEnabled;
     this.song = song;
+    this.rating = rating;
   }
 }

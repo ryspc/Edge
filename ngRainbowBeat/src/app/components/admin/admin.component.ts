@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
@@ -12,10 +12,16 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
 
 @Component({
   selector: 'app-admin',
+  template: `
+    Say {{ searchKeyword }}
+  `,
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
+
+  @Input() childMessage: Post[] = [];
+  @Input() searchKeyword: string = '';
 
   constructor(
     private userService: UserService,
@@ -36,6 +42,8 @@ export class AdminComponent implements OnInit {
   enabledComments: PostComment[] = [];
   enabledPosts: Post[]=[];
   allUsersSelected: boolean = false;
+
+
 
 
 
@@ -141,6 +149,7 @@ export class AdminComponent implements OnInit {
         user => {
           this.user =user;
           console.log(user);
+          console.log(this.childMessage);
           this.getUserInfo();
           this.getAllUsers();
         },

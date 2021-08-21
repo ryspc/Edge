@@ -7,6 +7,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { CommentService } from 'src/app/services/comment.service';
 import { PostService } from 'src/app/services/post.service';
 import { UserService } from 'src/app/services/user.service';
+import { RatingService } from 'src/app/services/rating.service';
+import { Rating } from 'src/app/models/rating';
 
 @Component({
   selector: 'app-home',
@@ -15,32 +17,56 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class HomeComponent implements OnInit {
   posts: Post[] = [];
+  ratings: Rating[] = [];
   newPost  = new Post();
   post: Post | null = null;
   followedUser : User | null = null;
   likedPost: Post | null = null;
+<<<<<<< HEAD
   loggedInUser = new User;
   comments: Comment[] = [];
   postComments: Comment[] = [];
+=======
+  loggedInUser: User | null = null;
+>>>>>>> e13e3aa3adba7dd2747e4fa2ad1b63f75ec81f0a
   public encoded = this.authService.getCredentials();
   public decoded = atob((this.encoded ?? 'null'));
   closeResult = '';
   panelOpenState = false;
+  ratingTotal: number = 0;
+  ratingPositive: number = 0;
+  rating: Rating = new Rating();
+
 
 
   constructor(private userService: UserService,
    private postService: PostService,
    private authService: AuthService,
    private modalService: NgbModal,
+<<<<<<< HEAD
    private commentService: CommentService
+=======
+   private ratingService: RatingService
+>>>>>>> e13e3aa3adba7dd2747e4fa2ad1b63f75ec81f0a
    ) { }
 
   ngOnInit(): void {
+    this.getLoggedInUser();
     this.loadPosts();
     this.getAllComments();
   }
-
-  // MODAL STUFF //
+  getLoggedInUser() {
+    this.userService.getCurrentUser(this.decoded.split(':')).subscribe(
+      user => {
+        this.loggedInUser = user;
+        console.log(this.loggedInUser);
+      },
+      err => {
+        console.log('Could not get logged in User');
+      }
+    );
+  }
+  
   open(content: any) {
     this.modalService.open(content,
       { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
@@ -65,6 +91,26 @@ export class HomeComponent implements OnInit {
     this.postService.index().subscribe(
       posts => {
         this.posts = posts;
+        this.posts.forEach(post => {
+          this.ratingService.ratingByPostId(post.id).subscribe(
+            data => {
+              this.ratings = data;
+              this.ratingTotal = this.ratings.length;
+              console.log('rating updated');
+              this.ratings.forEach(rating => {
+                if (rating.rating === true) {
+                this.ratingPositive++; }
+                post.rating = this.ratingPositive/this.ratingTotal;
+                console.log(post.rating);
+                console.log(this.ratingTotal);
+                console.log(this.ratingPositive);
+              });
+            },
+            err => {
+              console.log(err);
+            }
+          );
+        });
       },
       noPosts => {
         console.error('PostListComponenet.loadPosts: error retrieving posts list')
@@ -73,14 +119,64 @@ export class HomeComponent implements OnInit {
   }
 
   like(post: Post) {
-
+    if(this.loggedInUser && this.rating){
+      this.rating.rating = true;
+      this.rating.user = this.loggedInUser;
+      this.rating.post = post;
+      console.log(this.rating.rating);
+      console.log(this.rating.user);
+      console.log(this.rating.post);
+      
+      this.ratingService.create(this.rating).subscribe(
+        update => {
+          console.log('rating created')
+        },
+        err => {
+          console.log(err);
+        }
+      );
+    }
   }
 
-  getLoggedInUser() {
+
+  // getRating(post: Post) {
+  //   if(this.loggedInUser && this.ratings){
+  //     this.ratingService.ratingByPostId(post.id).subscribe(
+  //       data => {
+  //         this.ratings = data;
+  //         console.log('rating updated');
+  //         this.ratings.forEach(rating => {
+  //           if (rating.rating === true) {
+  //           this.ratingPositive++; }
+  //         });
+  //       },
+  //       err => {
+  //         console.log(err);
+  //       }
+  //     );
+  //   }
+  // }
+
+
+
+  setPost(post: Post) {
+    this.post = post;
+  }
+
+  follow(followedUser: User) {
     this.userService.getCurrentUser(this.decoded.split(':')).subscribe(
       user => {
         this.loggedInUser = user;
-        console.log(user);
+        this.loggedInUser.following.push(followedUser);
+        this.userService.update(this.loggedInUser).subscribe(
+          update => {
+            console.log('Follow successful');
+            this.getLoggedInUser();
+          },
+          err => {
+            console.log('Error following user');
+          }
+        );
       },
       err => {
         console.log('Could not get logged in User');
@@ -88,23 +184,36 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  setPost(post: Post) {
-    this.post = post;
-  }
-
-  follow(followedUser: User) {
-    this.getLoggedInUser();
-    this.loggedInUser.following.push(followedUser)
-    this.userService.update(this.loggedInUser).subscribe(
-      update => {
-        console.log('Follow successful');
-      },
-      err => {
-        console.log('Error following user');
+  following(user: User) {
+    if(this.loggedInUser){
+      for(let i = 0; i < this.loggedInUser.following.length; i++) {
+        if(this.loggedInUser.following[i].username === user.username){
+          return true;
+        }
       }
-    );
+    } return false;
   }
 
+  unfollow(user: User) {
+    if(this.loggedInUser){
+      for(let i = 0; i < this.loggedInUser.following.length; i++) {
+        if(this.loggedInUser.following[i].username === user.username){
+          this.loggedInUser.following.splice(i, 1);
+        }
+      }
+      this.userService.update(this.loggedInUser).subscribe(
+        update => {
+          this.getLoggedInUser();
+          console.log('unfollow successful')
+        },
+        err => {
+          console.log(err);
+        }
+      );
+    }
+  }
+
+<<<<<<< HEAD
   getAllComments() {
     this.commentService.allComments().subscribe(
       data => {
@@ -126,6 +235,9 @@ export class HomeComponent implements OnInit {
     }
     console.log(this.postComments);
   }
+=======
+
+>>>>>>> e13e3aa3adba7dd2747e4fa2ad1b63f75ec81f0a
 
 }
 

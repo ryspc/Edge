@@ -11,11 +11,11 @@ public interface SongService{
 	
 	public Song show(String username, int songId);
 	
-	public Song create(String username, Song song);
+	public Song create(Song song);
 	
-	public Song update(String username, int songId, Song song);
+	public Song update(int songId, Song song);
 	
-	public boolean destroy(String username, int songId);
+	public boolean destroy(int songId);
 	
 	List<Song> getSongByKeyword(String keyword);
 	

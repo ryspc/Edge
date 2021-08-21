@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Genre {
 	
@@ -19,6 +21,7 @@ public class Genre {
 	private int id;
 	@Column(name="genre_name")
 	private String name;
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name="song_genre",
 	joinColumns=@JoinColumn(name="genre_id"),

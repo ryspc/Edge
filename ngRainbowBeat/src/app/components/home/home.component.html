@@ -5,13 +5,14 @@
                 <mat-card-header>
                     <div mat-card-avatar class="avatar mat-elevation-z8" style="background-image: url({{post.user.imageUrl}})"></div>
                     <mat-card-title class="name">
-                        <span>{{post.user.username}}</span><span class="bullet">&nbsp;&#8226;&nbsp;</span><span class="follow" (click)="follow(post.user)">Follow</span>
+                        <span>{{post.user.username}}</span><span class="bullet">&nbsp;&#8226;&nbsp;</span><span *ngIf="!following(post.user)" class="follow" (click)="follow(post.user)">Follow</span>
+                        <span *ngIf="following(post.user)" class="follow" (click)="unfollow(post.user)">Unfollow</span>
                     </mat-card-title>
                     <mat-card-subtitle>{{post.createdAt | dateAgo}}</mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content (click)="setPost(post);open(content);">
                     <p>
-                        {{post.content}}
+                        {{post.content}} {{post.rating}}
                     </p>
                 </mat-card-content>
                 <img mat-card-image src="{{post.song.imageURL}}">
@@ -28,39 +29,39 @@
 
 
 <ng-template #content let-modal>
-  <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">
-          Post Details
-      </h4>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">
+            Post Details
+        </h4>
 
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
 
           <span aria-hidden="true">
               ×
           </span>
       </button>
-  </div>
-  <div *ngIf="post" class="modal-body modal-content">
-    <div class="info d-flex">
-      <h1>{{post.title}}</h1>
     </div>
-    <div class="info d-flex">
-      <h6>{{post.createdAt}}</h6>
+    <div *ngIf="post" class="modal-body modal-content">
+        <div class="info d-flex">
+            <h1>{{post.title}}</h1>
+        </div>
+        <div class="info d-flex">
+            <h6>{{post.createdAt}}</h6>
+        </div>
+        <div class="info d-flex">
+            <p>{{post.content}}</p>
+        </div>
+        <div class="info d-flex">
+            <p>Song Title: {{post.song.title}}</p>
+        </div>
+        <div class="info d-flex">
+            <p>By: {{post.song.artist}}&nbsp;&nbsp;&nbsp;&nbsp;Ablum: {{post.song.album}}</p>
+        </div>
+        <div class="modal-footer">
+            <img class="footerPic" src={{post.user.imageUrl}} alt="Profile Image">
+            <h3>&nbsp;&nbsp;{{post.user.username}}</h3>
+        </div>
     </div>
-    <div class="info d-flex">
-      <p>{{post.content}}</p>
-    </div>
-    <div class="info d-flex">
-      <p>Song Title: {{post.song.title}}</p>
-    </div>
-    <div class="info d-flex">
-      <p>By: {{post.song.artist}}&nbsp;&nbsp;&nbsp;&nbsp;Ablum: {{post.song.album}}</p>
-    </div>
-    <div class="modal-footer">
-      <img class="footerPic" src={{post.user.imageUrl}} alt="Profile Image">
-      <h3>&nbsp;&nbsp;{{post.user.username}}</h3>
-    </div>
-  </div>
 </ng-template>
 
 
@@ -81,14 +82,5 @@
     <div class="info d-flex">
       <h1>{{comment.user.username}}</h1>
     </div>
-    <div class="info d-flex">
-      <h6>{{comment.content}}</h6>
-    </div>
-    <div class="info d-flex">
-      <hr>
-    </div>
   </div>
-    <div class="modal-footer">
-      <!-- Add Form -->
-    </div>
 </ng-template>
