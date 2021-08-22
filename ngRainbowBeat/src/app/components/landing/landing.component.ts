@@ -58,7 +58,7 @@ export class LandingComponent implements OnInit {
   login(user: User) {
     this.auth.login(user.username, user.password).subscribe(
       loggedIn => {
-        this.router.navigateByUrl("/profile") //TODO: Update url navigation
+        this.router.navigateByUrl("/home") //TODO: Update url navigation
       },
       fail => {
         console.log("Login Failed");
@@ -78,7 +78,7 @@ export class LandingComponent implements OnInit {
       user => {
         this.auth.login(newUser.username, newUser.password).subscribe(
           loggedIn => {
-            this.router.navigateByUrl("/profile"); //TODO: Update url navigation
+            this.router.navigateByUrl("/home"); //TODO: Update url navigation
             console.log("User is logged in");
           },
           failed => {
