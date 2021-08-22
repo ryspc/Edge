@@ -33,4 +33,16 @@ export class SongService {
       )
     )
   }
+
+  public update(s:Song){
+    return this.http.put<Song>(this.url + '/' + s.id, s).pipe(
+      catchError((err: any) => {
+        console.error(err);
+        return throwError(
+          'error creating post' + err
+        )
+      }
+    )
+    )
+  }
 }
