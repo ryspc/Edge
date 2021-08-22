@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { Comment } from '../models/comment';
 import { PostComment } from '../models/post-comment';
 
 @Injectable({
@@ -20,6 +21,15 @@ export class CommentService {
       'Content-type' : 'application/json'
     }
   };
+
+  public allComments(){
+    return this.http.get<Comment[]>(this.url).pipe(
+      catchError((err: any) => {
+        console.log("CommentService.allComments(): Error retrieving comment list");
+        return throwError(err);
+      })
+    );
+  }
 
   public commentsByUsername(username: string){
     return this.http.get<PostComment[]>(this.url + '/user/' + username, this.httpOptions).pipe(
@@ -50,4 +60,14 @@ export class CommentService {
       })
     );
   }
+
+  public create(comment: PostComment) {
+    return this.http.post<PostComment>(this.url, comment, this.httpOptions).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Error creating new comment')
+      })
+    );
+  }
+
 }

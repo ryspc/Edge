@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Comment } from 'src/app/models/comment';
 import { Post } from 'src/app/models/post';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
+import { CommentService } from 'src/app/services/comment.service';
 import { PostService } from 'src/app/services/post.service';
 import { UserService } from 'src/app/services/user.service';
 import { RatingService } from 'src/app/services/rating.service';
@@ -20,7 +22,9 @@ export class HomeComponent implements OnInit {
   post: Post | null = null;
   followedUser : User | null = null;
   likedPost: Post | null = null;
-  loggedInUser: User | null = null;
+  loggedInUser = new User;
+  comments: Comment[] = [];
+  postComments: Comment[] = [];
   public encoded = this.authService.getCredentials();
   public decoded = atob((this.encoded ?? 'null'));
   closeResult = '';
@@ -28,6 +32,7 @@ export class HomeComponent implements OnInit {
   ratingTotal: number = 0;
   ratingPositive: number = 0;
   rating: Rating = new Rating();
+  newComment: Comment = new Comment();
 
 
 
@@ -35,12 +40,14 @@ export class HomeComponent implements OnInit {
    private postService: PostService,
    private authService: AuthService,
    private modalService: NgbModal,
+   private commentService: CommentService,
    private ratingService: RatingService
    ) { }
 
   ngOnInit(): void {
     this.getLoggedInUser();
     this.loadPosts();
+    this.getAllComments();
   }
   getLoggedInUser() {
     this.userService.getCurrentUser(this.decoded.split(':')).subscribe(
@@ -53,7 +60,7 @@ export class HomeComponent implements OnInit {
       }
     );
   }
-  
+
   open(content: any) {
     this.modalService.open(content,
       { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
@@ -113,7 +120,7 @@ export class HomeComponent implements OnInit {
       console.log(this.rating.rating);
       console.log(this.rating.user);
       console.log(this.rating.post);
-      
+
       this.ratingService.create(this.rating).subscribe(
         update => {
           console.log('rating created')
@@ -200,7 +207,53 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  getAllComments() {
+    this.commentService.allComments().subscribe(
+      data => {
+        this.comments = data;
+        console.log(this.comments);
 
+      },
+      err => {
+        console.log("Error in commentService with getting all comments");
+      }
+    );
+  }
+
+  getCommentsForPost(post: Post) {
+    // this.loadPosts();
+    this.getAllComments();
+    for(let i = 0; i < this.comments.length; i++) {
+      if(this.comments[i].post.id === post.id){
+        this.postComments.push(this.comments[i]);
+      }
+    }
+    console.log(this.postComments);
+  }
+
+  addComment(comment: Comment) {
+    console.log(comment);
+    comment.user = this.loggedInUser;
+    if(this.post) {
+      comment.post = this.post;
+    }
+
+    this.commentService.create(comment).subscribe(
+      data => {
+        console.log("Comment creation successful");
+        if(this.post){
+          this.getCommentsForPost(this.post);
+          console.log("test");
+        }
+        this.postComments.push(data);
+      },
+      err => {
+        console.log("Error creating new Comment");
+      }
+    );
+    // this.post = null;
+    // this.postComments = [];
+  }
 
 }
 
