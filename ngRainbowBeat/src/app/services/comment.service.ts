@@ -60,4 +60,14 @@ export class CommentService {
       })
     );
   }
+
+  public create(comment: PostComment) {
+    return this.http.post<PostComment>(this.url, comment, this.httpOptions).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Error creating new comment')
+      })
+    );
+  }
+
 }

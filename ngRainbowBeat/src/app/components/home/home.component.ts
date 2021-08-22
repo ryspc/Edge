@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit {
   ratingTotal: number = 0;
   ratingPositive: number = 0;
   rating: Rating = new Rating();
+  newComment: Comment = new Comment();
 
 
 
@@ -220,12 +221,38 @@ export class HomeComponent implements OnInit {
   }
 
   getCommentsForPost(post: Post) {
+    // this.loadPosts();
+    this.getAllComments();
     for(let i = 0; i < this.comments.length; i++) {
       if(this.comments[i].post.id === post.id){
         this.postComments.push(this.comments[i]);
       }
     }
     console.log(this.postComments);
+  }
+
+  addComment(comment: Comment) {
+    console.log(comment);
+    comment.user = this.loggedInUser;
+    if(this.post) {
+      comment.post = this.post;
+    }
+
+    this.commentService.create(comment).subscribe(
+      data => {
+        console.log("Comment creation successful");
+        if(this.post){
+          this.getCommentsForPost(this.post);
+          console.log("test");
+        }
+        this.postComments.push(data);
+      },
+      err => {
+        console.log("Error creating new Comment");
+      }
+    );
+    // this.post = null;
+    // this.postComments = [];
   }
 
 }
