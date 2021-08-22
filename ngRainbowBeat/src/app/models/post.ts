@@ -1,5 +1,6 @@
 import { User } from "./user";
 import { Song } from "./song";
+import { PostComment } from "./post-comment";
 
 export class Post {
 
@@ -26,7 +27,7 @@ export class Post {
     user: User = new User,
     song: Song = new Song,
     isEnabled: boolean = true,
-    rating: number = 0
+    rating: number = 0,
   ){
     this.id = id;
     this.content = content;

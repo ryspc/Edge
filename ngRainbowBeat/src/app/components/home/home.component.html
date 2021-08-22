@@ -12,14 +12,14 @@
                 </mat-card-header>
                 <mat-card-content (click)="setPost(post);open(content);">
                     <p>
-                        {{post.content}} {{post.rating}}
+                      {{post.content}} {{post.rating}}
                     </p>
                 </mat-card-content>
                 <img mat-card-image src="{{post.song.imageURL}}">
                 <mat-divider></mat-divider>
                 <mat-card-actions style="text-align: center;">
-                    <button mat-button (click)="like(post)"><mat-icon>thumb_up</mat-icon></button>
-                    <button mat-button><mat-icon>chat</mat-icon></button>
+                    <button mat-button onclick="like(post)"><mat-icon>thumb_up</mat-icon></button>
+                    <button mat-button (click)="setPost(post);getCommentsForPost(post);open(comment);"><mat-icon>chat</mat-icon></button>
                     <button mat-button><mat-icon>share</mat-icon></button>
                 </mat-card-actions>
             </mat-card>
@@ -62,24 +62,39 @@
             <h3>&nbsp;&nbsp;{{post.user.username}}</h3>
         </div>
     </div>
-    <!-- <form>
-      <div class="modal-body modal-content">
-          <div class="info d-flex">
-              <label for="title" class="form-label"> Title </label> <input class="form-control me-2" type="text" name="title" [(ngModel)]="newPost.title" />
-          </div>
-          <div class="info d-flex">
-            <label for="content" class="form-label"> Content </label>
-            <textarea class="form-control me-2" rows="2" name="content" [(ngModel)]="newPost.content"></textarea>
-        </div>
-          <div class="info d-flex">
-            <label for="song" class="form-label"> Song URL </label>
-            <textarea class="form-control me-2" rows="2" name="song" [(ngModel)]="newPost.song"></textarea>
-        </div>
+</ng-template>
+
+
+<ng-template #comment let-modal>
+  <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">
+          Add Comment
+      </h4>
+
+      <button type="button" class="close" aria-label="Close" (click)="postComments = [];modal.dismiss('Cross click');">
+
+          <span aria-hidden="true">
+              ×
+          </span>
+      </button>
+  </div>
+  <div *ngFor="let comment of postComments">
+    <div class="modal-body modal-content">
+      <div class="info d-flex">
+        <h2><span><img class="commentPic" src={{comment.user.imageUrl}} alt="Profile Image"></span>{{comment.user.username}}</h2>
+      </div>
+      <div class="info d-flex">
+        <p>{{comment.content}}</p>
+      </div>
+      <div><hr></div>
     </div>
+  </div>
+  <form *ngIf="post">
     <div class="modal-footer">
-        <button class="btn btn-outline-light pull-right" (click)="modal.close()" id="btn3" type="submit">
-            Close&nbsp;&nbsp;<i class="fa fa-download"></i>
-        </button>
+      <!-- <input type="hidden" [value]="loggedInUser" class="form-control me-2" [(ngModel)]="newComment.user"> -->
+      <!-- <input type="hidden" [value]="post" class="form-control me-2" [(ngModel)]="newComment.post"> -->
+      <textarea class="form-control me-2" name="addComment" cols="30" rows="2" [(ngModel)]="newComment.content"></textarea>
+      <button class="btn btn-outline-success pull-right" (click)="addComment(newComment)">Add Comment</button>
     </div>
-</form> -->
+  </form>
 </ng-template>

@@ -15,8 +15,8 @@ export class PostComment {
   content: string = '',
   createdAt: Date = new Date(),
   updatedAt: Date = new Date(),
-  user: User = new User,
-  post: Post = new Post,
+  user: User = new User(),
+  post: Post = new Post(),
   isEnabled: boolean = true,
   ){
     this.isEnabled = isEnabled;
