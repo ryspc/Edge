@@ -6,6 +6,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { CommentService } from 'src/app/services/comment.service';
 import { PostService } from 'src/app/services/post.service';
 import { UserService } from 'src/app/services/user.service';
+import { Genre } from 'src/app/models/genre';
+import { SongService } from 'src/app/services/song.service';
 
 @Component({
   selector: 'app-profile',
@@ -29,10 +31,12 @@ export class ProfileComponent implements OnInit {
   enabledPosts: Post[] = [];
   enabledComments: Comment [] = [];
 
-  constructor(private userService: UserService, private postService: PostService, private authService: AuthService, private commentService: CommentService) { }
+  constructor(private userService: UserService, private postService: PostService, private authService: AuthService, private commentService: CommentService, private songService: SongService) { }
 
   encoded = this.authService.getCredentials();
   decoded = atob((this.encoded ?? 'null'));
+
+  genres: Genre [] = [];
 
   ngOnInit(): void {
     this.loadPostsByUser();
@@ -114,16 +118,21 @@ setEditPost(): void{
   }
 
   updatePost(p: Post){
-    this.postService.update(p).subscribe(
+    this.songService.update(p.song).subscribe(
       data => {
-        this.loadPostsByUser();
-      },
-      err =>{
-        console.log(err);
-        console.log("error updating posts from service");
+        p.song = data;
+        this.postService.update(p).subscribe(
+          data => {
+            this.loadPostsByUser();
+            this.editPost = null;
+          },
+          err =>{
+            console.log(err);
+            console.log("error updating posts from service");
+          }
+        )
       }
     )
-    this.editPost = null;
     this.selected = null;
     // this.todos = this.todoService.index();
 }

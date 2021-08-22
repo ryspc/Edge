@@ -86,7 +86,59 @@
         name="content"
         [(ngModel)]="editPost.content"
       />
-
+      <label class="editLabel" for="songTitle">Song Title:</label>
+      <input
+        type="text"
+        class="form-control addPostForm"
+        name="songTitle"
+        [(ngModel)]="editPost.song.title"
+      />
+      <label class="editLabel" for="songArtist">Song Artist:</label>
+      <input
+        type="text"
+        class="form-control addPostForm"
+        name="songArtist"
+        [(ngModel)]="editPost.song.artist"
+      />
+      <label class="editLabel" for="songAlbum">Song Album:</label>
+      <input
+        type="text"
+        class="form-control addPostForm"
+        name="songAlbum"
+        [(ngModel)]="editPost.song.album"
+      />
+      <label class="editLabel" for="songReleaseDate">Release Date:</label>
+      <input
+        type="date"
+        class="form-control addPostForm"
+        name="songReleaseDate"
+        [(ngModel)]="editPost.song.releaseDate"
+      />
+      <label class="editLabel" for="songLength">Song Length:</label>
+      <input
+        type="number"
+        class="form-control addPostForm"
+        name="songLength"
+        [(ngModel)]="editPost.song.songLength"
+      />
+      <!-- <label class="editLabel" for="songLength">Genre:</label>
+      <select name = "dropdown" [(ngModel)]="editPost.song.genres">
+        <option *ngFor="let genre of genres" [value]="genre.id">{{genre.name}}</option>
+      </select> -->
+      <label class="editLabel" for="songURL">Song URL:</label>
+      <input
+        type="number"
+        class="form-control addPostForm"
+        name="songURL"
+        [(ngModel)]="editPost.song.songURL"
+      />
+      <label class="editLabel" for="imageURL">Image URL:</label>
+      <input
+        type="number"
+        class="form-control addPostForm"
+        name="imageURL"
+        [(ngModel)]="editPost.song.imageURL"
+      />
 
       <input
         type="submit"
@@ -175,3 +227,5 @@
     />
   </div>
 </form>
+
+
