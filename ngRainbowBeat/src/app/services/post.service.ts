@@ -110,10 +110,18 @@ export class PostService {
   public postsByKeyword(keyword: string){
     return this.http.get<Post[]>(this.url + '/search/' + keyword, this.httpOptions).pipe(
       catchError((err: any) => {
-        console.log('PostService.postByUsername() err retrieving post list');
+        console.log('PostService.postByKeyword() err retrieving post list');
         return throwError(err);
       })
     )
   }
 
+  public postsByGenre(genre: string){
+    return this.http.get<Post[]>(this.url + '/genre/' + genre, this.httpOptions).pipe(
+      catchError((err: any) => {
+        console.log('PostService.postByGenre() err retrieving post list');
+        return throwError(err);
+      })
+    )
+  }
 }

@@ -16,15 +16,17 @@ export class RatingService {
   url = environment.baseUrl + 'api/rating';
   constructor(private http: HttpClient, private auth: AuthService) { }
 
-  getHttpOptions() {
+  getHttpOptions():object {
     const credentials = this.auth.getCredentials();
-    const httpOptions = {
-      headers: new HttpHeaders ({
+    const httpOptions =  {
+      headers: new HttpHeaders( {
         'Content-type': 'application/json',
         'X-Requested-With': 'XMLHttpRequest',
-        'Authorization': `Basic ${credentials}`
-      }),
-    };
+    })
+  }
+  if (credentials) {
+    httpOptions.headers = httpOptions.headers.set('authorization', `Basic ${credentials}`);
+  }
      return httpOptions;
   }
 

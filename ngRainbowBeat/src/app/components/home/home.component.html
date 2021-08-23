@@ -1,61 +1,66 @@
 <div class="content">
-  <div fxLayout="row wrap" fxLayoutGap="16px grid" *ngIf="searchResult == undefined || searchResult == null">
-      <div fxFlex.lg="25%" fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let post of posts">
-        <div *ngIf="post.isEnabled">
-          <mat-card class="mat-elevation-z4">
-              <mat-card-header>
-                  <div mat-card-avatar class="avatar mat-elevation-z8" style="background-image: url({{post.user.imageUrl}})"></div>
-                  <mat-card-title class="name">
-                      <span>{{post.user.username}}</span><span class="bullet">&nbsp;&#8226;&nbsp;</span><span *ngIf="!following(post.user)" class="follow" (click)="follow(post.user)">Follow</span>
-                      <span *ngIf="following(post.user)" class="follow" (click)="unfollow(post.user)">Unfollow</span>
-                  </mat-card-title>
-                  <mat-card-subtitle>{{post.createdAt | dateAgo}}</mat-card-subtitle>
-              </mat-card-header>
-              <mat-card-content (click)="setPost(post);open(content);">
-                  <p>
-                    {{post.content}} {{post.rating}}
-                  </p>
-              </mat-card-content>
-              <img mat-card-image src="{{post.song.imageURL}}">
-              <mat-divider></mat-divider>
-              <mat-card-actions style="text-align: center;">
-                  <button mat-button onclick="like(post)"><mat-icon>thumb_up</mat-icon></button>
-                  <button mat-button (click)="setPost(post);getCommentsForPost(post);open(comment);"><mat-icon>chat</mat-icon></button>
-                  <button mat-button><mat-icon>share</mat-icon></button>
-              </mat-card-actions>
-          </mat-card>
-        </div>
-      </div>
-  </div>
-  <div fxLayout="row wrap" fxLayoutGap="16px grid" *ngIf="searchResult !== undefined && searchResult !== null">
-    <div fxFlex.lg="25%" fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let post of searchResult">
-      <div *ngIf="post.isEnabled">
-        <mat-card class="mat-elevation-z4">
-            <mat-card-header>
-                <div mat-card-avatar class="avatar mat-elevation-z8" style="background-image: url({{post.user.imageUrl}})"></div>
-                <mat-card-title class="name">
-                    <span>{{post.user.username}}</span><span class="bullet">&nbsp;&#8226;&nbsp;</span><span *ngIf="!following(post.user)" class="follow" (click)="follow(post.user)">Follow</span>
-                    <span *ngIf="following(post.user)" class="follow" (click)="unfollow(post.user)">Unfollow</span>
-                </mat-card-title>
-                <mat-card-subtitle>{{post.createdAt | dateAgo}}</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content (click)="setPost(post);open(content);">
-                <p>
-                  {{post.content}} {{post.rating}}
-                </p>
-            </mat-card-content>
-            <img mat-card-image src="{{post.song.imageURL}}">
-            <mat-divider></mat-divider>
-            <mat-card-actions style="text-align: center;">
-                <button mat-button onclick="like(post)"><mat-icon>thumb_up</mat-icon></button>
-                <button mat-button (click)="setPost(post);getCommentsForPost(post);open(comment);"><mat-icon>chat</mat-icon></button>
-                <button mat-button><mat-icon>share</mat-icon></button>
-            </mat-card-actions>
-        </mat-card>
-      </div>
-    </div>
-</div>
+    <div fxLayout="row wrap" fxLayoutGap="16px grid" *ngIf="searchResult == undefined || searchResult == null">
+        <div fxFlex.lg="25%" fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let post of posts">
+            <div *ngIf="post.isEnabled">
+                <mat-card class="mat-elevation-z4">
+                    <mat-card-header>
+                        <div mat-card-avatar class="avatar mat-elevation-z8" style="background-image: url({{post.user.imageUrl}})"></div>
+                        <mat-card-title class="name">
+                            <span>{{post.user.username}}</span><span class="bullet">&nbsp;&#8226;&nbsp;</span><span *ngIf="!following(post.user)" class="follow" (click)="follow(post.user)">Follow</span>
+                            <span *ngIf="following(post.user)" class="follow" (click)="unfollow(post.user)">Unfollow</span>
+                        </mat-card-title>
+                        <mat-card-subtitle>{{post.createdAt | dateAgo}}</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content (click)="setPost(post);open(content);">
+                        <p>
+                            {{post.content}}
+                        </p>
+                    </mat-card-content>
+                    <img mat-card-image src="{{post.song.imageURL}}">
+                    <mat-divider></mat-divider>
 
+
+                    <mat-card-actions style="text-align: center;">
+                        <button mat-button (click)="like(post)"><mat-icon>arrow_upward</mat-icon></button>
+                        <button mat-button (click)="like(post)"><mat-icon>arrow_downward</mat-icon></button> {{post.ratingTotal}}
+                        <button mat-button (click)="setPost(post);getCommentsForPost(post);open(comment);"><mat-icon>chat</mat-icon></button>
+                        <button mat-button><mat-icon>share</mat-icon></button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    <div fxLayout="row wrap" fxLayoutGap="16px grid" *ngIf="searchResult !== undefined && searchResult !== null">
+      <div *ngIf="searchResult.length === 0">
+        <h2>No posts found for your requested search</h2>
+      </div>
+        <div fxFlex.lg="25%" fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let post of searchResult">
+            <div *ngIf="post.isEnabled">
+                <mat-card class="mat-elevation-z4">
+                    <mat-card-header>
+                        <div mat-card-avatar class="avatar mat-elevation-z8" style="background-image: url({{post.user.imageUrl}})"></div>
+                        <mat-card-title class="name">
+                            <span>{{post.user.username}}</span><span class="bullet">&nbsp;&#8226;&nbsp;</span><span *ngIf="!following(post.user)" class="follow" (click)="follow(post.user)">Follow</span>
+                            <span *ngIf="following(post.user)" class="follow" (click)="unfollow(post.user)">Unfollow</span>
+                        </mat-card-title>
+                        <mat-card-subtitle>{{post.createdAt | dateAgo}}</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content (click)="setPost(post);open(content);">
+                        <p>
+                            {{post.content}} {{post.ratings}}
+                        </p>
+                    </mat-card-content>
+                    <img mat-card-image src="{{post.song.imageURL}}">
+                    <mat-divider></mat-divider>
+                    <mat-card-actions style="text-align: center;">
+                        <button mat-button (click)="like(post)"><mat-icon>thumb_up</mat-icon></button>
+                        <button mat-button (click)="setPost(post);getCommentsForPost(post);open(comment);"><mat-icon>chat</mat-icon></button>
+                        <button mat-button><mat-icon>share</mat-icon></button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+    </div>
 </div>
 
 
@@ -112,8 +117,8 @@
     <div *ngFor="let comment of postComments">
         <div class="modal-body modal-content">
             <div class="info d-flex">
-              <h2><span><img class="commentPic" src={{comment.user.imageUrl}} alt="Profile Image"></span>{{comment.user.username}}</h2>
-              <h5 class="subtitle">{{comment.createdAt | dateAgo}}</h5>
+                <h2><span><img class="commentPic" src={{comment.user.imageUrl}} alt="Profile Image"></span>{{comment.user.username}}</h2>
+                <h5 class="subtitle">{{comment.createdAt | dateAgo}}</h5>
             </div>
             <!-- <div class="info d-flex">
             </div> -->
@@ -133,9 +138,5 @@
             <button class="btn btn-outline-success pull-right" (click)="addComment(newComment)">Add Comment</button>
         </div>
     </form>
+
 </ng-template>
-
-<!-- <div id="giraffe">
-  {{searchResult | json}}
-
-</div> -->

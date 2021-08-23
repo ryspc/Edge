@@ -36,8 +36,6 @@ export class HomeComponent implements OnInit {
   @Input() searchKeyword: string = '';
   @Input() searchResult: Post[] | null | undefined;
 
-
-
   constructor(private userService: UserService,
    private postService: PostService,
    private authService: AuthService,
@@ -103,17 +101,21 @@ export class HomeComponent implements OnInit {
         this.posts.forEach(post => {
           this.ratingService.ratingByPostId(post.id).subscribe(
             data => {
-              this.ratings = data;
-              this.ratingTotal = this.ratings.length;
-              console.log('rating updated');
-              this.ratings.forEach(rating => {
-                if (rating.rating === true) {
-                this.ratingPositive++; }
-                post.rating = this.ratingPositive/this.ratingTotal;
-                console.log(post.rating);
-                console.log(this.ratingTotal);
-                console.log(this.ratingPositive);
-              });
+               post.ratings = data;
+               post.ratingTotal = post.ratings.length;
+               console.log(post.id);
+               console.log(this.ratings.length);
+               
+              // this.ratingTotal = this.ratings.length;
+              // console.log('rating updated');
+              // this.ratings.forEach(rating => {
+              //   if (rating.rating === true) {
+              //   this.ratingPositive++; }
+              //   post.rating = this.ratingPositive/this.ratingTotal;
+              //   console.log(post.rating);
+              //   console.log(this.ratingTotal);
+              //   console.log(this.ratingPositive);
+              // });
             },
             err => {
               console.log(err);
@@ -127,47 +129,26 @@ export class HomeComponent implements OnInit {
     )
   }
 
-  // like(post: Post) {
-  //   if(this.loggedInUser && this.rating){
-  //     this.rating.rating = true;
-  //     this.rating.user = this.loggedInUser;
-  //     this.rating.post = post;
-  //     console.log(this.rating.rating);
-  //     console.log(this.rating.user);
-  //     console.log(this.rating.post);
+  like(post: Post) {
+    if(this.loggedInUser && this.rating){
+      this.rating.rating = true;
+      this.rating.user = this.loggedInUser;
+      this.rating.post = post;
+      console.log(this.rating.rating);
+      console.log(this.rating.user);
+      console.log(this.rating.post);
 
-  //     this.ratingService.create(this.rating).subscribe(
-  //       update => {
-  //         console.log('rating created')
-  //         this.loadPosts();
-  //       },
-  //       err => {
-  //         console.log(err);
-  //       }
-  //     );
-  //   }
-  // }
-
-
-  // getRating(post: Post) {
-  //   if(this.loggedInUser && this.ratings){
-  //     this.ratingService.ratingByPostId(post.id).subscribe(
-  //       data => {
-  //         this.ratings = data;
-  //         console.log('rating updated');
-  //         this.ratings.forEach(rating => {
-  //           if (rating.rating === true) {
-  //           this.ratingPositive++; }
-  //         });
-  //       },
-  //       err => {
-  //         console.log(err);
-  //       }
-  //     );
-  //   }
-  // }
-
-
+      this.ratingService.create(this.rating).subscribe(
+        update => {
+          console.log('rating created')
+          this.loadPosts();
+        },
+        err => {
+          console.log(err);
+        }
+      );
+    }
+  }
 
   setPost(post: Post) {
     this.post = post;
@@ -237,7 +218,6 @@ export class HomeComponent implements OnInit {
   }
 
   getCommentsForPost(post: Post) {
-    // this.loadPosts();
     this.getAllComments();
     for(let i = 0; i < this.comments.length; i++) {
       if(this.comments[i].post.id === post.id){
@@ -267,7 +247,6 @@ export class HomeComponent implements OnInit {
         console.log("Error creating new Comment");
       }
     );
-    // this.post = null;
     this.postComments = [];
     this.newComment = new Comment();
   }
