@@ -104,7 +104,7 @@ export class HomeComponent implements OnInit {
                post.ratings = data;
                console.log(post.id);
                console.log(this.ratings.length);
-               
+
               // this.ratingTotal = this.ratings.length;
               // console.log('rating updated');
               // this.ratings.forEach(rating => {
@@ -129,24 +129,24 @@ export class HomeComponent implements OnInit {
   }
 
   like(post: Post) {
-    if(this.loggedInUser && this.rating){
-      this.rating.rating = true;
-      this.rating.user = this.loggedInUser;
-      this.rating.post = post;
-      console.log(this.rating.rating);
-      console.log(this.rating.user);
-      console.log(this.rating.post);
+  //   if(this.loggedInUser && this.rating){
+  //     this.rating.rating = true;
+  //     this.rating.user = this.loggedInUser;
+  //     this.rating.post = post;
+  //     console.log(this.rating.rating);
+  //     console.log(this.rating.user);
+  //     console.log(this.rating.post);
 
-      this.ratingService.create(this.rating).subscribe(
-        update => {
-          console.log('rating created')
-          this.loadPosts();
-        },
-        err => {
-          console.log(err);
-        }
-      );
-    }
+  //     this.ratingService.create(this.rating).subscribe(
+  //       update => {
+  //         console.log('rating created')
+  //         this.loadPosts();
+  //       },
+  //       err => {
+  //         console.error(err);
+  //       }
+  //     );
+  //   }
   }
 
 
