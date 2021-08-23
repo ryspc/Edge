@@ -44,8 +44,7 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public List<Post> postsByGenre(String genre) {
-		String containsGenre = "%"+genre+"%";
-		return postRepo.findBySong_Genres_NameLike(containsGenre);
+		return postRepo.findBySong_Genres_Name(genre);
 	}
 
 	@Override
