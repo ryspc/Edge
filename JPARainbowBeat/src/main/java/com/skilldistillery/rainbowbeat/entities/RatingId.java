@@ -1,28 +1,31 @@
 package com.skilldistillery.rainbowbeat.entities;
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-@Embeddable
-public class RatingId implements Serializable{
-	private static final long serialVersionUID = 1L;
-	
-	@Column(name="post_id")
-	private int postId;
-	@Column(name="user_id")
-	private int userId;
-	
-	public RatingId() {}
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
-	
-	
+@Embeddable
+public class RatingId implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+//	@LazyCollection(LazyCollectionOption.FALSE)
+	@Column(name = "post_id")
+	private int postId;
+	@Column(name = "user_id")
+	private int userId;
+
+	public RatingId() {
+	}
+
 	public RatingId(int postId, int userId) {
 		super();
 		this.postId = postId;
 		this.userId = userId;
 	}
-
 
 	public int getPostId() {
 		return postId;

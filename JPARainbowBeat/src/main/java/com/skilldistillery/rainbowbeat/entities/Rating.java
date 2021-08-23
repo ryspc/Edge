@@ -3,13 +3,13 @@ package com.skilldistillery.rainbowbeat.entities;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -28,6 +28,7 @@ public class Rating {
 	private User user;
 	@ManyToOne
 	@JsonIgnore
+//	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinColumn(name="post_id")
 	@MapsId(value="postId")
 	private Post post;
@@ -38,6 +39,7 @@ public Rating() {}
 	
 	public Rating(RatingId id, boolean rating, User user, Post post) {
 		super();
+//		this.id = new RatingId(post.getId(),user.getId());
 		this.id = id;
 		this.rating = rating;
 		this.user = user;
