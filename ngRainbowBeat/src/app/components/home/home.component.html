@@ -33,7 +33,6 @@
     <div fxLayout="row wrap" fxLayoutGap="16px grid" *ngIf="searchResult !== undefined && searchResult !== null">
       <div *ngIf="searchResult.length === 0">
         <h2>No posts found for your requested search</h2>
->>>>>>> 40ec0babdcd84191ca735d36db45b671a22ec230
       </div>
         <div fxFlex.lg="25%" fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let post of searchResult">
             <div *ngIf="post.isEnabled">
@@ -66,39 +65,46 @@
 
 
 <ng-template #content let-modal>
-    <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">
-            Post Details
-        </h4>
-
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-
-          <span aria-hidden="true">
-              ×
-          </span>
-      </button>
-    </div>
-    <div *ngIf="post" class="modal-body modal-content">
-        <div class="info d-flex">
-            <h1>{{post.title}}</h1>
-        </div>
-        <div class="info d-flex">
-            <h6>{{post.createdAt}}</h6>
-        </div>
-        <div class="info d-flex">
-            <p>{{post.content}}</p>
-        </div>
-        <div class="info d-flex">
-            <p>Song Title: {{post.song.title}}</p>
-        </div>
-        <div class="info d-flex">
-            <p>By: {{post.song.artist}}&nbsp;&nbsp;&nbsp;&nbsp;Ablum: {{post.song.album}}</p>
-        </div>
-        <div class="modal-footer">
-            <img class="footerPic" src={{post.user.imageUrl}} alt="Profile Image">
-            <h3>&nbsp;&nbsp;{{post.user.username}}</h3>
-        </div>
-    </div>
+  <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">
+          Post Details
+      </h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">
+            ×
+        </span>
+    </button>
+  </div>
+  <div *ngIf="post" class="modal-body modal-content">
+      <div class="info d-flex">
+          <h1>{{post.title}}</h1>
+      </div>
+      <div class="info d-flex">
+          <h6>{{post.createdAt}}</h6>
+      </div>
+      <div class="info d-flex">
+          <p>{{post.content}}</p>
+      </div>
+      <div class="info d-flex">
+          <p>Song Title: {{post.song.title}}</p>
+      </div>
+      <div class="info d-flex">
+          <p>By: {{post.song.artist}}&nbsp;&nbsp;&nbsp;&nbsp;Ablum: {{post.song.album}}</p>
+      </div>
+      <div class="info d-flex">
+        <youtube-player
+          videoId="{{getVideoId(post.song)}}"
+          suggestedQuality="highres"
+          [height]="300"
+          [width]="465"
+          [startSeconds]="0">
+        </youtube-player>
+      </div>
+      <div class="modal-footer">
+          <img class="footerPic" src={{post.user.imageUrl}} alt="Profile Image">
+          <h3>&nbsp;&nbsp;{{post.user.username}}</h3>
+      </div>
+  </div>
 </ng-template>
 
 

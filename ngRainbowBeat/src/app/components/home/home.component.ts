@@ -9,6 +9,7 @@ import { PostService } from 'src/app/services/post.service';
 import { UserService } from 'src/app/services/user.service';
 import { RatingService } from 'src/app/services/rating.service';
 import { Rating } from 'src/app/models/rating';
+import { Song } from 'src/app/models/song';
 
 @Component({
   selector: 'app-home',
@@ -52,10 +53,13 @@ export class HomeComponent implements OnInit {
 
    ngOnChanges(){
     console.log(this.searchResult);
-    this.loadPosts();
+    // this.loadPosts();
    }
 
   ngOnInit(): void {
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.body.appendChild(tag);
     this.getLoggedInUser();
     this.loadPosts();
     this.getAllComments();
@@ -93,20 +97,19 @@ export class HomeComponent implements OnInit {
   }
 
   loadPosts(){
+    this.enabledPosts = [];
     this.postService.index().subscribe(
       posts => {
         this.posts = posts;
+        this.getEnabledPosts();
+        console.log(this.enabledPosts)
         this.posts.forEach(post => {
-          if(post.isEnabled) {
-            this.enabledPosts.push(post);
-          }
           this.ratingService.ratingByPostId(post.id).subscribe(
             data => {
                post.ratings = data;
                post.ratingTotal = post.ratings.length;
-               console.log(post.id);
-               console.log(this.ratings.length);
-
+              //  console.log(post.id);
+              //  console.log(this.ratings.length);
               // this.ratingTotal = this.ratings.length;
               // console.log('rating updated');
               // this.ratings.forEach(rating => {
@@ -258,6 +261,14 @@ export class HomeComponent implements OnInit {
     );
     this.postComments = [];
     this.newComment = new Comment();
+  }
+
+  getVideoId(song: Song): string{
+    const regex = /[^=]*$/g;
+    let songString = song.songURL;
+    let songId = songString.substr(songString.search(regex));
+    console.log(songId);
+    return songId;
   }
 
 }
