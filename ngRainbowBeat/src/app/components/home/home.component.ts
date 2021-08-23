@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Comment } from 'src/app/models/comment';
 import { Post } from 'src/app/models/post';
@@ -33,6 +33,8 @@ export class HomeComponent implements OnInit {
   ratingPositive: number = 0;
   rating: Rating = new Rating();
   newComment: Comment = new Comment();
+  @Input() searchKeyword: string = '';
+  @Input() searchResult: Post[] | null | undefined;
 
 
 
@@ -42,7 +44,15 @@ export class HomeComponent implements OnInit {
    private modalService: NgbModal,
    private commentService: CommentService,
    private ratingService: RatingService
-   ) { }
+   ) {
+    console.log(this.searchResult);
+
+   }
+
+   ngOnChanges(){
+    console.log(this.searchResult);
+    this.loadPosts();
+   }
 
   ngOnInit(): void {
     this.getLoggedInUser();
@@ -117,26 +127,26 @@ export class HomeComponent implements OnInit {
     )
   }
 
-  like(post: Post) {
-    if(this.loggedInUser && this.rating){
-      this.rating.rating = true;
-      this.rating.user = this.loggedInUser;
-      this.rating.post = post;
-      console.log(this.rating.rating);
-      console.log(this.rating.user);
-      console.log(this.rating.post);
+  // like(post: Post) {
+  //   if(this.loggedInUser && this.rating){
+  //     this.rating.rating = true;
+  //     this.rating.user = this.loggedInUser;
+  //     this.rating.post = post;
+  //     console.log(this.rating.rating);
+  //     console.log(this.rating.user);
+  //     console.log(this.rating.post);
 
-      this.ratingService.create(this.rating).subscribe(
-        update => {
-          console.log('rating created')
-          this.loadPosts();
-        },
-        err => {
-          console.log(err);
-        }
-      );
-    }
-  }
+  //     this.ratingService.create(this.rating).subscribe(
+  //       update => {
+  //         console.log('rating created')
+  //         this.loadPosts();
+  //       },
+  //       err => {
+  //         console.log(err);
+  //       }
+  //     );
+  //   }
+  // }
 
 
   // getRating(post: Post) {

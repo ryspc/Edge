@@ -32,6 +32,9 @@ export class SidebarHomeComponent {
   genreName: string = '';
   newSongGenre: Genre = new Genre();
   genres: Genre [] = [];
+  searchResult: Post[] | null = null;
+  public searchInput: string = '';
+
 
   // selectChangeHandler(event: any){
   //   this.genreName = event.target.value;
@@ -178,4 +181,18 @@ export class SidebarHomeComponent {
       console.log("error getting genre object");
   });
 }
+
+postsByKeyword(){
+  // this.searchResult = [];
+  this.postService.postsByKeyword(this.searchInput).subscribe(
+    data => {
+      this.searchResult = data;
+      console.log(this.searchResult);
+    },
+    err => {
+      console.log('Could not retrieve all posts');
+
+    });
+}
+
 }
