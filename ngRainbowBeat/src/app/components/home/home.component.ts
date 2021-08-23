@@ -253,7 +253,8 @@ export class HomeComponent implements OnInit {
       }
     );
     // this.post = null;
-    // this.postComments = [];
+    this.postComments = [];
+    this.newComment = new Comment();
   }
 
 }
