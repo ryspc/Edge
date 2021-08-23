@@ -254,4 +254,60 @@ getVideoId(song: Song): string{
   return songId;
 }
 
+formatPostDateTime(postDateTime: string): string{
+  if(postDateTime == null){
+    return "None";
+  }
+  let dateYear = postDateTime.substr(0, 4);
+  let dateMonth = postDateTime.substr(5, 2);
+  let dateDay = postDateTime.substr(8, 2);
+  let dateHour = postDateTime.substr(11, 2);
+  let dateHourInt = parseInt(dateHour);
+  let pm = false;
+  if(dateHourInt > 12){
+    dateHourInt -= 12;
+    pm = true;
+  }
+  dateHour = dateHourInt.toString()
+  let dateMin = postDateTime.substr(14,2);
+  if(pm == false && dateHourInt === 12){
+    return dateMonth + '/' + dateDay + '/' + dateYear +' at '+ dateHour + ':'+ dateMin +"pm"
+  }
+  else if(pm == true){
+    return dateMonth + '/' + dateDay + '/' + dateYear +' at '+ dateHour + ':'+ dateMin +'pm';
+  }
+  else{
+    return dateMonth + '/' + dateDay + '/' + dateYear +' at '+ dateHour + ':'+ dateMin+'am';
+}
+  }
+
+  formatCommentDateTime(comDateTime: Date): string{
+    let postDateTime = comDateTime.toString();
+    if(postDateTime == null){
+      return "None";
+    }
+    let dateYear = postDateTime.substr(0, 4);
+    let dateMonth = postDateTime.substr(5, 2);
+    let dateDay = postDateTime.substr(8, 2);
+    let dateHour = postDateTime.substr(11, 2);
+    let dateHourInt = parseInt(dateHour);
+    let pm = false;
+    if(dateHourInt > 12){
+      dateHourInt -= 12;
+      pm = true;
+    }
+    dateHour = dateHourInt.toString()
+    let dateMin = postDateTime.substr(14,2);
+    if(pm == false && dateHourInt === 12){
+      return dateMonth + '/' + dateDay + '/' + dateYear +' at '+ dateHour + ':'+ dateMin +"pm"
+    }
+    else if(pm == true){
+      return dateMonth + '/' + dateDay + '/' + dateYear +' at '+ dateHour + ':'+ dateMin +'pm';
+    }
+    else{
+      return dateMonth + '/' + dateDay + '/' + dateYear +' at '+ dateHour + ':'+ dateMin+'am';
+  }
+    }
+
+
 }
