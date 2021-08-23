@@ -13,6 +13,7 @@ import { Song } from 'src/app/models/song';
 import { SongService } from 'src/app/services/song.service';
 import { GenreService } from 'src/app/services/genre.service';
 import { Genre } from 'src/app/models/genre';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-sidebar-home',
@@ -34,6 +35,8 @@ export class SidebarHomeComponent {
   genres: Genre [] = [];
   searchResult: Post[] | null = null;
   public searchInput: string = '';
+  myControl = new FormControl();
+  options: string[] = []
 
 
   // selectChangeHandler(event: any){
@@ -65,6 +68,10 @@ export class SidebarHomeComponent {
       });
       this.getLoggedInUser();
       this.getGenres();
+  }
+
+  ngOnInit() {
+    this.loadPosts();
   }
 
   // MODAL STUFF //
@@ -204,6 +211,22 @@ postsByGenre(genre: string){
       console.log('Could not retrieve all posts');
 
     });
+}
+
+loadPosts(){
+  this.postService.index().subscribe(
+    posts => {
+      posts.forEach(post => {
+        if(post.isEnabled){
+          this.options.push(post.title);
+          this.options.push(post.content);
+        }
+      })
+    },
+    noPosts => {
+      console.error('PostListComponenet.loadPosts: error retrieving posts list')
+    }
+  )
 }
 
 }

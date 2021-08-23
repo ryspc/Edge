@@ -36,6 +36,7 @@ import { HomeComponent } from './components/home/home.component';
 import { DateAgoPipe } from './pipes/date-ago.pipe';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {YouTubePlayerModule} from '@angular/youtube-player';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import {YouTubePlayerModule} from '@angular/youtube-player';
     MatListModule,
     MatDividerModule,
     MatSnackBarModule,
-    YouTubePlayerModule
+    YouTubePlayerModule,
+    MatAutocompleteModule
   ],
   providers: [
     UserService,

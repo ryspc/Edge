@@ -13,8 +13,20 @@
   </button>
   <div class="searchbar">
 
-    <input type="text" [(ngModel)]="searchInput" placeholder="Search for a Post" />
+    <input type="text"
+    [(ngModel)]="searchInput"
+    placeholder="Search for a Post"
+    matInput
+    [formControl]="myControl"
+    [matAutocomplete]="auto"
+    />
     <button (click)="postsByKeyword()">Search</button>
+
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of options" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
 
 
   </div>
