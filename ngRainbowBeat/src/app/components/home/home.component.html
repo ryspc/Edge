@@ -21,7 +21,9 @@
 
 
                     <mat-card-actions style="text-align: center;">
-                        <button mat-button (click)="like(post)"><mat-icon>arrow_upward</mat-icon></button>
+
+                        <!-- <button class= "upArrowRatingGiven" mat-button (click)="like(post)"><mat-icon>arrow_upward</mat-icon></button> -->
+                        <button class= "upArrowNoRating" mat-button (click)="like(post)"><mat-icon>arrow_upward</mat-icon></button>
                         <button mat-button (click)="like(post)"><mat-icon>arrow_downward</mat-icon></button> {{post.ratingTotal}}
                         <button mat-button (click)="setPost(post);getCommentsForPost(post);open(comment);"><mat-icon>chat</mat-icon></button>
                         <button mat-button><mat-icon>share</mat-icon></button>
@@ -33,7 +35,6 @@
     <div fxLayout="row wrap" fxLayoutGap="16px grid" *ngIf="searchResult !== undefined && searchResult !== null">
       <div *ngIf="searchResult.length === 0">
         <h2>No posts found for your requested search</h2>
->>>>>>> 40ec0babdcd84191ca735d36db45b671a22ec230
       </div>
         <div fxFlex.lg="25%" fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let post of searchResult">
             <div *ngIf="post.isEnabled">

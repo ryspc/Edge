@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit {
 
    ngOnChanges(){
     console.log(this.searchResult);
-    this.loadPosts();
+    // this.loadPosts();
    }
 
   ngOnInit(): void {
@@ -142,6 +142,7 @@ export class HomeComponent implements OnInit {
       this.ratingService.create(this.rating).subscribe(
         update => {
           console.log('rating created')
+          this.loadPosts();
         },
         err => {
           console.log(err);
