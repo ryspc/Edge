@@ -282,10 +282,11 @@ formatPostDateTime(postDateTime: string): string{
   }
 
   formatCommentDateTime(comDateTime: Date): string{
-    let postDateTime = comDateTime.toString();
-    if(postDateTime == null){
+
+    if(comDateTime == null){
       return "None";
     }
+    let postDateTime = comDateTime.toString();
     let dateYear = postDateTime.substr(0, 4);
     let dateMonth = postDateTime.substr(5, 2);
     let dateDay = postDateTime.substr(8, 2);

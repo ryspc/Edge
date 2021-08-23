@@ -188,8 +188,14 @@
 <div id="commentDetails" *ngIf="selectedComment && !editComment">
   <h3>Post: {{ selectedComment.post.title }}</h3>
   <p>Content: {{ selectedComment.content }}</p>
-  <p>Date Created: {{ selectedComment.createdAt }}</p>
-  <p>Updated: {{ selectedComment.updatedAt }}</p>
+  <p>Date Created: {{ formatCommentDateTime(selectedComment.createdAt)}}</p>
+  <p>Updated: {{ formatCommentDateTime(selectedComment.updatedAt) }}</p>
+  <p><youtube-player
+    videoId="{{getVideoId(selectedComment.post.song)}}"
+    suggestedQuality="highres"
+    [height]="200"
+    [width]="300"
+    [startSeconds]="0"></youtube-player></p>
 
   <div class="addCommentBtnDiv">
     <button
