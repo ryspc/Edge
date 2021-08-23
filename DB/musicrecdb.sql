@@ -277,10 +277,16 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `musicrecdb`;
-INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (1, 'My Little Pony Theme Song', 'Some Brony', NULL, NULL, 240, '2020-04-20', 'Pony Style', 1);
-INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (2, 'Rainbow Chill Beats', 'Rapper Brony', NULL, NULL, 300, '2020-05-11', 'Pony Time', 1);
-INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (3, 'Pony Death Princess Eternal Savagery', 'Heavy Pony', NULL, NULL, 330, '2020-04-15', 'Iron Pony', 2);
-INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (4, 'Ol Country Pony', 'Big Country Star', NULL, NULL, 240, '2020-03-15', 'Ponies and Tractors', 2);
+INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (1, 'Solar Power', 'Lorde', NULL, 'https://www.youtube.com/watch?v=wvsP_lzh2-8', 192, '2021-08-20', 'Solar Power', 1);
+INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (2, 'The Pressure', 'Nas', NULL, 'https://www.youtube.com/watch?v=qTzKh5ykLU0', 188, '2021-08-06', 'King\'s Disease II', 1);
+INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (3, 'Pressure Machine', 'The Killers', NULL, 'https://www.youtube.com/watch?v=cPy0542LqPA', 309, '2021-08-13', 'Pressure Machine', 2);
+INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (4, 'Monochrome', 'Between the Buried And Me', NULL, 'https://www.youtube.com/watch?v=5iXmfOE2o5Q', 195, '2021-08-20', 'Colors II', 2);
+INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (5, 'Happier Than Ever', 'Billie Eilish', NULL, 'https://www.youtube.com/watch?v=5GJWxDKyk3A', 299, '2021-07-30', 'Happier Than Ever', 2);
+INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (6, 'Last Train Home', 'John Mayer', NULL, 'https://www.youtube.com/watch?v=66Ne5dVDfLM', 187, '2021-07-16', 'Sob Rock', 1);
+INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (7, 'Blue Mesas', 'Leon Bridges', NULL, 'https://www.youtube.com/watch?v=2QjPc81E09A', 196, '2021-07-23', 'Gold-Diggers Sound', 1);
+INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (8, 'Wilshire', 'Tyler, the Creator', NULL, 'https://www.youtube.com/watch?v=LxGVyJLjbiY', 516, '2021-06-25', 'Call Me If You Get Lost', 2);
+INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (9, 'Butterfly 3000', 'King Gizzard and the Lizard Wizard', NULL, 'https://www.youtube.com/watch?v=ArIOjP4pRbM', 172, '2021-06-11', 'Butterfly 3000', 1);
+INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (10, 'Red Room', 'Hiatus Kaiyote', NULL, 'https://www.youtube.com/watch?v=p46Tm9-7i7E', 233, '2021-06-25', 'Mood Valiant', 1);
 
 COMMIT;
 
@@ -290,10 +296,16 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `musicrecdb`;
-INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`, `enabled`) VALUES (1, 'Purple Ponies are the best ponies', 'Fresh Pony Song', ' 2021-08-19T14:00:00', NULL, 1, 1, 1);
-INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`, `enabled`) VALUES (2, 'This song is great', 'Sweet Beats', ' 2021-08-18T14:00:00', NULL, 2, 2, 1);
-INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`, `enabled`) VALUES (3, 'Another great country song', 'The illest pony song ever', ' 2021-08-18T14:00:00', NULL, 2, 4, 1);
-INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`, `enabled`) VALUES (4, 'Very Metal Pony Song', 'So Heavy Brony', '2021-08-18T14:00:00', NULL, 1, 3, 1);
+INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`, `enabled`) VALUES (1, 'YAY I love lorde\'s music', 'Newest Lorde Album', '2021-08-19T14:00:00', NULL, 1, 1, 1);
+INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`, `enabled`) VALUES (2, 'This song has a great beat', 'Nas new album is killer', '2021-08-20T12:35:00', NULL, 1, 2, 1);
+INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`, `enabled`) VALUES (3, '20 years later their music is still my favorite', 'The Killers still got it', '2021-08-20T16:12:00', NULL, 2, 3, 1);
+INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`, `enabled`) VALUES (4, 'This song is so heavy. Love the breakdown.', 'BTBAM new colors', '2021-08-23T15:25:00', NULL, 2, 4, 1);
+INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`, `enabled`) VALUES (5, 'This is my favorite song off the new album.', 'Billes new album is great', '2021-08-22T20:20:00', NULL, 2, 5, 1);
+INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`, `enabled`) VALUES (6, 'This song is great and way chiller than his usual music.', 'Mayer\'s chill new song', '2021-08-23T14:15:00', NULL, 1, 6, 1);
+INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`, `enabled`) VALUES (7, 'Love the added instrumenation on this song.', 'Leon with instruments', '2021-08-20T16:30:00', NULL, 1, 7, 1);
+INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`, `enabled`) VALUES (8, 'Lyrics on this song are fantastic', 'Tylers lyrics', '2021-08-19T19:36:00', NULL, 2, 8, 1);
+INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`, `enabled`) VALUES (9, 'King Gizzard is still weird and great', 'The Lizard Wizard is still King', '2021-08-11T11:42:00', NULL, 1, 9, 1);
+INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`, `enabled`) VALUES (10, 'New Song is better than ever', 'Haitus is over', '2021-08-16T13:12:00', NULL, 1, 10, 1);
 
 COMMIT;
 
@@ -303,9 +315,23 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `musicrecdb`;
-INSERT INTO `genre` (`id`, `genre_name`) VALUES (1, 'Pony Music');
-INSERT INTO `genre` (`id`, `genre_name`) VALUES (2, 'Pony Alt Death Metal');
-INSERT INTO `genre` (`id`, `genre_name`) VALUES (3, 'Conservative Pony Country');
+INSERT INTO `genre` (`id`, `genre_name`) VALUES (1, 'Rock');
+INSERT INTO `genre` (`id`, `genre_name`) VALUES (2, 'Hip-Hop/Rap');
+INSERT INTO `genre` (`id`, `genre_name`) VALUES (3, 'Pop');
+INSERT INTO `genre` (`id`, `genre_name`) VALUES (4, 'Country');
+INSERT INTO `genre` (`id`, `genre_name`) VALUES (5, 'Jazz');
+INSERT INTO `genre` (`id`, `genre_name`) VALUES (6, 'Dance');
+INSERT INTO `genre` (`id`, `genre_name`) VALUES (7, 'House');
+INSERT INTO `genre` (`id`, `genre_name`) VALUES (8, 'Downtempo');
+INSERT INTO `genre` (`id`, `genre_name`) VALUES (9, 'Punk');
+INSERT INTO `genre` (`id`, `genre_name`) VALUES (10, 'Blues');
+INSERT INTO `genre` (`id`, `genre_name`) VALUES (11, 'Classical');
+INSERT INTO `genre` (`id`, `genre_name`) VALUES (12, 'R&B');
+INSERT INTO `genre` (`id`, `genre_name`) VALUES (13, 'Reggae');
+INSERT INTO `genre` (`id`, `genre_name`) VALUES (14, 'Latin');
+INSERT INTO `genre` (`id`, `genre_name`) VALUES (15, 'Indie Pop');
+INSERT INTO `genre` (`id`, `genre_name`) VALUES (16, 'Alternative');
+INSERT INTO `genre` (`id`, `genre_name`) VALUES (17, 'Metal');
 
 COMMIT;
 
@@ -315,9 +341,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `musicrecdb`;
-INSERT INTO `comment` (`id`, `content`, `created_at`, `updated_at`, `user_id`, `post_id`, `enabled`) VALUES (1, 'Ya Definitely A Sick Pony Song', NULL, NULL, 2, 2, 1);
-INSERT INTO `comment` (`id`, `content`, `created_at`, `updated_at`, `user_id`, `post_id`, `enabled`) VALUES (2, 'The Heaviest Pony Breakdown', NULL, NULL, 1, 4, 1);
-INSERT INTO `comment` (`id`, `content`, `created_at`, `updated_at`, `user_id`, `post_id`, `enabled`) VALUES (3, 'No way pink ponies are better', NULL, NULL, 2, 1, 1);
+INSERT INTO `comment` (`id`, `content`, `created_at`, `updated_at`, `user_id`, `post_id`, `enabled`) VALUES (1, 'This is her best song yet', '2021-08-19T14:20:00', NULL, 2, 1, 1);
+INSERT INTO `comment` (`id`, `content`, `created_at`, `updated_at`, `user_id`, `post_id`, `enabled`) VALUES (2, 'Not a big fan of this newest song', '2021-08-20T12:57:00', NULL, 2, 2, 1);
+INSERT INTO `comment` (`id`, `content`, `created_at`, `updated_at`, `user_id`, `post_id`, `enabled`) VALUES (3, 'Its pretty different than their original hits', '2021-08-20T16:55:00', NULL, 1, 3, 1);
+INSERT INTO `comment` (`id`, `content`, `created_at`, `updated_at`, `user_id`, `post_id`, `enabled`) VALUES (4, 'Agree this song is really heavy', '2021-08-23T16:15:00', NULL, 1, 4, 1);
+INSERT INTO `comment` (`id`, `content`, `created_at`, `updated_at`, `user_id`, `post_id`, `enabled`) VALUES (5, 'She keeps getting better and better.', '2021-08-22T20:20:00', NULL, 1, 5, 1);
 
 COMMIT;
 
@@ -337,10 +365,16 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `musicrecdb`;
-INSERT INTO `song_genre` (`song_id`, `genre_id`) VALUES (1, 1);
-INSERT INTO `song_genre` (`song_id`, `genre_id`) VALUES (2, 1);
-INSERT INTO `song_genre` (`song_id`, `genre_id`) VALUES (3, 2);
-INSERT INTO `song_genre` (`song_id`, `genre_id`) VALUES (4, 3);
+INSERT INTO `song_genre` (`song_id`, `genre_id`) VALUES (1, 3);
+INSERT INTO `song_genre` (`song_id`, `genre_id`) VALUES (2, 2);
+INSERT INTO `song_genre` (`song_id`, `genre_id`) VALUES (3, 16);
+INSERT INTO `song_genre` (`song_id`, `genre_id`) VALUES (4, 17);
+INSERT INTO `song_genre` (`song_id`, `genre_id`) VALUES (5, 3);
+INSERT INTO `song_genre` (`song_id`, `genre_id`) VALUES (6, 1);
+INSERT INTO `song_genre` (`song_id`, `genre_id`) VALUES (7, 12);
+INSERT INTO `song_genre` (`song_id`, `genre_id`) VALUES (8, 2);
+INSERT INTO `song_genre` (`song_id`, `genre_id`) VALUES (9, 1);
+INSERT INTO `song_genre` (`song_id`, `genre_id`) VALUES (10, 12);
 
 COMMIT;
 

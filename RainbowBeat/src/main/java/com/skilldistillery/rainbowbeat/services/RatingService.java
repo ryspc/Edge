@@ -14,5 +14,7 @@ public interface RatingService {
 
 	Rating update(int id, Rating rating);
 
-	Rating create(Rating rating);
+	Rating create(Rating rating, String username, int postId);
+
+
 }
