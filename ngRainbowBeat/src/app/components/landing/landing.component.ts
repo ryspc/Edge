@@ -11,6 +11,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { TabComponent } from '@syncfusion/ej2-angular-navigations';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatInputModule} from '@angular/material/input';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -20,13 +21,16 @@ import {MatInputModule} from '@angular/material/input';
 })
 export class LandingComponent implements OnInit {
   user: User = new User();
+  durationInSeconds = 5;
+  
 
   constructor(private currentRouter: ActivatedRoute,
     private router: Router,
     private modalService: NgbModal,
     private toaster: Toaster,
     private userService: UserService,
-    private auth: AuthService
+    private auth: AuthService,
+    private _snackBar: MatSnackBar
     ) { }
 
     closeResult = '';
@@ -62,10 +66,16 @@ export class LandingComponent implements OnInit {
       },
       fail => {
         console.log("Login Failed");
+        this.toaster.open({
+          text: 'Site successfully deleted',
+          type: 'dark',
+          position: 'top-left'
+        });
         console.log(fail);
       }
     );
   }
+
 
   logout() {
     this.auth.logout();
@@ -82,12 +92,14 @@ export class LandingComponent implements OnInit {
             console.log("User is logged in");
           },
           failed => {
+
             this.router.navigateByUrl("/landing");
           }
         );
       },
       fail => {
         console.log(fail);
+
         this.router.navigateByUrl("/landing");
       }
     );
