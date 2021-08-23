@@ -9,6 +9,7 @@ import { UserService } from 'src/app/services/user.service';
 import { Genre } from 'src/app/models/genre';
 import { SongService } from 'src/app/services/song.service';
 import { Song } from 'src/app/models/song';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-profile',
@@ -32,7 +33,12 @@ export class ProfileComponent implements OnInit {
   enabledPosts: Post[] = [];
   enabledComments: Comment [] = [];
 
-  constructor(private userService: UserService, private postService: PostService, private authService: AuthService, private commentService: CommentService, private songService: SongService) { }
+  constructor(private userService: UserService,
+     private postService: PostService,
+      private authService: AuthService,
+       private commentService: CommentService,
+        private songService: SongService,
+        private _snackBar: MatSnackBar) { }
 
   encoded = this.authService.getCredentials();
   decoded = atob((this.encoded ?? 'null'));
@@ -84,6 +90,12 @@ export class ProfileComponent implements OnInit {
       },
       err => {
         console.log('Could not get logged in User');
+        let snackbar = this._snackBar.open('You are not logged in.', '', {
+          horizontalPosition: 'start',
+          verticalPosition: 'top',
+          duration: 5 * 1000,
+        });
+
       }
     );
 
@@ -129,6 +141,11 @@ setEditPost(): void{
           data => {
             this.loadPostsByUser();
             this.editPost = null;
+            let snackbar = this._snackBar.open('Post updated.', '', {
+              horizontalPosition: 'start',
+              verticalPosition: 'top',
+              duration: 5 * 1000,
+            });
           },
           err =>{
             console.log(err);
@@ -194,6 +211,12 @@ loadCommentsByUser(){
     },
     err => {
       console.log('Could not get logged in User');
+      console.log('Could not get logged in User');
+      let snackbar = this._snackBar.open('You are not logged in.', '', {
+        horizontalPosition: 'start',
+        verticalPosition: 'top',
+        duration: 5 * 1000,
+      });
     }
   );
 
@@ -222,6 +245,11 @@ updateComment(c: Comment){
   this.commentService.update(c).subscribe(
     data => {
       this.loadCommentsByUser();
+      let snackbar = this._snackBar.open('Comment updated.', '', {
+        horizontalPosition: 'start',
+        verticalPosition: 'top',
+        duration: 5 * 1000,
+      });
     },
     err =>{
       console.log(err);

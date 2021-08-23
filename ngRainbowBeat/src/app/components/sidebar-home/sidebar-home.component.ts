@@ -13,6 +13,8 @@ import { Song } from 'src/app/models/song';
 import { SongService } from 'src/app/services/song.service';
 import { GenreService } from 'src/app/services/genre.service';
 import { Genre } from 'src/app/models/genre';
+import { FormControl } from '@angular/forms';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-sidebar-home',
@@ -34,6 +36,8 @@ export class SidebarHomeComponent {
   genres: Genre [] = [];
   searchResult: Post[] | null = null;
   public searchInput: string = '';
+  myControl = new FormControl();
+  options: string[] = []
 
 
   // selectChangeHandler(event: any){
@@ -48,6 +52,7 @@ export class SidebarHomeComponent {
     private genreService: GenreService,
     private router: Router,
     private modalService: NgbModal,
+    private _snackBar: MatSnackBar
     ) {}
 
   ngAfterViewInit() {
@@ -65,6 +70,10 @@ export class SidebarHomeComponent {
       });
       this.getLoggedInUser();
       this.getGenres();
+  }
+
+  ngOnInit() {
+    this.loadPosts();
   }
 
   // MODAL STUFF //
@@ -101,6 +110,14 @@ export class SidebarHomeComponent {
       },
       err => {
         console.log('Could not get logged in User');
+        let snackbar = this._snackBar.open('You are not logged in.', '', {
+          horizontalPosition: 'start',
+          verticalPosition: 'top',
+          duration: 5 * 1000,
+        });
+        snackbar.onAction().subscribe(() => {
+          console.log('The snack-bar action was triggered!');
+        });
       }
     );
   }
@@ -168,17 +185,40 @@ export class SidebarHomeComponent {
             this.postService.create(post).subscribe(
               data => {
                 this.newPost = data;
+                let snackbar = this._snackBar.open('Post created.', '', {
+                  horizontalPosition: 'start',
+                  verticalPosition: 'top',
+                  duration: 5 * 1000,
+                });
+                snackbar.onAction().subscribe(() => {
+                  console.log('The snack-bar action was triggered!');
+                });
               },
               err => {
+                let snackbar = this._snackBar.open('Could not create post.', '', {
+                  horizontalPosition: 'start',
+                  verticalPosition: 'top',
+                  duration: 5 * 1000,
+                });
                 console.log("error creating post");
               } );
           },
           err => {
             console.log("error creating song");
+            let snackbar = this._snackBar.open('Could not create post.', '', {
+              horizontalPosition: 'start',
+              verticalPosition: 'top',
+              duration: 5 * 1000,
+            });
           });
     },
     err => {
       console.log("error getting genre object");
+      let snackbar = this._snackBar.open('Could not create post.', '', {
+        horizontalPosition: 'start',
+        verticalPosition: 'top',
+        duration: 5 * 1000,
+      });
   });
 }
 
@@ -204,6 +244,22 @@ postsByGenre(genre: string){
       console.log('Could not retrieve all posts');
 
     });
+}
+
+loadPosts(){
+  this.postService.index().subscribe(
+    posts => {
+      posts.forEach(post => {
+        if(post.isEnabled){
+          this.options.push(post.title);
+          this.options.push(post.content);
+        }
+      })
+    },
+    noPosts => {
+      console.error('PostListComponenet.loadPosts: error retrieving posts list')
+    }
+  )
 }
 
 }

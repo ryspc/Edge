@@ -10,6 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 import { RatingService } from 'src/app/services/rating.service';
 import { Rating } from 'src/app/models/rating';
 import { Song } from 'src/app/models/song';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home',
@@ -32,6 +33,7 @@ export class HomeComponent implements OnInit {
   panelOpenState = false;
   ratingTotal: number = 0;
   ratingPositive: number = 0;
+  ratingNegative: number = 0;
   rating: Rating = new Rating();
   newComment: Comment = new Comment();
   enabledPosts: Post[] = [];
@@ -45,7 +47,8 @@ export class HomeComponent implements OnInit {
    private authService: AuthService,
    private modalService: NgbModal,
    private commentService: CommentService,
-   private ratingService: RatingService
+   private ratingService: RatingService,
+   private _snackBar: MatSnackBar
    ) {
     console.log(this.searchResult);
 
@@ -72,6 +75,14 @@ export class HomeComponent implements OnInit {
       },
       err => {
         console.log('Could not get logged in User');
+        let snackbar = this._snackBar.open('You are not logged in.', '', {
+          horizontalPosition: 'start',
+          verticalPosition: 'top',
+          duration: 5 * 1000,
+        });
+        snackbar.onAction().subscribe(() => {
+          console.log('The snack-bar action was triggered!');
+        });
       }
     );
   }
@@ -98,16 +109,51 @@ export class HomeComponent implements OnInit {
 
   loadPosts(){
     this.enabledPosts = [];
+    this.ratingNegative = 0;
+    this.ratingPositive = 0;
     this.postService.index().subscribe(
       posts => {
         this.posts = posts;
         this.getEnabledPosts();
-        console.log(this.enabledPosts)
-        this.posts.forEach(post => {
+        // console.log(this.enabledPosts)
+        this.enabledPosts.forEach(post => {
+          this.ratingNegative = 0;
+          this.ratingPositive = 0;
+          // console.log(post);
+          this.post = post;
+          // console.log(this.post);
+
+
+          console.log("foreachloop successfully entered");
           this.ratingService.ratingByPostId(post.id).subscribe(
             data => {
-               post.ratings = data;
-               post.ratingTotal = post.ratings.length;
+                if(this.post){
+               this.post.ratings = data;
+              //  console.log("ratings gotten for posts");
+              //  console.log(this.post);
+               this.ratingNegative = 0;
+          this.ratingPositive = 0;
+
+               if(this.post != null){
+                //  console.log("first if condition is met");
+                  // console.log(this.post.ratings);
+                 if(this.post.ratings){
+
+                 this.post.ratings.forEach(rating => {
+                   if (rating.rating == true){
+                     this.ratingPositive++;
+                   }
+                   if(rating.rating == false){
+                     this.ratingNegative++
+                   }
+                  //  console.log(post.id + "likes: " + this.ratingPositive);
+                  //  console.log(post.id + "dislikes: " + this.ratingNegative);
+                   post.ratingTotal = this.ratingPositive - this.ratingNegative;
+                  //  console.log(post.id + "totalRating: "  + post.ratingTotal);
+
+                 });
+                }
+               }
               //  console.log(post.id);
               //  console.log(this.ratings.length);
               // this.ratingTotal = this.ratings.length;
@@ -120,6 +166,7 @@ export class HomeComponent implements OnInit {
               //   console.log(this.ratingTotal);
               //   console.log(this.ratingPositive);
               // });
+                }
             },
             err => {
               console.log(err);
@@ -144,10 +191,46 @@ export class HomeComponent implements OnInit {
 
       this.ratingService.create(this.rating).subscribe(
         update => {
+          console.log('good rating created')
+          this.loadPosts();
+        },
+        err => {
+          console.log(err);
+        }
+      );
+    }
+  }
+
+  dislike(post: Post) {
+    if(this.loggedInUser && this.rating){
+      this.rating.rating = false;
+      this.rating.user = this.loggedInUser;
+      this.rating.post = post;
+      console.log(this.rating.rating);
+      console.log(this.rating.user);
+      console.log(this.rating.post);
+
+      this.ratingService.create(this.rating).subscribe(
+        update => {
+          console.log('bad rating created')
+          this.loadPosts();
+          let snackbar = this._snackBar.open('You liked '+ post.title+'.', 'UNDO', {
+            horizontalPosition: 'start',
+            verticalPosition: 'top',
+            duration: 5 * 1000,
+          });
+          snackbar.onAction().subscribe(() => {
+            console.log('The snack-bar action was triggered!');
+          });
           console.log('rating created')
         },
         err => {
           console.log(err);
+          let snackbar = this._snackBar.open('Could not like the post, please try again.', '', {
+            horizontalPosition: 'start',
+            verticalPosition: 'top',
+            duration: 5 * 1000,
+          });
         }
       );
     }
@@ -175,14 +258,32 @@ export class HomeComponent implements OnInit {
           update => {
             console.log('Follow successful');
             this.getLoggedInUser();
+            let snackbar = this._snackBar.open('You are now following ' +followedUser.username+'.', 'UNDO', {
+              horizontalPosition: 'start',
+              verticalPosition: 'top',
+              duration: 5 * 1000,
+            });
+            snackbar.onAction().subscribe(() => {
+              this.unfollow(followedUser);
+            });
           },
           err => {
             console.log('Error following user');
+            let snackbar = this._snackBar.open('Could not follow the user, please try again.', '', {
+              horizontalPosition: 'start',
+              verticalPosition: 'top',
+              duration: 5 * 1000,
+            });
           }
         );
       },
       err => {
         console.log('Could not get logged in User');
+        let snackbar = this._snackBar.open('Could not follow the user, please try again.', '', {
+          horizontalPosition: 'start',
+          verticalPosition: 'top',
+          duration: 5 * 1000,
+        });
       }
     );
   }
@@ -207,10 +308,23 @@ export class HomeComponent implements OnInit {
       this.userService.update(this.loggedInUser).subscribe(
         update => {
           this.getLoggedInUser();
-          console.log('unfollow successful')
+          console.log('unfollow successful');
+          let snackbar = this._snackBar.open('You unfollowed ' +user.username+'.', 'UNDO', {
+            horizontalPosition: 'start',
+            verticalPosition: 'top',
+            duration: 5 * 1000,
+          });
+          snackbar.onAction().subscribe(() => {
+            this.follow(user);
+          });
         },
         err => {
           console.log(err);
+          let snackbar = this._snackBar.open('Could not unfollow the user, please try again.', '', {
+            horizontalPosition: 'start',
+            verticalPosition: 'top',
+            duration: 5 * 1000,
+          });
         }
       );
     }
@@ -257,6 +371,11 @@ export class HomeComponent implements OnInit {
       },
       err => {
         console.log("Error creating new Comment");
+        let snackbar = this._snackBar.open('Could not comment, please try again.', '', {
+          horizontalPosition: 'start',
+          verticalPosition: 'top',
+          duration: 5 * 1000,
+        });
       }
     );
     this.postComments = [];
