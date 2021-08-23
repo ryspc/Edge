@@ -16,6 +16,7 @@ export class Post {
   song: Song;
   isEnabled: boolean;
   ratings: Rating[] | null | undefined;
+  ratingTotal: number;
 
   constructor(
     id: number = 0,
@@ -28,7 +29,8 @@ export class Post {
     user: User = new User,
     song: Song = new Song,
     isEnabled: boolean = true,
-    ratings: Rating[] | null | undefined = null
+    ratings: Rating[] | null | undefined = null,
+    ratingTotal: number = 0
   ){
     this.id = id;
     this.content = content;
@@ -41,5 +43,6 @@ export class Post {
     this.isEnabled = isEnabled;
     this.song = song;
     this.ratings = ratings ? ratings: [];
+    this.ratingTotal = ratingTotal;
   }
 }
