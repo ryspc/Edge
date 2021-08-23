@@ -4,7 +4,7 @@
       <h1>Following: <span>{{getFollowingCount()}}</span></h1><hr>
       <mat-card *ngFor="let friend of loggedInUser.following">
         <img mat-card-image class="avatar" src={{friend.imageUrl}} alt="Profile Image">
-        <mat-card-content>
+        <mat-card-content (click)="setFriend(friend);viewFollowingPosts(friend);open(posts)">
           <h2>{{friend.username}}</h2>
         </mat-card-content>
         <mat-card-actions>
@@ -26,3 +26,44 @@
     </div>
   </div>
 </div>
+
+
+<ng-template #posts let-modal>
+  <div class="modal-header" *ngIf="friend">
+      <h4 class="modal-title" id="modal-basic-title">
+          {{friend.username}}'s  Posts
+      </h4>
+
+      <button type="button" class="close" aria-label="Close" (click)="friend = null;modal.dismiss('Cross click');">
+
+          <span aria-hidden="true">
+              ×
+          </span>
+      </button>
+  </div>
+  <div *ngFor="let post of followedPosts">
+    <div class="modal-body modal-content">
+      <div class="info d-flex">
+        <h2>{{post.title}}</h2>
+      </div>
+      <div class="info d-flex">
+        <p><em>{{post.content}}</em></p>
+      </div>
+      <div class="info d-flex">
+        <p><b>Song Title:</b>  {{post.song.title}}</p>
+      </div>
+      <div class="info d-flex">
+        <p><b>By: </b>{{post.song.artist}}, <b> Album: </b> {{post.song.album}}</p>
+      </div>
+      <div class="info d-flex">
+        <p><b>Release Date:</b>  {{post.song.releaseDate}}</p>
+      </div>
+      <div class="info d-flex">
+        <p><b>Length:</b>  {{post.song.songLength}}</p>
+      </div>
+      <div class="info d-flex">
+        <p><b>URL:</b>  {{post.song.songURL}}</p>
+      </div>
+    </div>
+  </div>
+</ng-template>

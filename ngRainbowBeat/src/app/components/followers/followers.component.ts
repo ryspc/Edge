@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Post } from 'src/app/models/post';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
+import { PostService } from 'src/app/services/post.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -13,6 +16,10 @@ export class FollowersComponent implements OnInit {
   allUsers: User[] = [];
   loggedInUser: User | null = null;
   followers: User[] = [];
+  followedPosts: Post[] = [];
+  closeResult = '';
+  panelOpenState = false;
+  friend: User | null = null;
 
   public encoded = this.authService.getCredentials();
   public decoded = atob((this.encoded ?? 'null'));
@@ -20,6 +27,8 @@ export class FollowersComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private userService: UserService,
+    private postService: PostService,
+    private modalService: NgbModal,
     private router: Router
   ) { }
 
@@ -88,6 +97,46 @@ export class FollowersComponent implements OnInit {
         }
       );
     }
+  }
+
+  viewFollowingPosts(user: User){
+    this.postService.showPostByUser(user.username).subscribe(
+      data => {
+        this.followedPosts = data;
+        console.log(this.followedPosts);
+
+      },
+      err => {
+        console.log("Error getting Following Posts");
+      }
+    );
+  }
+
+  open(content: any) {
+    this.modalService.open(content,
+      { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+        this.closeResult = `Closed with: ${result}`;
+      }, (reason) => {
+        this.closeResult =
+          `Dismissed ${this.getDismissReason(reason)}`;
+      });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      this.followedPosts = [];
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      this.followedPosts = [];
+      return 'by clicking on a backdrop';
+    } else {
+      this.followedPosts = [];
+      return `with: ${reason}`;
+    }
+  }
+
+  setFriend(user: User) {
+    this.friend = user;
   }
 
 }

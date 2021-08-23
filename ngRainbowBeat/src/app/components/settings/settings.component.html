@@ -18,7 +18,7 @@
     <h1>Edit Info</h1><hr>
     <h3>First Name: <input type="text" name="firstName" [(ngModel)]="editUser.firstName"></h3><br>
     <h3>Last Name: <input type="text" name="lastName" [(ngModel)]="editUser.lastName"></h3><br>
-    <h3>Username: <input type="text" name="username" [(ngModel)]="editUser.username"></h3><br>
+    <!-- <h3>Username: <input type="text" name="username" [(ngModel)]="editUser.username"></h3><br> -->
     <h3>Email: <input type="text" name="email" [(ngModel)]="editUser.email"></h3><br>
     <h3>Profile Image URL: <input type="text" name="image-upload" [(ngModel)]="editUser.imageUrl"></h3>
     <input class="btn btn-success" type="submit" name="save" value="Save Changes" (click)="updateUserDetails(editUser)">
