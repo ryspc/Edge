@@ -50,7 +50,7 @@ export class LandingComponent implements OnInit {
   login(user: User) {
     this.auth.login(user.username, user.password).subscribe(
       loggedIn => {
-        let snackbar = this._snackBar.open('Welcome back, ' + user.username, '', {
+        let snackbar = this._snackBar.open('Welcome back, ' + user.username +'.', '', {
           horizontalPosition: 'start',
           verticalPosition: 'top',
           duration: 5 * 1000,
@@ -86,7 +86,7 @@ export class LandingComponent implements OnInit {
       user => {
         this.auth.login(newUser.username, newUser.password).subscribe(
           loggedIn => {
-            let snackbar = this._snackBar.open('Welcome to Edge, ' + newUser.username, '', {
+            let snackbar = this._snackBar.open('Welcome to Edge, ' + newUser.username+'.', '', {
               horizontalPosition: 'start',
               verticalPosition: 'top',
               duration: 5 * 1000,
