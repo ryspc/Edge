@@ -12,9 +12,6 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
 
 @Component({
   selector: 'app-admin',
-  template: `
-    Say {{ searchKeyword }}
-  `,
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css']
 })
@@ -23,13 +20,32 @@ export class AdminComponent implements OnInit {
   @Input() childMessage: Post[] = [];
   @Input() searchKeyword: string = '';
 
+  @Input() searchResult: Post[] | null | undefined;
+  // @Input() searchKeyword: string = '';
+  // @Output() displaySearchResults = new EventEmitter<boolean>();
+  // @Output() clearSearchResults = new EventEmitter<boolean>();
+
+  // exitSearchView(){
+  //   this.clearSearchResults.emit(true);
+  // }
+  // showSearchedPosts(){
+  //   this.displaySearchResults.emit(true);
+  // }
+
   constructor(
     private userService: UserService,
     private authService: AuthService,
     private postService: PostService,
     private commentService: CommentService,
-    private sidebarComponent: SidebarComponent
-    ) { }
+    // private sidebarComponent: SidebarComponent
+    ) {
+      console.log(this.searchResult);
+    }
+
+    ngOnChanges(){
+      console.log(this.searchResult);
+
+    }
 
     users: User [] = [];
     user: User | null = null;
