@@ -57,9 +57,12 @@ public class RatingController {
 		return r;
 	}
 	
-	@PostMapping("rating")
-	public Rating createRating(HttpServletRequest req, HttpServletResponse res, @RequestBody Rating rating) {
-		Rating r = ratingSvc.create(rating);
+	@PostMapping("rating/post/{id}")
+	public Rating createRating(HttpServletRequest req, HttpServletResponse res,@PathVariable int id, @RequestBody Rating rating, Principal principal) {
+		System.out.println(id);
+		System.out.println(rating);
+		System.out.println(principal);
+		Rating r = ratingSvc.create(rating, principal.getName(), id);
 		try {
 			if(r == null) {
 				res.setStatus(404);
