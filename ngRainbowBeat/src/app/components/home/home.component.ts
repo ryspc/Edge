@@ -33,6 +33,9 @@ export class HomeComponent implements OnInit {
   ratingPositive: number = 0;
   rating: Rating = new Rating();
   newComment: Comment = new Comment();
+  enabledPosts: Post[] = [];
+
+
   @Input() searchKeyword: string = '';
   @Input() searchResult: Post[] | null | undefined;
 
@@ -92,13 +95,11 @@ export class HomeComponent implements OnInit {
   loadPosts(){
     this.postService.index().subscribe(
       posts => {
-        for(let i = 0; i < posts.length; i++) {
-          if(!posts[i].isEnabled){
-            posts.splice(i, 1);
-          }
-        }
         this.posts = posts;
         this.posts.forEach(post => {
+          if(post.isEnabled) {
+            this.enabledPosts.push(post);
+          }
           this.ratingService.ratingByPostId(post.id).subscribe(
             data => {
                post.ratings = data;
@@ -130,24 +131,32 @@ export class HomeComponent implements OnInit {
   }
 
   like(post: Post) {
-  //   if(this.loggedInUser && this.rating){
-  //     this.rating.rating = true;
-  //     this.rating.user = this.loggedInUser;
-  //     this.rating.post = post;
-  //     console.log(this.rating.rating);
-  //     console.log(this.rating.user);
-  //     console.log(this.rating.post);
+    if(this.loggedInUser && this.rating){
+      this.rating.rating = true;
+      this.rating.user = this.loggedInUser;
+      this.rating.post = post;
+      console.log(this.rating.rating);
+      console.log(this.rating.user);
+      console.log(this.rating.post);
 
-  //     this.ratingService.create(this.rating).subscribe(
-  //       update => {
-  //         console.log('rating created')
-  //         this.loadPosts();
-  //       },
-  //       err => {
-  //         console.error(err);
-  //       }
-  //     );
-  //   }
+      this.ratingService.create(this.rating).subscribe(
+        update => {
+          console.log('rating created')
+        },
+        err => {
+          console.log(err);
+        }
+      );
+    }
+  }
+
+  getEnabledPosts() {
+    for(let i = 0; i < this.posts.length; i++) {
+      if(this.posts[i].isEnabled) {
+        this.enabledPosts.push(this.posts[i]);
+      }
+    }
+    console.log(this.enabledPosts);
   }
 
   setPost(post: Post) {

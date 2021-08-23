@@ -8,6 +8,7 @@ import { PostService } from 'src/app/services/post.service';
 import { UserService } from 'src/app/services/user.service';
 import { Genre } from 'src/app/models/genre';
 import { SongService } from 'src/app/services/song.service';
+import { Song } from 'src/app/models/song';
 
 @Component({
   selector: 'app-profile',
@@ -39,6 +40,9 @@ export class ProfileComponent implements OnInit {
   genres: Genre [] = [];
 
   ngOnInit(): void {
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.body.appendChild(tag);
     this.loadPostsByUser();
     this.loadCommentsByUser();
   }
@@ -240,6 +244,14 @@ displayCommentTable(): void{
 
 setEditComment(): void{
   this.editComment = Object.assign({}, this.selectedComment);
+}
+
+getVideoId(song: Song): string{
+  const regex = /[^=]*$/g;
+  let songString = song.songURL;
+  let songId = songString.substr(songString.search(regex));
+  console.log(songId);
+  return songId;
 }
 
 }
