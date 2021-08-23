@@ -53,6 +53,13 @@
     <p>Content: {{ selected.content }}</p>
     <p>Date Created: {{ selected.createdAt }}</p>
     <p>Updated: {{ selected.updatedAt }}</p>
+    <p><youtube-player
+      videoId="{{getVideoId(selected.song)}}"
+      suggestedQuality="highres"
+      [height]="200"
+      [width]="300"
+      [startSeconds]="0"></youtube-player>
+    </p>
 
     <div class="addPostBtnDiv">
       <button
