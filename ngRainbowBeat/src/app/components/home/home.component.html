@@ -19,7 +19,7 @@
                     <img mat-card-image src="{{post.song.imageURL}}">
                     <mat-divider></mat-divider>
                     <mat-card-actions style="text-align: center;">
-                        <button mat-button onclick="like(post)"><mat-icon>thumb_up</mat-icon></button>
+                        <button mat-button (click)="like(post)"><mat-icon>thumb_up</mat-icon></button>
                         <button mat-button (click)="setPost(post);getCommentsForPost(post);open(comment);"><mat-icon>chat</mat-icon></button>
                         <button mat-button><mat-icon>share</mat-icon></button>
                     </mat-card-actions>
