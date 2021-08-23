@@ -102,6 +102,7 @@ export class HomeComponent implements OnInit {
           this.ratingService.ratingByPostId(post.id).subscribe(
             data => {
                post.ratings = data;
+               post.ratingTotal = post.ratings.length;
                console.log(post.id);
                console.log(this.ratings.length);
 
@@ -148,27 +149,6 @@ export class HomeComponent implements OnInit {
   //     );
   //   }
   }
-
-
-  // getRating(post: Post) {
-  //   if(this.loggedInUser && this.ratings){
-  //     this.ratingService.ratingByPostId(post.id).subscribe(
-  //       data => {
-  //         this.ratings = data;
-  //         console.log('rating updated');
-  //         this.ratings.forEach(rating => {
-  //           if (rating.rating === true) {
-  //           this.ratingPositive++; }
-  //         });
-  //       },
-  //       err => {
-  //         console.log(err);
-  //       }
-  //     );
-  //   }
-  // }
-
-
 
   setPost(post: Post) {
     this.post = post;
@@ -238,7 +218,6 @@ export class HomeComponent implements OnInit {
   }
 
   getCommentsForPost(post: Post) {
-    // this.loadPosts();
     this.getAllComments();
     for(let i = 0; i < this.comments.length; i++) {
       if(this.comments[i].post.id === post.id){
@@ -268,7 +247,6 @@ export class HomeComponent implements OnInit {
         console.log("Error creating new Comment");
       }
     );
-    // this.post = null;
     this.postComments = [];
     this.newComment = new Comment();
   }
