@@ -42,3 +42,9 @@ mat-button {
   height: 30px;
   border-radius: 50%;
 }
+
+.subtitle {
+  margin-left: 240px;
+  margin-top: 16px;
+  color: gray;
+}
