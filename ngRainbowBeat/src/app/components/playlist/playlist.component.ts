@@ -3,6 +3,7 @@ import { Playlist } from 'src/app/models/playlist';
 import { Song } from 'src/app/models/song';
 import { PlaylistService } from 'src/app/services/playlist.service';
 import { UserService } from 'src/app/services/user.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-playlist',
@@ -13,7 +14,8 @@ export class PlaylistComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private playlistService: PlaylistService
+    private playlistService: PlaylistService,
+    private _snackBar: MatSnackBar
   ) { }
 
   playlists: Playlist[] = [];
@@ -36,6 +38,14 @@ export class PlaylistComponent implements OnInit {
       },
       noPlaylists => {
         console.error('PlaylistComponenet.loadPosts: error displaying Playlists')
+        let snackbar = this._snackBar.open('Error displaying favorite songs, please try again.', '', {
+          horizontalPosition: 'start',
+          verticalPosition: 'top',
+          duration: 5 * 1000,
+        });
+        snackbar.onAction().subscribe(() => {
+          console.log('The snack-bar action was triggered!');
+        });
       }
     )
   }
