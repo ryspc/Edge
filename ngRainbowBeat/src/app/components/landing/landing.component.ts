@@ -1,16 +1,9 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { Toaster } from 'ngx-toast-notifications';
-import { expandRightOnEnterAnimation } from 'angular-animations';
-import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { NgForm } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { TabComponent } from '@syncfusion/ej2-angular-navigations';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatInputModule} from '@angular/material/input';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 
@@ -21,14 +14,10 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class LandingComponent implements OnInit {
   user: User = new User();
-  durationInSeconds = 5;
-  
 
   constructor(private currentRouter: ActivatedRoute,
     private router: Router,
     private modalService: NgbModal,
-    private toaster: Toaster,
-    private userService: UserService,
     private auth: AuthService,
     private _snackBar: MatSnackBar
     ) { }
@@ -38,7 +27,7 @@ export class LandingComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  // MODAL STUFF //
+
   open(content: any) {
     this.modalService.open(content,
       { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
@@ -57,29 +46,38 @@ export class LandingComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-  // END MODAL STUFF //
 
   login(user: User) {
     this.auth.login(user.username, user.password).subscribe(
       loggedIn => {
-        this.router.navigateByUrl("/home") //TODO: Update url navigation
+        let snackbar = this._snackBar.open('Welcome back, ' + user.username, '', {
+          horizontalPosition: 'start',
+          verticalPosition: 'top',
+          duration: 5 * 1000,
+        });
+        snackbar.onAction().subscribe(() => {
+          console.log('The snack-bar action was triggered!');
+        });
+        this.router.navigateByUrl("/home")
       },
       fail => {
         console.log("Login Failed");
-        this.toaster.open({
-          text: 'Site successfully deleted',
-          type: 'dark',
-          position: 'top-left'
+        let snackbar = this._snackBar.open('Wrong username or password.', '', {
+          horizontalPosition: 'start',
+          verticalPosition: 'top',
+          duration: 5 * 1000,
+        });
+        snackbar.onAction().subscribe(() => {
+          console.log('The snack-bar action was triggered!');
         });
         console.log(fail);
       }
     );
   }
 
-
   logout() {
     this.auth.logout();
-    this.router.navigateByUrl("/landing"); //TODO: Update url navigation
+    this.router.navigateByUrl("/landing"); 
   }
 
   register(form: NgForm) {
@@ -88,18 +86,40 @@ export class LandingComponent implements OnInit {
       user => {
         this.auth.login(newUser.username, newUser.password).subscribe(
           loggedIn => {
-            this.router.navigateByUrl("/home"); //TODO: Update url navigation
+            let snackbar = this._snackBar.open('Welcome to Edge, ' + newUser.username, '', {
+              horizontalPosition: 'start',
+              verticalPosition: 'top',
+              duration: 5 * 1000,
+            });
+            snackbar.onAction().subscribe(() => {
+              console.log('The snack-bar action was triggered!');
+            });
+            this.router.navigateByUrl("/home"); 
             console.log("User is logged in");
           },
           failed => {
-
+            let snackbar = this._snackBar.open('Registration failed, please try again', '', {
+              horizontalPosition: 'start',
+              verticalPosition: 'top',
+              duration: 5 * 1000,
+            });
+            snackbar.onAction().subscribe(() => {
+              console.log('The snack-bar action was triggered!');
+            });
             this.router.navigateByUrl("/landing");
           }
         );
       },
       fail => {
         console.log(fail);
-
+        let snackbar = this._snackBar.open('Registration failed, please try again', '', {
+          horizontalPosition: 'start',
+          verticalPosition: 'top',
+          duration: 5 * 1000,
+        });
+        snackbar.onAction().subscribe(() => {
+          console.log('The snack-bar action was triggered!');
+        });
         this.router.navigateByUrl("/landing");
       }
     );
