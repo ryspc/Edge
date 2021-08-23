@@ -33,6 +33,7 @@ export class HomeComponent implements OnInit {
   ratingPositive: number = 0;
   rating: Rating = new Rating();
   newComment: Comment = new Comment();
+  enabledPosts: Post[] = [];
 
 
 
@@ -84,13 +85,11 @@ export class HomeComponent implements OnInit {
   loadPosts(){
     this.postService.index().subscribe(
       posts => {
-        for(let i = 0; i < posts.length; i++) {
-          if(!posts[i].isEnabled){
-            posts.splice(i, 1);
-          }
-        }
         this.posts = posts;
         this.posts.forEach(post => {
+          if(post.isEnabled) {
+            this.enabledPosts.push(post);
+          }
           this.ratingService.ratingByPostId(post.id).subscribe(
             data => {
               this.ratings = data;
@@ -129,7 +128,6 @@ export class HomeComponent implements OnInit {
       this.ratingService.create(this.rating).subscribe(
         update => {
           console.log('rating created')
-          this.loadPosts();
         },
         err => {
           console.log(err);
@@ -157,7 +155,14 @@ export class HomeComponent implements OnInit {
   //   }
   // }
 
-
+  getEnabledPosts() {
+    for(let i = 0; i < this.posts.length; i++) {
+      if(this.posts[i].isEnabled) {
+        this.enabledPosts.push(this.posts[i]);
+      }
+    }
+    console.log(this.enabledPosts);
+  }
 
   setPost(post: Post) {
     this.post = post;
