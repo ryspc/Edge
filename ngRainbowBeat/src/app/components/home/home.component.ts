@@ -34,8 +34,6 @@ export class HomeComponent implements OnInit {
   rating: Rating = new Rating();
   newComment: Comment = new Comment();
 
-
-
   constructor(private userService: UserService,
    private postService: PostService,
    private authService: AuthService,
@@ -88,17 +86,20 @@ export class HomeComponent implements OnInit {
         this.posts.forEach(post => {
           this.ratingService.ratingByPostId(post.id).subscribe(
             data => {
-              this.ratings = data;
-              this.ratingTotal = this.ratings.length;
-              console.log('rating updated');
-              this.ratings.forEach(rating => {
-                if (rating.rating === true) {
-                this.ratingPositive++; }
-                post.rating = this.ratingPositive/this.ratingTotal;
-                console.log(post.rating);
-                console.log(this.ratingTotal);
-                console.log(this.ratingPositive);
-              });
+               post.ratings = data;
+               console.log(post.id);
+               console.log(this.ratings.length);
+               
+              // this.ratingTotal = this.ratings.length;
+              // console.log('rating updated');
+              // this.ratings.forEach(rating => {
+              //   if (rating.rating === true) {
+              //   this.ratingPositive++; }
+              //   post.rating = this.ratingPositive/this.ratingTotal;
+              //   console.log(post.rating);
+              //   console.log(this.ratingTotal);
+              //   console.log(this.ratingPositive);
+              // });
             },
             err => {
               console.log(err);
