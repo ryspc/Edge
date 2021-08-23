@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-settings',
@@ -19,7 +20,8 @@ export class SettingsComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -34,6 +36,14 @@ export class SettingsComponent implements OnInit {
       },
       err => {
         console.log('Could not get logged in User');
+        let snackbar = this._snackBar.open('Error getting user info, please try again', '', {
+          horizontalPosition: 'start',
+          verticalPosition: 'top',
+          duration: 5 * 1000,
+        });
+        snackbar.onAction().subscribe(() => {
+          console.log('The snack-bar action was triggered!');
+        });
       }
     );
   }
@@ -47,9 +57,25 @@ export class SettingsComponent implements OnInit {
       update => {
         this.getLoggedInUser();
         console.log('edit successful');
+        let snackbar = this._snackBar.open('Profile Saved.', '', {
+          horizontalPosition: 'start',
+          verticalPosition: 'top',
+          duration: 5 * 1000,
+        });
+        snackbar.onAction().subscribe(() => {
+          console.log('The snack-bar action was triggered!');
+        });
       },
       err => {
         console.log('Error updating user settings');
+        let snackbar = this._snackBar.open('Update failed, please try again', '', {
+          horizontalPosition: 'start',
+          verticalPosition: 'top',
+          duration: 5 * 1000,
+        });
+        snackbar.onAction().subscribe(() => {
+          console.log('The snack-bar action was triggered!');
+        });
       }
     );
     this.editUser = null;

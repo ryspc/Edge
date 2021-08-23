@@ -8,6 +8,8 @@ import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 import { Post } from 'src/app/models/post';
 import { PostService } from 'src/app/services/post.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-sidebar',
@@ -31,6 +33,7 @@ export class SidebarComponent {
     private authService: AuthService,
     private router: Router,
     private postService: PostService,
+    private _snackBar: MatSnackBar
     )
     {}
 
@@ -53,6 +56,14 @@ export class SidebarComponent {
   }
   logout() {
     this.authService.logout();
+    let snackbar = this._snackBar.open('You have been logged out.', '', {
+      horizontalPosition: 'start',
+      verticalPosition: 'top',
+      duration: 5 * 1000,
+    });
+    snackbar.onAction().subscribe(() => {
+      console.log('The snack-bar action was triggered!');
+    });
     this.router.navigateByUrl("/landing"); //TODO: Update url navigation
   }
 
@@ -64,6 +75,14 @@ export class SidebarComponent {
       },
       err => {
         console.log('Could not get logged in User');
+        let snackbar = this._snackBar.open('You are not logged in.','', {
+          horizontalPosition: 'start',
+          verticalPosition: 'top',
+          duration: 5 * 1000,
+        });
+        snackbar.onAction().subscribe(() => {
+          console.log('The snack-bar action was triggered!');
+        });
       }
     );
   }
@@ -91,6 +110,14 @@ export class SidebarComponent {
       },
       err => {
         console.log('Could not retrieve all posts');
+        let snackbar = this._snackBar.open('Error retrieving posts, please try again.','', {
+          horizontalPosition: 'start',
+          verticalPosition: 'top',
+          duration: 5 * 1000,
+        });
+        snackbar.onAction().subscribe(() => {
+          console.log('The snack-bar action was triggered!');
+        });
 
       });
   }
@@ -104,6 +131,14 @@ export class SidebarComponent {
       },
       err => {
         console.log('Could not retrieve all posts');
+        let snackbar = this._snackBar.open('No posts found for "' +this.searchInput+'".', '', {
+          horizontalPosition: 'start',
+          verticalPosition: 'top',
+          duration: 5 * 1000,
+        });
+        snackbar.onAction().subscribe(() => {
+          console.log('The snack-bar action was triggered!');
+        });
 
       });
   }

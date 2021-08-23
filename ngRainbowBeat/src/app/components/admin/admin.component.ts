@@ -8,6 +8,7 @@ import { Comment } from 'src/app/models/comment';
 import { CommentService } from 'src/app/services/comment.service';
 import { PostComment } from 'src/app/models/post-comment';
 import { SidebarComponent } from '../sidebar/sidebar.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -37,6 +38,7 @@ export class AdminComponent implements OnInit {
     private authService: AuthService,
     private postService: PostService,
     private commentService: CommentService,
+    private _snackBar: MatSnackBar
     // private sidebarComponent: SidebarComponent
     ) {
       console.log(this.searchResult);
@@ -152,6 +154,14 @@ export class AdminComponent implements OnInit {
           console.log(user);
           this.getUserInfo();
           this.getAllUsers();
+          let snackbar = this._snackBar.open('User enabled.', 'UNDO',{
+            horizontalPosition: 'start',
+            verticalPosition: 'top',
+            duration: 5 * 1000,
+          });
+          snackbar.onAction().subscribe(() => {
+            this.disableUser(user);
+          });
         },
         noUser => {
           console.log('user enabled not updated')
@@ -168,9 +178,26 @@ export class AdminComponent implements OnInit {
           console.log(this.childMessage);
           this.getUserInfo();
           this.getAllUsers();
+          let snackbar = this._snackBar.open('User disabled.', 'UNDO',{
+            horizontalPosition: 'start',
+            verticalPosition: 'top',
+            duration: 5 * 1000,
+          });
+          snackbar.onAction().subscribe(() => {
+           this.enableUser(user);
+          });
+          
         },
         noUser => {
           console.log('user enabled not updated')
+          let snackbar = this._snackBar.open('Could not disable user.', '',{
+            horizontalPosition: 'start',
+            verticalPosition: 'top',
+            duration: 5 * 1000,
+          });
+          snackbar.onAction().subscribe(() => {
+            console.log('The snack-bar action was triggered!');
+          });
         }
       );
     }
@@ -181,9 +208,26 @@ export class AdminComponent implements OnInit {
        data => {
          comment = data;
          this.displayUserComments(username);
+         let snackbar = this._snackBar.open('Comment deleted.', '',{
+          horizontalPosition: 'start',
+          verticalPosition: 'top',
+          duration: 5 * 1000,
+        });
+        snackbar.onAction().subscribe(() => {
+          console.log('The snack-bar action was triggered!');
+        });
        },
        noData => {
          console.log('comment was not disabled');
+         this.displayUserComments(username);
+         let snackbar = this._snackBar.open('Could not delete comment.', '',{
+          horizontalPosition: 'start',
+          verticalPosition: 'top',
+          duration: 5 * 1000,
+        });
+        snackbar.onAction().subscribe(() => {
+          console.log('The snack-bar action was triggered!');
+        });
          console.log(noData);
        }
      );
@@ -196,9 +240,25 @@ export class AdminComponent implements OnInit {
         data => {
           post = data;
           this.displayUserPosts(username);
+          let snackbar = this._snackBar.open('Post deleted.', '',{
+            horizontalPosition: 'start',
+            verticalPosition: 'top',
+            duration: 5 * 1000,
+          });
+          snackbar.onAction().subscribe(() => {
+            console.log('The snack-bar action was triggered!');
+          });
         },
         noData => {
           console.log('comment was not disabled');
+          let snackbar = this._snackBar.open('Could not delete post.', '',{
+            horizontalPosition: 'start',
+            verticalPosition: 'top',
+            duration: 5 * 1000,
+          });
+          snackbar.onAction().subscribe(() => {
+            console.log('The snack-bar action was triggered!');
+          });
           console.log(noData);
         }
       );
