@@ -9,6 +9,7 @@ import { PostService } from 'src/app/services/post.service';
 import { UserService } from 'src/app/services/user.service';
 import { RatingService } from 'src/app/services/rating.service';
 import { Rating } from 'src/app/models/rating';
+import { Song } from 'src/app/models/song';
 
 @Component({
   selector: 'app-home',
@@ -33,6 +34,9 @@ export class HomeComponent implements OnInit {
   ratingPositive: number = 0;
   rating: Rating = new Rating();
   newComment: Comment = new Comment();
+  enabledPosts: Post[] = [];
+
+
   @Input() searchKeyword: string = '';
   @Input() searchResult: Post[] | null | undefined;
 
@@ -49,10 +53,13 @@ export class HomeComponent implements OnInit {
 
    ngOnChanges(){
     console.log(this.searchResult);
-    this.loadPosts();
+    // this.loadPosts();
    }
 
   ngOnInit(): void {
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.body.appendChild(tag);
     this.getLoggedInUser();
     this.loadPosts();
     this.getAllComments();
@@ -90,22 +97,19 @@ export class HomeComponent implements OnInit {
   }
 
   loadPosts(){
+    this.enabledPosts = [];
     this.postService.index().subscribe(
       posts => {
-        for(let i = 0; i < posts.length; i++) {
-          if(!posts[i].isEnabled){
-            posts.splice(i, 1);
-          }
-        }
         this.posts = posts;
+        this.getEnabledPosts();
+        console.log(this.enabledPosts)
         this.posts.forEach(post => {
           this.ratingService.ratingByPostId(post.id).subscribe(
             data => {
                post.ratings = data;
                post.ratingTotal = post.ratings.length;
-               console.log(post.id);
-               console.log(this.ratings.length);
-               
+              //  console.log(post.id);
+              //  console.log(this.ratings.length);
               // this.ratingTotal = this.ratings.length;
               // console.log('rating updated');
               // this.ratings.forEach(rating => {
@@ -141,13 +145,21 @@ export class HomeComponent implements OnInit {
       this.ratingService.create(this.rating).subscribe(
         update => {
           console.log('rating created')
-          this.loadPosts();
         },
         err => {
           console.log(err);
         }
       );
     }
+  }
+
+  getEnabledPosts() {
+    for(let i = 0; i < this.posts.length; i++) {
+      if(this.posts[i].isEnabled) {
+        this.enabledPosts.push(this.posts[i]);
+      }
+    }
+    console.log(this.enabledPosts);
   }
 
   setPost(post: Post) {
@@ -249,6 +261,14 @@ export class HomeComponent implements OnInit {
     );
     this.postComments = [];
     this.newComment = new Comment();
+  }
+
+  getVideoId(song: Song): string{
+    const regex = /[^=]*$/g;
+    let songString = song.songURL;
+    let songId = songString.substr(songString.search(regex));
+    console.log(songId);
+    return songId;
   }
 
 }
