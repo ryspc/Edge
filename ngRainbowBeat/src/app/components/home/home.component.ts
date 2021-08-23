@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Comment } from 'src/app/models/comment';
 import { Post } from 'src/app/models/post';
@@ -36,6 +36,8 @@ export class HomeComponent implements OnInit {
   enabledPosts: Post[] = [];
 
 
+  @Input() searchKeyword: string = '';
+  @Input() searchResult: Post[] | null | undefined;
 
   constructor(private userService: UserService,
    private postService: PostService,
@@ -43,7 +45,15 @@ export class HomeComponent implements OnInit {
    private modalService: NgbModal,
    private commentService: CommentService,
    private ratingService: RatingService
-   ) { }
+   ) {
+    console.log(this.searchResult);
+
+   }
+
+   ngOnChanges(){
+    console.log(this.searchResult);
+    this.loadPosts();
+   }
 
   ngOnInit(): void {
     this.getLoggedInUser();
@@ -92,17 +102,21 @@ export class HomeComponent implements OnInit {
           }
           this.ratingService.ratingByPostId(post.id).subscribe(
             data => {
-              this.ratings = data;
-              this.ratingTotal = this.ratings.length;
-              console.log('rating updated');
-              this.ratings.forEach(rating => {
-                if (rating.rating === true) {
-                this.ratingPositive++; }
-                post.rating = this.ratingPositive/this.ratingTotal;
-                console.log(post.rating);
-                console.log(this.ratingTotal);
-                console.log(this.ratingPositive);
-              });
+               post.ratings = data;
+               post.ratingTotal = post.ratings.length;
+               console.log(post.id);
+               console.log(this.ratings.length);
+
+              // this.ratingTotal = this.ratings.length;
+              // console.log('rating updated');
+              // this.ratings.forEach(rating => {
+              //   if (rating.rating === true) {
+              //   this.ratingPositive++; }
+              //   post.rating = this.ratingPositive/this.ratingTotal;
+              //   console.log(post.rating);
+              //   console.log(this.ratingTotal);
+              //   console.log(this.ratingPositive);
+              // });
             },
             err => {
               console.log(err);
@@ -135,25 +149,6 @@ export class HomeComponent implements OnInit {
       );
     }
   }
-
-
-  // getRating(post: Post) {
-  //   if(this.loggedInUser && this.ratings){
-  //     this.ratingService.ratingByPostId(post.id).subscribe(
-  //       data => {
-  //         this.ratings = data;
-  //         console.log('rating updated');
-  //         this.ratings.forEach(rating => {
-  //           if (rating.rating === true) {
-  //           this.ratingPositive++; }
-  //         });
-  //       },
-  //       err => {
-  //         console.log(err);
-  //       }
-  //     );
-  //   }
-  // }
 
   getEnabledPosts() {
     for(let i = 0; i < this.posts.length; i++) {
@@ -232,7 +227,6 @@ export class HomeComponent implements OnInit {
   }
 
   getCommentsForPost(post: Post) {
-    // this.loadPosts();
     this.getAllComments();
     for(let i = 0; i < this.comments.length; i++) {
       if(this.comments[i].post.id === post.id){
@@ -262,7 +256,6 @@ export class HomeComponent implements OnInit {
         console.log("Error creating new Comment");
       }
     );
-    // this.post = null;
     this.postComments = [];
     this.newComment = new Comment();
   }

@@ -1,6 +1,7 @@
 import { User } from "./user";
 import { Song } from "./song";
 import { PostComment } from "./post-comment";
+import { Rating } from "./rating";
 
 export class Post {
 
@@ -14,7 +15,8 @@ export class Post {
   user: User;
   song: Song;
   isEnabled: boolean;
-  rating: number;
+  ratings: Rating[] | null | undefined;
+  ratingTotal: number;
 
   constructor(
     id: number = 0,
@@ -27,7 +29,8 @@ export class Post {
     user: User = new User,
     song: Song = new Song,
     isEnabled: boolean = true,
-    rating: number = 0,
+    ratings: Rating[] | null | undefined = null,
+    ratingTotal: number = 0
   ){
     this.id = id;
     this.content = content;
@@ -39,6 +42,7 @@ export class Post {
     this.user = user;
     this.isEnabled = isEnabled;
     this.song = song;
-    this.rating = rating;
+    this.ratings = ratings ? ratings: [];
+    this.ratingTotal = ratingTotal;
   }
 }
