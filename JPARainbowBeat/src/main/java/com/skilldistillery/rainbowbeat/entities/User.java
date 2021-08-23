@@ -17,6 +17,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class User {
@@ -42,7 +43,7 @@ public class User {
 	@Column(name = "enabled")
 	private Boolean isEnabled;
 	private String role;
-	//@JsonIgnore
+	@JsonIgnoreProperties({"following"})
 	@ManyToMany
 	@JoinTable(name = "favorite_user",
 	joinColumns = @JoinColumn(name = "user_id"),

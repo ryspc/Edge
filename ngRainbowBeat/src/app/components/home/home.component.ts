@@ -249,7 +249,7 @@ export class HomeComponent implements OnInit {
         update => {
           this.getLoggedInUser();
           console.log('unfollow successful');
-          let snackbar = this._snackBar.open('You are now following ' +user.username+'.', 'UNDO', {
+          let snackbar = this._snackBar.open('You unfollowed ' +user.username+'.', 'UNDO', {
             horizontalPosition: 'start',
             verticalPosition: 'top',
             duration: 5 * 1000,
