@@ -33,6 +33,9 @@ export class HomeComponent implements OnInit {
   ratingPositive: number = 0;
   rating: Rating = new Rating();
   newComment: Comment = new Comment();
+  enabledPosts: Post[] = [];
+
+
   @Input() searchKeyword: string = '';
   @Input() searchResult: Post[] | null | undefined;
 
@@ -92,20 +95,18 @@ export class HomeComponent implements OnInit {
   loadPosts(){
     this.postService.index().subscribe(
       posts => {
-        for(let i = 0; i < posts.length; i++) {
-          if(!posts[i].isEnabled){
-            posts.splice(i, 1);
-          }
-        }
         this.posts = posts;
         this.posts.forEach(post => {
+          if(post.isEnabled) {
+            this.enabledPosts.push(post);
+          }
           this.ratingService.ratingByPostId(post.id).subscribe(
             data => {
                post.ratings = data;
                post.ratingTotal = post.ratings.length;
                console.log(post.id);
                console.log(this.ratings.length);
-               
+
               // this.ratingTotal = this.ratings.length;
               // console.log('rating updated');
               // this.ratings.forEach(rating => {
@@ -141,13 +142,21 @@ export class HomeComponent implements OnInit {
       this.ratingService.create(this.rating).subscribe(
         update => {
           console.log('rating created')
-          this.loadPosts();
         },
         err => {
           console.log(err);
         }
       );
     }
+  }
+
+  getEnabledPosts() {
+    for(let i = 0; i < this.posts.length; i++) {
+      if(this.posts[i].isEnabled) {
+        this.enabledPosts.push(this.posts[i]);
+      }
+    }
+    console.log(this.enabledPosts);
   }
 
   setPost(post: Post) {
