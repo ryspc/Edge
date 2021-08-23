@@ -316,7 +316,7 @@ COMMIT;
 START TRANSACTION;
 USE `musicrecdb`;
 INSERT INTO `genre` (`id`, `genre_name`) VALUES (1, 'Rock');
-INSERT INTO `genre` (`id`, `genre_name`) VALUES (2, 'Hip-Hop/Rap');
+INSERT INTO `genre` (`id`, `genre_name`) VALUES (2, 'Rap');
 INSERT INTO `genre` (`id`, `genre_name`) VALUES (3, 'Pop');
 INSERT INTO `genre` (`id`, `genre_name`) VALUES (4, 'Country');
 INSERT INTO `genre` (`id`, `genre_name`) VALUES (5, 'Jazz');
