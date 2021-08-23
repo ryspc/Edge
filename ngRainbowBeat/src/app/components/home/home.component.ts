@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit {
   panelOpenState = false;
   ratingTotal: number = 0;
   ratingPositive: number = 0;
+  ratingNegative: number = 0;
   rating: Rating = new Rating();
   newComment: Comment = new Comment();
   enabledPosts: Post[] = [];
@@ -98,16 +99,51 @@ export class HomeComponent implements OnInit {
 
   loadPosts(){
     this.enabledPosts = [];
+    this.ratingNegative = 0;
+    this.ratingPositive = 0;
     this.postService.index().subscribe(
       posts => {
         this.posts = posts;
         this.getEnabledPosts();
-        console.log(this.enabledPosts)
-        this.posts.forEach(post => {
+        // console.log(this.enabledPosts)
+        this.enabledPosts.forEach(post => {
+          this.ratingNegative = 0;
+          this.ratingPositive = 0;
+          // console.log(post);
+          this.post = post;
+          // console.log(this.post);
+
+
+          console.log("foreachloop successfully entered");
           this.ratingService.ratingByPostId(post.id).subscribe(
             data => {
-               post.ratings = data;
-               post.ratingTotal = post.ratings.length;
+                if(this.post){
+               this.post.ratings = data;
+              //  console.log("ratings gotten for posts");
+              //  console.log(this.post);
+               this.ratingNegative = 0;
+          this.ratingPositive = 0;
+
+               if(this.post != null){
+                //  console.log("first if condition is met");
+                  // console.log(this.post.ratings);
+                 if(this.post.ratings){
+
+                 this.post.ratings.forEach(rating => {
+                   if (rating.rating == true){
+                     this.ratingPositive++;
+                   }
+                   if(rating.rating == false){
+                     this.ratingNegative++
+                   }
+                  //  console.log(post.id + "likes: " + this.ratingPositive);
+                  //  console.log(post.id + "dislikes: " + this.ratingNegative);
+                   post.ratingTotal = this.ratingPositive - this.ratingNegative;
+                  //  console.log(post.id + "totalRating: "  + post.ratingTotal);
+
+                 });
+                }
+               }
               //  console.log(post.id);
               //  console.log(this.ratings.length);
               // this.ratingTotal = this.ratings.length;
@@ -120,6 +156,7 @@ export class HomeComponent implements OnInit {
               //   console.log(this.ratingTotal);
               //   console.log(this.ratingPositive);
               // });
+                }
             },
             err => {
               console.log(err);
@@ -144,7 +181,28 @@ export class HomeComponent implements OnInit {
 
       this.ratingService.create(this.rating).subscribe(
         update => {
-          console.log('rating created')
+          console.log('good rating created')
+          this.loadPosts();
+        },
+        err => {
+          console.log(err);
+        }
+      );
+    }
+  }
+
+  dislike(post: Post) {
+    if(this.loggedInUser && this.rating){
+      this.rating.rating = false;
+      this.rating.user = this.loggedInUser;
+      this.rating.post = post;
+      console.log(this.rating.rating);
+      console.log(this.rating.user);
+      console.log(this.rating.post);
+
+      this.ratingService.create(this.rating).subscribe(
+        update => {
+          console.log('bad rating created')
           this.loadPosts();
         },
         err => {
