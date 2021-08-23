@@ -28,6 +28,9 @@
         </div>
     </div>
     <div fxLayout="row wrap" fxLayoutGap="16px grid" *ngIf="searchResult !== undefined && searchResult !== null">
+      <div *ngIf="searchResult.length === 0">
+        <h2>No posts found for your requested search</h2>
+      </div>
         <div fxFlex.lg="25%" fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let post of searchResult">
             <div *ngIf="post.isEnabled">
                 <mat-card class="mat-elevation-z4">

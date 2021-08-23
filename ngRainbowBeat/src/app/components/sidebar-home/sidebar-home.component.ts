@@ -194,5 +194,16 @@ postsByKeyword(){
 
     });
 }
+postsByGenre(genre: string){
+  this.postService.postsByGenre(genre).subscribe(
+    data => {
+      this.searchResult = data;
+      console.log(this.searchResult);
+    },
+    err => {
+      console.log('Could not retrieve all posts');
+
+    });
+}
 
 }
