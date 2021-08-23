@@ -82,6 +82,11 @@ export class HomeComponent implements OnInit {
   loadPosts(){
     this.postService.index().subscribe(
       posts => {
+        for(let i = 0; i < posts.length; i++) {
+          if(!posts[i].isEnabled){
+            posts.splice(i, 1);
+          }
+        }
         this.posts = posts;
         this.posts.forEach(post => {
           this.ratingService.ratingByPostId(post.id).subscribe(

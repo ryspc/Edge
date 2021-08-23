@@ -277,16 +277,16 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `musicrecdb`;
-INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (1, 'Solar Power', 'Lorde', NULL, NULL, 192, '2021-08-20', 'Solar Power', 1);
-INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (2, 'The Pressure', 'Nas', NULL, NULL, 188, '2021-08-06', 'King\'s Disease II', 1);
-INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (3, 'Pressure Machine', 'The Killers', NULL, NULL, 309, '2021-08-13', 'Pressure Machine', 2);
-INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (4, 'Monochrome', 'Between the Buried And Me', NULL, NULL, 195, '2021-08-20', 'Colors II', 2);
-INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (5, 'Happier Than Ever', 'Billie Eilish', NULL, NULL, 299, '2021-07-30', 'Happier Than Ever', 2);
-INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (6, 'Last Train Home', 'John Mayer', NULL, NULL, 187, '2021-07-16', 'Sob Rock', 1);
-INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (7, 'Blue Mesas', 'Leon Bridges', NULL, NULL, 196, '2021-07-23', 'Gold-Diggers Sound', 1);
-INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (8, 'Wilshire', 'Tyler, the Creator', NULL, NULL, 516, '2021-06-25', 'Call Me If You Get Lost', 2);
-INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (9, 'Butterfly 3000', 'King Gizzard and the Lizard Wizard', NULL, NULL, 172, '2021-06-11', 'Butterfly 3000', 1);
-INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (10, 'Red Room', 'Hiatus Kaiyote', NULL, NULL, 233, '2021-06-25', 'Mood Valiant', 1);
+INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (1, 'Solar Power', 'Lorde', NULL, 'https://www.youtube.com/watch?v=wvsP_lzh2-8', 192, '2021-08-20', 'Solar Power', 1);
+INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (2, 'The Pressure', 'Nas', NULL, 'https://www.youtube.com/watch?v=qTzKh5ykLU0', 188, '2021-08-06', 'King\'s Disease II', 1);
+INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (3, 'Pressure Machine', 'The Killers', NULL, 'https://www.youtube.com/watch?v=cPy0542LqPA', 309, '2021-08-13', 'Pressure Machine', 2);
+INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (4, 'Monochrome', 'Between the Buried And Me', NULL, 'https://www.youtube.com/watch?v=5iXmfOE2o5Q', 195, '2021-08-20', 'Colors II', 2);
+INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (5, 'Happier Than Ever', 'Billie Eilish', NULL, 'https://www.youtube.com/watch?v=5GJWxDKyk3A', 299, '2021-07-30', 'Happier Than Ever', 2);
+INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (6, 'Last Train Home', 'John Mayer', NULL, 'https://www.youtube.com/watch?v=66Ne5dVDfLM', 187, '2021-07-16', 'Sob Rock', 1);
+INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (7, 'Blue Mesas', 'Leon Bridges', NULL, 'https://www.youtube.com/watch?v=2QjPc81E09A', 196, '2021-07-23', 'Gold-Diggers Sound', 1);
+INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (8, 'Wilshire', 'Tyler, the Creator', NULL, 'https://www.youtube.com/watch?v=LxGVyJLjbiY', 516, '2021-06-25', 'Call Me If You Get Lost', 2);
+INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (9, 'Butterfly 3000', 'King Gizzard and the Lizard Wizard', NULL, 'https://www.youtube.com/watch?v=ArIOjP4pRbM', 172, '2021-06-11', 'Butterfly 3000', 1);
+INSERT INTO `song` (`id`, `song_title`, `artist`, `image_url`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (10, 'Red Room', 'Hiatus Kaiyote', NULL, 'https://www.youtube.com/watch?v=p46Tm9-7i7E', 233, '2021-06-25', 'Mood Valiant', 1);
 
 COMMIT;
 

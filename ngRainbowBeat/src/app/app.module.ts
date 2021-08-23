@@ -35,6 +35,7 @@ import { SidebarHomeComponent } from './components/sidebar-home/sidebar-home.com
 import { HomeComponent } from './components/home/home.component';
 import { DateAgoPipe } from './pipes/date-ago.pipe';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {YouTubePlayerModule} from '@angular/youtube-player';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatListModule,
     MatDividerModule,
     MatSnackBarModule,
-
+    YouTubePlayerModule
   ],
   providers: [
     UserService,
