@@ -6,6 +6,7 @@ import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
 import { UserService } from 'src/app/services/user.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-followers',
@@ -29,7 +30,8 @@ export class FollowersComponent implements OnInit {
     private userService: UserService,
     private postService: PostService,
     private modalService: NgbModal,
-    private router: Router
+    private router: Router,
+    private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -91,6 +93,14 @@ export class FollowersComponent implements OnInit {
         update => {
           this.getLoggedInUser();
           console.log('unfollow successful')
+          let snackbar = this._snackBar.open('You unfollowed ' + user, '', {
+            horizontalPosition: 'start',
+            verticalPosition: 'top',
+            duration: 5 * 1000,
+          });
+          snackbar.onAction().subscribe(() => {
+            console.log('The snack-bar action was triggered!');
+          });
         },
         err => {
           console.log(err);
