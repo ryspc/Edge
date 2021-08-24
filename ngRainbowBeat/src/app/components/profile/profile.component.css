@@ -14,7 +14,11 @@
   margin-top: 20px;
 }
 
-.post-table-section{
+.commentHeader{
+  text-align: center;
+  margin-top: 20px;
+}
+/* .post-table-section{
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -33,4 +37,4 @@
   justify-content: center;
 
   margin-top: 20px;
-}
+} */

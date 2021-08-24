@@ -10,6 +10,7 @@ import { Genre } from 'src/app/models/genre';
 import { SongService } from 'src/app/services/song.service';
 import { Song } from 'src/app/models/song';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-profile',
@@ -21,6 +22,7 @@ export class ProfileComponent implements OnInit {
   posts: Post[] = [];
   newPost  = new Post();
   comments: Comment[] =[];
+  newComment = new Comment();
 
   currentUser = new User();
 
@@ -33,12 +35,16 @@ export class ProfileComponent implements OnInit {
   enabledPosts: Post[] = [];
   enabledComments: Comment [] = [];
 
+  closeResult = '';
+
   constructor(private userService: UserService,
      private postService: PostService,
       private authService: AuthService,
        private commentService: CommentService,
         private songService: SongService,
-        private _snackBar: MatSnackBar) { }
+        private _snackBar: MatSnackBar,
+        private modalService: NgbModal,
+        ) { }
 
   encoded = this.authService.getCredentials();
   decoded = atob((this.encoded ?? 'null'));
@@ -117,9 +123,9 @@ displayTable(): void{
   this.selected = null;
 }
 
-setEditPost(): void{
-  this.editPost = Object.assign({}, this.selected);
-}
+// setEditPost(): void{
+//   this.editPost = Object.assign({}, this.selected);
+// }
 
   addPost(): void{
     this.postService.create(this.newPost).subscribe(
@@ -270,9 +276,9 @@ displayCommentTable(): void{
   this.selectedComment = null;
 }
 
-setEditComment(): void{
-  this.editComment = Object.assign({}, this.selectedComment);
-}
+// setEditComment(): void{
+//   this.editComment = Object.assign({}, this.selectedComment);
+// }
 
 getVideoId(song: Song): string{
   const regex = /[^=]*$/g;
@@ -337,6 +343,38 @@ formatPostDateTime(postDateTime: string): string{
       return dateMonth + '/' + dateDay + '/' + dateYear +' at '+ dateHour + ':'+ dateMin+'am';
   }
     }
+    open(content: any) {
+      this.modalService.open(content,
+        { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+          this.closeResult = `Closed with: ${result}`;
+        }, (reason) => {
+          this.closeResult =
+            `Dismissed ${this.getDismissReason(reason)}`;
+        });
+    }
 
+    private getDismissReason(reason: any): string {
+      if (reason === ModalDismissReasons.ESC) {
+        return 'by pressing ESC';
+      } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+        return 'by clicking on a backdrop';
+      } else {
+        return `with: ${reason}`;
+      }
+    }
+    setPost(post: Post) {
+      this.newPost = post;
+    }
 
+    setEditPost(post: Post) {
+      this.editPost = post;
+    }
+
+    setComment(comment: Comment) {
+      this.newComment = comment;
+    }
+
+    setEditComment(comment: Comment) {
+      this.editComment = comment;
+    }
 }
