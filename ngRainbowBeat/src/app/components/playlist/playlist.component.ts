@@ -65,4 +65,22 @@ export class PlaylistComponent implements OnInit {
   getSongLength(song: Song): number{
     return song.songLength;
   }
+
+  removeFromPlaylist(song: Song) {
+    for(let i = 0; i < this.playlists[0].songs.length; i++) {
+      if(this.playlists[0].songs[i] === song){
+        this.playlists[0].songs.splice(i, 1);
+      }
+    }
+    this.playlistService.update(this.playlists[0]).subscribe(
+      data => {
+        this.loadUserPlaylists();
+        console.log("playlist updated");
+      },
+      err => {
+        console.log("Error updating playlist");
+      }
+    );
+  }
+
 }
