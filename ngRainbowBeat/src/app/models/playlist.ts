@@ -14,10 +14,10 @@ export class Playlist {
 
   constructor(
     id: number = 0,
-  title: string = '',
+  title: string = 'Favorite Songs',
   description: string = '',
   imageUrl: string = '',
-  published: boolean = false,
+  published: boolean = true,
   user: User = new User(),
   songs: Song[] = []
   ) {
