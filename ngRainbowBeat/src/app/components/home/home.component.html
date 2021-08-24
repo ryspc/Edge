@@ -4,32 +4,32 @@
             <div *ngIf="post.isEnabled">
                 <mat-card class="mat-elevation-z4">
                     <mat-card-header>
-                        <div mat-card-avatar class="avatar mat-elevation-z8" style="background-image: url({{post.user.imageUrl}})"></div>
+                        <div mat-card-avatar class="avatar mat-elevation-z8" style="background-image: url({{post.user.imageUrl}}); background-position: center; background-size: cover;">
+                        </div>
                         <mat-card-title class="name">
                             <span>{{post.user.username}}</span><span class="bullet">&nbsp;&#8226;&nbsp;</span><span *ngIf="!following(post.user)" class="follow" (click)="follow(post.user)">Follow</span>
                             <span *ngIf="following(post.user)" class="follow" (click)="unfollow(post.user)">Unfollow</span>
                         </mat-card-title>
                         <mat-card-subtitle>{{post.createdAt | dateAgo}}</mat-card-subtitle>
                     </mat-card-header>
-                    <mat-card-content (click)="setPost(post);open(content);">
-                        <p>
-                            {{post.content}}
-                        </p>
+                    <mat-card-content class="cardContent" (click)="setPost(post);open(content);">
+                        <h4 style="font-weight: bold; padding-left: 10%;  margin-bottom: 5px;">{{post.title}}</h4>
+                        <p style=" padding-left: 10%; margin-bottom: 20px;">{{post.content}}</p>
+                        <div style="text-align: center;">
+                            <youtube-player videoId="{{getVideoId(post.song)}}" suggestedQuality="highres" [height]="215" [width]="215" [startSeconds]="0">
+                            </youtube-player>
+                        </div>
                     </mat-card-content>
                     <img mat-card-image src="{{post.song.imageURL}}">
                     <mat-divider></mat-divider>
-
-
-                    <!-- <mat-card-actions style="text-align: center;"> -->
-                    <mat-card-actions display="flex" style="justify-content: space-between	;">
-
-                        <!-- <button class= "upArrowRatingGiven" mat-button (click)="like(post)"><mat-icon>arrow_upward</mat-icon></button> -->
-                        <button mat-button (click)="like(post)"><mat-icon>arrow_upward</mat-icon></button> {{post.ratingTotal}}
-                        <button mat-button (click)="setPost(post);getCommentsForPost(post);open(comment);"><mat-icon>chat</mat-icon></button><br>
-
-                        <button mat-button (click)="dislike(post)"><mat-icon>arrow_downward</mat-icon></button>
-                        <button mat-button (click)="addSong(post.song);"><mat-icon>favorite</mat-icon></button>
-                    </mat-card-actions>
+                    <mat-card-footer class="cardfooter" style="text-align: center; margin-top: -30px">
+                        <button mat-button (click)="like(post)">
+                            <mat-icon>arrow_upward</mat-icon>
+                        </button> {{post.ratingTotal}}
+                        <button mat-button (click)="dislike(post)">
+                            <mat-icon>arrow_downward</mat-icon>
+                        </button>
+                    </mat-card-footer>
                 </mat-card>
             </div>
         </div>
@@ -57,9 +57,15 @@
                     <img mat-card-image src="{{post.song.imageURL}}">
                     <mat-divider></mat-divider>
                     <mat-card-actions style="text-align: center;">
-                        <button mat-button (click)="like(post)"><mat-icon>thumb_up</mat-icon></button>
-                        <button mat-button (click)="setPost(post);getCommentsForPost(post);open(comment);"><mat-icon>chat</mat-icon></button>
-                        <button mat-button><mat-icon>share</mat-icon></button>
+                        <button mat-button (click)="like(post)">
+                            <mat-icon>thumb_up</mat-icon>
+                        </button>
+                        <button mat-button (click)="setPost(post);getCommentsForPost(post);open(content);">
+                            <mat-icon>chat</mat-icon>
+                        </button>
+                        <button mat-button>
+                            <mat-icon>share</mat-icon>
+                        </button>
                     </mat-card-actions>
                 </mat-card>
             </div>
@@ -67,82 +73,77 @@
     </div>
 </div>
 
-
 <ng-template #content let-modal>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">
             Post Details
         </h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">
-            ×
-        </span>
-    </button>
+            <span aria-hidden="true">
+                ×
+            </span>
+        </button>
     </div>
     <div *ngIf="post" class="modal-body modal-content">
         <div class="info d-flex">
             <h1>{{post.title}}</h1>
         </div>
         <div class="info d-flex">
-            <h6>{{post.createdAt}}</h6>
-        </div>
-        <div class="info d-flex">
             <p>{{post.content}}</p>
         </div>
+        <br>
         <div class="info d-flex">
-            <p>Song Title: {{post.song.title}}</p>
+            <p>Artist:&nbsp;</p>
+            <p style="font-weight: bold;">{{post.song.artist}}</p>
         </div>
         <div class="info d-flex">
-            <p>By: {{post.song.artist}}&nbsp;&nbsp;&nbsp;&nbsp;Ablum: {{post.song.album}}</p>
+            <p>Title:&nbsp;</p>
+            <p style="font-weight: bold;">{{post.song.title}}</p>
+        </div>
+        <div class="info d-flex">
+            <p>Album:&nbsp;</p>
+            <p style="font-weight: bold;">{{post.song.album}}</p>
+        </div>
+        <div class="info d-flex">
+            <p>Released:&nbsp;</p>
+            <p style="font-weight: bold;">{{post.song.releaseDate | dateAgo}}</p>
         </div>
         <div class="info d-flex">
             <youtube-player videoId="{{getVideoId(post.song)}}" suggestedQuality="highres" [height]="300" [width]="465" [startSeconds]="0">
             </youtube-player>
         </div>
-        <div class="modal-footer">
-            <img class="footerPic" src={{post.user.imageUrl}} alt="Profile Image">
+        <div class="modal-footer" style="margin-top: -25px;padding-bottom: 5px;">
+            <img class="footerPic" src={{post.user.imageUrl}}>
             <h3>&nbsp;&nbsp;{{post.user.username}}</h3>
         </div>
-    </div>
-</ng-template>
-
-
-<ng-template #comment let-modal>
-    <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">
-            Add Comment
-        </h4>
-
-        <button type="button" class="close" aria-label="Close" (click)="postComments = [];modal.dismiss('Cross click');">
-
-          <span aria-hidden="true">
-              ×
-          </span>
-      </button>
-    </div>
-    <div *ngFor="let comment of postComments">
-        <div class="modal-body modal-content">
-            <div class="info d-flex">
-                <h2><span><img class="commentPic" src={{comment.user.imageUrl}} alt="Profile Image"></span>{{comment.user.username}}</h2>
-                <h5 class="subtitle">{{comment.createdAt | dateAgo}}</h5>
-            </div>
-            <!-- <div class="info d-flex">
-            </div> -->
-            <div class="info d-flex">
-                <p>{{comment.content}}</p>
-            </div>
-            <div>
-                <hr>
+        <div style="text-align: left; margin-top: -60px;padding-bottom: 10px;">
+            <button mat-button (click)="addSong(post.song); ">
+                <mat-icon>favorite</mat-icon>
+            </button>
+            <button mat-button (click)="setPost(post);getCommentsForPost(post); ">
+                <mat-icon>chat</mat-icon>
+            </button>
+        </div>
+        <div *ngIf="commentVisibility">
+            <h3 style="font-weight: bold; margin-bottom: -10px; font-size: 16px;">Comments</h3>
+            <form *ngIf="post ">
+                <div class="modal-footer ">
+                    <textarea class="form-control me-2 " name="addComment " cols="30 " rows="2 " [(ngModel)]="newComment.content "></textarea>
+                    <button class="btn btn-outline-success pull-right " (click)="addComment(newComment) ">Add Comment</button>
+                </div>
+            </form>
+            <div *ngFor="let comment of postComments ">
+                <div class="modal-body modal-content ">
+                    <div class="info d-flex ">
+                        <h2><span><img class="commentPic " style="margin-top: -5px;" src={{comment.user.imageUrl}}></span>{{comment.user.username}}</h2>
+                        <h5 class="subtitle ">{{comment.createdAt | dateAgo}}</h5>
+                    </div>
+                    <div class="info d-flex ">
+                        <p>{{comment.content}}</p>
+                    </div>
+                    <hr>
+                </div>
             </div>
         </div>
     </div>
-    <form *ngIf="post">
-        <div class="modal-footer">
-            <!-- <input type="hidden" [value]="loggedInUser" class="form-control me-2" [(ngModel)]="newComment.user"> -->
-            <!-- <input type="hidden" [value]="post" class="form-control me-2" [(ngModel)]="newComment.post"> -->
-            <textarea class="form-control me-2" name="addComment" cols="30" rows="2" [(ngModel)]="newComment.content"></textarea>
-            <button class="btn btn-outline-success pull-right" (click)="addComment(newComment)">Add Comment</button>
-        </div>
-    </form>
-
 </ng-template>
