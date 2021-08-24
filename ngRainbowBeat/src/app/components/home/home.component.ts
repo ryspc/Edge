@@ -56,6 +56,16 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnChanges() {
+    if (this.searchResult === []) {
+      let snackbar = this._snackBar.open('No results found.', '', {
+        horizontalPosition: 'start',
+        verticalPosition: 'top',
+        duration: 5 * 1000,
+      });
+      snackbar.onAction().subscribe(() => {
+        console.log('The snack-bar action was triggered!');
+      });
+    }
     console.log(this.searchResult);  }
 
   ngOnInit(): void {
@@ -180,6 +190,7 @@ this.commentVisibility = false;
             verticalPosition: 'top',
             duration: 5 * 1000,
             panelClass: 'snackbar'
+
           });
           snackbar.onAction().subscribe(() => {
             this.dislike(post);
@@ -386,7 +397,6 @@ this.commentVisibility = false;
     const regex = /[^=]*$/g;
     let songString = song.songURL;
     let songId = songString.substr(songString.search(regex));
-    console.log(songId);
     return songId;
   }
 
@@ -425,6 +435,10 @@ this.commentVisibility = false;
         });
       }
     );
+  }
+
+  get sortedArray(): Post[] {
+    return this.enabledPosts.sort((a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
   }
 
 }
