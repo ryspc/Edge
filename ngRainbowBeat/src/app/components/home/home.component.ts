@@ -199,9 +199,24 @@ export class HomeComponent implements OnInit {
         update => {
           console.log('good rating created')
           this.loadPosts();
+          let snackbar = this._snackBar.open('You upvoted "'+ post.title+'".', 'UNDO', {
+            horizontalPosition: 'start',
+            verticalPosition: 'top',
+             duration: 5 * 1000,
+             panelClass: 'snackbar'
+             
+          });
+          snackbar.onAction().subscribe(() => {
+            this.dislike(post);
+          });
         },
         err => {
           console.log(err);
+          let snackbar = this._snackBar.open('Could not upvote, please try again.', '', {
+            horizontalPosition: 'start',
+            verticalPosition: 'top',
+            duration: 5 * 1000,
+          });
         }
       );
     }
@@ -220,19 +235,20 @@ export class HomeComponent implements OnInit {
         update => {
           console.log('bad rating created')
           this.loadPosts();
-          let snackbar = this._snackBar.open('You liked '+ post.title+'.', 'UNDO', {
+          let snackbar = this._snackBar.open('You downvoted "'+ post.title+'".', 'UNDO', {
             horizontalPosition: 'start',
             verticalPosition: 'top',
+            panelClass: 'snackbar',
             duration: 5 * 1000,
           });
           snackbar.onAction().subscribe(() => {
-            console.log('The snack-bar action was triggered!');
+            this.like(post);
           });
           console.log('rating created')
         },
         err => {
           console.log(err);
-          let snackbar = this._snackBar.open('Could not like the post, please try again.', '', {
+          let snackbar = this._snackBar.open('Could not downvote, please try again.', '', {
             horizontalPosition: 'start',
             verticalPosition: 'top',
             duration: 5 * 1000,
@@ -267,6 +283,7 @@ export class HomeComponent implements OnInit {
             let snackbar = this._snackBar.open('You are now following ' +followedUser.username+'.', 'UNDO', {
               horizontalPosition: 'start',
               verticalPosition: 'top',
+              panelClass: 'snackbar',
               duration: 5 * 1000,
             });
             snackbar.onAction().subscribe(() => {
@@ -318,6 +335,7 @@ export class HomeComponent implements OnInit {
           let snackbar = this._snackBar.open('You unfollowed ' +user.username+'.', 'UNDO', {
             horizontalPosition: 'start',
             verticalPosition: 'top',
+            panelClass: 'snackbar',
             duration: 5 * 1000,
           });
           snackbar.onAction().subscribe(() => {
