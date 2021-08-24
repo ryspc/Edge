@@ -21,7 +21,13 @@
         <img *ngIf="loggedInUser" class="avatar mat-elevation-z8 prof" src="{{loggedInUser.imageUrl}}" (click)="profile()" />
         <h4 *ngIf="loggedInUser" (click)="profile()" class="name prof">Welcome, {{loggedInUser.username}} </h4>
         <mat-divider></mat-divider>
+        <button mat-button class="menu-button" (click)="profile()">
+            <mat-icon>person</mat-icon>
+            <span>&nbsp;Profile</span>
+        </button>
+        <mat-divider></mat-divider>
         <button mat-button class="menu-button" (click)="open(content)">
+            <mat-icon>add</mat-icon>
       <span>&nbsp;Create Post</span>
     </button>
         <mat-divider></mat-divider>
