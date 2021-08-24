@@ -2,11 +2,15 @@
  body {
      height: 100%;
  }
-
+ 
  form.normal-form {
-   margin: 10px;
+     margin: 10px;
  }
-
+ 
  .button-row button {
-   margin: 5px;
+     margin: 5px;
+ }
+ 
+ .snackbar button {
+     color: tomato;
  }
