@@ -216,6 +216,7 @@ postsByKeyword(keyword:string){
   this.postService.postsByKeyword(keyword).subscribe(
     data => {
       this.searchResult = data;
+      this.searchResult = this.searchResult.sort((a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
       console.log(this.searchResult);
     },
     err => {
@@ -227,6 +228,7 @@ postsByGenre(genre: string){
   this.postService.postsByGenre(genre).subscribe(
     data => {
       this.searchResult = data;
+      this.searchResult = this.searchResult.sort((a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
       console.log(this.searchResult);
     },
     err => {

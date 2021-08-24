@@ -32,11 +32,21 @@
     </button>
         <mat-divider></mat-divider>
         <h2>Featured Genres</h2>
-        <div *ngFor="let genre of genres">
-            <button mat-button class="menu-button" (click)="postsByGenre(genre.name)">
-      <span>&nbsp;{{genre.name}}</span>
+            <button mat-button class="menu-button" (click)="postsByGenre('Rock')">
+      <span>&nbsp; Rock </span>
+    </button> <br>
+            <button mat-button class="menu-button" (click)="postsByGenre('Rap')">
+      <span>&nbsp; Rap </span>
+    </button> <br>
+            <button mat-button class="menu-button" (click)="postsByGenre('Pop')">
+      <span>&nbsp; Pop </span>
+    </button> <br>
+            <button mat-button class="menu-button" (click)="postsByGenre('R&B')">
+      <span>&nbsp; R&B </span>
+    </button> <br>
+            <button mat-button class="menu-button" (click)="postsByGenre('Metal')">
+      <span>&nbsp; Metal </span>
     </button>
-        </div>
     </mat-sidenav>
     <mat-sidenav-content>
         <div class="content mat-elevation-z8">
