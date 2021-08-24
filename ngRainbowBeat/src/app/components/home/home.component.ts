@@ -11,6 +11,8 @@ import { RatingService } from 'src/app/services/rating.service';
 import { Rating } from 'src/app/models/rating';
 import { Song } from 'src/app/models/song';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { PlaylistService } from 'src/app/services/playlist.service';
+import { Playlist } from 'src/app/models/playlist';
 
 @Component({
   selector: 'app-home',
@@ -37,6 +39,8 @@ export class HomeComponent implements OnInit {
   rating: Rating = new Rating();
   newComment: Comment = new Comment();
   enabledPosts: Post[] = [];
+  playlists: Playlist[] = [];
+
 
 
   @Input() searchKeyword: string = '';
@@ -48,6 +52,7 @@ export class HomeComponent implements OnInit {
    private modalService: NgbModal,
    private commentService: CommentService,
    private ratingService: RatingService,
+   private playlistService: PlaylistService,
    private _snackBar: MatSnackBar
    ) {
     console.log(this.searchResult);
@@ -66,6 +71,7 @@ export class HomeComponent implements OnInit {
     this.getLoggedInUser();
     this.loadPosts();
     this.getAllComments();
+    this.getUserPlaylist();
   }
   getLoggedInUser() {
     this.userService.getCurrentUser(this.decoded.split(':')).subscribe(
@@ -193,9 +199,24 @@ export class HomeComponent implements OnInit {
         update => {
           console.log('good rating created')
           this.loadPosts();
+          let snackbar = this._snackBar.open('You upvoted "'+ post.title+'".', 'UNDO', {
+            horizontalPosition: 'start',
+            verticalPosition: 'top',
+             duration: 5 * 1000,
+             panelClass: 'snackbar'
+
+          });
+          snackbar.onAction().subscribe(() => {
+            this.dislike(post);
+          });
         },
         err => {
           console.log(err);
+          let snackbar = this._snackBar.open('Could not upvote, please try again.', '', {
+            horizontalPosition: 'start',
+            verticalPosition: 'top',
+            duration: 5 * 1000,
+          });
         }
       );
     }
@@ -214,19 +235,20 @@ export class HomeComponent implements OnInit {
         update => {
           console.log('bad rating created')
           this.loadPosts();
-          let snackbar = this._snackBar.open('You liked '+ post.title+'.', 'UNDO', {
+          let snackbar = this._snackBar.open('You downvoted "'+ post.title+'".', 'UNDO', {
             horizontalPosition: 'start',
             verticalPosition: 'top',
+            panelClass: 'snackbar',
             duration: 5 * 1000,
           });
           snackbar.onAction().subscribe(() => {
-            console.log('The snack-bar action was triggered!');
+            this.like(post);
           });
           console.log('rating created')
         },
         err => {
           console.log(err);
-          let snackbar = this._snackBar.open('Could not like the post, please try again.', '', {
+          let snackbar = this._snackBar.open('Could not downvote, please try again.', '', {
             horizontalPosition: 'start',
             verticalPosition: 'top',
             duration: 5 * 1000,
@@ -261,6 +283,7 @@ export class HomeComponent implements OnInit {
             let snackbar = this._snackBar.open('You are now following ' +followedUser.username+'.', 'UNDO', {
               horizontalPosition: 'start',
               verticalPosition: 'top',
+              panelClass: 'snackbar',
               duration: 5 * 1000,
             });
             snackbar.onAction().subscribe(() => {
@@ -312,6 +335,7 @@ export class HomeComponent implements OnInit {
           let snackbar = this._snackBar.open('You unfollowed ' +user.username+'.', 'UNDO', {
             horizontalPosition: 'start',
             verticalPosition: 'top',
+            panelClass: 'snackbar',
             duration: 5 * 1000,
           });
           snackbar.onAction().subscribe(() => {
@@ -388,6 +412,34 @@ export class HomeComponent implements OnInit {
     let songId = songString.substr(songString.search(regex));
     console.log(songId);
     return songId;
+  }
+
+  getUserPlaylist() {
+    this.playlistService.index().subscribe(
+      data => {
+        this.playlists = data;
+      },
+      err => {
+        console.log("Error getting playlists");
+      }
+    );
+  }
+
+  addSong(song: Song) {
+    this.playlists[0].songs.push(song);
+    this.playlistService.update(this.playlists[0]).subscribe(
+      data => {
+        this.playlists[0] = data;
+        console.log("Playlist updated");
+      },
+      err => {
+        console.log("error updating playlist");
+      }
+    );
+  }
+
+  get sortedArray(): Post[] {
+    return this.enabledPosts.sort((a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
   }
 
 }

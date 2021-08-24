@@ -4,6 +4,8 @@ import { Song } from 'src/app/models/song';
 import { PlaylistService } from 'src/app/services/playlist.service';
 import { UserService } from 'src/app/services/user.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { User } from 'src/app/models/user';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-playlist',
@@ -15,7 +17,8 @@ export class PlaylistComponent implements OnInit {
   constructor(
     private userService: UserService,
     private playlistService: PlaylistService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private authService: AuthService
   ) { }
 
   playlists: Playlist[] = [];
@@ -30,11 +33,12 @@ export class PlaylistComponent implements OnInit {
 
   }
 
+
   loadUserPlaylists(){
     this.playlistService.index().subscribe(
       playlists => {
         this.playlists = playlists;
-        console.log(this.playlists)
+        console.log(this.playlist);
       },
       noPlaylists => {
         console.error('PlaylistComponenet.loadPosts: error displaying Playlists')
@@ -61,4 +65,22 @@ export class PlaylistComponent implements OnInit {
   getSongLength(song: Song): number{
     return song.songLength;
   }
+
+  removeFromPlaylist(song: Song) {
+    for(let i = 0; i < this.playlists[0].songs.length; i++) {
+      if(this.playlists[0].songs[i] === song){
+        this.playlists[0].songs.splice(i, 1);
+      }
+    }
+    this.playlistService.update(this.playlists[0]).subscribe(
+      data => {
+        this.loadUserPlaylists();
+        console.log("playlist updated");
+      },
+      err => {
+        console.log("Error updating playlist");
+      }
+    );
+  }
+
 }

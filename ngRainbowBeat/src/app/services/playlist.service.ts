@@ -24,7 +24,7 @@ export class PlaylistService {
 
 
   index(): Observable<Playlist[]>{
-    return this.http.get<Playlist[]>(this.url).pipe(
+    return this.http.get<Playlist[]>(this.url, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log('PlaylistService.index() err retrieving  playlists');
         return throwError(err);
@@ -39,6 +39,15 @@ export class PlaylistService {
       return throwError(err);
     })
   );
+  }
+
+  update(playlist: Playlist) {
+    return this.http.put<Playlist>(this.url, playlist, this.getHttpOptions()).pipe(
+      catchError((err:any) => {
+        console.log("PlaylistService.update(): err updating playlist")
+        return throwError(err);
+      })
+    );
   }
 
   getHttpOptions():object {

@@ -12,7 +12,9 @@ public interface PlaylistService {
 
 	Playlist create(Playlist playlist, String username);
 
-	Playlist update(Playlist playlist);
+	Playlist update(Playlist playlist, String username);
 
 	boolean delete(int id);
+	
+	List<Playlist> showUserPlaylist(String username);
 }

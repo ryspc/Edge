@@ -46,14 +46,27 @@ public class PlaylistServiceImpl implements PlaylistService {
 	}
 
 	@Override
-	public Playlist update(Playlist playlist) {
-		return playlistRepo.saveAndFlush(playlist);
+	public Playlist update(Playlist playlist, String username) {
+		User user = userRepo.findByUsername(username);
+		try {
+			playlist.setUser(user);
+			playlistRepo.saveAndFlush(playlist);
+			return playlist;
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+		}
 	}
 
 	@Override
 	public boolean delete(int id) {
 		playlistRepo.deleteById(id);
 		return !playlistRepo.existsById(id);
+	}
+
+	@Override
+	public List<Playlist> showUserPlaylist(String username) {
+		return playlistRepo.findByUser_Username(username);
 	}
 
 }
