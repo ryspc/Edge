@@ -1,6 +1,5 @@
-
 <mat-toolbar class="mat-elevation-z8">
-  <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+    <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
     <mat-icon *ngIf="!sidenav.opened">
       menu
     </mat-icon>
@@ -8,166 +7,96 @@
       close
     </mat-icon>
   </button>
-  <button mat-button>
+    <button mat-button>
     <span>&nbsp;Logo</span>
   </button>
-  <div class="searchbar">
-
-    <input type="text"
-    [(ngModel)]="searchInput"
-    placeholder="Search for a Post"
-    matInput
-    [formControl]="myControl"
-    [matAutocomplete]="auto"
-    />
-    <button (click)="postsByKeyword()">Search</button>
-
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let option of options" [value]="option">
-        {{option}}
-      </mat-option>
-    </mat-autocomplete>
-
-
-  </div>
+    <div class="searchbar" id="searchbar">
+        <form class="d-flex searchform">
+            <input class="form-control me-2" placeholder="Search posts, songs, users..." matInput id="input1" type="text" name="keyword" #keyword (keyup)="postsByKeyword(keyword.value)"> &nbsp;&nbsp;&nbsp;
+        </form>
+    </div>
 </mat-toolbar>
 <mat-sidenav-container>
-  <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
-    <img *ngIf="loggedInUser" class="avatar mat-elevation-z8 prof" src="{{loggedInUser.imageUrl}}" (click)="profile()" />
-    <h4 *ngIf="loggedInUser" (click)="profile()" class="name prof">Welcome, {{loggedInUser.username}} </h4>
-    <mat-divider></mat-divider>
-    <button mat-button class="menu-button" (click)="open(content)">
+    <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+        <img *ngIf="loggedInUser" class="avatar mat-elevation-z8 prof" src="{{loggedInUser.imageUrl}}" (click)="profile()" />
+        <h4 *ngIf="loggedInUser" (click)="profile()" class="name prof">Welcome, {{loggedInUser.username}} </h4>
+        <mat-divider></mat-divider>
+        <button mat-button class="menu-button" (click)="open(content)">
       <span>&nbsp;Create Post</span>
     </button>
-    <mat-divider></mat-divider>
-    <h2>Featured Genres</h2>
-    <div *ngFor="let genre of genres">
-    <button mat-button class="menu-button" (click)="postsByGenre(genre.name)" >
+        <mat-divider></mat-divider>
+        <h2>Featured Genres</h2>
+        <div *ngFor="let genre of genres">
+            <button mat-button class="menu-button" (click)="postsByGenre(genre.name)">
       <span>&nbsp;{{genre.name}}</span>
     </button>
-  </div>
-    <!-- <button mat-button class="menu-button">
-      <span>&nbsp;Hip-Hop/Rap</span>
-    </button>
-    <button mat-button class="menu-button">
-      <span>&nbsp;Pop</span>
-    </button>
-    <button mat-button class="menu-button">
-      <span>&nbsp;Country</span>
-    </button>
-    <button mat-button class="menu-button">
-      <span>&nbsp;Jazz</span>
-    </button>
-    <button mat-button class="menu-button">
-      <span>&nbsp;Dance</span>
-    </button>
-    <button mat-button class="menu-button">
-      <span>&nbsp;House</span>
-    </button>
-    <button mat-button class="menu-button">
-      <span>&nbsp;Downtempo</span>
-    </button>
-    <button mat-button class="menu-button">
-      <span>&nbsp;Punk</span>
-    </button>
-    <button mat-button class="menu-button">
-      <span>&nbsp;Blues</span>
-    </button>
-    <button mat-button class="menu-button">
-      <span>&nbsp;Classical</span>
-    </button>
-    <button mat-button class="menu-button">
-      <span>&nbsp;R&B</span>
-    </button>
-    <button mat-button class="menu-button">
-      <span>&nbsp;Reggae</span>
-    </button>
-    <button mat-button class="menu-button">
-      <span>&nbsp;Latin</span>
-    </button>
-    <button mat-button class="menu-button">
-      <span>&nbsp;Indie Pop</span>
-    </button>
-    <button mat-button class="menu-button">
-      <span>&nbsp;Alternative</span>
-    </button> -->
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <div class="content mat-elevation-z8">
-<app-home [searchKeyword]="searchInput" [searchResult]="searchResult"></app-home>
-    </div>
-  </mat-sidenav-content>
+        </div>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div class="content mat-elevation-z8">
+            <app-home [searchKeyword]="searchInput" [searchResult]="searchResult"></app-home>
+        </div>
+    </mat-sidenav-content>
 </mat-sidenav-container>
-
-
 <ng-template #content let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">
-      Add New Post
-    </h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">
+            Add New Post
+        </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">
         ×
       </span>
     </button>
-  </div>
-  <form>
-    <div class="modal-body modal-content">
-      <div class="info d-flex">
-        <label for="title" class="form-label"> Post Title </label> <input class="form-control me-2" type="text" name="title" [(ngModel)]="newPost.title" />
-      </div>
-      <div class="info d-flex">
-        <label for="content" class="form-label"> Post Content </label>
-        <textarea class="form-control me-2" rows="2" name="content" [(ngModel)]="newPost.content"></textarea>
-      </div>
-      <div class="info d-flex">
-        <label for="song" class="form-label"> Song Title </label>
-        <textarea class="form-control me-2" rows="2" name="songTitle" [(ngModel)]="newSong.title"></textarea>
-      </div>
-      <div class="info d-flex">
-        <label for="song" class="form-label"> Song Artist </label>
-        <textarea class="form-control me-2" rows="2" name="songArtist" [(ngModel)]="newSong.artist"></textarea>
-      </div>
-      <div class="info d-flex">
-        <label for="song" class="form-label"> Song Album </label>
-        <textarea class="form-control me-2" rows="2" name="songAlbum" [(ngModel)]="newSong.album"></textarea>
-      </div>
-      <div class="info d-flex">
-        <label for="song" class="form-label"> Song Genre </label>
-        <select name = "dropdown" [(ngModel)]="genreName">
-          <option *ngFor="let genre of genres" [value]="genre.id">{{genre.name}}</option>
-          <!-- <option value = "1" name="songGenre1" [ngValue]="genreName">Pony Music</option> -->
-          <!-- <option value = "2" name="songGenre2" [ngValue]="genreName">Pony Alt Death Metal </option> -->
-          <!-- <option value = "3" name="songGenre3" [ngValue]="genreName">Conservative Pony Country</option> -->
-        </select>
-        <!-- <textarea class="form-control me-2" rows="2" name="song" [(ngModel)]="genreName"></textarea> -->
-      </div>
-      <div class="info d-flex">
-        <label for="song" class="form-label"> Song Length </label>
-        <input type="number" name="songLength" [(ngModel)]="newSong.songLength" />
-        <!-- <textarea class="form-control me-2" rows="2" name="song" [(ngModel)]="newSong.songLength"></textarea> -->
-      </div>
-      <div class="info d-flex">
-        <label for="song" class="form-label"> Song Release Date </label>
-        <input type="date" name="releaseDate" [(ngModel)]="newSong.releaseDate" />
-        <!-- <textarea class="form-control me-2" rows="2" name="song" [(ngModel)]="newSong.releaseDate"></textarea> -->
-      </div>
-      <div class="info d-flex">
-        <label for="song" class="form-label"> Image URL </label>
-        <textarea class="form-control me-2" rows="2" name="songImg" [(ngModel)]="newSong.imageURL"></textarea>
-      </div>
-      <div class="info d-flex">
-        <label for="song" class="form-label"> Song URL </label>
-        <textarea class="form-control me-2" rows="2" name="songUrl" [(ngModel)]="newSong.songURL"></textarea>
-      </div>
     </div>
-    <div class="modal-footer">
-      <button class="btn btn-outline-light pull-right" (click)="modal.close(createPost(genreName, newSong, newPost))" id="btn3" type="submit">
+    <form>
+        <div class="modal-body modal-content">
+            <div class="info d-flex">
+                <label for="title" class="form-label"> Post Title </label> <input class="form-control me-2" type="text" name="title" [(ngModel)]="newPost.title" />
+            </div>
+            <div class="info d-flex">
+                <label for="content" class="form-label"> Post Content </label>
+                <textarea class="form-control me-2" rows="2" name="content" [(ngModel)]="newPost.content"></textarea>
+            </div>
+            <div class="info d-flex">
+                <label for="song" class="form-label"> Song Title </label>
+                <textarea class="form-control me-2" rows="2" name="songTitle" [(ngModel)]="newSong.title"></textarea>
+            </div>
+            <div class="info d-flex">
+                <label for="song" class="form-label"> Song Artist </label>
+                <textarea class="form-control me-2" rows="2" name="songArtist" [(ngModel)]="newSong.artist"></textarea>
+            </div>
+            <div class="info d-flex">
+                <label for="song" class="form-label"> Song Album </label>
+                <textarea class="form-control me-2" rows="2" name="songAlbum" [(ngModel)]="newSong.album"></textarea>
+            </div>
+            <div class="info d-flex">
+                <label for="song" class="form-label"> Song Genre </label>
+                <select name="dropdown" [(ngModel)]="genreName">
+          <option *ngFor="let genre of genres" [value]="genre.id">{{genre.name}}</option>
+        </select>
+            </div>
+            <div class="info d-flex">
+                <label for="song" class="form-label"> Song Length </label>
+                <input type="number" name="songLength" [(ngModel)]="newSong.songLength" />
+            </div>
+            <div class="info d-flex">
+                <label for="song" class="form-label"> Song Release Date </label>
+                <input type="date" name="releaseDate" [(ngModel)]="newSong.releaseDate" />
+            </div>
+            <div class="info d-flex">
+                <label for="song" class="form-label"> Image URL </label>
+                <textarea class="form-control me-2" rows="2" name="songImg" [(ngModel)]="newSong.imageURL"></textarea>
+            </div>
+            <div class="info d-flex">
+                <label for="song" class="form-label"> Song URL </label>
+                <textarea class="form-control me-2" rows="2" name="songUrl" [(ngModel)]="newSong.songURL"></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-outline-light pull-right" (click)="modal.close(createPost(genreName, newSong, newPost))" id="btn3" type="submit">
         Save&nbsp;&nbsp;<i class="fa fa-download"></i>
       </button>
-    </div>
-  </form>
+        </div>
+    </form>
 </ng-template>
-
-<!-- <app-home [searchKeyword]="searchInput" [searchResult]="searchResult"></app-home> -->
