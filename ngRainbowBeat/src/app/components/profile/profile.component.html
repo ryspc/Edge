@@ -3,236 +3,334 @@
 <h2 class="uploadHeader" *ngIf="!selected">I have {{getNumberOfPosts()}} Post </h2>
 
  <div class=post-table-section *ngIf="!selected">
-   <!--
-  <table class="myPostTable" *ngIf="!selected">
-    <thead>
-      <tr>
-        <th>Title:</th><th>Content:</th><th>Posted:</th><th></th><th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let post of posts">
-        <td >{{post.title}}</td><td>{{post.content}}</td><td>{{post.createdAt}}</td>
-        <td>
-          <button
-          (click)="displayPost(post)"
-          class="btn btn-dark">Details</button>
-        </td>
-        <td>
-          <button
-            (click)="destroyPost(post.id)"
-            class="btn btn-dark"
-          >
-            Delete
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table> -->
+  <div fxLayout="row wrap" fxLayoutGap="16px grid" *ngIf="!selected">
+        <div fxFlex.lg="25%" fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let post of enabledPosts">
+          <div *ngIf="post.isEnabled">
+              <mat-card class="mat-elevation-z4">
+                  <mat-card-header>
+                      <div mat-card-avatar class="avatar mat-elevation-z8" style="background-image: url({{post.user.imageUrl}})"></div>
+                      <mat-card-title class="name">
+                          <span>{{post.title}}</span>
+                      </mat-card-title>
+                      <mat-card-subtitle>{{formatPostDateTime(post.createdAt)}}</mat-card-subtitle>
+                  </mat-card-header>
+                  <mat-card-content>
+                      <p>
+                          {{post.content}}
+                      </p>
+                  </mat-card-content>
+                  <img mat-card-image src="{{post.song.imageURL}}">
+                  <mat-divider></mat-divider>
 
-  <div class="card" style="width: 18rem;" *ngFor="let post of enabledPosts">
-    <div class="card-body">
-      <h5 class="card-title">{{post.title}}</h5>
-      <h6 class="card-subtitle mb-2 text-muted">{{post.createdAt}}</h6>
-      <p class="card-text">{{post.content}}</p>
-      <button
-          (click)="displayPost(post)"
-          class="btn btn-dark">Details</button>
-          <button
-          (click)="hidePost(post.id)"
-          class="btn btn-dark"
-        >Delete</button>
-      <!-- <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a> -->
-    </div>
+
+                  <mat-card-actions style="text-align: center;">
+                      <button (click)="setPost(post);open(content)" class="btn btn-dark">Details</button>
+                      <button (click)="hidePost(post.id)" class="btn btn-dark">Delete</button>
+                  </mat-card-actions>
+              </mat-card>
+          </div>
+      </div>
   </div>
-</div>
-<!-- Post Details SECTION -->
-  <div id="postDetails" *ngIf="selected && !editPost">
-    <h3>Title: {{ selected.title }}</h3>
-    <p>Content: {{ selected.content }}</p>
-    <p>Date Created: {{ selected.createdAt }}</p>
-    <p>Updated: {{ selected.updatedAt }}</p>
-    <p><youtube-player
-      videoId="{{getVideoId(selected.song)}}"
-      suggestedQuality="highres"
-      [height]="200"
-      [width]="300"
-      [startSeconds]="0"></youtube-player>
-    </p>
 
-    <div class="addPostBtnDiv">
+</div>
+
+
+<!-- Post Details SECTION -->
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">
+          Post Details
+      </h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">
+            ×
+        </span>
+    </button>
+  </div>
+  <div *ngIf="newPost" class="modal-body modal-content">
+      <div class="info d-flex">
+          <h1>{{newPost.title}}</h1>
+      </div>
+      <div class="info d-flex">
+          <h6>{{formatPostDateTime(newPost.createdAt)}}</h6>
+      </div>
+      <div class="info d-flex">
+          <p>{{newPost.content}}</p>
+      </div>
+      <div class="info d-flex">
+          <p>Song Title: {{newPost.song.title}}</p>
+      </div>
+      <div class="info d-flex">
+          <p>By: {{newPost.song.artist}} Ablum: {{newPost.song.album}}</p>
+      </div>
+      <div class="info d-flex">
+        <youtube-player
+          videoId="{{getVideoId(newPost.song)}}"
+          suggestedQuality="highres"
+          [height]="300"
+          [width]="465"
+          [startSeconds]="0">
+        </youtube-player>
+      </div>
+      <div class="modal-footer">
       <button
-        (click)="displayTable()"
-        class="btn btn-dark addConcBtnEdit"
-      >
-        Back
-      </button>
-      <button
-        (click)="setEditPost()"
+        (click)="setEditPost(newPost);open(editContent);modal.dismiss('Cross click')"
         class="btn btn-dark addConcBtnEdit"
       >
         Edit
       </button>
-    </div>
+      </div>
   </div>
-  <form id="editTodo" *ngIf="editPost">
-    <h3>Edit Post</h3>
-    <div class="addPostBtnDiv">
-      <label class="editLabel" for="title">Title:</label>
-      <input
-        type="text"
-        class="form-control addPostForm"
-        name="title"
-        [(ngModel)]="editPost.title"
-      />
-      <label class="editLabel" for="content">Content:</label>
-      <input
-        type="text"
-        class="form-control addPostForm"
-        name="content"
-        [(ngModel)]="editPost.content"
-      />
-      <label class="editLabel" for="songTitle">Song Title:</label>
-      <input
-        type="text"
-        class="form-control addPostForm"
-        name="songTitle"
-        [(ngModel)]="editPost.song.title"
-      />
-      <label class="editLabel" for="songArtist">Song Artist:</label>
-      <input
-        type="text"
-        class="form-control addPostForm"
-        name="songArtist"
-        [(ngModel)]="editPost.song.artist"
-      />
-      <label class="editLabel" for="songAlbum">Song Album:</label>
-      <input
-        type="text"
-        class="form-control addPostForm"
-        name="songAlbum"
-        [(ngModel)]="editPost.song.album"
-      />
-      <label class="editLabel" for="songReleaseDate">Release Date:</label>
-      <input
-        type="date"
-        class="form-control addPostForm"
-        name="songReleaseDate"
-        [(ngModel)]="editPost.song.releaseDate"
-      />
-      <label class="editLabel" for="songLength">Song Length:</label>
-      <input
-        type="number"
-        class="form-control addPostForm"
-        name="songLength"
-        [(ngModel)]="editPost.song.songLength"
-      />
-      <!-- <label class="editLabel" for="songLength">Genre:</label>
-      <select name = "dropdown" [(ngModel)]="editPost.song.genres">
-        <option *ngFor="let genre of genres" [value]="genre.id">{{genre.name}}</option>
-      </select> -->
-      <label class="editLabel" for="songURL">Song URL:</label>
-      <input
-        type="number"
-        class="form-control addPostForm"
-        name="songURL"
-        [(ngModel)]="editPost.song.songURL"
-      />
-      <label class="editLabel" for="imageURL">Image URL:</label>
-      <input
-        type="number"
-        class="form-control addPostForm"
-        name="imageURL"
-        [(ngModel)]="editPost.song.imageURL"
-      />
+</ng-template>
 
-      <input
-        type="submit"
-        class="btn btn-dark addPostBtnEdit"
-        name="Save"
-        value="Save"
-        (click)="updatePost(editPost)"
-      />
-      <input
-        type="submit"
-        class="btn btn-dark addPostBtnEdit"
-        name="Cancel"
-        value="Cancel"
-        (click)="editPost = null"
-      />
-    </div>
-  </form>
-<!-- Comment Section -->
-  <div class="comment-section" *ngIf="!selectedComment">
-    <h2 class="commentHeader" *ngIf="!selectedComment">I have {{getNumberOfComments()}} Comments </h2>
-  <div class="card" style="width: 18rem;" *ngFor="let com of enabledComments">
-    <div class="card-body">
-      <h5 class="card-title">{{com.post.title}}</h5>
-      <h6 class="card-subtitle mb-2 text-muted">{{com.createdAt}}</h6>
-      <p class="card-text">{{com.content}}</p>
-      <button
-          (click)="displayComment(com)"
-          class="btn btn-dark">Details</button>
-          <button
-          (click)="hideComment(com.id)"
-          class="btn btn-dark"
-        >Delete</button>
-      <!-- <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a> -->
-    </div>
+<!-- Edit Post -->
+<ng-template #editContent let-modal >
+  <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">
+          Edit Post
+      </h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">
+            ×
+        </span>
+    </button>
   </div>
+  <div *ngIf="editPost" class="modal-body modal-content">
+    <form id="editTodo" *ngIf="editPost">
+      <div class="addPostBtnDiv">
+        <label class="editLabel" for="title">Title:</label>
+        <input
+          type="text"
+          class="form-control addPostForm"
+          name="title"
+          [(ngModel)]="editPost.title"
+        />
+        <label class="editLabel" for="content">Content:</label>
+        <input
+          type="text"
+          class="form-control addPostForm"
+          name="content"
+          [(ngModel)]="editPost.content"
+        />
+        <label class="editLabel" for="songTitle">Song Title:</label>
+        <input
+          type="text"
+          class="form-control addPostForm"
+          name="songTitle"
+          [(ngModel)]="editPost.song.title"
+        />
+        <label class="editLabel" for="songArtist">Song Artist:</label>
+        <input
+          type="text"
+          class="form-control addPostForm"
+          name="songArtist"
+          [(ngModel)]="editPost.song.artist"
+        />
+        <label class="editLabel" for="songAlbum">Song Album:</label>
+        <input
+          type="text"
+          class="form-control addPostForm"
+          name="songAlbum"
+          [(ngModel)]="editPost.song.album"
+        />
+        <label class="editLabel" for="songReleaseDate">Release Date:</label>
+        <input
+          type="date"
+          class="form-control addPostForm"
+          name="songReleaseDate"
+          [(ngModel)]="editPost.song.releaseDate"
+        />
+        <label class="editLabel" for="songLength">Song Length:</label>
+        <input
+          type="number"
+          class="form-control addPostForm"
+          name="songLength"
+          [(ngModel)]="editPost.song.songLength"
+        />
+        <!-- <label class="editLabel" for="songLength">Genre:</label>
+        <select name = "dropdown" [(ngModel)]="editPost.song.genres">
+          <option *ngFor="let genre of genres" [value]="genre.id">{{genre.name}}</option>
+        </select> -->
+        <!-- <label class="editLabel" for="songURL">Song URL:</label>
+        <input
+          type="number"
+          class="form-control addPostForm"
+          name="songURL"
+          [(ngModel)]="editPost.song.songURL"
+        />
+        <label class="editLabel" for="imageURL">Image URL:</label>
+        <input
+          type="number"
+          class="form-control addPostForm"
+          name="imageURL"
+          [(ngModel)]="editPost.song.imageURL"
+        /> -->
+
+        <input
+          type="submit"
+          class="btn btn-dark addPostBtnEdit"
+          name="Save"
+          value="Save"
+          (click)="updatePost(editPost);modal.dismiss('Cross click')"
+        />
+        <input
+          type="submit"
+          class="btn btn-dark addPostBtnEdit"
+          name="Cancel"
+          value="Cancel"
+          (click)="modal.dismiss('Cross click')"
+        />
+      </div>
+    </form>
+
+  </div>
+</ng-template>
+
+
+
+
+
+<!-- Comment Section -->
+
+<h2 class="commentHeader" *ngIf="!selectedComment">I have {{getNumberOfComments()}} Comments </h2>
+  <div class="comment-section" *ngIf="!selectedComment">
+
+    <div fxLayout="row wrap" fxLayoutGap="16px grid" *ngIf="!selectedComment">
+      <div fxFlex.lg="25%" fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let com of enabledComments">
+        <div *ngIf="com.isEnabled">
+            <mat-card class="mat-elevation-z4">
+                <mat-card-header>
+                    <div mat-card-avatar class="avatar mat-elevation-z8" style="background-image: url({{com.user.imageUrl}})"></div>
+                    <mat-card-title class="name">
+                        <span>{{com.post.title}}</span>
+                    </mat-card-title>
+                    <mat-card-subtitle>{{formatCommentDateTime(com.createdAt)}}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>
+                        {{com.content}}
+                    </p>
+                </mat-card-content>
+                <img mat-card-image src="{{com.post.song.imageURL}}">
+                <mat-divider></mat-divider>
+
+
+                <mat-card-actions style="text-align: center;">
+                    <button (click)="setComment(com);open(commentContent)" class="btn btn-dark">Details</button>
+                    <button (click)="hideComment(com.id)" class="btn btn-dark">Delete</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
 </div>
+
+</div>
+
+
+
 
 <!-- Comment Details SECTION -->
-<div id="commentDetails" *ngIf="selectedComment && !editComment">
-  <h3>Post: {{ selectedComment.post.title }}</h3>
-  <p>Content: {{ selectedComment.content }}</p>
-  <p>Date Created: {{ selectedComment.createdAt }}</p>
-  <p>Updated: {{ selectedComment.updatedAt }}</p>
-
-  <div class="addCommentBtnDiv">
-    <button
-      (click)="displayCommentTable()"
-      class="btn btn-dark addConcBtnEdit"
-    >
-      Back
-    </button>
-    <button
-      (click)="setEditComment()"
-      class="btn btn-dark addConcBtnEdit"
-    >
-      Edit
+<ng-template #commentContent let-modal>
+  <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">
+          Post Details
+      </h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">
+            ×
+        </span>
     </button>
   </div>
-</div>
-<form id="editComment" *ngIf="editComment">
-  <h3>Edit Comment</h3>
-  <div class="addPostBtnDiv">
-    <label class="editLabel" for="title">Content:</label>
-    <input
-      type="text"
-      class="form-control addCommentForm"
-      name="title"
-      [(ngModel)]="editComment.content"
-    />
-
-
-    <input
-      type="submit"
-      class="btn btn-dark addPostBtnEdit"
-      name="Save"
-      value="Save"
-      (click)="updateComment(editComment)"
-    />
-    <input
-      type="submit"
-      class="btn btn-dark addPostBtnEdit"
-      name="Cancel"
-      value="Cancel"
-      (click)="editComment = null"
-    />
+  <div *ngIf="newComment" class="modal-body modal-content">
+      <div class="info d-flex">
+          <h1>{{newComment.post.title}}</h1>
+      </div>
+      <div class="info d-flex">
+          <h6>{{formatCommentDateTime(newComment.createdAt)}}</h6>
+      </div>
+      <div class="info d-flex">
+          <p>{{newComment.content}}</p>
+      </div>
+      <div class="info d-flex">
+          <p>Song Title: {{newComment.post.song.title}}</p>
+      </div>
+      <div class="info d-flex">
+          <p>By: {{newComment.post.song.artist}} Ablum: {{newComment.post.song.album}}</p>
+      </div>
+      <div class="info d-flex">
+        <youtube-player
+          videoId="{{getVideoId(newComment.post.song)}}"
+          suggestedQuality="highres"
+          [height]="300"
+          [width]="465"
+          [startSeconds]="0">
+        </youtube-player>
+      </div>
+      <div class="modal-footer">
+      <button
+        (click)="setEditComment(newComment);open(editCommentContent);modal.dismiss('Cross click')"
+        class="btn btn-dark addConcBtnEdit"
+      >
+        Edit
+      </button>
+      </div>
   </div>
-</form>
+</ng-template>
+
+
+
+<!-- Edit Comment -->
+
+<ng-template #editCommentContent let-modal >
+  <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">
+          Edit Comment
+      </h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">
+            ×
+        </span>
+    </button>
+  </div>
+  <div *ngIf="editComment" class="modal-body modal-content">
+    <form id="editTodo" *ngIf="editComment">
+      <div class="addPostBtnDiv">
+        <!-- <label class="editLabel" for="title">Title:</label>
+        <input
+          type="text"
+          class="form-control addPostForm"
+          name="title"
+          [(ngModel)]="editPost.title"
+        /> -->
+        <label class="editLabel" for="content">Content:</label>
+        <input
+          type="text"
+          class="form-control addPostForm"
+          name="content"
+          [(ngModel)]="editComment.content"
+        />
+
+        <input
+          type="submit"
+          class="btn btn-dark addPostBtnEdit"
+          name="Save"
+          value="Save"
+          (click)="updateComment(editComment);modal.dismiss('Cross click')"
+        />
+        <input
+          type="submit"
+          class="btn btn-dark addPostBtnEdit"
+          name="Cancel"
+          value="Cancel"
+          (click)="modal.dismiss('Cross click')"
+        />
+      </div>
+    </form>
+
+  </div>
+</ng-template>
+
 
 
