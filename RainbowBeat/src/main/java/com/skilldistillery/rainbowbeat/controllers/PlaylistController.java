@@ -61,9 +61,18 @@ public class PlaylistController {
 
 	@PutMapping("playlists")
 	public Playlist updatePlaylist(HttpServletRequest req, HttpServletResponse res, @RequestBody Playlist playlist, Principal principal) {
-		
-		
-		return playlistSvc.update(playlist);
+		Playlist p = playlistSvc.update(playlist, principal.getName());
+		try {
+			if(p == null) {
+				res.setStatus(404);
+			}else {
+				res.setStatus(201);
+			}
+		} catch (Exception e) {
+			res.setStatus(400);
+			p=null;
+		}
+		return p;
 	}
 
 	@DeleteMapping("playlists/{id}")
