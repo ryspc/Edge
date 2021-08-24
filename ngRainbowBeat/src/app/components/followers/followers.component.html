@@ -2,24 +2,53 @@
   <div *ngIf="loggedInUser">
     <div *ngIf="loggedInUser.following.length > 0">
       <h1>Following: <span>{{getFollowingCount()}}</span></h1><hr>
-      <mat-card *ngFor="let friend of loggedInUser.following">
-        <img mat-card-image class="avatar" src={{friend.imageUrl}} alt="Profile Image">
-        <mat-card-content (click)="setFriend(friend);viewFollowingPosts(friend);open(posts)">
-          <h2>{{friend.username}}</h2>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-button class="btn btn-warning btn-sm" (click)="unfollow(friend)">Unfollow</button>
-        </mat-card-actions>
-      </mat-card>
+      <div fxLayout="row wrap" fxLayoutGap="16px grid">
+        <div fxFlex.lg="100%" fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%">
+          <mat-card class="userCard" *ngFor="let friend of loggedInUser.following">
+            <img mat-card-image class="avatar" src={{friend.imageUrl}} alt="Profile Image">
+            <mat-card-content>
+              <h2>{{friend.username}}</h2>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-button class="btn btn-danger btn-sm" (click)="unfollow(friend)">Unfollow</button>
+              <button mat-button class="btn btn-info btn-sm" (click)="viewFollowingPosts(friend)">View Posts</button>
+              <button mat-button class="btn btn-success btn-sm" (click)="followedPosts= []">Hide Posts</button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
     </div>
-    <!-- <div >
-      <mat-card *ngFor="let follower of followers">
-        <img mat-card-image class="avatar" src={{follower.imageUrl}} alt="Profile Image">
-        <mat-card-content>
-          <h2>{{follower.username}}</h2>
-        </mat-card-content>
-      </mat-card>
-    </div> -->
+    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+      <div fxFlex.lg="25%" fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let post of followedPosts">
+          <div *ngIf="followedPosts">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>
+                <h2>{{post.title}}</h2>
+              </mat-card-title>
+              <mat-card-subtitle>
+                {{post.createdAt | dateAgo}}
+              </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="info d-flex">
+                <p>{{post.content}}</p>
+              </div>
+              <div class="info d-flex">
+                <youtube-player
+                  videoId="{{getVideoId(post.song)}}"
+                  suggestedQuality="highres"
+                  [height]="215"
+                  [width]="215"
+                  [startSeconds]="0"
+                >
+                </youtube-player>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </div>
 
     <div *ngIf="loggedInUser.following.length === 0">
       <h1>Not currently following any users!</h1>
@@ -28,7 +57,7 @@
 </div>
 
 
-<ng-template #posts let-modal>
+<!-- <ng-template #posts let-modal>
   <div class="modal-header" *ngIf="friend">
       <h4 class="modal-title" id="modal-basic-title">
           {{friend.username}}'s  Posts
@@ -66,4 +95,4 @@
       </div>
     </div>
   </div>
-</ng-template>
+</ng-template> -->
