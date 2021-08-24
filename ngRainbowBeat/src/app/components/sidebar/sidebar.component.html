@@ -12,13 +12,13 @@
     </button>
     <div class="searchbar">
 
-      <input type="text" [(ngModel)]="searchInput" placeholder="Search for a Post" />
-      <button (click)="postsByKeyword()">Search</button>
-      <!-- <app-admin [searchKeyword]="searchInput"></app-admin> -->
-      <!-- #searchbar (keyup)="fetchPost($event)" -->
+        <input type="text" [(ngModel)]="searchInput" placeholder="Search for a Post" />
+        <button (click)="postsByKeyword()">Search</button>
+        <!-- <app-admin [searchKeyword]="searchInput"></app-admin> -->
+        <!-- #searchbar (keyup)="fetchPost($event)" -->
     </div>
     <div>
-      <!-- <ul>
+        <!-- <ul>
         <li *ngFor="let post of searchResult">
            <p> {{ post.title }}</p>
         </li>
@@ -36,6 +36,10 @@
             <span>&nbsp;Return Home</span>
         </button>
         <mat-divider></mat-divider>
+        <button *ngIf="loggedInUser && loggedInUser.role === 'ADMIN'" mat-button class="menu-button" (click)="admin()">
+            <mat-icon>gavel</mat-icon>
+            <span>&nbsp;Admin</span>
+        </button>
         <button mat-button class="menu-button" (click)="profile()">
             <mat-icon>wysiwyg</mat-icon>
             <span>&nbsp;Posts</span>
@@ -46,7 +50,7 @@
         </button>
         <button mat-button class="menu-button" (click)="playlist()">
             <mat-icon>queue_music</mat-icon>
-            <span>&nbsp;Playlist</span>
+            <span>&nbsp;Favorite Songs</span>
         </button>
         <button mat-button class="menu-button" (click)="settings()">
             <mat-icon>settings</mat-icon>
@@ -65,7 +69,7 @@
     </mat-sidenav-content>
 </mat-sidenav-container>
 
-    <!-- <app-home [searchKeyword]="searchInput" [searchResult]="searchResult"></app-home> -->
+<!-- <app-home [searchKeyword]="searchInput" [searchResult]="searchResult"></app-home> -->
 
 
 <!-- <app-todo-admin [searchKeyword]="searchKeyword" [searchResults]="searchResults"
