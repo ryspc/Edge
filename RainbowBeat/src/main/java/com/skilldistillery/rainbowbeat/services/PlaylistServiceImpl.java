@@ -56,4 +56,9 @@ public class PlaylistServiceImpl implements PlaylistService {
 		return !playlistRepo.existsById(id);
 	}
 
+	@Override
+	public List<Playlist> showUserPlaylist(String username) {
+		return playlistRepo.findByUser_Username(username);
+	}
+
 }

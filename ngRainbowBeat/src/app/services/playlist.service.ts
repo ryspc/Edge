@@ -24,7 +24,7 @@ export class PlaylistService {
 
 
   index(): Observable<Playlist[]>{
-    return this.http.get<Playlist[]>(this.url).pipe(
+    return this.http.get<Playlist[]>(this.url, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log('PlaylistService.index() err retrieving  playlists');
         return throwError(err);
