@@ -1,6 +1,11 @@
 .avatar {
   margin-top: 16px;
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
+}
+
+.userCard {
+  margin-top: 8px;
+  margin-bottom: 12px;
 }
