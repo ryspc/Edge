@@ -26,7 +26,7 @@
                         <button class= "upArrowNoRating" mat-button (click)="like(post)"><mat-icon>arrow_upward</mat-icon></button>
                         <button mat-button (click)="dislike(post)"><mat-icon>arrow_downward</mat-icon></button> {{post.ratingTotal}}
                         <button mat-button (click)="setPost(post);getCommentsForPost(post);open(comment);"><mat-icon>chat</mat-icon></button>
-                        <button mat-button><mat-icon>share</mat-icon></button>
+                        <button mat-button (click)="addSong(post.song);"><mat-icon>favorite</mat-icon></button>
                     </mat-card-actions>
                 </mat-card>
             </div>

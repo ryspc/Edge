@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.rainbowbeat.entities.Playlist;
 import com.skilldistillery.rainbowbeat.services.PlaylistService;
+import com.skilldistillery.rainbowbeat.services.UserService;
 
 @RestController
 @RequestMapping("api")
@@ -27,10 +28,17 @@ public class PlaylistController {
 
 	@Autowired
 	private PlaylistService playlistSvc;
+	@Autowired
+	private UserService userSvc;
 
+//	@GetMapping("playlists")
+//	public List<Playlist> getAllPlaylists() {
+//		return playlistSvc.showAll();
+//	}
+	
 	@GetMapping("playlists")
-	public List<Playlist> getAllPlaylists() {
-		return playlistSvc.showAll();
+	public List<Playlist> getUserPlaylists(HttpServletResponse res, HttpServletRequest req, Principal principal) {
+		return playlistSvc.showUserPlaylist(principal.getName());
 	}
 
 	@PostMapping("playlists")
