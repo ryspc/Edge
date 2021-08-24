@@ -204,7 +204,7 @@ export class HomeComponent implements OnInit {
             verticalPosition: 'top',
              duration: 5 * 1000,
              panelClass: 'snackbar'
-             
+
           });
           snackbar.onAction().subscribe(() => {
             this.dislike(post);
@@ -436,6 +436,10 @@ export class HomeComponent implements OnInit {
         console.log("error updating playlist");
       }
     );
+  }
+
+  get sortedArray(): Post[] {
+    return this.enabledPosts.sort((a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
   }
 
 }
