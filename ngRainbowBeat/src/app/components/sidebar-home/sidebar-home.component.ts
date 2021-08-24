@@ -13,7 +13,6 @@ import { Song } from 'src/app/models/song';
 import { SongService } from 'src/app/services/song.service';
 import { GenreService } from 'src/app/services/genre.service';
 import { Genre } from 'src/app/models/genre';
-import { FormControl } from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
@@ -36,13 +35,6 @@ export class SidebarHomeComponent {
   genres: Genre [] = [];
   searchResult: Post[] | null = null;
   public searchInput: string = '';
-  myControl = new FormControl();
-  options: string[] = []
-
-
-  // selectChangeHandler(event: any){
-  //   this.genreName = event.target.value;
-  // }
 
   constructor(private observer: BreakpointObserver,
     private userService: UserService,
@@ -73,10 +65,8 @@ export class SidebarHomeComponent {
   }
 
   ngOnInit() {
-    this.loadPosts();
   }
 
-  // MODAL STUFF //
   open(content: any) {
     this.modalService.open(content,
       { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
@@ -99,7 +89,7 @@ export class SidebarHomeComponent {
 
   logout() {
     this.authService.logout();
-    this.router.navigateByUrl("/landing"); //TODO: Update url navigation
+    this.router.navigateByUrl("/landing");
   }
 
   getLoggedInUser() {
@@ -222,9 +212,8 @@ export class SidebarHomeComponent {
   });
 }
 
-postsByKeyword(){
-  // this.searchResult = [];
-  this.postService.postsByKeyword(this.searchInput).subscribe(
+postsByKeyword(keyword:string){
+  this.postService.postsByKeyword(keyword).subscribe(
     data => {
       this.searchResult = data;
       console.log(this.searchResult);
@@ -244,22 +233,6 @@ postsByGenre(genre: string){
       console.log('Could not retrieve all posts');
 
     });
-}
-
-loadPosts(){
-  this.postService.index().subscribe(
-    posts => {
-      posts.forEach(post => {
-        if(post.isEnabled){
-          this.options.push(post.title);
-          this.options.push(post.content);
-        }
-      })
-    },
-    noPosts => {
-      console.error('PostListComponenet.loadPosts: error retrieving posts list')
-    }
-  )
 }
 
 }
