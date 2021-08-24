@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
 import { UserService } from 'src/app/services/user.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { Song } from 'src/app/models/song';
 
 @Component({
   selector: 'app-followers',
@@ -21,6 +22,7 @@ export class FollowersComponent implements OnInit {
   closeResult = '';
   panelOpenState = false;
   friend: User | null = null;
+
 
   public encoded = this.authService.getCredentials();
   public decoded = atob((this.encoded ?? 'null'));
@@ -110,11 +112,11 @@ export class FollowersComponent implements OnInit {
   }
 
   viewFollowingPosts(user: User){
+    this.followedPosts = [];
     this.postService.showPostByUser(user.username).subscribe(
       data => {
         this.followedPosts = data;
         console.log(this.followedPosts);
-
       },
       err => {
         console.log("Error getting Following Posts");
@@ -147,6 +149,14 @@ export class FollowersComponent implements OnInit {
 
   setFriend(user: User) {
     this.friend = user;
+  }
+
+  getVideoId(song: Song): string{
+    const regex = /[^=]*$/g;
+    let songString = song.songURL;
+    let songId = songString.substr(songString.search(regex));
+    console.log(songId);
+    return songId;
   }
 
 }
