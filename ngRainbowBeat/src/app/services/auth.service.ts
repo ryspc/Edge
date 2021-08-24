@@ -43,7 +43,6 @@ export class AuthService {
   }
 
   register(user:User): Observable<User> {
-    user.imageUrl = "https://www.seekpng.com/png/detail/5-59519_vinyl-scratch-by-iamthegreatlyra-d4j0r38-my-little-pony.png"
     // create request to register a new account
     return this.http.post<User>(this.baseUrl + 'register', user)
     .pipe(
