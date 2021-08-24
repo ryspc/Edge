@@ -4,6 +4,8 @@ import { Song } from 'src/app/models/song';
 import { PlaylistService } from 'src/app/services/playlist.service';
 import { UserService } from 'src/app/services/user.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { User } from 'src/app/models/user';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-playlist',
@@ -15,7 +17,8 @@ export class PlaylistComponent implements OnInit {
   constructor(
     private userService: UserService,
     private playlistService: PlaylistService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private authService: AuthService
   ) { }
 
   playlists: Playlist[] = [];
@@ -30,11 +33,12 @@ export class PlaylistComponent implements OnInit {
 
   }
 
+
   loadUserPlaylists(){
     this.playlistService.index().subscribe(
       playlists => {
         this.playlists = playlists;
-        console.log(this.playlists)
+        console.log(this.playlist);
       },
       noPlaylists => {
         console.error('PlaylistComponenet.loadPosts: error displaying Playlists')

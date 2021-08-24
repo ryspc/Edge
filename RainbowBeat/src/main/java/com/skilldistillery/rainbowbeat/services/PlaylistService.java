@@ -15,4 +15,6 @@ public interface PlaylistService {
 	Playlist update(Playlist playlist);
 
 	boolean delete(int id);
+	
+	List<Playlist> showUserPlaylist(String username);
 }
