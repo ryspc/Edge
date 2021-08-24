@@ -101,6 +101,9 @@ export class SidebarComponent {
   settings() {
     this.router.navigateByUrl("/settings");
   }
+  admin() {
+    this.router.navigateByUrl("/admin");
+  }
 
   getAllPosts(){
     this.postService.index().subscribe(
