@@ -100,9 +100,13 @@
                         <p>
                             {{post.title}}
                         </p>
+                        <div style="text-align: center;">
+                          <youtube-player videoId="{{getVideoId(post.song)}}" suggestedQuality="highres" [height]="215" [width]="215" [startSeconds]="0">
+                          </youtube-player>
+                      </div>
                     </mat-card-content>
-                    <img mat-card-image src="{{post.song.imageURL}}">
-                    <mat-divider></mat-divider>
+
+
 
 
                     <!-- <mat-card-actions style="text-align: center;"> -->
