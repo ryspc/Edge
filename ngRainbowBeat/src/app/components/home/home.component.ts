@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
   newComment: Comment = new Comment();
   enabledPosts: Post[] = [];
   playlists: Playlist[] = [];
-  userPlaylists: Playlist[] = [];
+
 
 
   @Input() searchKeyword: string = '';
@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit {
     this.getLoggedInUser();
     this.loadPosts();
     this.getAllComments();
-    this.getAllPlaylists();
+    this.getUserPlaylist();
   }
   getLoggedInUser() {
     this.userService.getCurrentUser(this.decoded.split(':')).subscribe(
@@ -414,17 +414,10 @@ export class HomeComponent implements OnInit {
     return songId;
   }
 
-  getAllPlaylists() {
+  getUserPlaylist() {
     this.playlistService.index().subscribe(
       data => {
         this.playlists = data;
-        for(let i = 0; i < this.playlists.length; i++) {
-          if(this.playlists[i].user.id === this.loggedInUser.id) {
-            this.userPlaylists.push(this.playlists[i]);
-          }
-        }
-        console.log("All playlists: " + this.playlists)
-        console.log("user playlists: " + this.userPlaylists)
       },
       err => {
         console.log("Error getting playlists");
@@ -433,7 +426,16 @@ export class HomeComponent implements OnInit {
   }
 
   addSong(song: Song) {
-    this.userPlaylists.push
+    this.playlists[0].songs.push(song);
+    this.playlistService.update(this.playlists[0]).subscribe(
+      data => {
+        this.playlists[0] = data;
+        console.log("Playlist updated");
+      },
+      err => {
+        console.log("error updating playlist");
+      }
+    );
   }
 
 }
