@@ -56,7 +56,10 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnChanges() {
-    if (this.searchResult === []) {
+    console.log(this.searchResult);
+    if (this.searchResult?.length === 0) {
+      console.log("inside if statement");
+      
       let snackbar = this._snackBar.open('No results found.', '', {
         horizontalPosition: 'start',
         verticalPosition: 'top',
