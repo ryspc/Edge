@@ -58,8 +58,6 @@ export class HomeComponent implements OnInit {
   ngOnChanges() {
     console.log(this.searchResult);
     if (this.searchResult?.length === 0) {
-      console.log("inside if statement");
-      
       let snackbar = this._snackBar.open('No results found.', '', {
         horizontalPosition: 'start',
         verticalPosition: 'top',
@@ -69,7 +67,7 @@ export class HomeComponent implements OnInit {
         console.log('The snack-bar action was triggered!');
       });
     }
-    console.log(this.searchResult);  }
+ }
 
   ngOnInit(): void {
     const tag = document.createElement('script');
