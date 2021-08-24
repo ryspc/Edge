@@ -10,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 import { RatingService } from 'src/app/services/rating.service';
 import { Rating } from 'src/app/models/rating';
 import { Song } from 'src/app/models/song';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { PlaylistService } from 'src/app/services/playlist.service';
 import { Playlist } from 'src/app/models/playlist';
 
@@ -22,9 +22,9 @@ import { Playlist } from 'src/app/models/playlist';
 export class HomeComponent implements OnInit {
   posts: Post[] = [];
   ratings: Rating[] = [];
-  newPost  = new Post();
+  newPost = new Post();
   post: Post | null = null;
-  followedUser : User | null = null;
+  followedUser: User | null = null;
   likedPost: Post | null = null;
   loggedInUser = new User;
   comments: Comment[] = [];
@@ -40,29 +40,36 @@ export class HomeComponent implements OnInit {
   newComment: Comment = new Comment();
   enabledPosts: Post[] = [];
   playlists: Playlist[] = [];
-
-
+  commentVisibility: boolean = false;
 
   @Input() searchKeyword: string = '';
   @Input() searchResult: Post[] | null | undefined;
 
   constructor(private userService: UserService,
-   private postService: PostService,
-   private authService: AuthService,
-   private modalService: NgbModal,
-   private commentService: CommentService,
-   private ratingService: RatingService,
-   private playlistService: PlaylistService,
-   private _snackBar: MatSnackBar
-   ) {
-    console.log(this.searchResult);
+    private postService: PostService,
+    private authService: AuthService,
+    private modalService: NgbModal,
+    private commentService: CommentService,
+    private ratingService: RatingService,
+    private playlistService: PlaylistService,
+    private _snackBar: MatSnackBar
+  ) {}
 
-   }
-
-   ngOnChanges(){
+  ngOnChanges() {
     console.log(this.searchResult);
-    // this.loadPosts();
-   }
+    if (this.searchResult?.length === 0) {
+      console.log("inside if statement");
+      
+      let snackbar = this._snackBar.open('No results found.', '', {
+        horizontalPosition: 'start',
+        verticalPosition: 'top',
+        duration: 5 * 1000,
+      });
+      snackbar.onAction().subscribe(() => {
+        console.log('The snack-bar action was triggered!');
+      });
+    }
+    console.log(this.searchResult);  }
 
   ngOnInit(): void {
     const tag = document.createElement('script');
@@ -93,6 +100,14 @@ export class HomeComponent implements OnInit {
     );
   }
 
+  viewComments() {
+this.commentVisibility = true;
+  }
+
+  hideComments() {
+this.commentVisibility = false;
+  }
+
   open(content: any) {
     this.modalService.open(content,
       { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
@@ -101,6 +116,7 @@ export class HomeComponent implements OnInit {
         this.closeResult =
           `Dismissed ${this.getDismissReason(reason)}`;
       });
+      this.hideComments();
   }
 
   private getDismissReason(reason: any): string {
@@ -113,7 +129,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  loadPosts(){
+  loadPosts() {
     this.enabledPosts = [];
     this.ratingNegative = 0;
     this.ratingPositive = 0;
@@ -121,58 +137,31 @@ export class HomeComponent implements OnInit {
       posts => {
         this.posts = posts;
         this.getEnabledPosts();
-        // console.log(this.enabledPosts)
         this.enabledPosts.forEach(post => {
           this.ratingNegative = 0;
           this.ratingPositive = 0;
-          // console.log(post);
           this.post = post;
-          // console.log(this.post);
-
-
           console.log("foreachloop successfully entered");
           this.ratingService.ratingByPostId(post.id).subscribe(
             data => {
-                if(this.post){
-               this.post.ratings = data;
-              //  console.log("ratings gotten for posts");
-              //  console.log(this.post);
-               this.ratingNegative = 0;
-          this.ratingPositive = 0;
-
-               if(this.post != null){
-                //  console.log("first if condition is met");
-                  // console.log(this.post.ratings);
-                 if(this.post.ratings){
-
-                 this.post.ratings.forEach(rating => {
-                   if (rating.rating == true){
-                     this.ratingPositive++;
-                   }
-                   if(rating.rating == false){
-                     this.ratingNegative++
-                   }
-                  //  console.log(post.id + "likes: " + this.ratingPositive);
-                  //  console.log(post.id + "dislikes: " + this.ratingNegative);
-                   post.ratingTotal = this.ratingPositive - this.ratingNegative;
-                  //  console.log(post.id + "totalRating: "  + post.ratingTotal);
-
-                 });
+              if (this.post) {
+                this.post.ratings = data;
+                this.ratingNegative = 0;
+                this.ratingPositive = 0;
+                if (this.post != null) {
+                  if (this.post.ratings) {
+                    this.post.ratings.forEach(rating => {
+                      if (rating.rating == true) {
+                        this.ratingPositive++;
+                      }
+                      if (rating.rating == false) {
+                        this.ratingNegative++
+                      }
+                      post.ratingTotal = this.ratingPositive - this.ratingNegative;
+                    });
+                  }
                 }
-               }
-              //  console.log(post.id);
-              //  console.log(this.ratings.length);
-              // this.ratingTotal = this.ratings.length;
-              // console.log('rating updated');
-              // this.ratings.forEach(rating => {
-              //   if (rating.rating === true) {
-              //   this.ratingPositive++; }
-              //   post.rating = this.ratingPositive/this.ratingTotal;
-              //   console.log(post.rating);
-              //   console.log(this.ratingTotal);
-              //   console.log(this.ratingPositive);
-              // });
-                }
+              }
             },
             err => {
               console.log(err);
@@ -187,7 +176,7 @@ export class HomeComponent implements OnInit {
   }
 
   like(post: Post) {
-    if(this.loggedInUser && this.rating){
+    if (this.loggedInUser && this.rating) {
       this.rating.rating = true;
       this.rating.user = this.loggedInUser;
       this.rating.post = post;
@@ -199,11 +188,11 @@ export class HomeComponent implements OnInit {
         update => {
           console.log('good rating created')
           this.loadPosts();
-          let snackbar = this._snackBar.open('You upvoted "'+ post.title+'".', 'UNDO', {
+          let snackbar = this._snackBar.open('You upvoted "' + post.title + '".', 'UNDO', {
             horizontalPosition: 'start',
             verticalPosition: 'top',
-             duration: 5 * 1000,
-             panelClass: 'snackbar'
+            duration: 5 * 1000,
+            panelClass: 'snackbar'
 
           });
           snackbar.onAction().subscribe(() => {
@@ -223,19 +212,18 @@ export class HomeComponent implements OnInit {
   }
 
   dislike(post: Post) {
-    if(this.loggedInUser && this.rating){
+    if (this.loggedInUser && this.rating) {
       this.rating.rating = false;
       this.rating.user = this.loggedInUser;
       this.rating.post = post;
       console.log(this.rating.rating);
       console.log(this.rating.user);
       console.log(this.rating.post);
-
       this.ratingService.create(this.rating).subscribe(
         update => {
           console.log('bad rating created')
           this.loadPosts();
-          let snackbar = this._snackBar.open('You downvoted "'+ post.title+'".', 'UNDO', {
+          let snackbar = this._snackBar.open('You downvoted "' + post.title + '".', 'UNDO', {
             horizontalPosition: 'start',
             verticalPosition: 'top',
             panelClass: 'snackbar',
@@ -259,8 +247,8 @@ export class HomeComponent implements OnInit {
   }
 
   getEnabledPosts() {
-    for(let i = 0; i < this.posts.length; i++) {
-      if(this.posts[i].isEnabled) {
+    for (let i = 0; i < this.posts.length; i++) {
+      if (this.posts[i].isEnabled) {
         this.enabledPosts.push(this.posts[i]);
       }
     }
@@ -280,7 +268,7 @@ export class HomeComponent implements OnInit {
           update => {
             console.log('Follow successful');
             this.getLoggedInUser();
-            let snackbar = this._snackBar.open('You are now following ' +followedUser.username+'.', 'UNDO', {
+            let snackbar = this._snackBar.open('You are now following ' + followedUser.username + '.', 'UNDO', {
               horizontalPosition: 'start',
               verticalPosition: 'top',
               panelClass: 'snackbar',
@@ -312,9 +300,9 @@ export class HomeComponent implements OnInit {
   }
 
   following(user: User) {
-    if(this.loggedInUser){
-      for(let i = 0; i < this.loggedInUser.following.length; i++) {
-        if(this.loggedInUser.following[i].username === user.username){
+    if (this.loggedInUser) {
+      for (let i = 0; i < this.loggedInUser.following.length; i++) {
+        if (this.loggedInUser.following[i].username === user.username) {
           return true;
         }
       }
@@ -322,9 +310,9 @@ export class HomeComponent implements OnInit {
   }
 
   unfollow(user: User) {
-    if(this.loggedInUser){
-      for(let i = 0; i < this.loggedInUser.following.length; i++) {
-        if(this.loggedInUser.following[i].username === user.username){
+    if (this.loggedInUser) {
+      for (let i = 0; i < this.loggedInUser.following.length; i++) {
+        if (this.loggedInUser.following[i].username === user.username) {
           this.loggedInUser.following.splice(i, 1);
         }
       }
@@ -332,7 +320,7 @@ export class HomeComponent implements OnInit {
         update => {
           this.getLoggedInUser();
           console.log('unfollow successful');
-          let snackbar = this._snackBar.open('You unfollowed ' +user.username+'.', 'UNDO', {
+          let snackbar = this._snackBar.open('You unfollowed ' + user.username + '.', 'UNDO', {
             horizontalPosition: 'start',
             verticalPosition: 'top',
             panelClass: 'snackbar',
@@ -368,26 +356,28 @@ export class HomeComponent implements OnInit {
   }
 
   getCommentsForPost(post: Post) {
+    this.postComments = [];
     this.getAllComments();
-    for(let i = 0; i < this.comments.length; i++) {
-      if(this.comments[i].post.id === post.id){
+    for (let i = 0; i < this.comments.length; i++) {
+      if (this.comments[i].post.id === post.id && this.comments[i].isEnabled === true) {
         this.postComments.push(this.comments[i]);
       }
     }
+    this.viewComments();
     console.log(this.postComments);
   }
 
   addComment(comment: Comment) {
     console.log(comment);
     comment.user = this.loggedInUser;
-    if(this.post) {
+    if (this.post) {
       comment.post = this.post;
     }
 
     this.commentService.create(comment).subscribe(
       data => {
         console.log("Comment creation successful");
-        if(this.post){
+        if (this.post) {
           this.getCommentsForPost(this.post);
           console.log("test");
         }
@@ -406,11 +396,10 @@ export class HomeComponent implements OnInit {
     this.newComment = new Comment();
   }
 
-  getVideoId(song: Song): string{
+  getVideoId(song: Song): string {
     const regex = /[^=]*$/g;
     let songString = song.songURL;
     let songId = songString.substr(songString.search(regex));
-    console.log(songId);
     return songId;
   }
 
@@ -431,9 +420,22 @@ export class HomeComponent implements OnInit {
       data => {
         this.playlists[0] = data;
         console.log("Playlist updated");
+        let snackbar = this._snackBar.open('Song added the favorites.', '', {
+          horizontalPosition: 'start',
+          verticalPosition: 'top',
+          duration: 5 * 1000,
+        });
+        snackbar.onAction().subscribe(() => {
+          console.log('The snack-bar action was triggered!');
+        });
       },
       err => {
         console.log("error updating playlist");
+        let snackbar = this._snackBar.open('Could not add song to favorites.', '', {
+          horizontalPosition: 'start',
+          verticalPosition: 'top',
+          duration: 5 * 1000,
+        });
       }
     );
   }

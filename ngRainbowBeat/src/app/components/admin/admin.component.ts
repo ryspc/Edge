@@ -9,6 +9,8 @@ import { CommentService } from 'src/app/services/comment.service';
 import { PostComment } from 'src/app/models/post-comment';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Song } from 'src/app/models/song';
 
 
 @Component({
@@ -17,7 +19,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
-
+  closeResult = '';
   @Input() childMessage: Post[] = [];
   @Input() searchKeyword: string = '';
 
@@ -38,7 +40,8 @@ export class AdminComponent implements OnInit {
     private authService: AuthService,
     private postService: PostService,
     private commentService: CommentService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private modalService: NgbModal
     // private sidebarComponent: SidebarComponent
     ) {
       console.log(this.searchResult);
@@ -60,6 +63,7 @@ export class AdminComponent implements OnInit {
   enabledComments: PostComment[] = [];
   enabledPosts: Post[]=[];
   allUsersSelected: boolean = false;
+  post: Post = new Post();
 
 
 
@@ -100,6 +104,7 @@ export class AdminComponent implements OnInit {
 
   displayUserPosts(username: string){
     this.enabledPosts = [];
+    this.enabledComments = [];
   this.postService.postsByUsername(username).subscribe(
     data => {
       this.posts = data;
@@ -124,6 +129,7 @@ export class AdminComponent implements OnInit {
 
   displayUserComments(username: string){
     this.enabledComments = [];
+    this.enabledPosts = [];
     this.commentService.commentsByUsername(username).subscribe(
       data => {
         this.comments = data;
@@ -186,7 +192,7 @@ export class AdminComponent implements OnInit {
           snackbar.onAction().subscribe(() => {
            this.enableUser(user);
           });
-          
+
         },
         noUser => {
           console.log('user enabled not updated')
@@ -263,6 +269,62 @@ export class AdminComponent implements OnInit {
         }
       );
      }
+
+     setPost(post: Post) {
+      this.post = post;
+    }
+
+    open(content: any) {
+      this.modalService.open(content,
+        { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+          this.closeResult = `Closed with: ${result}`;
+        }, (reason) => {
+          this.closeResult =
+            `Dismissed ${this.getDismissReason(reason)}`;
+        });
+    }
+
+    private getDismissReason(reason: any): string {
+      if (reason === ModalDismissReasons.ESC) {
+        return 'by pressing ESC';
+      } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+        return 'by clicking on a backdrop';
+      } else {
+        return `with: ${reason}`;
+      }
+    }
+
+    getVideoId(song: Song): string{
+      const regex = /[^=]*$/g;
+      let songString = song.songURL;
+      let songId = songString.substr(songString.search(regex));
+      console.log(songId);
+      return songId;
+    }
+
+    getAllComments() {
+      this.commentService.allComments().subscribe(
+        data => {
+          this.comments = data;
+          console.log(this.comments);
+
+        },
+        err => {
+          console.log("Error in commentService with getting all comments");
+        }
+      );
+    }
+
+    getCommentsForPost(post: Post) {
+      this.getAllComments();
+      this.enabledComments = [];
+      for(let i = 0; i < this.comments.length; i++) {
+        if(this.comments[i].post.id === post.id && this.comments[i].isEnabled === true){
+          this.enabledComments.push(this.comments[i]);
+        }
+      }
+      console.log(this.enabledComments);
+    }
 
 }
 
