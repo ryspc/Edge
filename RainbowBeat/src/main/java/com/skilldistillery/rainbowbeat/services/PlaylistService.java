@@ -10,7 +10,7 @@ public interface PlaylistService {
 
 	Playlist show(int id);
 
-	Playlist create(Playlist playlist);
+	Playlist create(Playlist playlist, String username);
 
 	Playlist update(Playlist playlist);
 
