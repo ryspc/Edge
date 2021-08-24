@@ -5,6 +5,8 @@ import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { NgForm } from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { PlaylistService } from 'src/app/services/playlist.service';
+import { Playlist } from 'src/app/models/playlist';
 
 
 @Component({
@@ -14,12 +16,14 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class LandingComponent implements OnInit {
   user: User = new User();
+  favoriteSongs: Playlist = new Playlist;
 
   constructor(private currentRouter: ActivatedRoute,
     private router: Router,
     private modalService: NgbModal,
     private auth: AuthService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private playlistService: PlaylistService
     ) { }
 
     closeResult = '';
@@ -77,7 +81,7 @@ export class LandingComponent implements OnInit {
 
   logout() {
     this.auth.logout();
-    this.router.navigateByUrl("/landing"); 
+    this.router.navigateByUrl("/landing");
   }
 
   register(form: NgForm) {
@@ -94,8 +98,19 @@ export class LandingComponent implements OnInit {
             snackbar.onAction().subscribe(() => {
               console.log('The snack-bar action was triggered!');
             });
-            this.router.navigateByUrl("/home"); 
+            this.playlistService.create().subscribe(
+              playlist => {
+                this.favoriteSongs = playlist;
+              },
+              err =>{
+                console.error(err)
+                console.log('error creating favorites playlist');
+              }
+            );
+            this.router.navigateByUrl("/home");
             console.log("User is logged in");
+
+
           },
           failed => {
             let snackbar = this._snackBar.open('Registration failed, please try again', '', {
@@ -123,6 +138,7 @@ export class LandingComponent implements OnInit {
         this.router.navigateByUrl("/landing");
       }
     );
+
   }
 
 }

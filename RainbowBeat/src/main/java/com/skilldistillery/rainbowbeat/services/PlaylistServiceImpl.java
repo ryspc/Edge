@@ -7,13 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.rainbowbeat.entities.Playlist;
+import com.skilldistillery.rainbowbeat.entities.User;
 import com.skilldistillery.rainbowbeat.repositories.PlaylistRepository;
+import com.skilldistillery.rainbowbeat.repositories.UserRepository;
 
 @Service
 public class PlaylistServiceImpl implements PlaylistService {
 
 	@Autowired
 	private PlaylistRepository playlistRepo;
+	@Autowired UserRepository userRepo;
 
 	@Override
 	public List<Playlist> showAll() {
@@ -30,8 +33,16 @@ public class PlaylistServiceImpl implements PlaylistService {
 	}
 
 	@Override
-	public Playlist create(Playlist playlist) {
-		return playlistRepo.saveAndFlush(playlist);
+	public Playlist create(Playlist playlist, String username) {
+		User user = userRepo.findByUsername(username);
+		try {
+			playlist.setUser(user);
+			playlistRepo.saveAndFlush(playlist);
+			return playlist;
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+		}
 	}
 
 	@Override
