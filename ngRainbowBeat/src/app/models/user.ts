@@ -1,3 +1,4 @@
+import { Playlist } from "./playlist";
 import { PostComment } from "./post-comment";
 
 export class User {
@@ -15,6 +16,7 @@ export class User {
   following: User[];
   followers: User[];
   comments: PostComment [];
+  playlists: Playlist[];
 
   constructor(
     id: number =0,
@@ -30,7 +32,8 @@ export class User {
     role: string = '',
     following: User[] = [],
     followers: User[] = [],
-    comments: PostComment [] = []
+    comments: PostComment [] = [],
+    playlists: Playlist[] = []
   ) {
     this.id = id;
     this.username = username;
@@ -46,5 +49,6 @@ export class User {
     this.following = following;
     this.comments = comments;
     this.followers = followers;
+    this.playlists = playlists;
   }
 }
