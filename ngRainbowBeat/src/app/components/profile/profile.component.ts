@@ -139,6 +139,8 @@ displayTable(): void{
     this.newPost = new Post();
   }
 
+  
+
   updatePost(p: Post){
     this.songService.update(p.song).subscribe(
       data => {
@@ -183,7 +185,33 @@ hidePost(id: number){
     if(this.posts[i].id  === id){
       console.log(this.posts[i].isEnabled);
       this.posts[i].isEnabled = false;
-      this.updatePost(this.posts[i]);
+      let snackbar = this._snackBar.open('Post updated.', '', {
+        horizontalPosition: 'start',
+        verticalPosition: 'top',
+        duration: 5 * 1000,
+      });
+      this.songService.update(this.posts[i].song).subscribe(
+        data => {
+          this.posts[i].song = data;
+          this.postService.update(this.posts[i]).subscribe(
+            data => {
+              this.loadPostsByUser();
+              this.editPost = null;
+              let snackbar = this._snackBar.open('Post deleted.', '', {
+                horizontalPosition: 'start',
+                verticalPosition: 'top',
+                duration: 5 * 1000,
+              });
+            },
+            err =>{
+              console.log(err);
+              console.log("error updating posts from service");
+            }
+          )
+        }
+      )
+      this.selected = null;
+      // this.todos = this.todoService.index();
     }
 
   }
@@ -225,8 +253,6 @@ loadCommentsByUser(){
       });
     }
   );
-
-
 }
 
 displayComment(c: Comment): void {
@@ -239,7 +265,23 @@ hideComment(id: number){
     if(this.comments[i].id  === id){
       console.log(this.comments[i].isEnabled);
       this.comments[i].isEnabled = false;
-      this.updateComment(this.comments[i]);
+      this.commentService.update(this.comments[i]).subscribe(
+        data => {
+          this.loadCommentsByUser();
+          let snackbar = this._snackBar.open('Comment deleted.', '', {
+            horizontalPosition: 'start',
+            verticalPosition: 'top',
+            duration: 5 * 1000,
+          });
+        },
+        err =>{
+          console.log(err);
+          console.log("error updating comments from service");
+        }
+      )
+      this.editComment = null;
+      this.selectedComment = null;
+      // this.todos = this.todoService.index();
     }
 
   }
