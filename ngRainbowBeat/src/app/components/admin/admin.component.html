@@ -147,20 +147,31 @@
               <p>By: {{post.song.artist}}&nbsp;&nbsp;&nbsp;&nbsp;Ablum: {{post.song.album}}</p>
           </div>
           <div class="info d-flex">
-              <youtube-player videoId="{{getVideoId(post.song)}}" suggestedQuality="highres" [height]="215" [width]="215" [startSeconds]="0">
-              </youtube-player>
-          </div>
-          <div class="modal-footer">
-            <mat-card-actions display="flex" style="justify-content: space-between	;">
+            <youtube-player videoId="{{getVideoId(post.song)}}" suggestedQuality="highres" [height]="300" [width]="465" [startSeconds]="0">
+            </youtube-player>
+        </div>
+          <div class="modal-footer" style="margin-top: -25px;padding-bottom: 5px;">
+            <img class="footerPic" src={{post.user.imageUrl}}>
+            <h3>&nbsp;&nbsp;{{post.user.username}}</h3>
+        </div>
+        <div style="text-align: left; margin-top: -60px;padding-bottom: 10px;">
+          <button mat-button (click)="setPost(post);getCommentsForPost(post);open(comment)"><mat-icon>chat</mat-icon></button>
+          <button mat-button (click)="deletePost(post, user.username)"><mat-icon>delete</mat-icon></button>
+      </div>
+          <!-- <div class="modal-footer" style="margin-top: -25px;padding-bottom: 5px;">
+            <mat-card-actions display="flex" style="justify-content: space-between	;"> -->
 
               <!-- <button class= "upArrowRatingGiven" mat-button (click)="like(post)"><mat-icon>arrow_upward</mat-icon></button> -->
 
-              <button mat-button (click)="setPost(post);getCommentsForPost(post);open(comment)"><mat-icon>chat</mat-icon></button>
+              <!-- <button mat-button (click)="setPost(post);getCommentsForPost(post);open(comment)"><mat-icon>chat</mat-icon></button>
               <button mat-button (click)="deletePost(post, user.username)"><mat-icon>delete</mat-icon></button>
-          </mat-card-actions>
-              <img class="footerPic" src={{post.user.imageUrl}} alt="Profile Image">
-              <h3>&nbsp;&nbsp;{{post.user.username}}</h3>
-          </div>
+              <img class="footerPic" src={{post.user.imageUrl}}>
+            <h3>&nbsp;&nbsp;{{post.user.username}}</h3>
+          </mat-card-actions> -->
+
+              <!-- <img class="footerPic" src={{post.user.imageUrl}} alt="Profile Image">
+              <h3>&nbsp;&nbsp;{{post.user.username}}</h3> -->
+          <!-- </div> -->
       </div>
   </ng-template>
 
