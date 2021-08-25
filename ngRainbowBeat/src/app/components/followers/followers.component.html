@@ -14,40 +14,41 @@
               <button mat-button class="btn btn-info btn-sm" (click)="viewFollowingPosts(friend)">View Posts</button>
               <button mat-button class="btn btn-success btn-sm" (click)="followedPosts= []">Hide Posts</button>
             </mat-card-actions>
+            <div fxLayout="row wrap" fxLayoutGap="16px grid">
+              <div fxFlex.lg="25%" fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let post of sortedArray">
+                  <div *ngIf="sortedArray && post.user.username === friend.username">
+                  <mat-card>
+                    <mat-card-header>
+                      <mat-card-title>
+                        <h2>{{post.title}}</h2>
+                      </mat-card-title>
+                      <mat-card-subtitle>
+                        {{post.createdAt | dateAgo}}
+                      </mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                      <div class="info d-flex">
+                        <p>{{post.content}}</p>
+                      </div>
+                      <div class="info d-flex">
+                        <youtube-player
+                          videoId="{{getVideoId(post.song)}}"
+                          suggestedQuality="highres"
+                          [height]="215"
+                          [width]="215"
+                          [startSeconds]="0"
+                        >
+                        </youtube-player>
+                      </div>
+                    </mat-card-content>
+                  </mat-card>
+                </div>
+              </div>
+            </div>
           </mat-card>
         </div>
       </div>
-    </div>
-    <div fxLayout="row wrap" fxLayoutGap="16px grid">
-      <div fxFlex.lg="25%" fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let post of followedPosts">
-          <div *ngIf="followedPosts">
-          <mat-card>
-            <mat-card-header>
-              <mat-card-title>
-                <h2>{{post.title}}</h2>
-              </mat-card-title>
-              <mat-card-subtitle>
-                {{post.createdAt | dateAgo}}
-              </mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content>
-              <div class="info d-flex">
-                <p>{{post.content}}</p>
-              </div>
-              <div class="info d-flex">
-                <youtube-player
-                  videoId="{{getVideoId(post.song)}}"
-                  suggestedQuality="highres"
-                  [height]="215"
-                  [width]="215"
-                  [startSeconds]="0"
-                >
-                </youtube-player>
-              </div>
-            </mat-card-content>
-          </mat-card>
-        </div>
-      </div>
+
     </div>
 
     <div *ngIf="loggedInUser.following.length === 0">

@@ -37,6 +37,9 @@ export class FollowersComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.body.appendChild(tag);
     this.getLoggedInUser();
     this.index();
   }
@@ -158,6 +161,10 @@ export class FollowersComponent implements OnInit {
     let songId = songString.substr(songString.search(regex));
     console.log(songId);
     return songId;
+  }
+
+  get sortedArray(): Post[] {
+    return this.followedPosts.sort((a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
   }
 
 }
