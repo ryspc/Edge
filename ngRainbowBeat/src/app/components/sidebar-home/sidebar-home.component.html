@@ -12,7 +12,7 @@
   </button>
     <div class="searchbar" id="searchbar">
         <form class="d-flex searchform">
-            <input class="form-control me-2" placeholder="Search posts, songs, users..." matInput id="input1" type="text" name="keyword" #keyword (keyup)="postsByKeyword(keyword.value)"> &nbsp;&nbsp;&nbsp;
+            <input class="form-control me-2" placeholder="Search posts, songs, users..." id="input1" type="text" name="keyword" #keyword (keyup)="postsByKeyword(keyword.value)"> &nbsp;&nbsp;&nbsp;
         </form>
     </div>
 </mat-toolbar>
@@ -46,6 +46,10 @@
     </button> <br>
         <button mat-button class="menu-button" (click)="postsByGenre('Metal')">
       <span>&nbsp; Metal </span>
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-button class="menu-button" (click)="allGenres()">
+      <span>&nbsp; All Genres </span>
     </button>
     </mat-sidenav>
     <mat-sidenav-content>

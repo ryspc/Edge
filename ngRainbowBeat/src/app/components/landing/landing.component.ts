@@ -65,16 +65,17 @@ export class LandingComponent implements OnInit {
         this.router.navigateByUrl("/home")
       },
       fail => {
-        console.log("Login Failed");
-        let snackbar = this._snackBar.open('Wrong username or password.', '', {
-          horizontalPosition: 'start',
-          verticalPosition: 'top',
-          duration: 5 * 1000,
-        });
-        snackbar.onAction().subscribe(() => {
-          console.log('The snack-bar action was triggered!');
-        });
+        console.log("Login Failed"); 
+          let snackbar = this._snackBar.open('Credentials do not match any active accounts.', '', {
+            horizontalPosition: 'start',
+            verticalPosition: 'top',
+            duration: 5 * 1000,
+          });
+          snackbar.onAction().subscribe(() => {
+            console.log('The snack-bar action was triggered!');
+          });
         console.log(fail);
+        
       }
     );
   }
