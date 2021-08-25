@@ -12,16 +12,16 @@
       <!-- <app-sidebar></app-sidebar> -->
 
 
-<button *ngIf = "allUsersSelected == false" (click)="allUsersSelected = true" mat-button style=
+<!-- <button *ngIf = "allUsersSelected == false" (click)="allUsersSelected = true" mat-button style=
 			"background-color: #b25512; color:white">
 			Display All Users
-		</button>
+		</button> -->
 
 <div *ngIf = "allUsersSelected == true">
-  <button (click)="allUsersSelected = false" mat-button style=
+  <!-- <button (click)="allUsersSelected = false" mat-button style=
   "background-color:orange; color:white">
   Hide All Users
-</button>
+</button> -->
 <mat-card class="example-card" *ngFor = "let user of users">
 	<mat-card-header>
 		<mat-card-title>{{user.username}}</mat-card-title>
@@ -38,22 +38,22 @@
 
 	<mat-card-actions>
 		<button (click)="disableUser(user)" *ngIf = "user.isEnabled" mat-button style=
-			"background-color:red; color:white">
+			"background-color:rgb(187, 22, 0); color:white">
 			Disable
 		</button>
 
 		<button *ngIf = "!user.isEnabled" (click)="enableUser(user)" mat-button style=
-			"background-color:green; color:white">
+			"background-color:rgba(0, 116, 0, 0.884); color:white">
 			Enable
 		</button>
 
     <button (click)="displayUserPosts(user.username)" mat-button style=
-    "background-color:rgba(177, 120, 14, 0.788); color:white">
+    "background-color:rgba(178, 85, 18); color:white">
     View Posts
   </button>
 
   <button (click)="displayUserComments(user.username)" mat-button style=
-    "background-color:orange; color:white">
+    "background-color:#b25512; color:white">
     View Comments
   </button>
 
@@ -189,7 +189,7 @@
                 <p>{{comment.content}}</p>
             </div>
             <div>
-              <button mat-button (click)="deleteComment(comment, user.username)"><mat-icon>delete</mat-icon></button>
+              <button mat-button (click)="deleteComment(comment, user.username);modal.dismiss('Cross click')"><mat-icon>delete</mat-icon></button>
                 <hr>
             </div>
         </div>
