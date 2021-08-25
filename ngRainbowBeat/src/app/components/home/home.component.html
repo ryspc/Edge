@@ -22,7 +22,7 @@
                     </mat-card-content>
                     <img mat-card-image src="{{post.song.imageURL}}">
                     <mat-divider></mat-divider>
-                    <mat-card-footer class="cardfooter" style="text-align: center; margin-top: -30px">
+                    <mat-card-footer class="cardfooter" style="text-align: center; ">
                         <button mat-button (click)="like(post)">
                             <mat-icon>arrow_upward</mat-icon>
                         </button> {{post.ratingTotal}}
@@ -133,7 +133,7 @@
                     <button class="btn btn-outline-success pull-right " (click)="addComment(newComment) ">Add Comment</button>
                 </div>
             </form>
-            <div *ngFor="let comment of postComments ">
+            <div *ngFor="let comment of sortedComments ">
                 <div class="modal-body modal-content ">
                     <div class="info d-flex ">
                         <h2><span><img class="commentPic " style="margin-top: -5px;" src={{comment.user.imageUrl}}></span>{{comment.user.username}}</h2>
