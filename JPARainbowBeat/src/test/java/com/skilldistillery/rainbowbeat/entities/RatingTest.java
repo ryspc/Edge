@@ -66,7 +66,7 @@ class RatingTest {
 	@DisplayName("testing rating to user mapping")
 	void test3() {
 		assertNotNull(rating);
-		assertEquals("Fresh Pony Song", rating.getPost().getTitle());
+		assertEquals("Newest Lorde Album", rating.getPost().getTitle());
 	}
 
 }

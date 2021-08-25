@@ -46,7 +46,7 @@ class CommentTest {
 	@DisplayName("Comment Entity Test")
 	void test1() {
 		assertNotNull(comment);
-		assertEquals("Ya Definitely A Sick Pony Song", comment.getContent());
+		assertEquals("This is her best song yet", comment.getContent());
 	}
 	
 	@Test
@@ -54,7 +54,7 @@ class CommentTest {
 	void test2() {
 		assertNotNull(comment);
 		assertNotNull(comment.getUser());
-		assertEquals("Fresh Pony Song", comment.getPost().getTitle());
+		assertEquals("Newest Lorde Album", comment.getPost().getTitle());
 	}
 
 }
