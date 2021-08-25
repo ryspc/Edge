@@ -37,6 +37,9 @@ export class FollowersComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.body.appendChild(tag);
     this.getLoggedInUser();
     this.index();
   }
@@ -86,6 +89,7 @@ export class FollowersComponent implements OnInit {
 
   unfollow(user: User) {
     if(this.loggedInUser){
+      let userNoMore = user.username;
       for(let i = 0; i < this.loggedInUser.following.length; i++) {
         if(this.loggedInUser.following[i].username === user.username){
           this.loggedInUser.following.splice(i, 1);
@@ -95,7 +99,7 @@ export class FollowersComponent implements OnInit {
         update => {
           this.getLoggedInUser();
           console.log('unfollow successful')
-          let snackbar = this._snackBar.open('You unfollowed ' + user, '', {
+          let snackbar = this._snackBar.open('You unfollowed ' + userNoMore, '', {
             horizontalPosition: 'start',
             verticalPosition: 'top',
             duration: 5 * 1000,
@@ -157,6 +161,10 @@ export class FollowersComponent implements OnInit {
     let songId = songString.substr(songString.search(regex));
     console.log(songId);
     return songId;
+  }
+
+  get sortedArray(): Post[] {
+    return this.followedPosts.sort((a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
   }
 
 }

@@ -15,18 +15,19 @@
                       <mat-card-subtitle>{{formatPostDateTime(post.createdAt)}}</mat-card-subtitle>
                   </mat-card-header>
                   <mat-card-content>
-                      <p>
-                          {{post.content}}
-                      </p>
+                    <p style=" padding-left: 10%; margin-bottom: 20px;">{{post.content}}</p>
+                    <div style="text-align: center;">
+                        <youtube-player videoId="{{getVideoId(post.song)}}" suggestedQuality="highres" [height]="215" [width]="215" [startSeconds]="0">
+                        </youtube-player>
+                    </div>
                   </mat-card-content>
-                  <img mat-card-image src="{{post.song.imageURL}}">
                   <mat-divider></mat-divider>
-
-
-                  <mat-card-actions style="text-align: center;">
-                      <button (click)="setPost(post);open(content)" class="btn btn-dark">Details</button>
-                      <button (click)="hidePost(post.id)" class="btn btn-dark">Delete</button>
-                  </mat-card-actions>
+                  <mat-card-footer>
+                    <mat-card-actions style="text-align: center;">
+                        <button (click)="setPost(post);open(content)" class="btn btn-dark">Details</button>
+                        <button (click)="hidePost(post.id)" class="btn btn-dark">Delete</button>
+                    </mat-card-actions>
+                  </mat-card-footer>
               </mat-card>
           </div>
       </div>
@@ -141,13 +142,6 @@
           class="form-control addPostForm"
           name="songReleaseDate"
           [(ngModel)]="editPost.song.releaseDate"
-        />
-        <label class="editLabel" for="songLength">Song Length:</label>
-        <input
-          type="number"
-          class="form-control addPostForm"
-          name="songLength"
-          [(ngModel)]="editPost.song.songLength"
         />
         <!-- <label class="editLabel" for="songLength">Genre:</label>
         <select name = "dropdown" [(ngModel)]="editPost.song.genres">

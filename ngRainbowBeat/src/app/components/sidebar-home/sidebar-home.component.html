@@ -12,7 +12,7 @@
   </button>
     <div class="searchbar" id="searchbar">
         <form class="d-flex searchform">
-            <input class="form-control me-2" placeholder="Search posts, songs, users..." matInput id="input1" type="text" name="keyword" #keyword (keyup)="postsByKeyword(keyword.value)"> &nbsp;&nbsp;&nbsp;
+            <input class="form-control me-2" placeholder="Search posts, songs, users..." id="input1" type="text" name="keyword" #keyword (keyup)="postsByKeyword(keyword.value)"> &nbsp;&nbsp;&nbsp;
         </form>
     </div>
 </mat-toolbar>
@@ -47,6 +47,10 @@
         <button mat-button class="menu-button" (click)="postsByGenre('Metal')">
       <span>&nbsp; Metal </span>
     </button>
+    <mat-divider></mat-divider>
+    <button mat-button class="menu-button" (click)="allGenres()">
+      <span>&nbsp; All Genres </span>
+    </button>
     </mat-sidenav>
     <mat-sidenav-content>
         <div class="content mat-elevation-z8">
@@ -54,6 +58,8 @@
         </div>
     </mat-sidenav-content>
 </mat-sidenav-container>
+
+
 <ng-template #content let-modal>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">
@@ -91,10 +97,6 @@
                 <select name="dropdown" [(ngModel)]="genreName">
           <option *ngFor="let genre of genres" [value]="genre.id">{{genre.name}}</option>
         </select>
-            </div>
-            <div class="info d-flex">
-                <label for="song" class="form-label"> Song Length&nbsp;&nbsp; </label>
-                <input type="number" name="songLength" [(ngModel)]="newSong.songLength" />
             </div>
             <div class="info d-flex">
                 <label for="song" class="form-label"> Song Release Date&nbsp;&nbsp; </label>

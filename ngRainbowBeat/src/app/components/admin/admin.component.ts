@@ -61,8 +61,9 @@ export class AdminComponent implements OnInit {
   posts: Post [] = [];
   comments: PostComment[] = [];
   enabledComments: PostComment[] = [];
+  expandedComments: PostComment[] = [];
   enabledPosts: Post[]=[];
-  allUsersSelected: boolean = false;
+  allUsersSelected: boolean = true;
   post: Post = new Post();
 
 
@@ -71,6 +72,9 @@ export class AdminComponent implements OnInit {
 
 
   ngOnInit(): void {
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.body.appendChild(tag);
     this.getUserInfo();
     this.getAllUsers();
 
@@ -118,7 +122,7 @@ export class AdminComponent implements OnInit {
           this.enabledPosts.push(post);
         }
       });
-
+      this.enabledPosts = this.enabledPosts.sort((a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
     },
     noPosts => {
@@ -316,14 +320,23 @@ export class AdminComponent implements OnInit {
     }
 
     getCommentsForPost(post: Post) {
-      this.getAllComments();
-      this.enabledComments = [];
-      for(let i = 0; i < this.comments.length; i++) {
-        if(this.comments[i].post.id === post.id && this.comments[i].isEnabled === true){
-          this.enabledComments.push(this.comments[i]);
+      this.expandedComments = [];
+      this.commentService.allComments().subscribe(
+        data => {
+          this.comments = data;
+          console.log(this.comments);
+          for(let i = 0; i < this.comments.length; i++) {
+            if(this.comments[i].post.id === post.id && this.comments[i].isEnabled === true){
+              this.expandedComments.push(this.comments[i]);
+            }
+          }
+
+        },
+        err => {
+          console.log("Error in commentService with getting all comments");
         }
-      }
-      console.log(this.enabledComments);
+      );
+      console.log(this.expandedComments);
     }
 
 }

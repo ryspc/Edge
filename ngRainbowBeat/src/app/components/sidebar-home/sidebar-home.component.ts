@@ -35,6 +35,7 @@ export class SidebarHomeComponent {
   genres: Genre [] = [];
   searchResult: Post[] | null = null;
   public searchInput: string = '';
+  allSearches: Post[] = [];
 
   constructor(private observer: BreakpointObserver,
     private userService: UserService,
@@ -215,21 +216,59 @@ export class SidebarHomeComponent {
 postsByKeyword(keyword:string){
   this.postService.postsByKeyword(keyword).subscribe(
     data => {
-      this.searchResult = data;
+      this.allSearches = data;
+      this.searchResult = [];
+      this.allSearches.forEach(post => {
+        if(post.isEnabled == true){
+          this.searchResult?.push(post);
+        }
+      });
+      if(this.searchResult){
       this.searchResult = this.searchResult.sort((a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
       console.log(this.searchResult);
+      }
+    },
+    err => {
+      console.log('Could not retrieve all posts');
+
+    });
+
+}
+postsByGenre(genre: string){
+  this.postService.postsByGenre(genre).subscribe(
+    data => {
+      this.allSearches = data;
+      this.searchResult = [];
+      this.allSearches.forEach(post => {
+        if(post.isEnabled == true){
+          this.searchResult?.push(post);
+        }
+      });
+      if(this.searchResult){
+      this.searchResult = this.searchResult.sort((a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+      console.log(this.searchResult);
+      }
     },
     err => {
       console.log('Could not retrieve all posts');
 
     });
 }
-postsByGenre(genre: string){
-  this.postService.postsByGenre(genre).subscribe(
+
+allGenres(){
+  this.postService.index().subscribe(
     data => {
-      this.searchResult = data;
+      this.allSearches = data;
+      this.searchResult = [];
+      this.allSearches.forEach(post => {
+        if(post.isEnabled == true){
+          this.searchResult?.push(post);
+        }
+      });
+      if(this.searchResult){
       this.searchResult = this.searchResult.sort((a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
       console.log(this.searchResult);
+      }
     },
     err => {
       console.log('Could not retrieve all posts');
