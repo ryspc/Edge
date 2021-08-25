@@ -88,3 +88,11 @@ mat-divider {
 .prof:hover {
     cursor: pointer;
 }
+
+.ourLogoBtn{
+  width: 135px;
+  margin-left: 30px;
+}
+.ourLogo{
+  width:100%;
+}
