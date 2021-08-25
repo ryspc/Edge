@@ -28,8 +28,6 @@ public class Song {
 	@Column(name="artist")
 	private String artist;
 	
-	@Column(name="image_url")
-	private String imageURL;
 	
 	@Column(name="song_url")
 	private String songURL;
@@ -90,13 +88,7 @@ public class Song {
 		this.artist = artist;
 	}
 
-	public String getImageURL() {
-		return imageURL;
-	}
-
-	public void setImageURL(String imageURL) {
-		this.imageURL = imageURL;
-	}
+	
 
 	public String getSongURL() {
 		return songURL;
@@ -165,7 +157,7 @@ public class Song {
 
 	@Override
 	public String toString() {
-		return "Song [id=" + id + ", title=" + title + ", artist=" + artist + ", imageURL=" + imageURL + ", songURL="
+		return "Song [id=" + id + ", title=" + title + ", artist=" + artist + ", songURL="
 				+ songURL + ", songLength=" + songLength + ", releaseDate=" + releaseDate + ", album=" + album
 				+ ", user=" + user + "]";
 	}
