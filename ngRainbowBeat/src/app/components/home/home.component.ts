@@ -13,6 +13,7 @@ import { Song } from 'src/app/models/song';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PlaylistService } from 'src/app/services/playlist.service';
 import { Playlist } from 'src/app/models/playlist';
+import { PostComment } from 'src/app/models/post-comment';
 
 @Component({
   selector: 'app-home',
@@ -440,6 +441,10 @@ this.commentVisibility = false;
 
   get sortedArray(): Post[] {
     return this.enabledPosts.sort((a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+  }
+
+  get sortedComments(): PostComment[] {
+    return this.postComments.sort((a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
   }
 
 }
