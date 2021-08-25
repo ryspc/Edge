@@ -46,7 +46,7 @@ class SongTest {
 	@DisplayName("Song Entity Test")
 	void test1() {
 		assertNotNull(song);
-		assertEquals("My Little Pony Theme Song", song.getTitle());
+		assertEquals("Solar Power", song.getTitle());
 	}
 	
 	@Test
@@ -62,7 +62,7 @@ class SongTest {
 	void test3() {
 		assertNotNull(song);
 		assertNotNull(song.getPost());
-		assertEquals("Fresh Pony Song", song.getPost().getTitle());
+		assertEquals("Newest Lorde Album", song.getPost().getTitle());
 	}
 
 	@Test
