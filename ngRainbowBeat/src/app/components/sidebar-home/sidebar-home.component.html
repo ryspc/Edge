@@ -108,7 +108,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-outline-success pull-right " (click)="modal.close(createPost(genreName, newSong, newPost))" type="submit">
+            <button class="btn btn-outline-success pull-right " (click)="modal.close(createPost(genreName, newSong, newPost));reloadPage();" type="submit">
         Save&nbsp;&nbsp;<i class="fa fa-download"></i>
       </button>
         </div>
