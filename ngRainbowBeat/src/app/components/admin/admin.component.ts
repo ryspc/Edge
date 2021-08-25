@@ -63,7 +63,7 @@ export class AdminComponent implements OnInit {
   enabledComments: PostComment[] = [];
   expandedComments: PostComment[] = [];
   enabledPosts: Post[]=[];
-  allUsersSelected: boolean = false;
+  allUsersSelected: boolean = true;
   post: Post = new Post();
 
 
@@ -122,7 +122,7 @@ export class AdminComponent implements OnInit {
           this.enabledPosts.push(post);
         }
       });
-
+      this.enabledPosts = this.enabledPosts.sort((a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
     },
     noPosts => {
