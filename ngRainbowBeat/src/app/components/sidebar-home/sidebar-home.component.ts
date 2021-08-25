@@ -124,6 +124,10 @@ export class SidebarHomeComponent {
     );
   }
 
+  home() {
+    this.router.navigateByUrl("/home");
+  }
+
   profile() {
     this.router.navigateByUrl("/profile");
   }
@@ -248,6 +252,12 @@ allGenres(){
       console.log('Could not retrieve all posts');
 
     });
+}
+
+reloadPage(){
+  setTimeout(() => {
+    window.location.reload();
+  },1000);
 }
 
 }
