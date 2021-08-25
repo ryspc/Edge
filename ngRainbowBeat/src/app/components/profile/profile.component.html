@@ -1,6 +1,6 @@
 <h1 class="profileHeader">User Profile</h1>
 
-<h2 class="uploadHeader" *ngIf="!selected">I have {{getNumberOfPosts()}} Post </h2>
+<h2 class="uploadHeader" *ngIf="!selected">Total Posts: {{getNumberOfPosts()}}</h2>
 
  <div class=post-table-section *ngIf="!selected">
   <div fxLayout="row wrap" fxLayoutGap="16px grid" *ngIf="!selected">
@@ -22,10 +22,14 @@
                     </div>
                   </mat-card-content>
                   <mat-divider></mat-divider>
-                  <mat-card-footer>
+                  <mat-card-footer class="cardfooter" style="text-align: center; ">
                     <mat-card-actions style="text-align: center;">
-                        <button (click)="setPost(post);open(content)" class="btn btn-dark">Details</button>
-                        <button (click)="hidePost(post.id)" class="btn btn-dark">Delete</button>
+                        <button mat-button (click)="setPost(post);open(content)">
+                          <mat-icon>info</mat-icon>
+                        </button>
+                        <button mat-button (click)="hidePost(post.id)">
+                          <mat-icon>delete</mat-icon>
+                        </button>
                     </mat-card-actions>
                   </mat-card-footer>
               </mat-card>
@@ -60,12 +64,23 @@
       <div class="info d-flex">
           <p>{{newPost.content}}</p>
       </div>
+      <br>
       <div class="info d-flex">
-          <p>Song Title: {{newPost.song.title}}</p>
-      </div>
-      <div class="info d-flex">
-          <p>By: {{newPost.song.artist}} Ablum: {{newPost.song.album}}</p>
-      </div>
+        <p>Artist:&nbsp;</p>
+        <p style="font-weight: bold;">{{newPost.song.artist}}</p>
+    </div>
+    <div class="info d-flex">
+        <p>Title:&nbsp;</p>
+        <p style="font-weight: bold;">{{newPost.song.title}}</p>
+    </div>
+    <div class="info d-flex">
+        <p>Album:&nbsp;</p>
+        <p style="font-weight: bold;">{{newPost.song.album}}</p>
+    </div>
+    <div class="info d-flex">
+        <p>Released:&nbsp;</p>
+        <p style="font-weight: bold;">{{newPost.song.releaseDate | dateAgo}}</p>
+    </div>
       <div class="info d-flex">
         <youtube-player
           videoId="{{getVideoId(newPost.song)}}"
@@ -76,11 +91,11 @@
         </youtube-player>
       </div>
       <div class="modal-footer">
-      <button
+      <button mat-button
         (click)="setEditPost(newPost);open(editContent);modal.dismiss('Cross click')"
-        class="btn btn-dark addConcBtnEdit"
+        style="text-align: center;"
       >
-        Edit
+      <mat-icon>edit_note</mat-icon>
       </button>
       </div>
   </div>
@@ -187,8 +202,8 @@
 
 
 <!-- Comment Section -->
-
-<h2 class="commentHeader" *ngIf="!selectedComment">I have {{getNumberOfComments()}} Comments </h2>
+<br><br><br>
+<h2 class="commentHeader" *ngIf="!selectedComment">Total Comments: {{getNumberOfComments()}}</h2>
   <div class="comment-section" *ngIf="!selectedComment">
 
     <div fxLayout="row wrap" fxLayoutGap="16px grid" *ngIf="!selectedComment">
@@ -209,12 +224,21 @@
                 </mat-card-content>
                 <img mat-card-image src="{{com.post.song.imageURL}}">
                 <mat-divider></mat-divider>
+                <mat-card-footer class="cardfooter" style="text-align: center; ">
+                  <mat-card-actions style="text-align: center;">
+                      <button mat-button (click)="setComment(com);open(commentContent)">
+                        <mat-icon>info</mat-icon>
+                      </button>
+                      <button mat-button (click)="hideComment(com.id)">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                  </mat-card-actions>
+                </mat-card-footer>
 
-
-                <mat-card-actions style="text-align: center;">
+                <!-- <mat-card-actions style="text-align: center;">
                     <button (click)="setComment(com);open(commentContent)" class="btn btn-dark">Details</button>
                     <button (click)="hideComment(com.id)" class="btn btn-dark">Delete</button>
-                </mat-card-actions>
+                </mat-card-actions> -->
             </mat-card>
         </div>
     </div>
@@ -247,13 +271,24 @@
       <div class="info d-flex">
           <p>{{newComment.content}}</p>
       </div>
+      <br>
       <div class="info d-flex">
-          <p>Song Title: {{newComment.post.song.title}}</p>
-      </div>
-      <div class="info d-flex">
-          <p>By: {{newComment.post.song.artist}} Ablum: {{newComment.post.song.album}}</p>
-      </div>
-      <div class="info d-flex">
+        <p>Artist:&nbsp;</p>
+        <p style="font-weight: bold;">{{newComment.post.song.artist}}</p>
+    </div>
+    <div class="info d-flex">
+        <p>Title:&nbsp;</p>
+        <p style="font-weight: bold;">{{newComment.post.song.title}}</p>
+    </div>
+    <div class="info d-flex">
+        <p>Album:&nbsp;</p>
+        <p style="font-weight: bold;">{{newComment.post.song.album}}</p>
+    </div>
+    <div class="info d-flex">
+        <p>Released:&nbsp;</p>
+        <p style="font-weight: bold;">{{newComment.post.song.releaseDate | dateAgo}}</p>
+    </div>
+      <div>
         <youtube-player
           videoId="{{getVideoId(newComment.post.song)}}"
           suggestedQuality="highres"

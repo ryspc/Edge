@@ -218,6 +218,7 @@ export class SidebarHomeComponent {
 }
 
 postsByKeyword(keyword:string){
+  console.log(keyword);
   this.postService.postsByKeyword(keyword).subscribe(
     data => {
       this.allSearches = data;
