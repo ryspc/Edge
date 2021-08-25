@@ -108,12 +108,23 @@ export class PostService {
   }
 
   public postsByKeyword(keyword: string){
+    console.log(keyword);
+    if(keyword === ''){
+      console.log('if statement entered');
+      return this.http.get<Post[]>(this.url).pipe(
+        catchError((err: any) => {
+          console.log('PostService.index() err retrieving post list');
+          return throwError(err);
+        })
+      )
+    }else{
     return this.http.get<Post[]>(this.url + '/search/' + keyword, this.httpOptions).pipe(
       catchError((err: any) => {
         console.log('PostService.postByKeyword() err retrieving post list');
         return throwError(err);
       })
     )
+    }
   }
 
   public postsByGenre(genre: string){

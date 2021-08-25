@@ -68,6 +68,9 @@ export class HomeComponent implements OnInit {
         console.log('The snack-bar action was triggered!');
       });
     }
+    // if(this.searchKeyword === ''){
+
+    // }
  }
 
   ngOnInit(): void {
