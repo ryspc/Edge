@@ -237,4 +237,17 @@ postsByGenre(genre: string){
     });
 }
 
+allGenres(){
+  this.postService.index().subscribe(
+    data => {
+      this.searchResult = data;
+      this.searchResult = this.searchResult.sort((a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+      console.log(this.searchResult);
+    },
+    err => {
+      console.log('Could not retrieve all posts');
+
+    });
+}
+
 }
