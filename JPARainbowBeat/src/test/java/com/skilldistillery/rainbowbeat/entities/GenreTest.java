@@ -46,7 +46,7 @@ class GenreTest {
 	@DisplayName("Genre Entity Test")
 	void test1() {
 		assertNotNull(genre);
-		assertEquals("Pony Music", genre.getName());
+		assertEquals("Rock", genre.getName());
 	}
 	
 	@Test
@@ -54,7 +54,7 @@ class GenreTest {
 	void test2() {
 		assertNotNull(genre);
 		assertNotNull(genre.getSongs());
-		assertEquals("Rainbow Chill Beats", genre.getSongs().get(1).getTitle());
+		assertEquals("Butterfly 3000", genre.getSongs().get(1).getTitle());
 	}
 
 }

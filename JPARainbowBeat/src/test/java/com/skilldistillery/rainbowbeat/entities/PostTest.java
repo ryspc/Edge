@@ -47,7 +47,7 @@ class PostTest {
 	@DisplayName("Testing post entity")
 	void test1() {
 		assertNotNull(post);
-		assertEquals("Fresh Pony Song", post.getTitle());
+		assertEquals("Newest Lorde Album", post.getTitle());
 	}
 	
 	@Test
@@ -55,7 +55,7 @@ class PostTest {
 	void test2() {
 		assertNotNull(post);
 		assertNotNull(post.getSong());
-		assertEquals("My Little Pony Theme Song", post.getSong().getTitle());
+		assertEquals("Solar Power", post.getSong().getTitle());
 	}
 	
 	@DisplayName("Post to User Mapping Test")
