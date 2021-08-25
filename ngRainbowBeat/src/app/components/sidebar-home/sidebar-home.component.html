@@ -32,19 +32,19 @@
     </button>
         <mat-divider></mat-divider>
         <h2>Featured Genres</h2>
-            <button mat-button class="menu-button" (click)="postsByGenre('Rock')">
+        <button mat-button class="menu-button" (click)="postsByGenre('Rock')">
       <span>&nbsp; Rock </span>
     </button> <br>
-            <button mat-button class="menu-button" (click)="postsByGenre('Rap')">
+        <button mat-button class="menu-button" (click)="postsByGenre('Rap')">
       <span>&nbsp; Rap </span>
     </button> <br>
-            <button mat-button class="menu-button" (click)="postsByGenre('Pop')">
+        <button mat-button class="menu-button" (click)="postsByGenre('Pop')">
       <span>&nbsp; Pop </span>
     </button> <br>
-            <button mat-button class="menu-button" (click)="postsByGenre('R&B')">
+        <button mat-button class="menu-button" (click)="postsByGenre('R&B')">
       <span>&nbsp; R&B </span>
     </button> <br>
-            <button mat-button class="menu-button" (click)="postsByGenre('Metal')">
+        <button mat-button class="menu-button" (click)="postsByGenre('Metal')">
       <span>&nbsp; Metal </span>
     </button>
     </mat-sidenav>
@@ -87,22 +87,18 @@
                 <textarea class="form-control me-2" rows="2" name="songAlbum" [(ngModel)]="newSong.album"></textarea>
             </div>
             <div class="info d-flex">
-                <label for="song" class="form-label"> Song Genre </label>
+                <label for="song" class="form-label"> Song Genre &nbsp;&nbsp;</label>
                 <select name="dropdown" [(ngModel)]="genreName">
           <option *ngFor="let genre of genres" [value]="genre.id">{{genre.name}}</option>
         </select>
             </div>
             <div class="info d-flex">
-                <label for="song" class="form-label"> Song Length </label>
+                <label for="song" class="form-label"> Song Length&nbsp;&nbsp; </label>
                 <input type="number" name="songLength" [(ngModel)]="newSong.songLength" />
             </div>
             <div class="info d-flex">
-                <label for="song" class="form-label"> Song Release Date </label>
+                <label for="song" class="form-label"> Song Release Date&nbsp;&nbsp; </label>
                 <input type="date" name="releaseDate" [(ngModel)]="newSong.releaseDate" />
-            </div>
-            <div class="info d-flex">
-                <label for="song" class="form-label"> Image URL </label>
-                <textarea class="form-control me-2" rows="2" name="songImg" [(ngModel)]="newSong.imageURL"></textarea>
             </div>
             <div class="info d-flex">
                 <label for="song" class="form-label"> Song URL </label>
@@ -110,7 +106,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-outline-light pull-right" (click)="modal.close(createPost(genreName, newSong, newPost))" id="btn3" type="submit">
+            <button class="btn btn-outline-success pull-right " (click)="modal.close(createPost(genreName, newSong, newPost))" type="submit">
         Save&nbsp;&nbsp;<i class="fa fa-download"></i>
       </button>
         </div>
