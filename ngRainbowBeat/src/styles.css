@@ -14,3 +14,9 @@
  .snackbar button {
      color: #b25512;
  }
+ 
+ #modal-basic-title {
+     padding: 0px;
+     margin: 0px;
+     font-size: 18px;
+ }

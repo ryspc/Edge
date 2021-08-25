@@ -32,8 +32,8 @@
         <p *ngIf="loggedInUser" class="designation">{{loggedInUser.firstName}}&nbsp;{{loggedInUser.lastName}}</p>
         <mat-divider></mat-divider>
         <button mat-button class="menu-button" (click)="home()">
-            <mat-icon>arrow_back</mat-icon>
-            <span>&nbsp;Return Home</span>
+            <mat-icon>home</mat-icon>
+            <span>&nbsp;Home</span>
         </button>
         <mat-divider></mat-divider>
         <button *ngIf="loggedInUser && loggedInUser.role === 'ADMIN'" mat-button class="menu-button" (click)="admin()">
