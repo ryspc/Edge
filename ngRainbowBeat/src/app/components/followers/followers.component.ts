@@ -55,6 +55,7 @@ export class FollowersComponent implements OnInit {
     document.body.appendChild(tag);
     this.getLoggedInUser();
     this.index();
+    this.getUserPlaylist();
   }
 
   getLoggedInUser() {
