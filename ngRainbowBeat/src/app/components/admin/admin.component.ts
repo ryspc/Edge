@@ -167,6 +167,7 @@ export class AdminComponent implements OnInit {
           let snackbar = this._snackBar.open('User enabled.', 'UNDO',{
             horizontalPosition: 'start',
             verticalPosition: 'top',
+            panelClass: 'snackbar',
             duration: 5 * 1000,
           });
           snackbar.onAction().subscribe(() => {
@@ -191,6 +192,7 @@ export class AdminComponent implements OnInit {
           let snackbar = this._snackBar.open('User disabled.', 'UNDO',{
             horizontalPosition: 'start',
             verticalPosition: 'top',
+            panelClass: 'snackbar',
             duration: 5 * 1000,
           });
           snackbar.onAction().subscribe(() => {
