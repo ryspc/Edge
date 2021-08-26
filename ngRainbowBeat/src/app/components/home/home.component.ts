@@ -409,6 +409,7 @@ this.commentVisibility = false;
     this.playlistService.index().subscribe(
       data => {
         this.playlists = data;
+        console.log(data);
       },
       err => {
         console.log("Error getting playlists");
@@ -417,6 +418,8 @@ this.commentVisibility = false;
   }
 
   addSong(song: Song) {
+    console.log(song);
+    console.log(this.playlists)
     this.playlists[0].songs.push(song);
     this.playlistService.update(this.playlists[0]).subscribe(
       data => {
