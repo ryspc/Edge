@@ -8,6 +8,11 @@ import { PostService } from 'src/app/services/post.service';
 import { UserService } from 'src/app/services/user.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { Song } from 'src/app/models/song';
+import { Comment } from 'src/app/models/comment';
+import { CommentService } from 'src/app/services/comment.service';
+import { PlaylistService } from 'src/app/services/playlist.service';
+import { Playlist } from 'src/app/models/playlist';
+import { PostComment } from 'src/app/models/post-comment';
 
 @Component({
   selector: 'app-followers',
@@ -22,6 +27,12 @@ export class FollowersComponent implements OnInit {
   closeResult = '';
   panelOpenState = false;
   friend: User | null = null;
+  post: Post | null = null;
+  comments: Comment[] = [];
+  postComments: Comment[] = [];
+  newComment: Comment = new Comment();
+  commentVisibility: boolean = false;
+  playlists: Playlist[] = [];
 
 
   public encoded = this.authService.getCredentials();
@@ -32,7 +43,9 @@ export class FollowersComponent implements OnInit {
     private userService: UserService,
     private postService: PostService,
     private modalService: NgbModal,
+    private playlistService: PlaylistService,
     private router: Router,
+    private commentService: CommentService,
     private _snackBar: MatSnackBar
   ) { }
 
@@ -42,6 +55,7 @@ export class FollowersComponent implements OnInit {
     document.body.appendChild(tag);
     this.getLoggedInUser();
     this.index();
+    this.getUserPlaylist();
   }
 
   getLoggedInUser() {
@@ -141,12 +155,18 @@ export class FollowersComponent implements OnInit {
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       this.followedPosts = [];
+      this.postComments = [];
+      this.commentVisibility = false;
       return 'by pressing ESC';
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
       this.followedPosts = [];
+      this.postComments = [];
+      this.commentVisibility = false;
       return 'by clicking on a backdrop';
     } else {
       this.followedPosts = [];
+      this.postComments = [];
+      this.commentVisibility = false;
       return `with: ${reason}`;
     }
   }
@@ -165,6 +185,111 @@ export class FollowersComponent implements OnInit {
 
   get sortedArray(): Post[] {
     return this.followedPosts.sort((a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+  }
+
+  setPost(post: Post) {
+    this.post = post;
+  }
+
+  getAllComments() {
+    this.commentService.allComments().subscribe(
+      data => {
+        this.comments = data;
+        console.log(this.comments);
+
+      },
+      err => {
+        console.log("Error in commentService with getting all comments");
+      }
+    );
+  }
+
+  getCommentsForPost(post: Post) {
+    this.postComments = [];
+    this.getAllComments();
+    for (let i = 0; i < this.comments.length; i++) {
+      if (this.comments[i].post.id === post.id && this.comments[i].isEnabled === true) {
+        this.postComments.push(this.comments[i]);
+      }
+    }
+    this.viewComments();
+    console.log(this.postComments);
+  }
+
+  addComment(comment: Comment) {
+    console.log(comment);
+    if(this.loggedInUser){
+      comment.user = this.loggedInUser;
+    }
+    if (this.post) {
+      comment.post = this.post;
+    }
+
+    this.commentService.create(comment).subscribe(
+      data => {
+        console.log("Comment creation successful");
+        if (this.post) {
+          this.getCommentsForPost(this.post);
+          console.log("test");
+        }
+        this.postComments.push(data);
+      },
+      err => {
+        console.log("Error creating new Comment");
+        let snackbar = this._snackBar.open('Could not comment, please try again.', '', {
+          horizontalPosition: 'start',
+          verticalPosition: 'top',
+          duration: 5 * 1000,
+        });
+      }
+    );
+    this.postComments = [];
+    this.newComment = new Comment();
+  }
+
+  viewComments() {
+    this.commentVisibility = true;
+  }
+
+  getUserPlaylist() {
+    this.playlistService.index().subscribe(
+      data => {
+        this.playlists = data;
+      },
+      err => {
+        console.log("Error getting playlists");
+      }
+    );
+  }
+
+  addSong(song: Song) {
+    this.playlists[0].songs.push(song);
+    this.playlistService.update(this.playlists[0]).subscribe(
+      data => {
+        this.playlists[0] = data;
+        console.log("Playlist updated");
+        let snackbar = this._snackBar.open('Song added the favorites.', '', {
+          horizontalPosition: 'start',
+          verticalPosition: 'top',
+          duration: 5 * 1000,
+        });
+        snackbar.onAction().subscribe(() => {
+          console.log('The snack-bar action was triggered!');
+        });
+      },
+      err => {
+        console.log("error updating playlist");
+        let snackbar = this._snackBar.open('Could not add song to favorites.', '', {
+          horizontalPosition: 'start',
+          verticalPosition: 'top',
+          duration: 5 * 1000,
+        });
+      }
+    );
+  }
+
+  get sortedComments(): PostComment[] {
+    return this.postComments.sort((a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
   }
 
 }

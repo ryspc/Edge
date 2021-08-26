@@ -23,7 +23,7 @@ export class PlaylistService {
   private playlists: Playlist[] = [];
 
 
-  index(): Observable<Playlist[]>{
+  index() {
     return this.http.get<Playlist[]>(this.url, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log('PlaylistService.index() err retrieving  playlists');

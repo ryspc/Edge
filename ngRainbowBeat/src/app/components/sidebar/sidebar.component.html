@@ -7,15 +7,12 @@
             close
         </mat-icon>
     </button>
-    <button class="ourLogoBtn" mat-button>
+    <button class="ourLogoBtn" mat-button (click)="home()">
         <span>&nbsp;<img class="ourLogo" src="https://i.imgur.com/yg8t2b0.png" alt=""></span>
     </button>
     <div class="searchbar">
 
-        <!-- <input type="text" [(ngModel)]="searchInput" placeholder="Search for a Post" /> -->
-        <!-- <button (click)="postsByKeyword()">Search</button> -->
-        <!-- <app-admin [searchKeyword]="searchInput"></app-admin> -->
-        <!-- #searchbar (keyup)="fetchPost($event)" -->
+        <p>"Why listen in comfort, when you can listen on the EDGE" &ensp; &ensp;-&ensp;Kanye West</p>
     </div>
     <div>
         <!-- <ul>
@@ -24,18 +21,23 @@
         </li>
       </ul> -->
     </div>
+    <button mat-button class="logout" (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>&nbsp;Logout</span>
+  </button>
+
 </mat-toolbar>
 <mat-sidenav-container>
     <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
         <img *ngIf="loggedInUser" class="avatar mat-elevation-z8" src="{{loggedInUser.imageUrl}}" />
         <h4 *ngIf="loggedInUser" class="name">{{loggedInUser.username}}</h4>
-        <p *ngIf="loggedInUser" class="designation">{{loggedInUser.firstName}}&nbsp;{{loggedInUser.lastName}}</p>
+        <p *ngIf="loggedInUser" class="designation">{{loggedInUser.firstName}}&nbsp;{{loggedInUser.lastName}}</p><br>
         <mat-divider></mat-divider>
         <button mat-button class="menu-button" (click)="home()">
             <mat-icon>home</mat-icon>
             <span>&nbsp;Home</span>
         </button>
-        <mat-divider></mat-divider>
+        <mat-divider></mat-divider><br>
         <button *ngIf="loggedInUser && loggedInUser.role === 'ADMIN'" mat-button class="menu-button" (click)="admin()">
             <mat-icon>gavel</mat-icon>
             <span>&nbsp;Admin</span>
@@ -43,23 +45,18 @@
         <button mat-button class="menu-button" (click)="profile()">
             <mat-icon>wysiwyg</mat-icon>
             <span>&nbsp;Posts</span>
-        </button>
+        </button><br>
         <button mat-button class="menu-button" (click)="followers()">
             <mat-icon>groups</mat-icon>
             <span>&nbsp;Following</span>
-        </button>
+        </button><br>
         <button mat-button class="menu-button" (click)="playlist()">
             <mat-icon>queue_music</mat-icon>
             <span>&nbsp;Favorite Songs</span>
-        </button>
+        </button><br>
         <button mat-button class="menu-button" (click)="settings()">
             <mat-icon>settings</mat-icon>
             <span>&nbsp;Settings</span>
-        </button>
-        <mat-divider></mat-divider>
-        <button mat-button class="menu-button" (click)="logout()">
-            <mat-icon>logout</mat-icon>
-            <span>&nbsp;Logout</span>
         </button>
     </mat-sidenav>
     <mat-sidenav-content>

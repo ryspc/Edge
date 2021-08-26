@@ -1,4 +1,4 @@
-<h1 class="profileHeader">User Profile</h1>
+<h1 class="profileHeader">Your Profile</h1>
 
 <h2 class="uploadHeader" *ngIf="!selected">Total Posts: {{getNumberOfPosts()}}</h2>
 
@@ -8,7 +8,7 @@
           <div *ngIf="post.isEnabled">
               <mat-card class="mat-elevation-z4">
                   <mat-card-header>
-                      <div mat-card-avatar class="avatar mat-elevation-z8" style="background-image: url({{post.user.imageUrl}})"></div>
+                      <div mat-card-avatar class="avatar mat-elevation-z8" style="background-image: url({{post.user.imageUrl}}); background-position: center; background-size: cover;"></div>
                       <mat-card-title class="name">
                           <span>{{post.title}}</span>
                       </mat-card-title>
@@ -176,8 +176,21 @@
           name="imageURL"
           [(ngModel)]="editPost.song.imageURL"
         /> -->
-
-        <input
+        <div class="modal-footer">
+          <button mat-button
+            (click)="updatePost(editPost);modal.dismiss('Cross click')"
+            style="text-align: center;"
+          >
+          <mat-icon>check</mat-icon>
+          </button>
+          <button mat-button
+            (click)="modal.dismiss('Cross click')"
+            style="text-align: center;"
+          >
+          <mat-icon>cancel</mat-icon>
+          </button>
+          </div>
+        <!-- <input
           type="submit"
           class="btn btn-dark addPostBtnEdit"
           name="Save"
@@ -190,7 +203,7 @@
           name="Cancel"
           value="Cancel"
           (click)="modal.dismiss('Cross click')"
-        />
+        /> -->
       </div>
     </form>
 
@@ -211,7 +224,7 @@
         <div *ngIf="com.isEnabled">
             <mat-card class="mat-elevation-z4">
                 <mat-card-header>
-                    <div mat-card-avatar class="avatar mat-elevation-z8" style="background-image: url({{com.user.imageUrl}})"></div>
+                    <div mat-card-avatar class="avatar mat-elevation-z8" style="background-image: url({{com.user.imageUrl}}); background-position: center; background-size: cover;"></div>
                     <mat-card-title class="name">
                         <span>{{com.post.title}}</span>
                     </mat-card-title>
