@@ -1,3 +1,76 @@
 .playlistBody {
   color: black;
 }
+
+.content {
+  padding: 16px;
+}
+
+.content>mat-card {
+  width: 200px;
+}
+
+mat-icon {
+  color: #b25512;
+}
+
+mat-button {
+  size: 50%;
+  padding: 0px;
+}
+
+.follow {
+  font-size: 16px;
+  color: #b25512;
+}
+
+.follow:hover {
+  cursor: pointer;
+}
+
+.bullet {
+  font-size: 14px;
+  ;
+}
+
+.footerPic {
+  margin-top: 16px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.commentPic {
+  margin-top: 16px;
+  margin-right: 16px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.subtitle {
+  margin-left: 240px;
+  margin-top: 16px;
+  color: gray;
+}
+
+.cardContent:hover {
+  cursor: pointer;
+}
+
+.cardfooter {
+  padding-bottom: 5px;
+}
+
+.name {
+  text-align: center;
+  align-items: center;
+}
+
+.playlistHeader{
+  text-align: center;
+  margin-top: 20px;
+  color: #b25512;
+  text-decoration: underline;
+  font-weight: bold;
+}
