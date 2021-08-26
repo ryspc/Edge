@@ -15,6 +15,10 @@
             <input class="form-control me-2" placeholder="Search posts, songs, users..." id="input1" type="text" name="keyword" #keyword (keyup)="postsByKeyword(keyword.value)"> &nbsp;&nbsp;&nbsp;
         </form>
     </div>
+    <button mat-button class="logout" (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>&nbsp;Logout</span>
+  </button>
 </mat-toolbar>
 <mat-sidenav-container>
     <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
