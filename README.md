@@ -46,7 +46,7 @@
 * [Eclipse](https://www.eclipse.org/ide/)</br>
 
 ## How to Run (Demo)
-To run, make sure your favorite browser is updated to the lastest version. Listed below are each developers ec2 instances' of the application.<br>
+To run, make sure your favorite browser is updated to the latest version. Listed below are each developers ec2 instances' of the application.<br>
 NOTE: You'll need to create an account
 * [Ray Space's Instance](http://52.8.239.60:8080/RainbowBeat/)
 
