@@ -38,22 +38,22 @@
 
 	<mat-card-actions>
 		<button (click)="disableUser(user)" *ngIf = "user.isEnabled" mat-button style=
-			"background-color:rgb(187, 22, 0); color:white">
+			"background-color:rgba(187, 22, 0, 0.651); color:white">
 			Disable
 		</button>
 
 		<button *ngIf = "!user.isEnabled" (click)="enableUser(user)" mat-button style=
-			"background-color:rgba(0, 116, 0, 0.884); color:white">
+			"background-color:rgba(0, 116, 0, 0.63); color:white">
 			Enable
 		</button>
 
     <button (click)="displayUserPosts(user.username)" mat-button style=
-    "background-color:rgba(178, 85, 18); color:white">
+    "background-color:rgba(178, 85, 18, 0.637); color:white">
     View Posts
   </button>
 
   <button (click)="displayUserComments(user.username)" mat-button style=
-    "background-color:#b25512; color:white">
+    "background-color:#b255129f; color:white">
     View Comments
   </button>
 
@@ -89,7 +89,7 @@
             <div *ngIf="post.isEnabled">
                 <mat-card class="mat-elevation-z4" *ngIf = "post.user.username == user.username">
                     <mat-card-header>
-                        <div mat-card-avatar class="avatar mat-elevation-z8" style="background-image: url({{post.user.imageUrl}})"></div>
+                        <div mat-card-avatar class="avatar mat-elevation-z8" style="background-image: url({{post.user.imageUrl}}); background-position: center; background-size: cover;"></div>
                         <mat-card-title class="name">
                             <span>{{post.user.username}}</span>
                         </mat-card-title>
@@ -254,13 +254,13 @@
     <div *ngIf="comment.isEnabled">
         <mat-card class="mat-elevation-z4" *ngIf = "comment.user.username == user.username">
             <mat-card-header>
-                <div mat-card-avatar class="avatar mat-elevation-z8" style="background-image: url({{comment.user.imageUrl}})"></div>
+                <div mat-card-avatar class="avatar mat-elevation-z8" style="background-image: url({{comment.user.imageUrl}}); background-position: center; background-size: cover;"></div>
                 <mat-card-title class="name">
                     <span>{{comment.post.title}}</span>
                 </mat-card-title>
                 <mat-card-subtitle>{{comment.createdAt | dateAgo}}</mat-card-subtitle>
             </mat-card-header>
-            <mat-card-content>
+            <mat-card-content class="cardContent" (click)="setPost(comment.post);open(commentPost);">
                 <p>
                     {{comment.content}}
                 </p>
@@ -269,7 +269,7 @@
 
 
             <!-- <mat-card-actions style="text-align: center;"> -->
-            <mat-card-actions display="flex" style="justify-content: space-between	;">
+            <mat-card-actions display="flex" style="text-align: center;">
 
                 <!-- <button class= "upArrowRatingGiven" mat-button (click)="like(post)"><mat-icon>arrow_upward</mat-icon></button> -->
 
@@ -281,5 +281,46 @@
 
 
     </div>
+
+  <ng-template #commentPost let-modal>
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">
+        Post Details
+    </h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <span aria-hidden="true">
+        ×
+    </span>
+</button>
+</div>
+<div *ngIf="post" class="modal-body modal-content">
+    <div class="info d-flex">
+        <h1>{{post.title}}</h1>
+    </div>
+    <div class="info d-flex">
+        <h6>{{post.createdAt}}</h6>
+    </div>
+    <div class="info d-flex">
+        <p>{{post.content}}</p>
+    </div>
+    <div class="info d-flex">
+        <p>Song Title: {{post.song.title}}</p>
+    </div>
+    <div class="info d-flex">
+        <p>Artist: {{post.song.artist}}</p>
+    </div>
+    <div class="info d-flex">
+      <p>Ablum: {{post.song.album}}</p>
+  </div>
+    <div class="info d-flex">
+        <youtube-player videoId="{{getVideoId(post.song)}}" suggestedQuality="highres" [height]="300" [width]="465" [startSeconds]="0">
+        </youtube-player>
+    </div>
+    <div class="modal-footer">
+        <img class="footerPic" src={{post.user.imageUrl}} alt="Profile Image">
+        <h3>&nbsp;&nbsp;{{post.user.username}}</h3>
+    </div>
+</div>
+</ng-template>
 </div>
 </mat-card>
