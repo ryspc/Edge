@@ -267,14 +267,14 @@ START TRANSACTION;
 USE `musicrecdb`;
 INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `created_at`, `updated_at`, `email`, `image_url`, `enabled`, `role`) VALUES (1, 'admin', '$2a$10$XIVl/dqHvi08wZ8.B6qXsOrIy/gilyNbRdC6YYDLXGzATnPEYoVCO', NULL, NULL, NULL, NULL, 'admin@admin.com', 'https://i.imgur.com/jfxC2Mk.png', 1, 'ADMIN');
 INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `created_at`, `updated_at`, `email`, `image_url`, `enabled`, `role`) VALUES (2, 'ponyman', '$2a$10$XIVl/dqHvi08wZ8.B6qXsOrIy/gilyNbRdC6YYDLXGzATnPEYoVCO', 'Brony', 'Jabrony', NULL, NULL, 'ponyman@rainbow.com', 'https://i.imgur.com/Rv2Q6p8.png', 1, NULL);
-INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `created_at`, `updated_at`, `email`, `image_url`, `enabled`, `role`) VALUES (3, 'gandalf44', '$2a$10$XIVl/dqHvi08wZ8.B6qXsOrIy/gilyNbRdC6YYDLXGzATnPEYoVCO', 'Wizard', 'Oz', NULL, NULL, 'gandalf@savethering.com', 'https://i.imgur.com/1SihChy.png', 1, NULL);
-INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `created_at`, `updated_at`, `email`, `image_url`, `enabled`, `role`) VALUES (4, 'darthedgelord12', '$2a$10$XIVl/dqHvi08wZ8.B6qXsOrIy/gilyNbRdC6YYDLXGzATnPEYoVCO', 'Edgeman', 'Edgeland', NULL, NULL, 'titled@theedgelord.org', 'https://i.imgur.com/LPHr3Bv.png', 1, NULL);
-INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `created_at`, `updated_at`, `email`, `image_url`, `enabled`, `role`) VALUES (5, 'joker45', '$2a$10$XIVl/dqHvi08wZ8.B6qXsOrIy/gilyNbRdC6YYDLXGzATnPEYoVCO', 'Jack', 'Napier', NULL, NULL, 'betterthanbatman@villans.co.uk', 'https://i.imgur.com/Ay5oOSS.png', 1, NULL);
-INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `created_at`, `updated_at`, `email`, `image_url`, `enabled`, `role`) VALUES (6, 'sweetcaroline332', '$2a$10$XIVl/dqHvi08wZ8.B6qXsOrIy/gilyNbRdC6YYDLXGzATnPEYoVCO', 'Neil', 'Diamond', NULL, NULL, 'diamondintheRocks@music.com', 'https://i.imgur.com/XNaRbff.png', 1, NULL);
-INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `created_at`, `updated_at`, `email`, `image_url`, `enabled`, `role`) VALUES (7, 'marvinAndroid42', '$2a$10$XIVl/dqHvi08wZ8.B6qXsOrIy/gilyNbRdC6YYDLXGzATnPEYoVCO', 'marvin', 'sadrobot', NULL, NULL, 'bestrobot@hitchhikers.io', 'https://i.imgur.com/PaCA8qW.png', 1, NULL);
-INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `created_at`, `updated_at`, `email`, `image_url`, `enabled`, `role`) VALUES (8, 'ferrisbueller21', '$2a$10$XIVl/dqHvi08wZ8.B6qXsOrIy/gilyNbRdC6YYDLXGzATnPEYoVCO', 'ferris', 'bueller', NULL, NULL, 'sweetferrari@dayoff.com', 'https://i.imgur.com/2zwiXHD.png', 1, NULL);
-INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `created_at`, `updated_at`, `email`, `image_url`, `enabled`, `role`) VALUES (9, 'theterminator2029', '$2a$10$XIVl/dqHvi08wZ8.B6qXsOrIy/gilyNbRdC6YYDLXGzATnPEYoVCO', 'arnold', 'schwarzenegger', NULL, NULL, 'riseofthemachine@cali.gov', 'https://i.imgur.com/gnDpOUn.png', 1, NULL);
-INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `created_at`, `updated_at`, `email`, `image_url`, `enabled`, `role`) VALUES (10, 'yellowsubmarine1970', '$2a$10$XIVl/dqHvi08wZ8.B6qXsOrIy/gilyNbRdC6YYDLXGzATnPEYoVCO', 'John', 'Lennon', NULL, NULL, 'thebeatles@hotmail.co.uk', 'https://i.imgur.com/3KqBrqQ.png', 1, NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `created_at`, `updated_at`, `email`, `image_url`, `enabled`, `role`) VALUES (3, 'gandalf', '$2a$10$XIVl/dqHvi08wZ8.B6qXsOrIy/gilyNbRdC6YYDLXGzATnPEYoVCO', 'Wizard', 'Oz', NULL, NULL, 'gandalf@savethering.com', 'https://i.imgur.com/1SihChy.png', 1, NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `created_at`, `updated_at`, `email`, `image_url`, `enabled`, `role`) VALUES (4, 'darthvader', '$2a$10$XIVl/dqHvi08wZ8.B6qXsOrIy/gilyNbRdC6YYDLXGzATnPEYoVCO', 'Edgeman', 'Edgeland', NULL, NULL, 'titled@theedgelord.org', 'https://i.imgur.com/LPHr3Bv.png', 1, NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `created_at`, `updated_at`, `email`, `image_url`, `enabled`, `role`) VALUES (5, 'joker45', '$2a$10$XIVl/dqHvi08wZ8.B6qXsOrIy/gilyNbRdC6YYDLXGzATnPEYoVCO', 'Brian', 'Ramirez', NULL, NULL, 'betterthanbatman@villans.co.uk', 'https://i.imgur.com/Ay5oOSS.png', 1, NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `created_at`, `updated_at`, `email`, `image_url`, `enabled`, `role`) VALUES (6, 'sweetcarol', '$2a$10$XIVl/dqHvi08wZ8.B6qXsOrIy/gilyNbRdC6YYDLXGzATnPEYoVCO', 'Neil', 'Diamond', NULL, NULL, 'diamondintheRocks@music.com', 'https://i.imgur.com/XNaRbff.png', 1, NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `created_at`, `updated_at`, `email`, `image_url`, `enabled`, `role`) VALUES (7, 'marvin42', '$2a$10$XIVl/dqHvi08wZ8.B6qXsOrIy/gilyNbRdC6YYDLXGzATnPEYoVCO', 'marvin', 'sadrobot', NULL, NULL, 'bestrobot@hitchhikers.io', 'https://i.imgur.com/PaCA8qW.png', 1, NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `created_at`, `updated_at`, `email`, `image_url`, `enabled`, `role`) VALUES (8, 'ferrisb21', '$2a$10$XIVl/dqHvi08wZ8.B6qXsOrIy/gilyNbRdC6YYDLXGzATnPEYoVCO', 'ferris', 'bueller', NULL, NULL, 'sweetferrari@dayoff.com', 'https://i.imgur.com/2zwiXHD.png', 1, NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `created_at`, `updated_at`, `email`, `image_url`, `enabled`, `role`) VALUES (9, 'awwnold', '$2a$10$XIVl/dqHvi08wZ8.B6qXsOrIy/gilyNbRdC6YYDLXGzATnPEYoVCO', 'arnold', 'schwarzenegger', NULL, NULL, 'riseofthemachine@cali.gov', 'https://i.imgur.com/gnDpOUn.png', 1, NULL);
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `created_at`, `updated_at`, `email`, `image_url`, `enabled`, `role`) VALUES (10, 'jlennon', '$2a$10$XIVl/dqHvi08wZ8.B6qXsOrIy/gilyNbRdC6YYDLXGzATnPEYoVCO', 'John', 'Lennon', NULL, NULL, 'thebeatles@hotmail.co.uk', 'https://i.imgur.com/3KqBrqQ.png', 1, NULL);
 
 COMMIT;
 
@@ -284,17 +284,17 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `musicrecdb`;
-INSERT INTO `song` (`id`, `song_title`, `artist`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (1, 'Solar Power', 'Lorde', 'https://www.youtube.com/watch?v=HnaVsxo2PV8', 192, '2021-08-20', 'Solar Power', 1);
-INSERT INTO `song` (`id`, `song_title`, `artist`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (2, 'The Pressure', 'Nas', 'https://www.youtube.com/watch?v=qTzKh5ykLU0', 188, '2021-08-06', 'King\'s Disease II', 1);
+INSERT INTO `song` (`id`, `song_title`, `artist`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (1, 'Solar Power', 'Lorde', 'https://www.youtube.com/watch?v=HnaVsxo2PV8', 192, '2021-08-20', 'Solar Power', 4);
+INSERT INTO `song` (`id`, `song_title`, `artist`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (2, 'The Pressure', 'Nas', 'https://www.youtube.com/watch?v=qTzKh5ykLU0', 188, '2021-08-06', 'King\'s Disease II', 6);
 INSERT INTO `song` (`id`, `song_title`, `artist`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (3, 'Pressure Machine', 'The Killers', 'https://www.youtube.com/watch?v=_XngU7zi22E', 309, '2021-08-13', 'Pressure Machine', 2);
 INSERT INTO `song` (`id`, `song_title`, `artist`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (4, 'Monochrome', 'Between the Buried And Me', 'https://www.youtube.com/watch?v=5iXmfOE2o5Q', 195, '2021-08-20', 'Colors II', 3);
 INSERT INTO `song` (`id`, `song_title`, `artist`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (5, 'Happier Than Ever', 'Billie Eilish', 'https://www.youtube.com/watch?v=mA5Pby_UGck', 299, '2021-07-30', 'Happier Than Ever', 2);
-INSERT INTO `song` (`id`, `song_title`, `artist`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (6, 'Last Train Home', 'John Mayer', 'https://www.youtube.com/watch?v=66Ne5dVDfLM', 187, '2021-07-16', 'Sob Rock', 1);
+INSERT INTO `song` (`id`, `song_title`, `artist`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (6, 'Last Train Home', 'John Mayer', 'https://www.youtube.com/watch?v=66Ne5dVDfLM', 187, '2021-07-16', 'Sob Rock', 8);
 INSERT INTO `song` (`id`, `song_title`, `artist`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (7, 'Blue Mesas', 'Leon Bridges', 'https://www.youtube.com/watch?v=2QjPc81E09A', 196, '2021-07-23', 'Gold-Diggers Sound', 5);
 INSERT INTO `song` (`id`, `song_title`, `artist`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (8, 'Wilshire', 'Tyler, the Creator', 'https://www.youtube.com/watch?v=LxGVyJLjbiY', 516, '2021-06-25', 'Call Me If You Get Lost', 2);
-INSERT INTO `song` (`id`, `song_title`, `artist`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (9, 'Butterfly 3000', 'King Gizzard and the Lizard Wizard', 'https://www.youtube.com/watch?v=ArIOjP4pRbM', 172, '2021-06-11', 'Butterfly 3000', 1);
+INSERT INTO `song` (`id`, `song_title`, `artist`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (9, 'Butterfly 3000', 'King Gizzard and the Lizard Wizard', 'https://www.youtube.com/watch?v=ArIOjP4pRbM', 172, '2021-06-11', 'Butterfly 3000', 10);
 INSERT INTO `song` (`id`, `song_title`, `artist`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (10, 'Red Room', 'Hiatus Kaiyote', 'https://www.youtube.com/watch?v=p46Tm9-7i7E', 233, '2021-06-25', 'Mood Valiant', 7);
-INSERT INTO `song` (`id`, `song_title`, `artist`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (11, 'Thelma + Louise', 'Bastille', 'https://www.youtube.com/watch?v=2e-4iaXAo9U', NULL, '2021-08-18', 'Thelma + Louise', 3);
+INSERT INTO `song` (`id`, `song_title`, `artist`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (11, 'Thelma and Louise', 'Bastille', 'https://www.youtube.com/watch?v=uIoMKnm8v6E', NULL, '2021-08-18', 'Thelma and Louise', 3);
 INSERT INTO `song` (`id`, `song_title`, `artist`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (12, 'Visiting Hours', 'Ed Sheeran', 'https://www.youtube.com/watch?v=TsqvjqoBj10', NULL, '2021-08-19', 'Visiting Hours', 4);
 INSERT INTO `song` (`id`, `song_title`, `artist`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (13, 'Stratego', 'Iron Maiden', 'https://www.youtube.com/watch?v=RZW9o55t3a8', NULL, '2021-08-19', 'Senjutsu', 5);
 INSERT INTO `song` (`id`, `song_title`, `artist`, `song_url`, `song_length`, `release_date`, `album`, `user_id`) VALUES (14, 'Survivor', 'Nathaniel Rateliff and the Night Sweats', 'https://www.youtube.com/watch?v=sU1Qb9cskds', NULL, '2021-08-17', 'The Future', 6);
@@ -311,15 +311,15 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `musicrecdb`;
-INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`, `enabled`) VALUES (1, 'YAY I love lorde\'s music', 'Newest Lorde Album', '2021-08-19T14:00:00', NULL, 1, 1, 1);
-INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`, `enabled`) VALUES (2, 'This song has a great beat', 'Nas new album is killer', '2021-08-20T12:35:00', NULL, 1, 2, 1);
+INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`, `enabled`) VALUES (1, 'YAY I love lorde\'s music', 'Newest Lorde Album', '2021-08-19T14:00:00', NULL, 4, 1, 1);
+INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`, `enabled`) VALUES (2, 'This song has a great beat', 'Nas new album is killer', '2021-08-20T12:35:00', NULL, 6, 2, 1);
 INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`, `enabled`) VALUES (3, '20 years later their music is still my favorite', 'The Killers still got it', '2021-08-20T16:12:00', NULL, 2, 3, 1);
 INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`, `enabled`) VALUES (4, 'This song is so heavy. Love the breakdown.', 'BTBAM new colors', '2021-08-23T15:25:00', NULL, 3, 4, 1);
 INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`, `enabled`) VALUES (5, 'This is my favorite song off the new album.', 'Billes new album is great', '2021-08-22T20:20:00', NULL, 2, 5, 1);
-INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`, `enabled`) VALUES (6, 'This song is great and way chiller than his usual music.', 'Mayer\'s chill new song', '2021-08-23T14:15:00', NULL, 1, 6, 1);
+INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`, `enabled`) VALUES (6, 'This song is great and way chiller than his usual music.', 'Mayer\'s chill new song', '2021-08-23T14:15:00', NULL, 8, 6, 1);
 INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`, `enabled`) VALUES (7, 'Love the added instrumenation on this song.', 'Leon with instruments', '2021-08-20T16:30:00', NULL, 5, 7, 1);
 INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`, `enabled`) VALUES (8, 'Lyrics on this song are fantastic', 'Tylers lyrics', '2021-08-19T19:36:00', NULL, 2, 8, 1);
-INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`, `enabled`) VALUES (9, 'King Gizzard is still weird and great', 'The Lizard Wizard is still King', '2021-08-11T11:42:00', NULL, 1, 9, 1);
+INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`, `enabled`) VALUES (9, 'King Gizzard is still weird and great', 'The Lizard Wizard is still King', '2021-08-11T11:42:00', NULL, 10, 9, 1);
 INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`, `enabled`) VALUES (10, 'New Song is better than ever', 'Haitus is over', '2021-08-16T13:12:00', NULL, 7, 10, 1);
 INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`, `enabled`) VALUES (11, 'Their signature sound is on display again!', 'New Bastille!', '2021-08-20T13:35:00', NULL, 3, 11, 1);
 INSERT INTO `post` (`id`, `content`, `title`, `created_at`, `updated_at`, `user_id`, `song_id`, `enabled`) VALUES (12, 'I nearly cry every time I listen to this song', 'Soft Side of Sheeran', '2021-08-22T15:21:00', NULL, 4, 12, 1);
@@ -366,9 +366,9 @@ START TRANSACTION;
 USE `musicrecdb`;
 INSERT INTO `comment` (`id`, `content`, `created_at`, `updated_at`, `user_id`, `post_id`, `enabled`) VALUES (1, 'This is her best song yet', '2021-08-19T14:20:00', NULL, 2, 1, 1);
 INSERT INTO `comment` (`id`, `content`, `created_at`, `updated_at`, `user_id`, `post_id`, `enabled`) VALUES (2, 'Not a big fan of this newest song', '2021-08-20T12:57:00', NULL, 2, 2, 1);
-INSERT INTO `comment` (`id`, `content`, `created_at`, `updated_at`, `user_id`, `post_id`, `enabled`) VALUES (3, 'Its pretty different than their original hits', '2021-08-20T16:55:00', NULL, 1, 3, 1);
-INSERT INTO `comment` (`id`, `content`, `created_at`, `updated_at`, `user_id`, `post_id`, `enabled`) VALUES (4, 'Agree this song is really heavy', '2021-08-23T16:15:00', NULL, 1, 4, 1);
-INSERT INTO `comment` (`id`, `content`, `created_at`, `updated_at`, `user_id`, `post_id`, `enabled`) VALUES (5, 'She keeps getting better and better.', '2021-08-22T20:20:00', NULL, 1, 5, 1);
+INSERT INTO `comment` (`id`, `content`, `created_at`, `updated_at`, `user_id`, `post_id`, `enabled`) VALUES (3, 'Its pretty different than their original hits', '2021-08-20T16:55:00', NULL, 8, 3, 1);
+INSERT INTO `comment` (`id`, `content`, `created_at`, `updated_at`, `user_id`, `post_id`, `enabled`) VALUES (4, 'Agree this song is really heavy', '2021-08-23T16:15:00', NULL, 8, 4, 1);
+INSERT INTO `comment` (`id`, `content`, `created_at`, `updated_at`, `user_id`, `post_id`, `enabled`) VALUES (5, 'She keeps getting better and better.', '2021-08-22T20:20:00', NULL, 8, 5, 1);
 
 COMMIT;
 
@@ -379,6 +379,14 @@ COMMIT;
 START TRANSACTION;
 USE `musicrecdb`;
 INSERT INTO `rating` (`rating`, `user_id`, `post_id`) VALUES (1, 2, 1);
+INSERT INTO `rating` (`rating`, `user_id`, `post_id`) VALUES (1, 3, 1);
+INSERT INTO `rating` (`rating`, `user_id`, `post_id`) VALUES (1, 4, 3);
+INSERT INTO `rating` (`rating`, `user_id`, `post_id`) VALUES (1, 5, 5);
+INSERT INTO `rating` (`rating`, `user_id`, `post_id`) VALUES (1, 6, 5);
+INSERT INTO `rating` (`rating`, `user_id`, `post_id`) VALUES (1, 7, 9);
+INSERT INTO `rating` (`rating`, `user_id`, `post_id`) VALUES (1, 8, 9);
+INSERT INTO `rating` (`rating`, `user_id`, `post_id`) VALUES (1, 9, 10);
+INSERT INTO `rating` (`rating`, `user_id`, `post_id`) VALUES (1, 10, 10);
 
 COMMIT;
 
@@ -415,7 +423,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `musicrecdb`;
-INSERT INTO `playlist` (`id`, `title`, `user_id`, `description`, `image_url`, `published`) VALUES (1, 'Pony Beats', 1, 'The freshest pony music', NULL, 1);
+INSERT INTO `playlist` (`id`, `title`, `user_id`, `description`, `image_url`, `published`) VALUES (1, 'My Favorite Things', 1, 'Favorite Songs', NULL, 1);
 
 COMMIT;
 
