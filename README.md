@@ -20,7 +20,6 @@ Discover, listen, share and discuss for free.<br>
 <img src="media/git-logo.png" alt ="git" width="100" align="center"/>
 <img src="media/mySQL-logo.png" alt = "MySQL"  height="110"  align="center"/>
 <img src="media/spring-logo.png" alt = "Spring Boot" width="260"  align="center"/>
-<!--   <img src="media/eclipse-logo.png" alt = "eclipse" width="150" align="center"/> -->
 </p>
 
 ## Functionality
@@ -61,24 +60,21 @@ Working on this team during this final sprint has taught me a lot about authenti
 ###### Michael I:
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 ###### Ray S:
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Angular and Spring frameworks work well together and we were able to cover all of our user stories with ease. These frameworks come with many quality of life addons that we successfully utilized. Things like Spring security, and Angular Material components reduced the amount of work we would normally have to put for a full-stack application at this scale. One of the key takeaways for me was the importance of keeping ourselves up to date with the with the changes in these types of frameworks.
 
 ## REST Endpoints
-
 #### Users
 | Return Type    | Route                           | Functionality              |
 |:---------------|:--------------------------------|----------------------------|
 |`User`          | `POST api/users`                | Creates a new user         |
 |`User`          | `PUT api/users`                 | Updates a user             |
 |`void`          | `DELETE api/users/{id}`         | Deletes a user             |
-
 #### Songs
 | Return Type    | Route                           | Functionality              |
 |:---------------|:--------------------------------|----------------------------|
 |`List<Song>`    | `GET api/songs`                 | Retrieves all songs        |
 |`List<Song>`    | `GET api/songs/search/{keyword}`| Retrieves songs by keyword |
 |`List<Song>`    | `GET api/songs/{genre}`         | Retrieves songs by genre   |
-
 #### Posts
 | Return Type    | Route                           | Functionality              |
 |:---------------|:--------------------------------|----------------------------|
@@ -88,15 +84,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 |`Post`          | `POST api/posts`                | Creates a new post         |
 |`Post`          | `PUT api/posts`                 | Updates a post             |
 |`void`          | `DELETE api/posts/{id}`         | Deletes a post             |
-
 #### Comments
 | Return Type    | Route                           | Functionality              |
 |:---------------|:--------------------------------|----------------------------|
 |`Comment`       | `POST api/comments`             | Creates a new comment      |
 |`Comment`       | `PUT api/comments`              | Updates a comment          |
 |`void`          | `DELETE api/comments/{id}`      | Deletes a comment          |
-
-#### Playlists
+#### Favorites
 | Return Type    | Route                           | Functionality              |
 |:---------------|:--------------------------------|----------------------------|
 |`Playlist`      | `GET api/playlists/{id}`        | Retrieves  a playlist by id|
@@ -105,5 +99,4 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 |`void`          | `DELETE api/playlists/{id}`     | Deletes a playlist         |
 
 ## EER Diagram
-<!-- <img src="DB/housereportdbSchema.png" alt="DB Schema"/> -->
-Coming Soon.
+<img src="media/model.png" alt="DB Schema"/>

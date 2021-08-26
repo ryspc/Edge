@@ -135,15 +135,22 @@
           <youtube-player videoId="{{getVideoId(post.song)}}" suggestedQuality="highres" [height]="300" [width]="465" [startSeconds]="0">
           </youtube-player>
       </div>
-
-      <div style="text-align: left;">
+      <div class="modal-footer">
+        <button mat-button (click)="addSong(post.song); ">
+            <mat-icon>favorite</mat-icon>
+        </button>
+        <button mat-button (click)="setPost(post);getCommentsForPost(post); ">
+            <mat-icon>chat</mat-icon>
+        </button>
+    </div>
+      <!-- <div style="text-align: left;">
           <button mat-button (click)="addSong(post.song); ">
               <mat-icon>favorite</mat-icon>
           </button>
           <button mat-button (click)="setPost(post);getCommentsForPost(post); ">
               <mat-icon>chat</mat-icon>
           </button>
-      </div>
+      </div> -->
       <div *ngIf="commentVisibility">
           <h3 style="font-weight: bold; margin-bottom: -10px; font-size: 16px;">Comments</h3>
           <form *ngIf="post ">

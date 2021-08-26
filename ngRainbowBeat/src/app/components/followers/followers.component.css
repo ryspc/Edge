@@ -23,3 +23,12 @@
   height: 30px;
   border-radius: 50%;
 }
+
+mat-icon {
+  color: #b25512;
+}
+
+mat-button {
+  size: 50%;
+  padding: 0px;
+}
