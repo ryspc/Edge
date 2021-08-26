@@ -1,4 +1,4 @@
-# EDGE - Dive into the world of fresh music.
+# EDGE - *Dive into the world of fresh music.*
 
 ## Developers
 #### [Caleb Koch](https://github.com/CKoch92), [Gabriel Avila](https://github.com/Cebrail1053), [Michael Ingram](https://github.com/mjingram), [Ray Space](https://github.com/ryspc)
@@ -8,7 +8,7 @@
  Do you want to explore the newest music in your favorite genres?<br>
  Do you want to become a part of like-minded communities and stay on the edge of new music?
 #### With EDGE, you can dive into the world of fresh music. 
-*Discover, listen, share and discuss for free.*<br>
+Discover, listen, share and discuss for free.<br>
 <br>
 <p float="left">
 <img src="media/java-logo.png" alt = "java" width="75" height="130"   align="center"/>
