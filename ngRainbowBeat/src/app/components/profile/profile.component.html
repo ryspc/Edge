@@ -311,12 +311,18 @@
         </youtube-player>
       </div>
       <div class="modal-footer">
-      <button
+      <!-- <button
         (click)="setEditComment(newComment);open(editCommentContent);modal.dismiss('Cross click')"
         class="btn btn-dark addConcBtnEdit"
       >
         Edit
-      </button>
+      </button> -->
+      <button mat-button
+            (click)="setEditComment(newComment);open(editCommentContent);modal.dismiss('Cross click')"
+            style="text-align: center;"
+          >
+          <mat-icon>edit_note</mat-icon>
+          </button>
       </div>
   </div>
 </ng-template>
@@ -354,7 +360,22 @@
           [(ngModel)]="editComment.content"
         />
 
-        <input
+        <div class="modal-footer">
+          <button mat-button
+            (click)="updateComment(editComment);modal.dismiss('Cross click')"
+            style="text-align: center;"
+          >
+          <mat-icon>check</mat-icon>
+          </button>
+          <button mat-button
+            (click)="modal.dismiss('Cross click')"
+            style="text-align: center;"
+          >
+          <mat-icon>cancel</mat-icon>
+          </button>
+          </div>
+
+        <!-- <input
           type="submit"
           class="btn btn-dark addPostBtnEdit"
           name="Save"
@@ -367,7 +388,7 @@
           name="Cancel"
           value="Cancel"
           (click)="modal.dismiss('Cross click')"
-        />
+        /> -->
       </div>
     </form>
 

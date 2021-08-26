@@ -38,12 +38,12 @@
 
 	<mat-card-actions>
 		<button (click)="disableUser(user)" *ngIf = "user.isEnabled" mat-button style=
-			"background-color:rgba(187, 22, 0, 0.651); color:white">
+			"background-color:rgba(0, 116, 0, 0.7); color:white">
 			Disable
 		</button>
 
 		<button *ngIf = "!user.isEnabled" (click)="enableUser(user)" mat-button style=
-			"background-color:rgba(0, 116, 0, 0.63); color:white">
+			"background-color:rgba(187, 22, 0, 0.7); color:white">
 			Enable
 		</button>
 

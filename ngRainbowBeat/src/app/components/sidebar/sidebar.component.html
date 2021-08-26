@@ -38,10 +38,12 @@
             <span>&nbsp;Home</span>
         </button>
         <mat-divider></mat-divider><br>
-        <button *ngIf="loggedInUser && loggedInUser.role === 'ADMIN'" mat-button class="menu-button" (click)="admin()">
+        <div *ngIf="loggedInUser && loggedInUser.role === 'ADMIN'">
+        <button mat-button class="menu-button" (click)="admin()">
             <mat-icon>gavel</mat-icon>
             <span>&nbsp;Admin</span>
-        </button>
+        </button><br>
+      </div>
         <button mat-button class="menu-button" (click)="profile()">
             <mat-icon>wysiwyg</mat-icon>
             <span>&nbsp;Posts</span>
