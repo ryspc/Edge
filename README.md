@@ -7,7 +7,8 @@
  Do you feel like you are listening to the same songs since high school?<br>
  Do you want to explore the newest music in your favorite genres?<br>
  Do you want to become a part of like-minded communities and stay on the edge of new music?
-#### With EDGE, you can dive into the world of fresh music. Discover, listen, share and discuss for free.<br>
+#### With EDGE, you can dive into the world of fresh music. 
+*Discover, listen, share and discuss for free.*<br>
 <br>
 <p float="left">
 <img src="media/java-logo.png" alt = "java" width="75" height="130"   align="center"/>
@@ -17,7 +18,6 @@
 <img src="media/mySQL-logo.png" alt = "MySQL"  height="110"  align="center"/>
 <img src="media/spring-logo.png" alt = "Spring Boot" width="260"  align="center"/>
 <!--   <img src="media/eclipse-logo.png" alt = "eclipse" width="150" align="center"/> -->
-
 </p>
 
 ## Functionality
