@@ -54,7 +54,7 @@ NOTE: You'll need to create an account
 
 ## Lessons Learned
 ###### Caleb K:
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
 ###### Gabriel A.:
 Working on this team during this final sprint has taught me a lot about authentication and angular. I'm grateful to have been partnered with such insightful and driven individuals. The planning phase and communication really helped with mitigating potential issues that would appear later on. All that being said this was definitely a challenging project, particularly with the social aspect of the site and using angular to retrieve good data. Adding a following/followers feature was also challenging, and given the time frame I feel we did a great job implementing this feature. Taking the time to talk about design ideas and compromise as a team on certain decisions really helped us with getting a good final product.
 ###### Michael I:
